@@ -18,17 +18,32 @@ What We’re Building:
 - An API abstraction layer that integrates with popular databases like Postgres and MySQL, allowing developers to easily add, update, or query user authentication data.
 - A modular authentication system that can be integrated into various development stacks with minimal setup.
 - Open-source availability, allowing anyone to use, adapt, and contribute to the product, fostering community-driven improvements and ensuring widespread accessibility.
-- 
+  
 Context:
 The product aims to compete with popular authentication solutions by offering a lightweight, open-source alternative that reduces overhead for developers and encourages innovation through community involvement.
 
 
 #### Q2: Who are your target users?
 
-  > Short (1 - 2 min' read max)
- * Be specific (e.g. a 'a third-year university student studying Computer Science' and not 'a student')
- * **Feel free to use personas. You can create your personas as part of this Markdown file, or add a link to an external site (for example, [Xtensio](https://xtensio.com/user-persona/)).**
+Independent Developers:
 
+Example: A freelance developer working on a small-scale web application who needs a secure, quick-to-implement authentication solution without incurring licensing costs.
+
+Startup Teams:
+
+Example: A small team building a SaaS product with limited resources and time for implementing a custom authentication solution. Open-source access ensures they can integrate and customize the product to fit their needs without financial barriers.
+
+Tech Enterprises:
+
+Example: A mid-sized company seeking a more modular and lightweight alternative to existing proprietary authentication systems, with the flexibility to modify the code to suit their internal standards.
+
+Open-Source Enthusiasts and Contributors:
+
+Example: Developers passionate about improving community-driven tools who can adapt and enhance the product for their specific use cases while contributing back to the open-source ecosystem.
+
+Educators & Learners:
+
+Example: A third-year computer science student building a secure web application and seeking a lightweight, open-source tool for experimentation and learning.
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
 > Short (1 - 2 min' read max)
