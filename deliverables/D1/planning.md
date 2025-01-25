@@ -16,7 +16,8 @@ What We’re Building:
 
 A standalone Admin UI for managing user authentication.
 An API abstraction layer that integrates with popular databases like Postgres and MySQL, allowing developers to easily add, update, or query user authentication data.
-A modular authentication system that can be integrated into a variety of development stacks with minimal setup.
+A modular authentication system that can be integrated into a variety of development stacks with minimal setup. 
+
 Context:
 
 The product aims to compete with popular authentication solutions by offering a lightweight alternative that reduces overhead for developers.
