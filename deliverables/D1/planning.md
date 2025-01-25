@@ -7,21 +7,20 @@
 #### Q1: What is the product?
 
 High-Level Description:
-The product is a lightweight, quick-to-start authentication solution designed to simplify and streamline user authentication for developers and organizations.
+The product is a lightweight, open-source authentication solution designed to simplify and streamline user authentication for developers and organizations.
 
 Problem Statement:
-Existing authentication solutions, such as Auth0, Supertokens, and Keycloak, can be complex, heavyweight, or slow to integrate into projects. Developers need a faster and more efficient way to implement authentication without compromising scalability or security.
+Existing authentication solutions, such as Auth0, Supertokens, and Keycloak, can be complex, heavyweight, or require significant time and resources to integrate. Developers and organizations need a faster, more efficient, and more accessible way to implement authentication while maintaining flexibility and scalability.
 
 What We’re Building:
 
-A standalone Admin UI for managing user authentication.
-An API abstraction layer that integrates with popular databases like Postgres and MySQL, allowing developers to easily add, update, or query user authentication data.
-A modular authentication system that can be integrated into a variety of development stacks with minimal setup. 
-
+- A standalone Admin UI for managing user authentication.
+- An API abstraction layer that integrates with popular databases like Postgres and MySQL, allowing developers to easily add, update, or query user authentication data.
+- A modular authentication system that can be integrated into various development stacks with minimal setup.
+- Open-source availability, allowing anyone to use, adapt, and contribute to the product, fostering community-driven improvements and ensuring widespread accessibility.
+- 
 Context:
-
-The product aims to compete with popular authentication solutions by offering a lightweight alternative that reduces overhead for developers.
-It is intended for organizations and developers looking for faster deployment and simpler configuration.
+The product aims to compete with popular authentication solutions by offering a lightweight, open-source alternative that reduces overhead for developers and encourages innovation through community involvement.
 
 
 #### Q2: Who are your target users?
