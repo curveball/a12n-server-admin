@@ -6,17 +6,21 @@
  
 #### Q1: What is the product?
 
- > Short (1 - 2 min' read)
- * Start with a single sentence, high-level description of the product.
- * Be clear - Describe the problem you are solving in simple terms.
- * Specify if you have a partner and who they are.
- * Be concrete. For example:
-    * What are you planning to build? Is it a website, mobile app, browser extension, command-line app, etc.?      
-    * When describing the problem/need, give concrete examples of common use cases.
-    * Assume your the reader knows nothing about the partner or the problem domain and provide the necessary context. 
- * Focus on *what* your product does, and avoid discussing *how* you're going to implement it.      
-   For example: This is not the time or the place to talk about which programming language and/or framework you are planning to use.
- * **Feel free (and very much encouraged) to include useful diagrams, mock-ups and/or links**.
+High-Level Description:
+The product is a lightweight, quick-to-start authentication solution designed to simplify and streamline user authentication for developers and organizations.
+
+Problem Statement:
+Existing authentication solutions, such as Auth0, Supertokens, and Keycloak, can be complex, heavyweight, or slow to integrate into projects. Developers need a faster and more efficient way to implement authentication without compromising scalability or security.
+
+What We’re Building:
+
+A standalone Admin UI for managing user authentication.
+An API abstraction layer that integrates with popular databases like Postgres and MySQL, allowing developers to easily add, update, or query user authentication data.
+A modular authentication system that can be integrated into a variety of development stacks with minimal setup.
+Context:
+
+The product aims to compete with popular authentication solutions by offering a lightweight alternative that reduces overhead for developers.
+It is intended for organizations and developers looking for faster deployment and simpler configuration.
 
 
 #### Q2: Who are your target users?
