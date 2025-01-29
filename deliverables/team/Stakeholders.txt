@@ -1,0 +1,18 @@
+I. Partners
+
+Sprout Family:
+The scope of the project is to revamp the UI for the Admin page of the authentification server Sprout Family uses, more specifically, the a12n server (https://github.com/curveball/a12n-server). 
+We aim to create a standalone interface that interacts with the server when going through an initial sign-in and OAuth2 flow to be autheniticated. Once authenticated, the new a12n-admin UI will be displayed.
+
+Partners:
+- Evert Pot, CTO of Sprout Family, evert@sproutfamily.ca
+- Jennifer Chan, External Adviser, jennifer7chan@gmail.com
+
+II. Partner Contacts
+
+Our primary partner contact is Evert as CTO and our main parter and adviser for this project. Jen is our secondary partner contact for miscellaneous advice and technical expertise. We meet with both of them
+on a weekly basis on Fridays at 4:30 - 5:30pm
+
+III. TA
+
+Our TA is Omid Jafarinezhad, his email is omid.jn@gmail.com
