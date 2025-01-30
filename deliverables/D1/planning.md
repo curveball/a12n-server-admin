@@ -59,7 +59,12 @@ Example: A third-year computer science student building a secure web application
  * User stories must contain acceptance criteria. Examples of user stories with different formats can be found here: https://www.justinmind.com/blog/user-story-examples/. **It is important that you provide a link to an artifact containing your user stories**.
  * If you have a partner, these must be reviewed and accepted by them. You need to include the evidence of partner approval (e.g., screenshot from email) or at least communication to the partner (e.g., email you sent)
 
- * 
+1) As a developer, I want to enable users to register for my application, in order to provide secure access to the application.
+
+Acceptance Criteria:
+1.1) Passwords are securely encrypted before being stored in the database.
+1.2) The system displays validation errors for invalid inputs (e.g., incorrect email format, weak password).
+1.3) Users can access a secure registration form though the application interface. 
 
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
@@ -181,8 +186,29 @@ User Stories That Are Too Abstract or Too Simple
 If our user stories are not well-defined, they may not provide enough direction for development. This could lead to unnecessary scope creep or features that don’t add real value. We will refine our user stories to make them actionable and aligned with project goals.
 
 #### Q14. What are some potential mitigation strategies for the risks you identified?
-* Examples of mitigation strategies:
-  * More communication with the partner might help with improving clarity.
-  * Adding more details for an user story might make it less abstract.
-  * Adding an extra user story might increase the project complexity, making it less simple.
-* It's ok if you are unable to find mitigation strategies for all the risks right now.
+
+1) Risk: Since the project is open source it might be susceptible to security vulnerabilities.
+   
+Strategy:
+
+- Regular security audits in which the people contributing can look at the codebase and try to find and fix possible vulnerabilities.
+- Implement industry-standard security measures, such as using strong encryption for data, securing API endpoints, and enforcing robust authentication mechanisms
+  
+2) Risk: Integration challenges with different tech stacks
+   
+Strategy:
+- Provide thorough and clear API documentation to simplify the integration process.
+- Establish channels for developers to provide feedback on integration issues and prioritize resolving the most common challenges.
+
+3) Risk: Maintenance and Timely Updates
+   
+Strategy:
+- Implement continuous integration and continuous deployment (CI/CD) pipelines to streamline the process of releasing updates and patches.
+- Maintain a clear project roadmap with prioritized tasks to ensure that critical updates and improvements are addressed promptly.
+
+4) Risk: Poor or insufficient documentation can hinder developer onboarding
+   
+Strategy:
+- Develop detailed documentation covering installation, configuration, usage, API references, and troubleshooting guides.
+- Keep documentation up-to-date with the latest features, changes, and best practices to ensure its relevance and accuracy.
+
