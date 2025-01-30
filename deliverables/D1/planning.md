@@ -1,4 +1,4 @@
-# a12n-server/The Rizzlers
+# Sprout Family/The Rizzlers
 > _Note:_ This document will evolve throughout your project. You commit regularly to this file while working on the project (especially edits/additions/deletions to the _Highlights_ section). 
  > **This document will serve as a master plan between your team, your partner and your TA.**
 
@@ -66,7 +66,7 @@ Acceptance Criteria:
 - The system displays validation errors for invalid inputs (e.g., incorrect email format, weak password).
 - Users can access a secure registration form though the application interface.
 
-2) As an admin, I want to be able to see I want to view a list of users in a table and also in JSON format so that I can manage them easily
+2) As an admin, I want to be able to see I want to view a list of users in a table and also in JSON format in order to manage users easily
 
 Acceptance Criteria:
 - Given that I am logged in as an admin, when I open the user management section, then I should see a table with a list of all users.
@@ -121,6 +121,19 @@ List each team member and:
  * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
  * Why did you choose them to take that role? Specify if they are interested in learning that part, experienced in it, or any other reasons. Do no make things up. This part is not graded but may be reviewed later.
 
+Vihaan Chugh:
+
+Muhammad Ibrahim:
+
+Orhan Cangurel:
+
+Vikram Makkar:
+
+Aleksandr Kovalev:
+
+Harshith Latchupatula:
+
+Samuel Lukas:
 
 #### Q8: How will you work as a team?
 
@@ -152,6 +165,25 @@ List/describe the artifacts you will produce in order to organize your team.
    * **How do you prioritize tasks?**
    * How do tasks get assigned to team members?
    * How do you determine the status of work from inception to completion?
+  
+Our meeting schedule is already concrete with recurring meetings on Tuesdays and Fridays. The meeting minutes for these meetings will be recordered under `team/minutes/weekx.txt` for the corresponding week.
+
+In terms of tasks, work assigned will be aggregated as Github issues so that it is visible to all members on the team. Given specific roles (frontend, backend, etc.) we will assign the corresponding role to an issue and it's priority as follows:
+
+🟥 priority: critical (Must be addressed immediately, blocking other work)
+🟧 priority: high (Important, but not blocking)
+🟨 priority: medium (Should be done, but not urgent)
+🟩 priority: low (Nice to have, but not time-sensitive)
+
+As soon as a team member is done working on a current ticket, they will pick up the next ticket aligning with their role with the highest priority. TO determine the status of work from inception to completion, the following labels will be assigned:
+
+🔵 status: backlog
+🟡 status: in progress
+🟠 status: in review
+🔴 status: blocked
+✅ status: done
+
+As a group member works on their assigned ticket/issue, they will update the status to reflect the status of their work.
 
 #### Q10: What are the rules regarding how your team works?
 
@@ -165,7 +197,7 @@ List/describe the artifacts you will produce in order to organize your team.
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
  * How will you address the issue if one person doesn't contribute or is not responsive?
  * 
- To keep everyone accountable for meetings and action items, we use an Instagram group chat for quick reminders and updates about upcoming meetings. For scheduling, we use Calendly to find times that work for everyone, ensuring that meetings are planned around everyone’s availability.
+To keep everyone accountable for meetings and action items, we use an Instagram group chat for quick reminders and updates about upcoming meetings. For scheduling, we use Calendly to find times that work for everyone, ensuring that meetings are planned around everyone’s availability.
 
 If someone isn’t contributing or isn’t responsive, we first reach out to them individually to check in and understand if there’s an issue. If the problem persists, we address it as a team to find a solution together. If necessary, we escalate the issue to the assigned TA to ensure fairness and keep the project moving forward.
 
@@ -176,11 +208,19 @@ If someone isn’t contributing or isn’t responsive, we first reach out to the
 * Examples include product development that includes developing new features, or quality assurance that includes developing features that test the product reliability, or software maintenance that includes fixing crucial bugs in the product.
 * Provide examples of why you think you fit this role.
 
+Our partner, Sprout Family, is a very small startup that is in the early stages of building out their product ecosystem. Given their lean team structure, our role is crucial in laying the foundation for a new admin page UI for their OAuth2 server. In the broader scope of their organization, our team plays a Product Development role, specifically focusing a revamped version the administration panel. This work is essential as it provides the first interface for managing OAuth2 clients, users, and permissions, making it a key component of their authentication and authorization system.
+
+By delivering this new admin UI page and connecting it with the pre-existing a12n-server they have, we're allowing Sprout family, and other potential uses of the a12n-server to more efficiently manage and secure their authentication system without having to directly interact with backend configurations.
+
+Since Sprout family is still early in its development, we fit this role perfectly as we're flexible and can soley focus on creating this new product. As majority of our team has experience with frontend, designing and creating this new UI, and plugging it into the a12n-server API would be an accomplishable goal. We will be able to further improve on their frontend (which is currently server-rendered HTML) by leveraging technologies such as React to increase user interactability while incorporating best practices.
+
 #### Q12. How does your project fit within the overall product from the partner?
 * Look at the big picture of the product and think about how your project fits into this product.
 * Is your project the first step towards building this product? Is it the first prototype? Are you developing the frontend of a product whose backend is developed by the partner? Are you building the release pipelines for a product that is developed by the partner? Are you building a core feature set and take full ownership of these features?
 * You should also provide details of who else is contributing to what parts of the product, if you have this information. This is more important if the project that you will be working on has strong coupling with parts that will be contributed to by members other than your team (e.g. from partner).
 * You can be creative for these questions and even use a graphical or pictorial representation to demonstrate the fit.
+
+We're focused mostly on developing the frontend of a product whose backend is already developed by the partner. More specifically, the frontend we will develop for the admin UI page will be a new, standalone, iteration replacing the legacy admin page. The backend is already developed and maintained by the partner as the a12n-server. Apart from the server and the admin UI, we will not be working on other parts of the overall product (ie. anything that is more userfacing and relating to Sprout Family). The only potential coupling will be between APIs that are used on the a12n-server that will be required to plug into our frontend UI. However, the only possible clashes would be if the APIs need to be updated or modified to fit our usecase. Otherwise, since the frontend portion is standalone and separate, there will not be any coupling between the project and the overall product.
 
 ## Potential Risks
 
