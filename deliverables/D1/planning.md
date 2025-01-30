@@ -64,7 +64,14 @@ Example: A third-year computer science student building a secure web application
 Acceptance Criteria:
 - Passwords are securely encrypted before being stored in the database.
 - The system displays validation errors for invalid inputs (e.g., incorrect email format, weak password).
-- Users can access a secure registration form though the application interface. 
+- Users can access a secure registration form though the application interface.
+
+2) As an admin, I want to be able to see I want to view a list of users in a table and also in JSON format so that I can manage them easily
+
+Acceptance Criteria:
+- Given that I am logged in as an admin, when I open the user management section, then I should see a table with a list of all users.
+- I can switch tabs from a table view to the developer tab to see the relevant information in JSON format.
+- The table should include columns for at least: Email, firstName, lastName, isActive (Active/Inactive).
 
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
@@ -123,7 +130,17 @@ Describe meetings (and other events) you are planning to have.
  * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
  * You should have 2 meetings with your project partner (if you have one) before D1 is due. Describe them here:
    * You must keep track of meeting minutes and add them to your repo under "deliverables/minutes" folder
-   * You must have a regular meeting schedule established for the rest of the term.  
+   * You must have a regular meeting schedule established for the rest of the term.
+
+We will have 1-2 meetings each week. On Tuesdays, we will have a short meeting as a team sync to discuss challenges
+or issues that arise. We will also use this time to prepare for tutorial updates, deliverables, or various tasks
+we need to prep for other deadlines. The second meeting will be on Fridays with the partner. Here, we will give updates
+on what we are working on, discuss next steps or goals we want to accomplish, and also take time to ask questions and
+clarify taksks we are working on. 
+
+Additionally, we have a discord server where we are able to communicate ad-hoc with the partner and eachother. Issues,
+conversation, or questions that don't require a meeting will happen in the discord server chat. If anything urgent
+pops up, we are able to have mini meetings through discord calls on the server.
   
 #### Q9: How will you organize your team?
 
@@ -190,7 +207,6 @@ If our user stories are not well-defined, they may not provide enough direction 
 1) Risk: Since the project is open source it might be susceptible to security vulnerabilities.
    
 Strategy:
-
 - Regular security audits in which the people contributing can look at the codebase and try to find and fix possible vulnerabilities.
 - Implement industry-standard security measures, such as using strong encryption for data, securing API endpoints, and enforcing robust authentication mechanisms
   
