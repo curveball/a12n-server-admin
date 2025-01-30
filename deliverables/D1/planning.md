@@ -80,7 +80,15 @@ Acceptance Criteria:
 - When creating a new user, I must enter a valid email, first name, last name, and set their initial status (Active/Inactive).
 - When I select a user from the list, I should have an option to edit their details (email, first name, last name, and status).
 - When I deactivate a user, their status should change to "Inactive," and they should no longer be able to log in.
+- I should be able to search for a user to address specific issues.
 
+4) As an admin, I want to be able to manage the OAuth2 apps in an accessible way:
+
+Acceptance Criteria:
+- I can easily add/remove new apps and generate new scopes if necessary.
+- I can track what scopes are available in specific apps and add/remove them from a drop-down menu.
+- I can add or remove users from an app given a unique identifier (username/email).
+- I can track and manage the scopes given to user in a specific app.
 
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
