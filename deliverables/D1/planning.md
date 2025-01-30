@@ -73,6 +73,15 @@ Acceptance Criteria:
 - I can switch tabs from a table view to the developer tab to see the relevant information in JSON format.
 - The table should include columns for at least: Email, firstName, lastName, isActive (Active/Inactive).
 
+3) As an admin, I want to be able to create new user, updates user information, and deactivate users.
+
+Acceptance Criteria:
+- Given that I am logged in as an admin, when I navigate to the user management section, I should see an option to add a new user.
+- When creating a new user, I must enter a valid email, first name, last name, and set their initial status (Active/Inactive).
+- When I select a user from the list, I should have an option to edit their details (email, first name, last name, and status).
+- When I deactivate a user, their status should change to "Inactive," and they should no longer be able to log in.
+
+
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
 > Short (1-2 min' read max)
