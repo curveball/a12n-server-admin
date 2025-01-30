@@ -170,18 +170,22 @@ Our meeting schedule is already concrete with recurring meetings on Tuesdays and
 
 In terms of tasks, work assigned will be aggregated as Github issues so that it is visible to all members on the team. Given specific roles (frontend, backend, etc.) we will assign the corresponding role to an issue and it's priority as follows:
 
+```
 🟥 priority: critical (Must be addressed immediately, blocking other work)
 🟧 priority: high (Important, but not blocking)
 🟨 priority: medium (Should be done, but not urgent)
 🟩 priority: low (Nice to have, but not time-sensitive)
+```
 
 As soon as a team member is done working on a current ticket, they will pick up the next ticket aligning with their role with the highest priority. TO determine the status of work from inception to completion, the following labels will be assigned:
 
+```
 🔵 status: backlog
 🟡 status: in progress
 🟠 status: in review
 🔴 status: blocked
 ✅ status: done
+```
 
 As a group member works on their assigned ticket/issue, they will update the status to reflect the status of their work.
 
