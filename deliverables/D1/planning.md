@@ -59,6 +59,8 @@ Example: A third-year computer science student building a secure web application
  * User stories must contain acceptance criteria. Examples of user stories with different formats can be found here: https://www.justinmind.com/blog/user-story-examples/. **It is important that you provide a link to an artifact containing your user stories**.
  * If you have a partner, these must be reviewed and accepted by them. You need to include the evidence of partner approval (e.g., screenshot from email) or at least communication to the partner (e.g., email you sent)
 
+ * 
+
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
 > Short (1-2 min' read max)
@@ -81,6 +83,7 @@ Example: A third-year computer science student building a secure web application
 **Your partner cannot ask you to sign any legal agreements or documents pertaining to non-disclosure, confidentiality, IP ownership, etc.**
 
 Briefly describe which option you have agreed to.
+Since this project is open - source, there is no legal agreements of any sort. 
 
 ----
 
@@ -91,8 +94,8 @@ Briefly describe which option you have agreed to.
 Do a team-building activity in-person or online. This can be playing an online game, meeting for bubble tea, lunch, or any other activity you all enjoy.
 * Get to know each other on a more personal level.
 * Provide a few sentences on what you did and share a picture or other evidence of your team building activity.
-* Share at least three fun facts from members of you team (total not 3 for each member).
 
+Our team got together on Discord for a fun team-building session and played Gartic Phone using its in-game feature. It was a great way to relax and bond—we had some hilarious drawings and even more hilarious guesses. Along the way, we also shared a bit about our backgrounds and got to know each other better. It was a fun break from work and definitely helped us feel more connected as a team. Here’s a screenshot from one of our games!
 
 #### Q7: What are the roles & responsibilities on the team?
 
@@ -133,10 +136,16 @@ List/describe the artifacts you will produce in order to organize your team.
 **Communications:**
  * What is the expected frequency? What methods/channels will be used? 
  * If you have a partner project, what is your process for communicating with your partner?
+
+ We set up a Discord server as our main communication platform to keep everything organized and ensure smooth collaboration. We plan on having at least 1-2 check-ins per week, either through text updates or by hopping into the General voice channel for live discussions. This helps us stay aligned on tasks, share progress, and quickly resolve any issues. If we're working with a partner, we use the same approach—keeping them updated through regular messages and calls to ensure we're all on the same page.
  
 **Collaboration: (Share your responses to Q8 & Q9 from A1)**
  * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
  * How will you address the issue if one person doesn't contribute or is not responsive?
+ * 
+ To keep everyone accountable for meetings and action items, we use an Instagram group chat for quick reminders and updates about upcoming meetings. For scheduling, we use Calendly to find times that work for everyone, ensuring that meetings are planned around everyone’s availability.
+
+If someone isn’t contributing or isn’t responsive, we first reach out to them individually to check in and understand if there’s an issue. If the problem persists, we address it as a team to find a solution together. If necessary, we escalate the issue to the assigned TA to ensure fairness and keep the project moving forward.
 
 ## Organisation Details
 
@@ -160,7 +169,16 @@ List/describe the artifacts you will produce in order to organize your team.
   * Lack of clarity in execution
   * Insufficient discussion with partners
   * User stories that are too abstract or too simple
-* For each risk, provide a brief bullet point and then explain the risk in detail. 
+* For each risk, provide a brief bullet point and then explain the risk in detail.
+
+* Lack of Clarity in Execution
+If team members have different interpretations of tasks or project goals, it may lead to inconsistencies in implementation. To mitigate this, we need clear documentation, regular check-ins, and well-defined action items.
+
+Insufficient Discussion with Partners
+If we don’t communicate effectively with our partners, we may miss important requirements or feedback, leading to last-minute changes. Ensuring regular updates and feedback loops will help minimize misunderstandings.
+
+User Stories That Are Too Abstract or Too Simple
+If our user stories are not well-defined, they may not provide enough direction for development. This could lead to unnecessary scope creep or features that don’t add real value. We will refine our user stories to make them actionable and aligned with project goals.
 
 #### Q14. What are some potential mitigation strategies for the risks you identified?
 * Examples of mitigation strategies:
