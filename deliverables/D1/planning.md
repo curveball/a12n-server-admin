@@ -1,4 +1,4 @@
-# YOUR PRODUCT/TEAM NAME
+# a12n-server/The Rizzlers
 > _Note:_ This document will evolve throughout your project. You commit regularly to this file while working on the project (especially edits/additions/deletions to the _Highlights_ section). 
  > **This document will serve as a master plan between your team, your partner and your TA.**
 
@@ -46,14 +46,11 @@ Educators & Learners:
 Example: A third-year computer science student building a secure web application and seeking a lightweight, open-source tool for experimentation and learning.
 #### Q3: Why would your users choose your product? What are they using today to solve their problem/need?
 
-> Short (1 - 2 min' read max)
- * We want you to "connect the dots" for us - Why does your product (as described in your answer to Q1) fits the needs of your users (as described in your answer to Q2)?
- * Explain the benefits of your product explicitly & clearly. For example:
-    * Save users time (how and how much?)
-    * Allow users to discover new information (which information? And, why couldn't they discover it before?)
-    * Provide users with more accurate and/or informative data (what kind of data? Why is it useful to them?)
-    * Does this application exist in another form? If so, how does your differ and provide value to the users?
-    * How does this align with your partner's organization's values/mission/mandate?
+1) Time Efficient: The first benefit of using our product is time efficiency. Most platforms, like Auth0, are complex. Our solution provides a straightforward setup process that lets developers integrate authentication features quickly. 
+
+2) Cost-Effective: Since our project is open-source there are no licensing fees, making it ideal for independent developers and startups. Moreover, having a global community helps ensure that the product stays up to date. 
+
+3) Customization Friendly: Our product allows users to choose designs that fit their specific tech stack and needs, which offers much more flexibility than rigid alternatives. 
 
 #### Q4: What are the user stories that make up the Minumum Viable Product (MVP)?
 
