@@ -73,7 +73,7 @@ Acceptance Criteria:
 - I can switch tabs from a table view to the developer tab to see the relevant information in JSON format.
 - The table should include columns for at least: Email, firstName, lastName, isActive (Active/Inactive).
 
-3) As an admin, I want to be able to create new user, updates user information, and deactivate users.
+3) As an admin, I want to be able to create new user, updates user information, deactivate users, and search for them in order to handle any issues that might arise with specific users.
 
 Acceptance Criteria:
 - Given that I am logged in as an admin, when I navigate to the user management section, I should see an option to add a new user.
@@ -82,7 +82,7 @@ Acceptance Criteria:
 - When I deactivate a user, their status should change to "Inactive," and they should no longer be able to log in.
 - I should be able to search for a user to address specific issues.
 
-4) As an admin, I want to be able to manage the OAuth2 apps in an accessible way:
+4) As an admin, I want to be able to manage the OAuth2 apps in an accessible way in order to be able to quickly handle any issues with them (stretch goal):
 
 Acceptance Criteria:
 - I can easily add/remove new apps and generate new scopes if necessary.
