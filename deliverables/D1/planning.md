@@ -62,9 +62,9 @@ Example: A third-year computer science student building a secure web application
 1) As a developer, I want to enable users to register for my application, in order to provide secure access to the application.
 
 Acceptance Criteria:
-1.1) Passwords are securely encrypted before being stored in the database.
-1.2) The system displays validation errors for invalid inputs (e.g., incorrect email format, weak password).
-1.3) Users can access a secure registration form though the application interface. 
+- Passwords are securely encrypted before being stored in the database.
+- The system displays validation errors for invalid inputs (e.g., incorrect email format, weak password).
+- Users can access a secure registration form though the application interface. 
 
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
