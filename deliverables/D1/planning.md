@@ -162,7 +162,7 @@ Muhammad Ibrahim:
 
 Orhan Cangurel:
 
-Vikram Makkar:
+Vikram Makkar: Frotend. I am choosing frontend because even though I have some experience with it, I want to refine it and make myself more thorough with it by working on it during this project. 
 
 Aleksandr Kovalev:
 
