@@ -64,7 +64,7 @@ Example: A third-year computer science student building a secure web application
 Acceptance Criteria:
 - Passwords are securely encrypted before being stored in the database.
 - The system displays validation errors for invalid inputs (e.g., incorrect email format, weak password).
-- Users can access a secure registration form though the application interface.
+- Users can access a secure registration form through the application interface, which has one combined field for the full name.
 
 2) As an admin, I want to be able to see I want to view a list of users in a table and also in JSON format in order to manage users easily
 
@@ -99,6 +99,9 @@ Acceptance Criteria:
 - Reset Process: Clicking the reset link within 24 hours allows the user to set a new password.
 - The new password must be at least 8 characters, include uppercase and lowercase letters, a number, and a special character.
 - Confirmation:After resetting, users can log in with the new password successfully.
+
+<img width="929" alt="image" src="https://github.com/user-attachments/assets/b7d78e67-aaa9-433d-b0d4-0ce19b28d912" />
+
 
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
@@ -137,6 +140,9 @@ Do a team-building activity in-person or online. This can be playing an online g
 * Provide a few sentences on what you did and share a picture or other evidence of your team building activity.
 
 Our team got together on Discord for a fun team-building session and played Gartic Phone using its in-game feature. It was a great way to relax and bond—we had some hilarious drawings and even more hilarious guesses. Along the way, we also shared a bit about our backgrounds and got to know each other better. It was a fun break from work and definitely helped us feel more connected as a team. Here’s a screenshot from one of our games!
+
+![03C3DAED-561F-4666-835D-64071ABA4960](https://github.com/user-attachments/assets/5ee6f5af-0a6c-4e19-806b-de3c2642ec6c)
+
 
 #### Q7: What are the roles & responsibilities on the team?
 
