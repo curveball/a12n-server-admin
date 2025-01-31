@@ -161,7 +161,7 @@ Vihaan Chugh: Project Manager. Frontend. Some experience with react from 309. I 
 
 Muhammad Ibrahim: Frontend Developer. Some exposure working with it before in React specifically which is being considered as one of the frontend framework for the project. I want to learn more about it and become more well versed over the course of this project.
 
-Orhan Cangurel:
+Orhan Cangurel: Frontend. Some experience working with React in my previous internship. Also did a few hackathon projects in Next.js (basically React). I wish to gain exposure to it through this project as I feel like this project has the potential to be a very big tool for developers. I'm also open to working on back-end and databases if help is needed.
 
 Vikram Makkar: Frontend. I am choosing frontend because even though I have some experience with it, I want to refine it and make myself more thorough with it by working on it during this project. 
 
