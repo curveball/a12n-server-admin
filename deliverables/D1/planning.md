@@ -167,7 +167,7 @@ Vikram Makkar: Frontend. I am choosing frontend because even though I have some 
 
 Aleksandr Kovalev: Frontend + DB integration. The project has few backend-related goals and I wish to get more experience with frontend. Although I will try to prioritize tasks that concern the server and db's.
 
-Harshith Latchupatula:
+Harshith Latchupatula: Design + Frontend + Backend. I've worked in full-stack in most of my previous interships and I'm interested in seeing the project from the client-side all the way to the backend. I also have design experience as a hobby.
 
 Samuel Lukas: Frontend + DB integration + backend (if necessary). I have some exposure with working on frontend for small projects and wish to expand my frontend knowledge and skills. However, if needed, I wish to do more backend and DB related tasks since I have more experience in that area.
 
