@@ -90,6 +90,15 @@ Acceptance Criteria:
 - I can add or remove users from an app given a unique identifier (username/email).
 - I can track and manage the scopes given to user in a specific app.
 
+5 )As a user, I want to reset my password in order to regain access if I forget it.
+Acceptance Criteria:
+
+- Request Reset: Users can click "Forgot Password" on the login page to enter their registered email.
+- Email Notification: A password reset link is sent to the valid email address provided.
+- Reset Process: Clicking the reset link within 24 hours allows the user to set a new password.
+- The new password must be at least 8 characters, include uppercase and lowercase letters, a number, and a special character.
+- Confirmation:After resetting, users can log in with the new password successfully.
+
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
 > Short (1-2 min' read max)
