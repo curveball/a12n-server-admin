@@ -100,7 +100,7 @@ Acceptance Criteria:
 - The admin can disable MFA for the user in case they have lost their authentication method.
 - The admin can unlock accounts that were locked due to too many failed login attempts.
 - The system logs all admin-initiated password resets and MFA changes for auditing purposes.
-- 
+
 <img width="929" alt="image" src="https://github.com/user-attachments/assets/b7d78e67-aaa9-433d-b0d4-0ce19b28d912" />
 
 
@@ -157,7 +157,7 @@ List each team member and:
  * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
  * Why did you choose them to take that role? Specify if they are interested in learning that part, experienced in it, or any other reasons. Do no make things up. This part is not graded but may be reviewed later.
 
-Vihaan Chugh: Produce Manager. Frontend. Some experience with react from 309. I want to refine this skill further with this project as practise. 
+Vihaan Chugh: Project Manager. Frontend. Some experience with react from 309. I want to refine this skill further with this project as practise. 
 
 Muhammad Ibrahim: Frontend Developer. Some exposure working with it before in React specifically which is being considered as one of the frontend framework for the project. I want to learn more about it and become more well versed over the course of this project.
 
@@ -169,7 +169,7 @@ Aleksandr Kovalev: Frontend + DB integration. The project has few backend-relate
 
 Harshith Latchupatula:
 
-Samuel Lukas:
+Samuel Lukas: Frontend + DB integration + backend (if necessary). I have some exposure with working on frontend for small projects and wish to expand my frontend knowledge and skills. However, if needed, I wish to do more backend and DB related tasks since I have more experience in that area.
 
 #### Q8: How will you work as a team?
 
