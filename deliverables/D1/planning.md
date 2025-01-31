@@ -59,6 +59,8 @@ Example: A third-year computer science student building a secure web application
  * User stories must contain acceptance criteria. Examples of user stories with different formats can be found here: https://www.justinmind.com/blog/user-story-examples/. **It is important that you provide a link to an artifact containing your user stories**.
  * If you have a partner, these must be reviewed and accepted by them. You need to include the evidence of partner approval (e.g., screenshot from email) or at least communication to the partner (e.g., email you sent)
 
+**Link to Figma Prototype: https://www.figma.com/design/qMa4lHpX4ydsGFQ0AI74cL/Admin-UI**
+
 1) As a developer, I want to enable users to register for my application, in order to provide secure access to the application.
 
 Acceptance Criteria:
