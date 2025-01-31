@@ -108,6 +108,8 @@ Acceptance Criteria:
  * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here. 
  * Will you be using third party applications or APIs? If so, what are they?
 
+As the project is being developed in TypeScript/Javascript, we have chosen to stick to them as well. The focus is primarily on UI, so React is being considered as the main framework, though serverside rendering is also an option (which is how the original server interface was implemented). The original project can use MySQL, Postgres and Sqlite databases, and we would simply need to request data from them, though Node.js would be required in that case. Docker would be used for containerization, just as in the original project. For CI/CD, we are leaning towards Github Actions, just to be consistent with the server repo. The application will be deployed as a server along with a database. The architecture can be split into roughly three components - the Admin UI (uses React), the OAuth2 server (which is already functional), and a database. The Admin UI makes requests to the server, which then accesses the database through an abstraction layer. This is essentially an MVC pattern. At the moment, we are not considering any third-party applications or APIs, although that may change later.
+
 ----
 ## Intellectual Property Confidentiality Agreement 
 > Note this section is **not marked** but must be completed briefly if you have a partner. If you have any questions, please ask on Piazza.
