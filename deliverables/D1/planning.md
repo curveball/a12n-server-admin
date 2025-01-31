@@ -158,7 +158,7 @@ List each team member and:
 
 Vihaan Chugh:
 
-Muhammad Ibrahim:
+Muhammad Ibrahim: Frontend Developer. Some exposure working with it before in React specifically which is being considered as one of the frontend framework for the project. I want to learn more about it and become more well versed over the course of this project.
 
 Orhan Cangurel:
 
