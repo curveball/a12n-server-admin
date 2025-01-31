@@ -54,11 +54,6 @@ Example: A third-year computer science student building a secure web application
 
 #### Q4: What are the user stories that make up the Minumum Viable Product (MVP)?
 
- * At least 5 user stories concerning the main features of the application - note that this can broken down further
- * You must follow proper user story format (as taught in lecture) ```As a <user of the app>, I want to <do something in the app> in order to <accomplish some goal>```
- * User stories must contain acceptance criteria. Examples of user stories with different formats can be found here: https://www.justinmind.com/blog/user-story-examples/. **It is important that you provide a link to an artifact containing your user stories**.
- * If you have a partner, these must be reviewed and accepted by them. You need to include the evidence of partner approval (e.g., screenshot from email) or at least communication to the partner (e.g., email you sent)
-
 **Link to Figma Prototype: https://www.figma.com/design/qMa4lHpX4ydsGFQ0AI74cL/Admin-UI**
 
 1) As a developer, I want to enable users to register for my application, in order to provide secure access to the application.
@@ -106,12 +101,6 @@ Acceptance Criteria:
 
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
-> Short (1-2 min' read max)
- * What is the technology stack? Specify languages, frameworks, libraries, PaaS products or tools to be used or being considered. 
- * How will you deploy the application?
- * Describe the architecture - what are the high level components or patterns you will use? Diagrams are useful here. 
- * Will you be using third party applications or APIs? If so, what are they?
-
 As the project is being developed in TypeScript/Javascript, we have chosen to stick to them as well. The focus is primarily on UI, so React is being considered as the main framework, though serverside rendering is also an option (which is how the original server interface was implemented). The original project can use MySQL, Postgres and Sqlite databases, and we would simply need to request data from them, though Node.js would be required in that case. Docker would be used for containerization, just as in the original project. For CI/CD, we are leaning towards Github Actions, just to be consistent with the server repo. The application will be deployed as a server along with a database. The architecture can be split into roughly three components - the Admin UI (uses React), the OAuth2 server (which is already functional), and a database. The Admin UI makes requests to the server, which then accesses the database through an abstraction layer. This is essentially an MVC pattern. At the moment, we are not considering any third-party applications or APIs, although that may change later.
 
 ![Data Flow Diagram](https://github.com/user-attachments/assets/9733d895-5614-4d2b-8908-966368e0161d)
@@ -138,26 +127,12 @@ Since this project is open - source, there is no legal agreements of any sort.
 
 #### Q6: Have you met with your team?
 
-Do a team-building activity in-person or online. This can be playing an online game, meeting for bubble tea, lunch, or any other activity you all enjoy.
-* Get to know each other on a more personal level.
-* Provide a few sentences on what you did and share a picture or other evidence of your team building activity.
-
 Our team got together on Discord for a fun team-building session and played Gartic Phone using its in-game feature. It was a great way to relax and bond—we had some hilarious drawings and even more hilarious guesses. Along the way, we also shared a bit about our backgrounds and got to know each other better. It was a fun break from work and definitely helped us feel more connected as a team. Here’s a screenshot from one of our games!
 
 ![03C3DAED-561F-4666-835D-64071ABA4960](https://github.com/user-attachments/assets/5ee6f5af-0a6c-4e19-806b-de3c2642ec6c)
 
 
 #### Q7: What are the roles & responsibilities on the team?
-
-Describe the different roles on the team and the responsibilities associated with each role. 
- * Roles should reflect the structure of your team and be appropriate for your project. One person may have multiple roles.  
- * Add role(s) to your Team-[Team_Number]-[Team_Name].csv file on the main folder.
- * At least one person must be identified as the dedicated partner liaison. They need to have great organization and communication skills.
- * Everyone must contribute to code. Students who don't contribute to code enough will receive a lower mark at the end of the term.
-
-List each team member and:
- * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
- * Why did you choose them to take that role? Specify if they are interested in learning that part, experienced in it, or any other reasons. Do no make things up. This part is not graded but may be reviewed later.
 
 Vihaan Chugh: Project Manager. Frontend. Some experience with react from 309. I want to refine this skill further with this project as practise. 
 
@@ -175,14 +150,6 @@ Samuel Lukas: Frontend + DB integration + backend (if necessary). I have some ex
 
 #### Q8: How will you work as a team?
 
-Describe meetings (and other events) you are planning to have. 
- * When and where? Recurring or ad hoc? In-person or online?
- * What's the purpose of each meeting?
- * Other events could be coding sessions, code reviews, quick weekly sync meeting online, etc.
- * You should have 2 meetings with your project partner (if you have one) before D1 is due. Describe them here:
-   * You must keep track of meeting minutes and add them to your repo under "deliverables/minutes" folder
-   * You must have a regular meeting schedule established for the rest of the term.
-
 We will have 1-2 meetings each week. On Tuesdays, we will have a short meeting as a team sync to discuss challenges
 or issues that arise. We will also use this time to prepare for tutorial updates, deliverables, or various tasks
 we need to prep for other deadlines. The second meeting will be on Fridays with the partner. Here, we will give updates
@@ -194,15 +161,6 @@ conversation, or questions that don't require a meeting will happen in the disco
 pops up, we are able to have mini meetings through discord calls on the server.
   
 #### Q9: How will you organize your team?
-
-List/describe the artifacts you will produce in order to organize your team.       
-
- * Artifacts can be To-Do lists, Task boards, schedule(s), meeting minutes, etc.
- * We want to understand:
-   * How do you keep track of what needs to get done? (You must grant your TA and partner access to systems you use to manage work)
-   * **How do you prioritize tasks?**
-   * How do tasks get assigned to team members?
-   * How do you determine the status of work from inception to completion?
   
 Our meeting schedule is already concrete with recurring meetings on Tuesdays and Fridays. The meeting minutes for these meetings will be recordered under `team/minutes/weekx.txt` for the corresponding week.
 
@@ -230,15 +188,11 @@ As a group member works on their assigned ticket/issue, they will update the sta
 #### Q10: What are the rules regarding how your team works?
 
 **Communications:**
- * What is the expected frequency? What methods/channels will be used? 
- * If you have a partner project, what is your process for communicating with your partner?
 
  We set up a Discord server as our main communication platform to keep everything organized and ensure smooth collaboration. We plan on having at least 1-2 check-ins per week, either through text updates or by hopping into the General voice channel for live discussions. This helps us stay aligned on tasks, share progress, and quickly resolve any issues. If we're working with a partner, we use the same approach—keeping them updated through regular messages and calls to ensure we're all on the same page.
  
 **Collaboration: (Share your responses to Q8 & Q9 from A1)**
- * How are people held accountable for attending meetings, completing action items? Is there a moderator or process?
- * How will you address the issue if one person doesn't contribute or is not responsive?
- * 
+
 To keep everyone accountable for meetings and action items, we use an Instagram group chat for quick reminders and updates about upcoming meetings. For scheduling, we use Calendly to find times that work for everyone, ensuring that meetings are planned around everyone’s availability.
 
 If someone isn’t contributing or isn’t responsive, we first reach out to them individually to check in and understand if there’s an issue. If the problem persists, we address it as a team to find a solution together. If necessary, we escalate the issue to the assigned TA to ensure fairness and keep the project moving forward.
@@ -246,9 +200,6 @@ If someone isn’t contributing or isn’t responsive, we first reach out to the
 ## Organisation Details
 
 #### Q11. How does your team fit within the overall team organisation of the partner?
-* Given the team structure of your partner, what role do you think your team will play?
-* Examples include product development that includes developing new features, or quality assurance that includes developing features that test the product reliability, or software maintenance that includes fixing crucial bugs in the product.
-* Provide examples of why you think you fit this role.
 
 Our partner, Sprout Family, is a very small startup that is in the early stages of building out their product ecosystem. Given their lean team structure, our role is crucial in laying the foundation for a new admin page UI for their OAuth2 server. In the broader scope of their organization, our team plays a Product Development role, specifically focusing a revamped version the administration panel. This work is essential as it provides the first interface for managing OAuth2 clients, users, and permissions, making it a key component of their authentication and authorization system.
 
@@ -257,23 +208,12 @@ By delivering this new admin UI page and connecting it with the pre-existing a12
 Since Sprout family is still early in its development, we fit this role perfectly as we're flexible and can soley focus on creating this new product. As majority of our team has experience with frontend, designing and creating this new UI, and plugging it into the a12n-server API would be an accomplishable goal. We will be able to further improve on their frontend (which is currently server-rendered HTML) by leveraging technologies such as React to increase user interactability while incorporating best practices.
 
 #### Q12. How does your project fit within the overall product from the partner?
-* Look at the big picture of the product and think about how your project fits into this product.
-* Is your project the first step towards building this product? Is it the first prototype? Are you developing the frontend of a product whose backend is developed by the partner? Are you building the release pipelines for a product that is developed by the partner? Are you building a core feature set and take full ownership of these features?
-* You should also provide details of who else is contributing to what parts of the product, if you have this information. This is more important if the project that you will be working on has strong coupling with parts that will be contributed to by members other than your team (e.g. from partner).
-* You can be creative for these questions and even use a graphical or pictorial representation to demonstrate the fit.
 
 We're focused mostly on developing the frontend of a product whose backend is already developed by the partner. More specifically, the frontend we will develop for the admin UI page will be a new, standalone, iteration replacing the legacy admin page. The backend is already developed and maintained by the partner as the a12n-server. Apart from the server and the admin UI, we will not be working on other parts of the overall product (ie. anything that is more userfacing and relating to Sprout Family). The only potential coupling will be between APIs that are used on the a12n-server that will be required to plug into our frontend UI. However, the only possible clashes would be if the APIs need to be updated or modified to fit our usecase. Otherwise, since the frontend portion is standalone and separate, there will not be any coupling between the project and the overall product.
 
 ## Potential Risks
 
 #### Q13. What are some potential risks to your project?
-* Now that you have defined your project, what risks can you identify that might impact it?
-* Some examples of risks at this planning stage could include:
-  * Uncertainties regarding a specific feature
-  * Lack of clarity in execution
-  * Insufficient discussion with partners
-  * User stories that are too abstract or too simple
-* For each risk, provide a brief bullet point and then explain the risk in detail.
 
 * Lack of Clarity in Execution
 If team members have different interpretations of tasks or project goals, it may lead to inconsistencies in implementation. To mitigate this, we need clear documentation, regular check-ins, and well-defined action items.
