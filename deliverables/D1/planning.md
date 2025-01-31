@@ -88,7 +88,7 @@ Acceptance Criteria:
 
 Acceptance Criteria:
 - I can easily add/remove new apps and generate new scopes if necessary.
-- I can track what scopes are available in specific apps and add/remove them from a drop-down menu.
+- I can track and add/remove priviledges from specific apps.
 - I can add or remove users from an app given a unique identifier (username/email).
 - I can track and manage the scopes given to user in a specific app.
 
