@@ -163,9 +163,9 @@ Muhammad Ibrahim: Frontend Developer. Some exposure working with it before in Re
 
 Orhan Cangurel:
 
-Vikram Makkar: Frotend. I am choosing frontend because even though I have some experience with it, I want to refine it and make myself more thorough with it by working on it during this project. 
+Vikram Makkar: Frontend. I am choosing frontend because even though I have some experience with it, I want to refine it and make myself more thorough with it by working on it during this project. 
 
-Aleksandr Kovalev:
+Aleksandr Kovalev: Frontend + DB integration. The project has few backend-related goals and I wish to get more experience with frontend. Although I will try to prioritize tasks that concern the server and db's.
 
 Harshith Latchupatula:
 
