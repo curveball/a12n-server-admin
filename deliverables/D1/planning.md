@@ -90,7 +90,8 @@ Acceptance Criteria:
 - I can add or remove users from an app given a unique identifier (username/email).
 - I can track and manage the scopes given to user in a specific app.
 
-5 )As a user, I want to reset my password in order to regain access if I forget it.
+5. As a user, I want to reset my password in order to regain access if I forget it.
+
 Acceptance Criteria:
 
 - Request Reset: Users can click "Forgot Password" on the login page to enter their registered email.
