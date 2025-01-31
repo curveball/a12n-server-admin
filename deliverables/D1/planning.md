@@ -92,16 +92,15 @@ Acceptance Criteria:
 - I can add or remove users from an app given a unique identifier (username/email).
 - I can track and manage the scopes given to user in a specific app.
 
-5. As a user, I want to reset my password in order to regain access if I forget it.
+5) As an admin, I want to be able to initiate a password reset for a user and disable their MFA if needed, so that I can assist users who have lost access to their accounts due to forgotten credentials or failed login attempts.
 
 Acceptance Criteria:
-
-- Request Reset: Users can click "Forgot Password" on the login page to enter their registered email.
-- Email Notification: A password reset link is sent to the valid email address provided.
-- Reset Process: Clicking the reset link within 24 hours allows the user to set a new password.
-- The new password must be at least 8 characters, include uppercase and lowercase letters, a number, and a special character.
-- Confirmation:After resetting, users can log in with the new password successfully.
-
+- The admin can search for a user by email, username, or user ID.
+- The admin can trigger a password reset email for the user.
+- The admin can disable MFA for the user in case they have lost their authentication method.
+- The admin can unlock accounts that were locked due to too many failed login attempts.
+- The system logs all admin-initiated password resets and MFA changes for auditing purposes.
+- 
 <img width="929" alt="image" src="https://github.com/user-attachments/assets/b7d78e67-aaa9-433d-b0d4-0ce19b28d912" />
 
 
@@ -158,7 +157,7 @@ List each team member and:
  * A description of their role(s) and responsibilities including the components they'll work on and non-software related work
  * Why did you choose them to take that role? Specify if they are interested in learning that part, experienced in it, or any other reasons. Do no make things up. This part is not graded but may be reviewed later.
 
-Vihaan Chugh:
+Vihaan Chugh: Team Co-ordinator. Frontend. Some experience with react from 309. I want to refine this skill further with this project as practise. 
 
 Muhammad Ibrahim: Frontend Developer. Some exposure working with it before in React specifically which is being considered as one of the frontend framework for the project. I want to learn more about it and become more well versed over the course of this project.
 
