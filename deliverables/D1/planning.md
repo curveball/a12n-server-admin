@@ -101,7 +101,20 @@ Acceptance Criteria:
 
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
-As the project is being developed in TypeScript/Javascript, we have chosen to stick to them as well. The focus is primarily on UI, so React is being considered as the main framework, though serverside rendering is also an option (which is how the original server interface was implemented). The original project can use MySQL, Postgres and Sqlite databases, and we would simply need to request data from them, though Node.js would be required in that case. Docker would be used for containerization, just as in the original project. For CI/CD, we are leaning towards Github Actions, just to be consistent with the server repo. The application will be deployed as a server along with a database. The architecture can be split into roughly three components - the Admin UI (uses React), the OAuth2 server (which is already functional), and a database. The Admin UI makes requests to the server, which then accesses the database through an abstraction layer. This is essentially an MVC pattern. At the moment, we are not considering any third-party applications or APIs, although that may change later.
+We are building a web application that is primarily:
+	Frontend:
+	•	React (TypeScript) for Admin UI
+	• Why: Familiar to the team, strong library ecosystem, easy to maintain, open-source
+	Backend:
+	•	Node.js (TypeScript) – reusing the existing a12n-server from the partner (Sprout Family)
+	•	Why: The partner’s server is already in TS/Node, so we integrate seamlessly
+	Databases:
+	•	Postgres/MySQL (supported by the partner’s existing code)
+	•	Why: The a12n-server has built-in abstractions for these
+	Containerization:
+	•	Docker for easy setup and potential cloud deployment
+	•	Continuous Integration / Deployment (future optional bonus):
+	•	GitHub Actions for linting, testing, building
 
 ![Data Flow Diagram](https://github.com/user-attachments/assets/9733d895-5614-4d2b-8908-966368e0161d)
 
