@@ -102,19 +102,19 @@ Acceptance Criteria:
 #### Q5: Have you decided on how you will build it? Share what you know now or tell us the options you are considering.
 
 We are building a web application that is primarily:
-	Frontend:
-	•	React (TypeScript) for Admin UI
+Frontend:
+	•React (TypeScript) for Admin UI
 	• Why: Familiar to the team, strong library ecosystem, easy to maintain, open-source
-	Backend:
-	•	Node.js (TypeScript) – reusing the existing a12n-server from the partner (Sprout Family)
-	•	Why: The partner’s server is already in TS/Node, so we integrate seamlessly
-	Databases:
-	•	Postgres/MySQL (supported by the partner’s existing code)
-	•	Why: The a12n-server has built-in abstractions for these
-	Containerization:
-	•	Docker for easy setup and potential cloud deployment
-	•	Continuous Integration / Deployment (future optional bonus):
-	•	GitHub Actions for linting, testing, building
+Backend:
+	•Node.js (TypeScript) – reusing the existing a12n-server from the partner (Sprout Family)
+	•Why: The partner’s server is already in TS/Node, so we integrate seamlessly
+Databases:
+	•Postgres/MySQL (supported by the partner’s existing code)
+	•Why: The a12n-server has built-in abstractions for these
+Containerization:
+	•Docker for easy setup and potential cloud deployment
+	•Continuous Integration / Deployment (future optional bonus):
+	•GitHub Actions for linting, testing, building
 
 ![Data Flow Diagram](https://github.com/user-attachments/assets/9733d895-5614-4d2b-8908-966368e0161d)
 
