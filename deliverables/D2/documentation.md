@@ -94,7 +94,7 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 
 
 1. **Frontend**:  
-   - **React (TypeScript)** – popular, well-documented, suits our team’s skill set.  
+   - **React (TypeScript)** – popular, well-documented, and suits our team’s skill set.  
    - **TanStack Query** – helps manage server state, caching user data from a12n-server.  
 2. **Backend**:  
    - We use **a12n-server** as a **dependency**, not rewriting or modifying its code.  
@@ -195,34 +195,31 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 ### Sub-team 5.3
 
 #### Q10
-**Team members in this sub-team and their roles.**
-
-**Answer Here**
+- **Harshith** – Designed all Figma pages and added a new Login and Signup Page
+- **Vikram** – Login and Signup Page creation in React with radix ui component library
 
 #### Q11
 **A description of the specific features, modules, or components built by the sub-team.**
 
 1. **Figma Design Refinement**  
-   - Polished existing mock-ups to ensure consistency with any new branding or color palettes.  
-   - Finalized layout for the login page, header, and potential side navigation.  
+   - Polished existing mock-ups to ensure consistency with any new themes or colour palettes.  
+   - Finalized layout for the login page, navbar, and new pages.  
 2. **Login Page Development**  
-   - Form that collects admin credentials; on submit, it calls the a12n-server’s `/login` or relevant endpoint.  
+   - Form that collects admin credentials; on submit, it calls the a12n-server’s relevant endpoint.  
    - Basic client-side validation.  
-   - If login is successful, redirect to the main dashboard or user listing page.  
 3. **Reusable Components**  
-   - Possibly a shared `<Button>` or `<Input>` with styles from Figma.  
+   - Created components that can be shared and used across other pages.  
    - The goal is to keep the UI consistent for future pages.
 
 
 #### Q12
 **Lessons learned from this phase.**  
-1. *What worked well?*  
-2. *What didn’t work well? What can you do better for future deliverables?*
+1. *What worked well?*
+- Login and Signup page look consistent with the other colour themes and designs, providing a user-friendly look
 
-  - A close iteration loop between the Figma design and the coded login page—quickly discovering what design changes were feasible.  
-- **What didn’t work well?**  
-  - We realized mid-way that a12n-server uses certain headers or tokens for the login flow, so we had to adjust the front-end logic.  
-  - **Future Improvement**: Provide a small mock or local environment so we can test the login page without fully configuring a production-like server.
+2. *What didn’t work well? What can you do better for future deliverables?*
+- Due to the lack of time we weren't able to setup the logic for the login and signup which we plan on doing in the next sprint
+- Plan on coordinating better and leaving abundant time in the end to account for last-minute issues
 
 ---
 
@@ -257,9 +254,9 @@ Before each sub-team diverged:
 2. **Design & Documentation Team (5.2)**  
    - Provided immediate clarity for any new team member on how to spin up the project.  
    - Added test scaffolding so other devs can write tests quickly.  
-3. **Login & Figma Team (5.3)**  
-   - Ensured the UI design is consistent and user-friendly from day one.  
-   - Created the crucial login page, a typical first point of interaction for an admin.
+3. **Login, Signup & Figma Team (5.3)**  
+   - Ensured the UI design was consistent and user-friendly from day one.  
+   - Created the crucial login page and signup page, a typical first point of interaction for an admin.
 
 Together, these contributions set up a functional MVP environment: we can start the UI, see some “demo users,” have a refined login page, and a robust README plus initial tests.
 
