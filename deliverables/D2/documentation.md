@@ -74,16 +74,16 @@ We decided on **three sub-teams** to handle distinct aspects of the MVP:
      - Both have strong communication and documentation skills.  
      - They will also set up initial testing to ensure consistent quality.  
 
-3. **Login & Figma Team**: Vikram and Harshith  
+3. **Signup, Login Pages Implementation & Figma Team**: Vikram and Harshith  
    - **Scope**:  
      - Refine the existing Figma designs.  
-     - Implement the login page (or basic front-end route) that ties into a12n-server’s auth flow.  
-     - Potentially create base UI components (buttons, forms, etc.) that follow the updated Figma design.  
+     - Implement the signup and login page (or basic front-end route) that ties into a12n-server’s auth flow.  
+     - Create base UI components (buttons, forms, etc.) that follow the updated Figma design.  
    - **Reasoning**:  
      - They have UI/UX experience; Harshith has done design in previous internships, and Vikram is focusing on front-end refinement.  
      - They’ll ensure the MVP has a polished look and a cohesive design from day one.
 
-This division makes certain each sub-team handles a well-defined slice: **foundational setup**, **documentation/testing**, and **login design**. It also evenly spreads workload based on each member’s interests and expertise.
+This division ensures each sub-team handles a well-defined slice: **foundational setup**, **documentation/testing**, and **login design**. It also evenly spreads the workload based on each member’s interests and expertise.
 
 
 ---
