@@ -122,7 +122,10 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 #### Q4
 **Team members in this sub-team and their roles.**
 
-**Answer Here**
+- **Sam** – Node/React environment wizard & repository structure  
+- **Vihaan** – TanStack Query integration & environment debugging  
+- **Orhan** – Basic data fetch (demo users), future expansions
+
 
 #### Q5
 **A description of the specific features, modules, or components built by the sub-team.**
