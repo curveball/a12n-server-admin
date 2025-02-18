@@ -9,7 +9,6 @@ a12n-server is a lightweight authentication server designed to provide developer
 ### Problem Statement
 While there are several OAuth2 server implementations available for Node.js on GitHub, many are either too complex, resource-heavy, or lack comprehensive TypeScript support. This project aims to fill that gap by offering a lean, fast, and TypeScript-friendly alternative.Although some open-source and lightweight alternatives exist, a12n-server differentiates itself through its standalone, intuitive admin UI that significantly reduces the learning curve and administrative overhead for managing users, permissions, and applications, making it accessible even to those with minimal technical expertise. 
 
-Importance 
 
 ### Importance
 Authentication is a critical component of any modern web application. a12n-server offers developers a lightweight, easy-to-configure solution that integrates seamlessly with popular databases and provides essential authentication features like OAuth2, MFA, and user management.
