@@ -83,7 +83,6 @@ export default function SignupPage() {
                     border: '1px solid #e0e0e0',
                 }}
             >
-                {/* Main content */}
                 <Box style={{ textAlign: 'center', marginBottom: '30px' }}>
                     <Text
                         as='p'
