@@ -4,16 +4,18 @@
 Evert Pot, evert@sproutfamily.com
 
 ## About the Project
-a12n-server is a lightweight authentication server designed to provide developers with a simple and efficient authentication system. The project was initiated in 2018 as a personal endeavor by our partner, Evert Pot, to address the lack of lightweight, open-source OAuth2 servers for Node.js that support TypeScript. In this context, 'lightweight' refers to faster startup times , lower memory usage, and simpler configuration compared to what would be considered heavyweight solutions such as Keycloak, which can require several minutes to start, use hundreds of MB of RAM, and demand complex setup and maintenance. Integration time is also minimized as a12n-server provides a ready-to-use API with minimal setup, typically taking less than an hour to integrate into an existing Node.js project, as opposed to days for more comprehensive systems.
+a12n-server is a lightweight authentication server designed to provide developers with a simple and efficient authentication system. The project was initiated in 2018 as a personal endeavor by our partner, Evert Pot, to address the lack of lightweight, open-source OAuth2 servers for Node.js that support TypeScript. In this context, 'lightweight' refers to faster startup times , lower memory usage, and simpler configuration compared to what would be considered heavyweight solutions such as Keycloak, which can require several minutes to start, use hundreds of MB of RAM, and demand complex setup and maintenance. Integration time is also minimized as a12n-server provides a ready-to-use API with minimal setup, typically taking less than an hour to integrate into an existing Node.js project, as opposed to days for more comprehensive systems. It was created to address the lack of simple yet secure OAuth2 solutions that offer fast startup times, minimal resource usage, and an easy-to-use admin UI. This project began as a personal endeavor by our partner, Evert Pot, and it continues to grow in features and community adoption.
+
 
 ### Problem Statement
 While there are several OAuth2 server implementations available for Node.js on GitHub, many are either too complex, resource-heavy, or lack comprehensive TypeScript support. This project aims to fill that gap by offering a lean, fast, and TypeScript-friendly alternative. Although some open-source and lightweight alternatives exist, a12n-server differentiates itself through its standalone, intuitive admin UI that significantly reduces the learning curve and administrative overhead for managing users, permissions, and applications, making it accessible even to those with minimal technical expertise. 
 
 
+
 ### Importance
 Authentication is a critical component of any modern web application. a12n-server offers developers a lightweight, easy-to-configure solution that integrates seamlessly with popular databases and provides essential authentication features like OAuth2, MFA, and user management.
 
-## Key Feature Description
+## Key Features
 * **Browsable API endpoints** with errors and responses displayed in HTML and JSON, and HAL-formatted user resources.
 * **Database support** for Postgres, MySQL, and SQLite.
 * **Admin UI** with user permission and app management.
@@ -26,8 +28,28 @@ Authentication is a critical component of any modern web application. a12n-serve
 ## Screenshots/Short Videos
 
 ## Testing the Features
+1. **Register an Admin Account**  
+   - Start the server (see "Getting Started").  
+   - Visit [http://localhost:8531/](http://localhost:8531/) in a browser.  
+   - Follow the prompts to create an admin user.  
+
+2. **Manage Permissions & Users**  
+   - After logging in, go to the “Users” section.  
+   - Verify you can see the user in the list.  
+
+3. **Enable MFA**  
+   - Under “Security Settings”, enable TOTP or WebAuthn.  
+   - Follow the on-screen prompts and verify the 6-digit code.  
+   - Log out and log back in to confirm MFA is required.  
+
 
 ## Getting Started (Developer Instructions)
+
+## Prerequistes
+* Node.js 18.x or newer
+* A supported database (MySQL, Postgres, or SQLite)
+* (Optional) Docker if you prefer containerized deployment
+
 ### Setup
 To set up a test server:
 ```sh
@@ -89,6 +111,12 @@ Task management is handled through GitHub Issues.
 * **Integration Tests:** API endpoint responses, database operations.
 * **End-to-End Tests:** User registration, login, MFA, password recovery.
 * **Tools:** Jest, Vite, Cypress.
+
+# Unit and Integration tests:
+npm run test
+
+# End-to-End tests:
+npm run e2e
 
 ## License
 This project is licensed under the Apache License 2.0, consistent with the original project.
