@@ -2,7 +2,7 @@ import { Box, Text, Button, Flex, TextField as TextFieldRoot, Link } from '@radi
 import adminLogo from '../assets/icons/admin-ui-logo.svg';
 import * as Avatar from '@radix-ui/react-avatar';
 
-export default function LoginPage() {
+export default function SignupPage() {
     return (
         <Box
             style={{
@@ -93,11 +93,11 @@ export default function LoginPage() {
                             fontWeight: '500',
                         }}
                     >
-                        Log in to the <span style={{ color: '#ab6400' }}>Admin UI</span>
+                        Sign Up for <span style={{ color: '#ab6400' }}>Admin UI</span>
                     </Text>
                     <Text as='p' size='3' style={{ color: '#555' }}>
-                        Enter in your details below to log back in. If you forgot your password, just click the link at
-                        the bottom of the page.
+                        Enter in your details below to sign up, if you already have an account click the link on the
+                        bottom.
                     </Text>
                 </Box>
 
@@ -133,11 +133,29 @@ export default function LoginPage() {
                         </TextFieldRoot.Root>
                     </Box>
 
-                    <Link size='2' style={{ color: '#666', cursor: 'pointer' }}>
-                        <Box style={{ textAlign: 'right', color: 'var(--amber-12)', marginBottom: '20px' }}>
-                            Forgot your password?
-                        </Box>
-                    </Link>
+                    <Box style={{ marginBottom: '20px' }}>
+                        <Text as='label' size='2' style={{ display: 'block', marginBottom: '8px', textAlign: 'left' }}>
+                            Re-Enter Password<span style={{ color: 'red' }}>*</span>
+                        </Text>
+                        <TextFieldRoot.Root
+                            type='password'
+                            size='3'
+                            placeholder='••••••••••••••••••••••••••••••'
+                            style={{ width: '100%' }}
+                        >
+                            <TextFieldRoot.Slot side='right'>
+                                <Button
+                                    size='1'
+                                    style={{
+                                        backgroundColor: '#b78846',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    Show
+                                </Button>
+                            </TextFieldRoot.Slot>
+                        </TextFieldRoot.Root>
+                    </Box>
 
                     <Button
                         size='3'
@@ -149,32 +167,13 @@ export default function LoginPage() {
                             marginBottom: '20px',
                         }}
                     >
-                        Log In
-                    </Button>
-
-                    <Flex style={{ margin: '20px 0', alignItems: 'center' }}>
-                        <Box style={{ flex: 1, height: '1px', backgroundColor: '#e0e0e0' }} />
-                        <Box style={{ flex: 1, height: '1px', backgroundColor: '#e0e0e0' }} />
-                    </Flex>
-
-                    <Button
-                        size='3'
-                        variant='outline'
-                        style={{
-                            width: '100%',
-                            color: '#666',
-                            cursor: 'pointer',
-                            backgroundColor: 'var(--bronze-11)',
-                            marginBottom: '20px',
-                        }}
-                    >
-                        <Text style={{ color: 'white' }}>Log in with OAuth</Text>
+                        Sign Up
                     </Button>
 
                     <Box style={{ textAlign: 'center', marginTop: '20px' }}>
                         <Text size='2' style={{ color: '#666' }}>
-                            Don't have an account?{' '}
-                            <Link style={{ cursor: 'pointer', color: 'var(--bronze-11)' }}>Sign up here</Link>.
+                            Already have an account?{' '}
+                            <Link style={{ cursor: 'pointer', color: 'var(--bronze-11)' }}>Log in here</Link>.
                         </Text>
                     </Box>
                 </Box>
