@@ -12,7 +12,7 @@ While there are several OAuth2 server implementations available for Node.js on G
 ### Importance
 Authentication is a critical component of any modern web application. a12n-server offers developers a lightweight, easy-to-configure solution that integrates seamlessly with popular databases and provides essential authentication features like OAuth2, MFA, and user management.
 
-## Key Features
+## Key Feature Description
 * **Browsable API endpoints** with errors and responses displayed in HTML and JSON, and HAL-formatted user resources.
 * **Database support** for Postgres, MySQL, and SQLite.
 * **Admin UI** with user permission and app management.
@@ -22,7 +22,11 @@ Authentication is a critical component of any modern web application. a12n-serve
 * **Registration flow** with one-time passcode (OTP).
 * **Password recovery** through a 'forgot-my-password' flow.
 
-## Getting Started
+## Screenshots/Short Videos
+
+## Testing the Features
+
+## Getting Started (Developer Instructions)
 ### Setup
 To set up a test server:
 ```sh
@@ -41,12 +45,10 @@ Open [http://localhost:8531/](http://localhost:8531/) to create your admin accou
 * **Deployment Details:**
   - Deploy using Docker with pre-configured Dockerfiles.
   - CI/CD pipelines using GitHub Actions for automated testing, building, and deployment.
-  - Environment-based configurations for development, staging, and production.
 
 * **GitHub Actions Workflow:**
   - Build, lint, and test on every push and pull request.
-  - Automated deployments to staging after successful tests.
-  - Manual approval for production deployments.
+  - Manual approval for deployments.
 
 ## Task Management
 Task management is handled through GitHub Issues.
