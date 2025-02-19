@@ -1,5 +1,3 @@
-// src/pages/AdminGroupsPage.tsx
-
 import React from 'react';
 import {
   Theme,
@@ -9,16 +7,23 @@ import {
   Text,
   Card,
   Button,
+  Badge,
   Avatar,
 } from '@radix-ui/themes';
 
-const mockGroups = [
-  { name: 'test group 1', createdAt: '2025-02-15', modifiedAt: '2025-02-15', privileges: 'read' },
-  { name: 'test group 2', createdAt: '2025-02-16', modifiedAt: '2025-02-16', privileges: 'read, update' },
-  { name: 'test group 3', createdAt: '2025-02-17', modifiedAt: '2025-02-17', privileges: 'read, update, delete' },
+const mockPrivileges = [
+    { url: '/privilege/admin', title: 'Full admin privileges on the authenciation server' },
+    { url: '/privilege/a12n:principals:list', title: 'Read user, app and group information' },
+    { url: '/privilege/a12n:principals:create', title: 'Create new users, apps and groups' },
+    { url: '/privilege/a12n:principals:update', title: 'Update users, apps and groups' },
+    { url: '/privilege/a12n:one-time-token:generate', title: 'Create a token for an arbitrary user, this token grants full access to this account.' },
+    { url: '/privilege/a12n:one-time-token:exchange', title: 'Exchange a one-time-token for a OAuth2 access token.' },
+    { url: '/privilege/a12n:user:change-password', title: 'Allow changing a users\' password.' },
+    { url: '/privilege/a12n:access-token:generate', title: 'Allows a user to create a valid access-token for another user without consent. This privilege allows full control of other accounts and should never be given to third parties.' },
+    { url: '/privilege/a12n:user:manage-identities', title: 'Full control over a user identities, including adding, deleting, setting and removing verification status.' }
 ];
 
-export default function AdminGroupsPage() {
+export default function AdminPrivilegesPage() {
   return (
     <Theme accentColor="orange" radius="small">
       <Flex style={{ height: '100vh', overflow: 'hidden' }}>
@@ -75,10 +80,10 @@ export default function AdminGroupsPage() {
           {/* Header */}
           <Box style={{ marginBottom: '1rem' }}>
             <Heading as="h1" size="4" style={{ marginBottom: '4px' }}>
-              Groups
+              Users
             </Heading>
             <Text size="2" color="gray">
-              View a list of all groups in the database below.
+              View a list of all privileges available.
             </Text>
           </Box>
 
@@ -86,15 +91,15 @@ export default function AdminGroupsPage() {
           <Card style={{ marginTop: '1rem', padding: '1rem' }}>
             {/* Action Bar */}
             <Flex justify="between" align="center" style={{ marginBottom: '1rem' }}>
-              <Text size="2" weight="bold">
+            <Text size="2" weight="bold">
 
-              </Text>
+            </Text>
               <Flex gap="2">
                 <Button variant="outline">Delete</Button>
                 <Button variant="outline">Filters</Button>
                 <Button variant="outline">Export</Button>
                 <Button variant="solid" color="orange">
-                  + New Group
+                  + New Privilege
                 </Button>
               </Flex>
             </Flex>
@@ -105,22 +110,20 @@ export default function AdminGroupsPage() {
                 <thead>
                   <tr>
                     <th style={{ ...styles.th, width: '40px' }} />
-                    <th style={styles.th}>Name</th>
-                    <th style={styles.th}>Created</th>
-                    <th style={styles.th}>Modified</th>
-                    <th style={styles.th}>Privileges</th>
+                    <th style={styles.th}>url</th>
+                    <th style={styles.th}>title</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {mockGroups.map((group) => (
-                    <tr key={group.name} style={styles.tr}>
+                  {mockPrivileges.map((privilege) => (
+                    <tr key={privilege.url} style={styles.tr}>
                       <td style={{ ...styles.td, width: '40px' }}>
                         <input type="checkbox" />
                       </td>
-                      <td style={styles.td}>{group.name}</td>
-                      <td style={styles.td}>{group.createdAt}</td>
-                      <td style={styles.td}>{group.modifiedAt}</td>
-                      <td style={styles.td}>{group.privileges}</td>
+                      <td style={styles.td}><a href={privilege.url} target="_blank" rel="noreferrer" style={styles.link}>
+                        {privilege.url}
+                      </a></td>
+                      <td style={styles.td}>{privilege.title}</td>
                     </tr>
                   ))}
                 </tbody>
