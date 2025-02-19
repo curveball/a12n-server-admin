@@ -65,6 +65,7 @@ Open [http://localhost:8531/](http://localhost:8531/) to create your admin accou
 * MySQL, Postgres, or SQLite
 
 ## Deployment and GitHub Workflow
+Deployment is not supported as of this moment. The steps for the desired deployment process are outlined below.
 * **Deployment Details:**
   - Deploy using Docker with pre-configured Dockerfiles.
   - CI/CD pipelines using GitHub Actions for automated testing, building, and deployment.
