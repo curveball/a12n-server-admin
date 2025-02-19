@@ -105,8 +105,16 @@ Task management is handled through GitHub Issues.
   - 100% unit test coverage for core functionalities.
   - Integration tests for database interactions and API endpoints.
   - End-to-end tests using Cypress for critical user flows.
+ 
+## Design Guidelines
+* **Color Palette:**
+  - Primary: #A18072, #211F26, #E3DFE6, #AB6400
+  - Secondary: #008573, #641723, #027864
+* **Font:**
+  - Primary: Typography
+  - Title: Mona Sans
 
-### Test Plan
+## Test Plan
 * **Unit Tests:** Core authentication logic, database interactions.
 * **Integration Tests:** API endpoint responses, database operations.
 * **End-to-End Tests:** User registration, login, MFA, password recovery.
