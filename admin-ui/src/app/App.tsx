@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HomePage, LoginPage } from '@/pages';
 import { Box, ThemePanel } from '@radix-ui/themes';
 import AdminUsersPage from '@/pages/AdminUsersPage';
+import AppsListPage from '@/pages/AppsListPage';
 import '@radix-ui/themes/styles.css';
 import '@/config/fonts.css';
 
@@ -13,6 +14,7 @@ const App = () => {
                 <Route path='/auth/login' element={<LoginPage />} />
                 <Route path='/config/theme' element={<ThemePanel />} />
                 <Route path="/users" element={<AdminUsersPage />} />
+                <Route path="/apps" element={<AppsListPage />} />
             </Routes>
         </Router>
     );
