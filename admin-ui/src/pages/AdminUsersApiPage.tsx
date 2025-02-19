@@ -56,7 +56,7 @@ export default function AdminUsersPage() {
                     </Box>
                     <Box style={{ marginBottom: '1rem' }}>
                         <Heading as="h1" size="4">Users</Heading>
-                        <Text size="2" color="gray">View a list of all users in the database below in JSON format.</Text>
+                        <Text size="2" color="gray">The REST API request that was sent to perform the required action.</Text>
                     </Box>
                     <Card style={{ marginTop: '1rem', padding: '1rem' }}>
                         <Box style={styles.tableWrapper}>
