@@ -45,7 +45,7 @@ Authentication is a critical component of any modern web application. a12n-serve
 
 ## Getting Started (Developer Instructions)
 
-## Prerequistes
+### Prerequistes
 * Node.js 18.x or newer
 * A supported database (MySQL, Postgres, or SQLite)
 * (Optional) Docker if you prefer containerized deployment
