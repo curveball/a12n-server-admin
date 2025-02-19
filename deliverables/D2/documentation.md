@@ -162,7 +162,7 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 **Team members in this sub-team and their roles.**
 
 - **Sasha** - Defining the architecture and design outlines.
-- **Muhammad**
+- **Muhammad** - Refined readme based on initial feedback and coordinated testing setup/some initial react skeleton components.
 
 #### Q8
 **A description of the specific features, modules, or components built by the sub-team.**
