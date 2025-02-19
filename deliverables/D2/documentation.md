@@ -48,6 +48,12 @@ Our primary objective is to build a **dedicated Admin UI** for the open-source *
 2. **a12n-server**: Provides the actual authentication endpoints. We fetch real or dummy data from it (or from a stub) for the MVP.  
 3. **Database**: The a12n-server abstracts the DB away from us, so we only interact with it via the server’s APIs.
 
+**Sequence Diagram:**
+<img src="./sequence diagram.png" alt="Alt text">
+
+**Class Diagram:**
+- Both HalLink and HalResource come from the **hal-types** library. HalLink is an object representing a hyperlink, while HalResource is an object representing a HAL document, which in turn represents a resource.
+<img src="./Class Diagram.png" alt="Alt text">
 
 ---
 
@@ -60,7 +66,8 @@ We decided on **three sub-teams** to handle distinct aspects of the MVP:
    - **Scope**:  
      - Set up React + Node environment.  
      - Configure TanStack Query for fetching demo users.  
-     - Establish folder structure, potential Docker setup, and baseline code standards.  
+     - Establish folder structure, potential Docker setup, and baseline code standards.
+     - Help out with Testing Setup
    - **Reasoning**:  
      - They have experience with React/Node configurations and enjoy setting up new codebases.  
      - This is the foundation on which everyone else can build.  
@@ -117,7 +124,7 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 
 ## Sub-Teams
 
-### Sub-team 5.1
+### Sub-team 21.1
 
 #### Q4
 **Team members in this sub-team and their roles.**
@@ -131,7 +138,7 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 **A description of the specific features, modules, or components built by the sub-team.**
 
 1. **Create React + Node Environment**  
-   - `create-react-app` (or Vite) with TypeScript, plus a Node server or dev server config.  
+   - Initialize server through Vite with TypeScript, plus a Node server or dev server config. Defined types for various objects like Apps, Groups, Users, Permissions, etc.
 2. **Configure TanStack Query**  
    - Example calls to fetch a list of “demo users” (could be from a12n-server or mock endpoint).  
 3. **Project Boilerplate**  
@@ -155,12 +162,13 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 
 ---
 
-### Sub-team 5.2
+### Sub-team 21.2
 
 #### Q7
 **Team members in this sub-team and their roles.**
 
-**Answer Here**
+- **Sasha** - Defining the architecture and design outlines.
+- **Muhammad** - Refined readme based on initial feedback and coordinated testing setup/some initial react skeleton components.
 
 #### Q8
 **A description of the specific features, modules, or components built by the sub-team.**
@@ -192,7 +200,7 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 
 ---
 
-### Sub-team 5.3
+### Sub-team 21.3
 
 #### Q10
 - **Harshith** – Designed all Figma pages and added a new Login and Signup Page
@@ -249,12 +257,12 @@ Before each sub-team diverged:
 ### Q14
 **A summary of how the sub-teams' work contributed to the overall project.**
 
-1. **Initialization Team (5.1)**  
+1. **Initialization Team (21.1)**  
    - Laid the foundation: created the skeleton UI, integrated TanStack Query, ensured everything runs consistently.  
-2. **Design & Documentation Team (5.2)**  
+2. **Design & Documentation Team (21.2)**  
    - Provided immediate clarity for any new team member on how to spin up the project.  
    - Added test scaffolding so other devs can write tests quickly.  
-3. **Login, Signup & Figma Team (5.3)**  
+3. **Login, Signup & Figma Team (21.3)**  
    - Ensured the UI design was consistent and user-friendly from day one.  
    - Created the crucial login page and signup page, a typical first point of interaction for an admin.
 
