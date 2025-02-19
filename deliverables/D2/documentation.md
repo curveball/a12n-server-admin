@@ -161,7 +161,7 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 #### Q7
 **Team members in this sub-team and their roles.**
 
-**Answer Here**
+- **Sasha** - Defining the architecture and design outlines.
 
 #### Q8
 **A description of the specific features, modules, or components built by the sub-team.**
