@@ -27,6 +27,15 @@ Authentication is a critical component of any modern web application. a12n-serve
 
 ## Screenshots/Short Videos
 
+## Demo walkthrough
+```sh
+npm install
+npm run dev
+```
+
+Now you can browse through the prototype. As of this moment, it has mock data and limited functionality; however, it correctly outlines the structure of the Admin UI.
+
+
 ## Testing the Features
 1. **Register an Admin Account**  
    - Start the server (see "Getting Started").  
