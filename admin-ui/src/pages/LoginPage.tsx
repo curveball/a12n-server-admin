@@ -1,4 +1,4 @@
-import { Box, Text, Button, Flex, TextField as TextFieldRoot, Link } from '@radix-ui/themes';
+import { Box, Text, Button, Flex, Link } from '@radix-ui/themes';
 import adminLogo from '../assets/icons/admin-ui-logo.svg';
 import * as Avatar from '@radix-ui/react-avatar';
 
@@ -83,61 +83,7 @@ export default function LoginPage() {
                     border: '1px solid #e0e0e0',
                 }}
             >
-                <Box style={{ textAlign: 'center', marginBottom: '30px' }}>
-                    <Text
-                        as='p'
-                        size='7'
-                        style={{
-                            marginBottom: '16px',
-                            fontWeight: '500',
-                        }}
-                    >
-                        Log in to the <span style={{ color: '#ab6400' }}>Admin UI</span>
-                    </Text>
-                    <Text as='p' size='3' style={{ color: '#555' }}>
-                        Enter in your details below to log back in. If you forgot your password, just click the link at
-                        the bottom of the page.
-                    </Text>
-                </Box>
-
                 <Box as='div' style={{ width: '100%', padding: '0 20px' }}>
-                    <Box style={{ marginBottom: '20px' }}>
-                        <Text as='label' size='2' style={{ display: 'block', marginBottom: '8px', textAlign: 'left' }}>
-                            Email address<span style={{ color: 'red' }}>*</span>
-                        </Text>
-                        <TextFieldRoot.Root size='3' placeholder='clark.kent@superman.com' style={{ width: '100%' }} />
-                    </Box>
-
-                    <Box style={{ marginBottom: '20px' }}>
-                        <Text as='label' size='2' style={{ display: 'block', marginBottom: '8px', textAlign: 'left' }}>
-                            Password<span style={{ color: 'red' }}>*</span>
-                        </Text>
-                        <TextFieldRoot.Root
-                            type='password'
-                            size='3'
-                            placeholder='••••••••••••••••••••••••••••••'
-                            style={{ width: '100%' }}
-                        >
-                            <TextFieldRoot.Slot side='right'>
-                                <Button
-                                    size='1'
-                                    style={{
-                                        backgroundColor: '#b78846',
-                                        cursor: 'pointer',
-                                    }}
-                                >
-                                    Show
-                                </Button>
-                            </TextFieldRoot.Slot>
-                        </TextFieldRoot.Root>
-                    </Box>
-
-                    <Link size='2' style={{ color: '#666', cursor: 'pointer' }}>
-                        <Box style={{ textAlign: 'right', color: 'var(--amber-12)', marginBottom: '20px' }}>
-                            Forgot your password?
-                        </Box>
-                    </Link>
-
                     <Button
                         size='3'
                         style={{
@@ -149,25 +95,6 @@ export default function LoginPage() {
                         }}
                     >
                         Log In
-                    </Button>
-
-                    <Flex style={{ margin: '20px 0', alignItems: 'center' }}>
-                        <Box style={{ flex: 1, height: '1px', backgroundColor: '#e0e0e0' }} />
-                        <Box style={{ flex: 1, height: '1px', backgroundColor: '#e0e0e0' }} />
-                    </Flex>
-
-                    <Button
-                        size='3'
-                        variant='outline'
-                        style={{
-                            width: '100%',
-                            color: '#666',
-                            cursor: 'pointer',
-                            backgroundColor: 'var(--bronze-11)',
-                            marginBottom: '20px',
-                        }}
-                    >
-                        <Text style={{ color: 'white' }}>Log in with OAuth</Text>
                     </Button>
 
                     <Box style={{ textAlign: 'center', marginTop: '20px' }}>
