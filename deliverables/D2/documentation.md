@@ -48,6 +48,12 @@ Our primary objective is to build a **dedicated Admin UI** for the open-source *
 2. **a12n-server**: Provides the actual authentication endpoints. We fetch real or dummy data from it (or from a stub) for the MVP.  
 3. **Database**: The a12n-server abstracts the DB away from us, so we only interact with it via the server’s APIs.
 
+**Sequence Diagram:**
+<img src="./sequence diagram.png" alt="Alt text">
+
+**Class Diagram:**
+- Both HalLink and HalResource come from the **hal-types** library. HalLink is an object representing a hyperlink, while HalResource is an object representing a HAL document, which in turn represents a resource.
+<img src="./Class Diagram.png" alt="Alt text">
 
 ---
 
