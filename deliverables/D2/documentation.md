@@ -60,7 +60,8 @@ We decided on **three sub-teams** to handle distinct aspects of the MVP:
    - **Scope**:  
      - Set up React + Node environment.  
      - Configure TanStack Query for fetching demo users.  
-     - Establish folder structure, potential Docker setup, and baseline code standards.  
+     - Establish folder structure, potential Docker setup, and baseline code standards.
+     - Help out with Testing Setup
    - **Reasoning**:  
      - They have experience with React/Node configurations and enjoy setting up new codebases.  
      - This is the foundation on which everyone else can build.  
