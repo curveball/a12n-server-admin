@@ -1,5 +1,3 @@
-// src/pages/AdminGroupsPage.tsx
-
 import React from 'react';
 import {
   Theme,
@@ -9,19 +7,24 @@ import {
   Text,
   Card,
   Button,
+  Badge,
   Avatar,
 } from '@radix-ui/themes';
 
-const mockGroups = [
-  { name: 'test group 1', createdAt: '2025-02-15', modifiedAt: '2025-02-15', privileges: 'read' },
-  { name: 'test group 2', createdAt: '2025-02-16', modifiedAt: '2025-02-16', privileges: 'read, update' },
-  { name: 'test group 3', createdAt: '2025-02-17', modifiedAt: '2025-02-17', privileges: 'read, update, delete' },
+// Need to clarify tokens later, for now we can have some demo data
+const mockTokens = [
+    { code: '2YotnFZFEjr1zCsicMWpAA', created: '2025-02-15', expired: '2025-02-16' },
+    { code: 'tGzv3JOkF0XG5Qx2TlKWIA', created: '2025-02-16', expired: '2025-02-17' },
+    { code: 'abc123def456ghi789', created: '2025-02-14', expired: '2025-02-15' },
+    { code: '9A1B2C3D4E5F6G7H8I9J', created: '2025-02-12', expired: '2025-02-13' },
+    { code: 'ZxYwVUtSrQpOnMlKjIhG', created: '2025-02-17', expired: '2025-02-18' }
 ];
 
-export default function AdminGroupsPage() {
+export default function AdminTokensPage() {
   return (
     <Theme accentColor="orange" radius="small">
       <Flex style={{ height: '100vh', overflow: 'hidden' }}>
+
         {/* MAIN CONTENT */}
         <Flex direction="column" style={styles.mainContent}>
           {/* Documentation button at top-right */}
@@ -34,10 +37,10 @@ export default function AdminGroupsPage() {
           {/* Header */}
           <Box style={{ marginBottom: '1rem' }}>
             <Heading as="h1" size="4" style={{ marginBottom: '4px' }}>
-              Groups
+              Tokens
             </Heading>
             <Text size="2" color="gray">
-              View a list of all groups in the database below.
+              View a list of all tokens.
             </Text>
           </Box>
 
@@ -45,15 +48,15 @@ export default function AdminGroupsPage() {
           <Card style={{ marginTop: '1rem', padding: '1rem' }}>
             {/* Action Bar */}
             <Flex justify="between" align="center" style={{ marginBottom: '1rem' }}>
-              <Text size="2" weight="bold">
+            <Text size="2" weight="bold">
 
-              </Text>
+            </Text>
               <Flex gap="2">
                 <Button variant="outline">Delete</Button>
                 <Button variant="outline">Filters</Button>
                 <Button variant="outline">Export</Button>
                 <Button variant="solid" color="orange">
-                  + New Group
+                  + New Token
                 </Button>
               </Flex>
             </Flex>
@@ -64,22 +67,20 @@ export default function AdminGroupsPage() {
                 <thead>
                   <tr>
                     <th style={{ ...styles.th, width: '40px' }} />
-                    <th style={styles.th}>Name</th>
+                    <th style={styles.th}>Token</th>
                     <th style={styles.th}>Created</th>
-                    <th style={styles.th}>Modified</th>
-                    <th style={styles.th}>Privileges</th>
+                    <th style={styles.th}>Expired</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {mockGroups.map((group) => (
-                    <tr key={group.name} style={styles.tr}>
+                  {mockTokens.map((token) => (
+                    <tr key={token.code} style={styles.tr}>
                       <td style={{ ...styles.td, width: '40px' }}>
                         <input type="checkbox" />
                       </td>
-                      <td style={styles.td}>{group.name}</td>
-                      <td style={styles.td}>{group.createdAt}</td>
-                      <td style={styles.td}>{group.modifiedAt}</td>
-                      <td style={styles.td}>{group.privileges}</td>
+                      <td style={styles.td}>{token.code}</td>
+                      <td style={styles.td}>{token.created}</td>
+                      <td style={styles.td}>{token.expired}</td>
                     </tr>
                   ))}
                 </tbody>
