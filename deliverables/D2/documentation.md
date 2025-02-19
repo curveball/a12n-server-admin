@@ -68,6 +68,7 @@ We decided on **three sub-teams** to handle distinct aspects of the MVP:
      - Configure TanStack Query for fetching demo users.  
      - Establish folder structure, potential Docker setup, and baseline code standards.
      - Help out with Testing Setup
+     - Create initial frontend
    - **Reasoning**:  
      - They have experience with React/Node configurations and enjoy setting up new codebases.  
      - This is the foundation on which everyone else can build.  
@@ -129,8 +130,8 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 #### Q4
 **Team members in this sub-team and their roles.**
 
-- **Sam** – Node/React environment wizard & repository structure  
-- **Vihaan** – TanStack Query integration & environment debugging  
+- **Sam** – Node/React environment wizard & repository structure, frontend design  
+- **Vihaan** – TanStack Query integration & environment debugging, frontend design  
 - **Orhan** – Basic data fetch (demo users), future expansions
 
 
@@ -138,12 +139,16 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 **A description of the specific features, modules, or components built by the sub-team.**
 
 1. **Create React + Node Environment**  
-   - Initialize server through Vite with TypeScript, plus a Node server or dev server config. Defined types for various objects like Apps, Groups, Users, Permissions, etc.
+   - Initialize server through Vite with TypeScript, plus a Node server or dev server config.
 2. **Configure TanStack Query**  
    - Example calls to fetch a list of “demo users” (could be from a12n-server or mock endpoint).  
 3. **Project Boilerplate**  
    - ESLint + Prettier for code standards.  
-   - Potential Dockerfile / docker-compose for local dev.  
+   - Potential Dockerfile / docker-compose for local dev.
+4. **Type setup**
+   - Defined types for various objects like Apps, Groups, Users, Permissions, etc.
+5. **Initial Frontend mockup**
+   - Created initial pages representing Groups, Apps, Users, Tokens, and Privileges, made navigatable through the sidebar
 
 
 #### Q6
@@ -157,6 +162,7 @@ _(e.g., programming languages, frameworks, databases, cloud services, etc.) and 
 - **What didn’t work well?**  
   - We initially had confusion over how the a12n-server would be started in parallel. A short doc or script was needed.  
   - **Future Improvement**: Provide a single command (`npm run dev:all`) that spins up both the UI and a12n-server in Docker or via scripts.
+  - **Future Improvement**: Clean up UI, make it cleaner and more interactive
 
 ---
 
@@ -276,7 +282,8 @@ Together, these contributions set up a functional MVP environment: we can start 
 
 - **Milestone 1**: The Initialization Team has the environment running with sample or demo user data.  
 - **Milestone 2**: The Figma designs are refined, and a functioning login page is built.  
-- **Milestone 3**: We have a well-structured README and initial testing setup—already providing documentation for other members or future expansions.  
+- **Milestone 3**: We have a well-structured README and initial testing setup—already providing documentation for other members or future expansions.
+- **Milestone 4**: Created rough draft UI representations of Figma designs that are interactable
 - **Next Steps**: As soon as these basics are stable, we will proceed to more advanced Admin UI tasks (CRUD of real a12n-server users, MFA toggles, etc.).
 
 
