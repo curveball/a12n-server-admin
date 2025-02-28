@@ -1,21 +1,19 @@
-{   "files": [],
+{
+    "files": [],
     "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
     "compilerOptions": {
-      "baseUrl": ".",
+        "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"]},
-      "target": "ESNext",
-      "lib": ["DOM", "DOM.Iterable", "ESNext"],
-      "jsx": "react-jsx", 
-      "module": "ESNext",
-      "moduleResolution": "Node",
-      "strict": true,
-      "resolveJsonModule": true,
-      "isolatedModules": true
+            "@/*": ["./src/*"]
+        },
+        "target": "ESNext",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "jsx": "react-jsx",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "strict": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true
     },
-    "include": [
-      "src", 
-      "**/*.test.ts", 
-      "**/*.test.tsx"
-    ]
-  }
+    "include": ["src", "**/*.test.ts", "**/*.test.tsx"]
+}
