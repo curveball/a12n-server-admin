@@ -42,9 +42,8 @@ export function DeveloperTabContainer({
   console.log('DeveloperTabContainer: Query result:', queryResult);
 
   return (
-    <div style={{ border: '2px dashed red', padding: '1rem', margin: '1rem 0' }}>
+    <div style={{margin: '1rem 0' }}>
       <p style={{ fontWeight: 'bold', marginBottom: '1rem' }}>
-        [DeveloperTabContainer is rendering]
       </p>
       <DeveloperTabView fetchUrl={fullUrl} token={token} queryResult={queryResult} />
     </div>
