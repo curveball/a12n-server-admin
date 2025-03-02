@@ -17,4 +17,4 @@ export default defineConfig({
     globals: true, // optional: you can use "describe, it" without importing
     setupFiles: [], // optional: path to a test setup file
   },
-})
+});
