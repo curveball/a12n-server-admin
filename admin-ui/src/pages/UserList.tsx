@@ -19,7 +19,7 @@ const mockUsers = [
 
 const UserList = () => {
     return (
-        <TableList columnDefs={columnDefs} data={mockUsers} itemName='users' onDelete={() => console.log('Delete')} />
+        <TableList columnDefs={columnDefs} data={mockUsers} itemName='user' onDelete={() => console.log('Delete')} />
     );
 };
 

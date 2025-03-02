@@ -22,7 +22,8 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                     {/* Action Bar */}
                     <Flex justify='between' align='center' style={{ marginBottom: '1rem' }}>
                         <Text size='2' weight='bold'>
-                            {selectedCount} {itemName} selected
+                            {selectedCount} {itemName}
+                            {selectedCount > 1 || selectedCount == 0 ? 's' : ''} selected
                         </Text>
                         <Flex gap='2'>
                             {selectedCount > 0 && (
@@ -41,7 +42,7 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                             </Button>
                             <Button variant='solid' size='3' radius='full'>
                                 <PlusIcon />
-                                New user
+                                New {itemName}
                             </Button>
                         </Flex>
                     </Flex>
@@ -52,7 +53,7 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                             ref={gridRef}
                             columnDefs={columnDefs}
                             rowData={data}
-                            theme={themeQuartz.withParams({ accentColor: 'brown' })}
+                            theme={themeQuartz.withParams({ accentColor: '#A18072' })}
                             rowSelection={{ mode: 'multiRow' }}
                             onSelectionChanged={onSelectionChanged}
                             suppressRowHoverHighlight={true}
