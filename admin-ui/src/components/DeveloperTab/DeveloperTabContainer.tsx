@@ -4,33 +4,34 @@ import { useQuery } from '@tanstack/react-query';
 import DeveloperTabView from './DeveloperTabView';
 
 export interface DeveloperTabContainerProps {
-  /** Defaults to /user if that’s the endpoint showing your user listing */
   fetchUrl?: string;
   token?: string;
 }
 
 export function DeveloperTabContainer({
-  fetchUrl = '/user',
-  token = '',
+  fetchUrl = '/user?embed=item',
+  token = 'DUMMY_TOKEN',
 }: DeveloperTabContainerProps) {
-  // We'll assume your server is at http://localhost:8531
-  // but if you have an env var, you can use import.meta.env.VITE_A12N_SERVER_URL
+  console.log('DeveloperTabContainer: Rendering with token:', token);
   const baseUrl = 'http://localhost:8531';
   const fullUrl = `${baseUrl}${fetchUrl}`;
+  console.log('DeveloperTabContainer: Full URL:', fullUrl);
 
   const fetchData = async () => {
+    console.log('DeveloperTabContainer: fetchData called for:', fullUrl);
     const res = await fetch(fullUrl, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        // If you need a token:
-        // 'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
       },
-    });
+    });w
     if (!res.ok) {
-      throw new Error(`Failed to fetch from ${fullUrl} - ${res.status} ${res.statusText}`);
+      throw new Error(`Failed to fetch from ${fullUrl} (${res.status} ${res.statusText})`);
     }
-    return res.json(); // should contain `_links`, `total`, etc.
+    const json = await res.json();
+    console.log('DeveloperTabContainer: Data fetched:', json);
+    return json;
   };
 
   const queryResult = useQuery({
@@ -38,7 +39,16 @@ export function DeveloperTabContainer({
     queryFn: fetchData,
   });
 
+  console.log('DeveloperTabContainer: Query result:', queryResult);
+
   return (
-    <DeveloperTabView fetchUrl={fullUrl} token={token} queryResult={queryResult} />
+    <div style={{ border: '2px dashed red', padding: '1rem', margin: '1rem 0' }}>
+      <p style={{ fontWeight: 'bold', marginBottom: '1rem' }}>
+        [DeveloperTabContainer is rendering]
+      </p>
+      <DeveloperTabView fetchUrl={fullUrl} token={token} queryResult={queryResult} />
+    </div>
   );
 }
+
+export default DeveloperTabContainer;
