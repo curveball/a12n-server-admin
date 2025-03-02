@@ -9,7 +9,14 @@ const columnDefs = [
         flex: 1,
         minWidth: 150,
         resizable: false,
-        cellRenderer: StatusPill,
+        cellRenderer: (params: any) => {
+            return (
+                <StatusPill
+                    variant={params.value ? 'active' : 'inactive'}
+                    text={params.value ? 'Active' : 'Inactive'}
+                />
+            );
+        },
     },
 ];
 
