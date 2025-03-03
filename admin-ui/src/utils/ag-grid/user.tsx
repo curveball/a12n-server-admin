@@ -1,4 +1,4 @@
-import StatusPill from '@/components/StatusPill';
+import { Badge } from '@radix-ui/themes';
 
 const columnDefs = [
     { field: 'firstName', flex: 1, minWidth: 150, resizable: false },
@@ -9,14 +9,11 @@ const columnDefs = [
         flex: 1,
         minWidth: 150,
         resizable: false,
-        cellRenderer: (params: any) => {
-            return (
-                <StatusPill
-                    variant={params.value ? 'active' : 'inactive'}
-                    text={params.value ? 'Active' : 'Inactive'}
-                />
-            );
-        },
+        cellRenderer: (params: any) => (
+            <Badge radius='full' color={params.value ? 'green' : 'red'}>
+                {params.value ? 'Active' : 'Inactive'}
+            </Badge>
+        ),
     },
 ];
 
