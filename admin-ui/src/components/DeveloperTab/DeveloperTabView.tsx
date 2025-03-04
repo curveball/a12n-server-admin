@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UseQueryResult } from '@tanstack/react-query';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-// Import the icons from Radix UI
 import { ChevronDownIcon, RocketIcon } from '@radix-ui/react-icons';
 
 interface DeveloperTabViewProps {
@@ -19,6 +18,26 @@ const DeveloperTabView: React.FC<DeveloperTabViewProps> = ({
 
   // snippet type: cURL / Node / Python
   const [snippetType, setSnippetType] = useState<'curl' | 'node' | 'python'>('curl');
+
+  // track request start time + how long the request took
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [elapsed, setElapsed] = useState<number | null>(null);
+
+  // When isFetching becomes true, we note the start time. 
+  // When it finishes (data or error), we compute how long it took.
+  useEffect(() => {
+    if (isFetching && startTime === null) {
+      // start timing
+      setStartTime(Date.now());
+      setElapsed(null);
+    } else if (!isFetching && startTime !== null) {
+      // request ended
+      const endTime = Date.now();
+      const diffSeconds = (endTime - startTime) / 1000;
+      setElapsed(diffSeconds);
+      setStartTime(null);
+    }
+  }, [isFetching, data, error, startTime]);
 
   // Build raw snippet
   let rawSnippet = `curl '${fetchUrl}' \\
@@ -63,7 +82,7 @@ print(resp.json())`;
     border: '1px solid #ced4da',
     borderRadius: '6px',
     padding: '1.25rem',
-    paddingRight: '4rem', // extra space for the copy button
+    paddingRight: '4rem', // extra space for copy button
     fontFamily: 'monospace',
     maxHeight: '300px',
     overflowY: 'auto',
@@ -218,15 +237,30 @@ print(resp.json())`;
         </div>
       </div>
 
-      {/* Response Header */}
-      <div style={{ marginBottom: '1rem' }}>
-        <h2 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.25rem' }}>
+      {/* Response Header + Time Pill */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+        <h2 style={{ fontSize: '1rem', fontWeight: 600, margin: 0 }}>
           Response
         </h2>
-        <p style={{ fontSize: '0.875rem', color: '#555', margin: 0 }}>
-          The raw JSON response retrieved from the API request.
-        </p>
+        {/* Show time pill if we have a measured time */}
+        {elapsed !== null && (
+          <span
+            style={{
+              backgroundColor: '#3A5BC7', // #3A5BC7 from your design
+              borderRadius: '9999px', // fully rounded
+              padding: '0.25rem 0.75rem',
+              color: '#fff',
+              fontWeight: 600,
+              fontSize: '0.875rem',
+            }}
+          >
+            {elapsed.toFixed(1)}s
+          </span>
+        )}
       </div>
+      <p style={{ fontSize: '0.875rem', color: '#555', margin: '0 0 0.5rem 0' }}>
+        The raw JSON response retrieved from the API request.
+      </p>
 
       {/* "Raw" pill + code box in container */}
       <div style={{ position: 'relative' }}>
