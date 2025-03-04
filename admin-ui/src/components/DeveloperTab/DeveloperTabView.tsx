@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { UseQueryResult } from '@tanstack/react-query';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+// Import the icons from Radix UI
+import { ChevronDownIcon, RocketIcon } from '@radix-ui/react-icons';
 
 interface DeveloperTabViewProps {
   fetchUrl: string;
@@ -15,6 +17,7 @@ const DeveloperTabView: React.FC<DeveloperTabViewProps> = ({
 }) => {
   const { data, error, isLoading, isFetching, refetch } = queryResult;
 
+  // snippet type: cURL / Node / Python
   const [snippetType, setSnippetType] = useState<'curl' | 'node' | 'python'>('curl');
 
   // Build raw snippet
@@ -60,8 +63,7 @@ print(resp.json())`;
     border: '1px solid #ced4da',
     borderRadius: '6px',
     padding: '1.25rem',
-    // Add extra right padding so the copy button doesn’t overlap the text
-    paddingRight: '4rem',
+    paddingRight: '4rem', // extra space for the copy button
     fontFamily: 'monospace',
     maxHeight: '300px',
     overflowY: 'auto',
@@ -69,7 +71,7 @@ print(resp.json())`;
     position: 'relative',
   };
 
-  // <pre> style that forcibly wraps text (no horizontal scroll)
+  // <pre> style that forcibly wraps text
   const preWrapStyle: React.CSSProperties = {
     margin: 0,
     whiteSpace: 'pre-wrap',
@@ -79,8 +81,11 @@ print(resp.json())`;
     lineHeight: '1.4',
   };
 
-  // Button style (base)
+  // Base button style
   const buttonStyle: React.CSSProperties = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.4rem',
     padding: '0.4rem 0.75rem',
     border: 'none',
     borderRadius: '4px',
@@ -108,7 +113,7 @@ print(resp.json())`;
         </p>
       </div>
 
-      {/* GET, cURL dropdown, Test button */}
+      {/* GET, snippet dropdown, Test button */}
       <div
         style={{
           display: 'flex',
@@ -117,6 +122,7 @@ print(resp.json())`;
           marginBottom: '0.5rem',
         }}
       >
+        {/* GET pill */}
         <span
           style={{
             backgroundColor: '#d4edda',
@@ -130,7 +136,6 @@ print(resp.json())`;
           GET
         </span>
 
-
         <span style={{ fontSize: '0.9rem', color: '#333', flex: 1 }}>{fetchUrl}</span>
 
         {/* Snippet dropdown (cURL, Node, Python) */}
@@ -143,7 +148,8 @@ print(resp.json())`;
                 textTransform: 'none',
               }}
             >
-              {snippetType} ▼
+              {snippetType}
+              <ChevronDownIcon width={15} height={15} />
             </button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Portal>
@@ -178,7 +184,7 @@ print(resp.json())`;
           </DropdownMenu.Portal>
         </DropdownMenu.Root>
 
-        {/* Test button */}
+        {/* Test button (with RocketIcon) */}
         <button
           onClick={() => refetch()}
           disabled={isFetching}
@@ -187,6 +193,7 @@ print(resp.json())`;
             backgroundColor: '#008573',
           }}
         >
+          <RocketIcon width={15} height={15} />
           {isFetching ? 'Testing...' : 'Test'}
         </button>
       </div>
@@ -207,7 +214,7 @@ print(resp.json())`;
           >
             Copy
           </button>
-          <pre style={{ ...preWrapStyle, marginTop: 0 }} dangerouslySetInnerHTML={{ __html: snippetHtml }} />
+          <pre style={{ ...preWrapStyle }} dangerouslySetInnerHTML={{ __html: snippetHtml }} />
         </div>
       </div>
 
@@ -221,9 +228,8 @@ print(resp.json())`;
         </p>
       </div>
 
-      {/* Wrap the "Raw" pill + code box in a container so we can position "Raw" top-right */}
+      {/* "Raw" pill + code box in container */}
       <div style={{ position: 'relative' }}>
-        {/* Raw pill (outside the code box, top-right) */}
         <span
           style={{
             backgroundColor: '#6c757d',
@@ -235,14 +241,13 @@ print(resp.json())`;
             position: 'absolute',
             top: 0,
             right: 0,
-            transform: 'translateY(-120%)', // scoot it above the box if you like
+            transform: 'translateY(-120%)',
           }}
         >
           Raw
         </span>
 
         <div style={codeBoxStyle}>
-          {/* Copy button on top-right inside the box (only if we have a response) */}
           {!isLoading && !error && data && (
             <button
               onClick={() => copyToClipboard(JSON.stringify(data, null, 2))}
@@ -264,8 +269,8 @@ print(resp.json())`;
           ) : error ? (
             <p style={{ color: 'red', margin: 0 }}>{(error as Error).message}</p>
           ) : (
-            <pre style={{ ...preWrapStyle, marginTop: 0 }}>
-              {data ? JSON.stringify(data, null, 2) : 'Failed to fetch'}
+            <pre style={{ marginTop: '2.5rem', ...preWrapStyle }}>
+              {data ? JSON.stringify(data, null, 2) : 'No data'}
             </pre>
           )}
         </div>
