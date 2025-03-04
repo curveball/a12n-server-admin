@@ -1,25 +1,17 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from '@/Layout';
-import UserList from '@/pages/UserList';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import UserPage from '@/pages/UserPage';
-import '@radix-ui/themes/styles.css';
-import '@/config/theme.css';
+import HomePage from '@/pages/HomePage'; // or any other component
 
-function App() {
-    return (
-        <Router>
-            <Routes>
-                {/* The root route uses <Layout>, which contains the sidebar + <Outlet> */}
-                <Route path='/' element={<Layout />}>
-                    {/* Child routes (render in <Outlet>) */}
-                  <Route path='users' element={<UserList />} />
-                  <Route path="/userspage" element={<UserPage />} />
-
-                    {/* Optionally, you could have an index route, e.g. <Route index element={<HomePage />} /> */}
-                </Route>
-            </Routes>
-        </Router>
-    );
-}
+const App: React.FC = () => {
+  return (
+    <Routes>
+      {/* <Route path="/" element={<Layout/>} /> */}
+      <Route path="/userspage" element={<UserPage />} />
+      {/* <Route path="/users" element = {<UserList/>} /> */}
+    </Routes>
+  );
+};
 
 export default App;
+

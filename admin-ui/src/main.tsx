@@ -8,8 +8,7 @@ import { Theme, ThemePanel } from '@radix-ui/themes';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 
 // Register all Community features
-ModuleRegistry.registerModules([AllCommunityModule]
-
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 const queryClient = new QueryClient();
 const rootElement = document.getElementById('root');
