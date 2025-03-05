@@ -6,6 +6,8 @@ import { OAuthProvider } from '../lib/OAuthProvider';
 import { Protected, Layout } from '../components';
 import '../config/theme.css';
 
+const queryClient = new QueryClient();
+
 function App() {
     return (
         <Router>
