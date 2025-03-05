@@ -38,9 +38,12 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 redirectUri: import.meta.env.VITE_POST_AUTH_REDIRECT_URI,
                 codeVerifier,
             });
+
+            localStorage.removeItem(CODE_VERIFIER_LOCAL_STORAGE_NAME);
             setTokens(oAuth2Token);
             setIsAuthenticated(true);
-        } catch {
+        } catch (err) {
+            console.error(err);
             navigate('/404');
         }
     };
