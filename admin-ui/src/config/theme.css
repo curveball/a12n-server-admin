@@ -45,3 +45,8 @@
     --heading-font-family: 'Matter';
     --strong-font-family: 'Matter';
 }
+
+button:hover {
+    cursor: pointer;
+    filter: brightness(0.95);
+}

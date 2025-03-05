@@ -1,4 +1,4 @@
-import StatusPill from '@/components/StatusPill';
+import StatusPill from '../../components/StatusPill';
 
 const columnDefs = [
     { field: 'firstName', flex: 1, minWidth: 150, resizable: false },

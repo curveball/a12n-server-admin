@@ -1,21 +1,32 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from '@/Layout';
-import UserList from '@/pages/UserList';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import '@radix-ui/themes/styles.css';
-import '@/config/theme.css';
+
+import { OAuthTriggerPage, UserList, OAuthRedirectPage, NotFoundPage } from '../pages';
+import { OAuthProvider } from '../lib/OAuthProvider';
+import { Protected, Layout } from '../components';
+import '../config/theme.css';
 
 function App() {
     return (
         <Router>
-            <Routes>
-                {/* The root route uses <Layout>, which contains the sidebar + <Outlet> */}
-                <Route path='/' element={<Layout />}>
-                    {/* Child routes (render in <Outlet>) */}
-                    <Route path='users' element={<UserList />} />
-
-                    {/* Optionally, you could have an index route, e.g. <Route index element={<HomePage />} /> */}
-                </Route>
-            </Routes>
+            <OAuthProvider>
+                <Routes>
+                    <Route path='/auth/trigger' element={<OAuthTriggerPage />} />
+                    <Route path='/auth/redirect' element={<OAuthRedirectPage />} />
+                    <Route path='/' element={<Layout />}>
+                        <Route
+                            path='/users'
+                            element={
+                                <Protected>
+                                    <UserList />
+                                </Protected>
+                            }
+                        />
+                    </Route>
+                    <Route path='/404' element={<NotFoundPage />} />
+                    <Route path='*' element={<NotFoundPage />} />
+                </Routes>
+            </OAuthProvider>
         </Router>
     );
 }

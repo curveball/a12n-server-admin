@@ -1,5 +1,5 @@
-import TableList from '@/components/TableList';
-import columnDefs from '@/utils/ag-grid/user';
+import TableList from '../components/TableList';
+import columnDefs from '../utils/ag-grid/user';
 
 const mockUsers = [
     { emailAddress: 'Jordane.Bednar@gmail.com', firstName: 'Santina', lastName: 'Kovacek', isActive: true },
