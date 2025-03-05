@@ -3,7 +3,7 @@ import { generateCodeVerifier, OAuth2Token } from '@badgateway/oauth2-client';
 import { useNavigate } from 'react-router-dom';
 
 import client from '../utils/oauth/client';
-import { AUTHORIZATION_CODE_QUERY_PARAM_NAME, CODE_VERIFIER_LOCAL_STORAGE_NAME } from '../constants';
+import { AUTHORIZATION_CODE_QUERY_PARAM_NAME, CODE_VERIFIER_LOCAL_STORAGE_NAME } from '../utils/constants';
 
 type OAuthContextType = {
     tokens: OAuth2Token | null;

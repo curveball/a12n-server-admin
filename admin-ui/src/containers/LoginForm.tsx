@@ -1,7 +1,7 @@
 import { generateCodeVerifier } from '@badgateway/oauth2-client';
 import { Box, Heading, Button } from '@radix-ui/themes';
 import client from '../utils/oauth/client';
-import { CODE_VERIFIER_LOCAL_STORAGE_NAME } from '../constants';
+import { CODE_VERIFIER_LOCAL_STORAGE_NAME } from '../utils/constants';
 
 const LoginForm = () => {
     const triggerOAuthFlow = async () => {
