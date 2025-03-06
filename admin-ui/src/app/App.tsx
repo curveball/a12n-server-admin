@@ -1,17 +1,15 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import UserPage from '@/pages/UserPage';
-import HomePage from '@/pages/HomePage'; // or any other component
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from '@/pages/HomePage';         // Example home
+import DeveloperTabPage from '@/pages/DeveloperTabPage'; // New page
 
-const App: React.FC = () => {
+export default function App() {
   return (
-    <Routes>
-      {/* <Route path="/" element={<Layout/>} /> */}
-      <Route path="/userspage" element={<UserPage />} />
-      {/* <Route path="/users" element = {<UserList/>} /> */}
-    </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/developer" element={<DeveloperTabPage />} />
+      </Routes>
+    </BrowserRouter>
   );
-};
-
-export default App;
-
+}
