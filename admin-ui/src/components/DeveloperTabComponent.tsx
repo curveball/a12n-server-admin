@@ -18,7 +18,6 @@ export function DeveloperTabComponent({
   baseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:8531',
   token = import.meta.env.VITE_ACCESS_TOKEN || 'NO_TOKEN_FOUND',
 }: DeveloperTabComponentProps) {
-  const baseUrl = 'http://localhost:8531';
   const fullUrl = new URL(fetchUrl, baseUrl);
 
   // --------------------
