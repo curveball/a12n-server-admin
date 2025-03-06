@@ -1,3 +1,4 @@
+// src/components/DeveloperTabComponent.tsx
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -18,7 +19,7 @@ export function DeveloperTabComponent({
   baseUrl = import.meta.env.VITE_BASE_URL || 'http://localhost:8531',
   token = import.meta.env.VITE_ACCESS_TOKEN || 'NO_TOKEN_FOUND',
 }: DeveloperTabComponentProps) {
-  const fullUrl = new URL(fetchUrl, baseUrl);
+  const fullUrl = `${baseUrl}${fetchUrl}`;
 
   // --------------------
   // Data Fetching (TanStack Query)
