@@ -14,7 +14,7 @@ export function DeveloperTabComponent({
   token = 'DUMMY_TOKEN',
 }: DeveloperTabComponentProps) {
   const baseUrl = 'http://localhost:8531';
-  const fullUrl = `${baseUrl}${fetchUrl}`;
+  const fullUrl = new URL(fetchUrl, baseUrl);
 
   // Data fetching (Container logic)
   const fetchData = async () => {
