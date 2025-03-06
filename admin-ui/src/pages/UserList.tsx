@@ -1,7 +1,8 @@
-import TableList from '@/components/TableList';
-import columnDefs from '@/utils/ag-grid/user';
+import TableList from '../components/TableList';
+import columnDefs from '../utils/ag-grid/user';
 import { useQuery } from '@tanstack/react-query';
-import { usersQuery } from '@/utils/queries/users/users';
+import { usersQuery } from '../utils/queries/users/users';
+
 
 // const mockUsers = [
 //     { emailAddress: 'Jordane.Bednar@gmail.com', firstName: 'Santina', lastName: 'Kovacek', isActive: true },

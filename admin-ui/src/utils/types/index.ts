@@ -1,7 +1,1 @@
-export type { 
-    App, 
-    Group, 
-    Template, 
-    TemplateProperty, 
-    User 
-} from '@/utils/types/models';
+export type { App, Group, Template, TemplateProperty, User } from './models';
