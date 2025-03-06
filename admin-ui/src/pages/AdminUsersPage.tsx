@@ -12,22 +12,6 @@ import {
   Badge,
 } from '@radix-ui/themes';
 
-const mockUsers = [
-  { emailAddress: 'Jordane.Bednar@gmail.com', firstName: 'Santina', lastName: 'Kovacek', isActive: true },
-  { emailAddress: 'Eve.Stoltenberg21@gmail.com', firstName: 'Elwin', lastName: 'Sanford', isActive: true },
-  { emailAddress: 'Morton_Haag@yahoo.com', firstName: 'Elbert', lastName: 'Little', isActive: false },
-  { emailAddress: 'Sheridan.Hegmann@gmail.com', firstName: 'Susanna', lastName: 'Koch', isActive: true },
-  { emailAddress: 'Korbin48@hotmail.com', firstName: 'Roberto', lastName: 'Hirthe', isActive: false },
-  { emailAddress: 'Imani.Rolfson0@gmail.com', firstName: 'Mafalda', lastName: 'Feeney', isActive: true },
-  { emailAddress: 'Jordy24@hotmail.com', firstName: 'Kyla', lastName: 'McCullough', isActive: true },
-  { emailAddress: 'Brooke_Hansen@gmail.com', firstName: 'Kaia', lastName: 'Stokes', isActive: false },
-  { emailAddress: 'Jennie_Purdy@yahoo.com', firstName: 'Elinor', lastName: 'Bergnaum', isActive: true },
-  { emailAddress: 'Clay31@yahoo.com', firstName: 'Sherwood', lastName: 'Howe', isActive: true },
-  { emailAddress: 'Forest_Wolf37@gmail.com', firstName: 'Reba', lastName: 'Gusikowski', isActive: false },
-  { emailAddress: 'Javkayla.Orn@yahoo.com', firstName: 'Will', lastName: 'Cummerata', isActive: true },
-  { emailAddress: 'Minerva54@yahoo.com', firstName: 'Ried', lastName: 'Wolber', isActive: true },
-];
-
 export default function AdminUsersPage() {
   return (
     <Theme accentColor="orange" radius="small">
@@ -55,7 +39,7 @@ export default function AdminUsersPage() {
           {/* Action Bar */}
           <Flex justify="between" align="center" style={{ marginBottom: '1rem' }}>
             <Text size="2" weight="bold">
-              6 users selected
+              0 users selected
             </Text>
             <Flex gap="2">
               <Button variant="outline">Delete</Button>
@@ -80,23 +64,6 @@ export default function AdminUsersPage() {
                 </tr>
               </thead>
               <tbody>
-                {mockUsers.map((user) => (
-                  <tr key={user.emailAddress} style={styles.tr}>
-                    <td style={{ ...styles.td, width: '40px' }}>
-                      <input type="checkbox" />
-                    </td>
-                    <td style={styles.td}>{user.emailAddress}</td>
-                    <td style={styles.td}>{user.firstName}</td>
-                    <td style={styles.td}>{user.lastName}</td>
-                    <td style={styles.td}>
-                      {user.isActive ? (
-                        <Badge color="green">Active</Badge>
-                      ) : (
-                        <Badge color="gray">Inactive</Badge>
-                      )}
-                    </td>
-                  </tr>
-                ))}
               </tbody>
             </table>
           </Box>

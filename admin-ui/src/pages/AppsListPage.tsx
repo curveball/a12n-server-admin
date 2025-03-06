@@ -11,28 +11,6 @@ import {
 } from '@radix-ui/themes';
 import { Link } from 'react-router-dom';
 
-// Mock data for existing apps
-const mockApps = [
-  {
-    name: 'Google Authenticator',
-    url: 'https://google.com/auth',
-    createdAt: '2022-10-01',
-    status: 'Active',
-  },
-  {
-    name: 'Slack',
-    url: 'https://slack.com',
-    createdAt: '2023-01-15',
-    status: 'Active',
-  },
-  {
-    name: 'GitHub',
-    url: 'https://github.com',
-    createdAt: '2022-11-20',
-    status: 'Inactive',
-  },
-];
-
 export default function AppsListPage() {
   return (
     <Theme accentColor="orange" radius="small">
@@ -68,31 +46,6 @@ export default function AppsListPage() {
                   <th style={styles.th}></th> {/* For "Manage" button */}
                 </tr>
               </thead>
-              <tbody>
-                {mockApps.map((app) => (
-                  <tr key={app.name} style={styles.tr}>
-                    <td style={styles.td}>{app.name}</td>
-                    <td style={styles.td}>
-                      <a href={app.url} target="_blank" rel="noreferrer" style={styles.link}>
-                        {app.url}
-                      </a>
-                    </td>
-                    <td style={styles.td}>{app.createdAt}</td>
-                    <td style={styles.td}>
-                      {app.status === 'Active' ? (
-                        <Badge color="green">Active</Badge>
-                      ) : (
-                        <Badge color="gray">Inactive</Badge>
-                      )}
-                    </td>
-                    <td style={styles.td}>
-                      <Button variant="outline" color="gray" size="2">
-                        Manage
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
             </table>
           </Box>
         </Card>

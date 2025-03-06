@@ -11,18 +11,6 @@ import {
   Avatar,
 } from '@radix-ui/themes';
 
-const mockPrivileges = [
-    { url: '/privilege/admin', title: 'Full admin privileges on the authenciation server' },
-    { url: '/privilege/a12n:principals:list', title: 'Read user, app and group information' },
-    { url: '/privilege/a12n:principals:create', title: 'Create new users, apps and groups' },
-    { url: '/privilege/a12n:principals:update', title: 'Update users, apps and groups' },
-    { url: '/privilege/a12n:one-time-token:generate', title: 'Create a token for an arbitrary user, this token grants full access to this account.' },
-    { url: '/privilege/a12n:one-time-token:exchange', title: 'Exchange a one-time-token for a OAuth2 access token.' },
-    { url: '/privilege/a12n:user:change-password', title: 'Allow changing a users\' password.' },
-    { url: '/privilege/a12n:access-token:generate', title: 'Allows a user to create a valid access-token for another user without consent. This privilege allows full control of other accounts and should never be given to third parties.' },
-    { url: '/privilege/a12n:user:manage-identities', title: 'Full control over a user identities, including adding, deleting, setting and removing verification status.' }
-];
-
 export default function AdminPrivilegesPage() {
   return (
     <Theme accentColor="orange" radius="small">
@@ -74,17 +62,6 @@ export default function AdminPrivilegesPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {mockPrivileges.map((privilege) => (
-                    <tr key={privilege.url} style={styles.tr}>
-                      <td style={{ ...styles.td, width: '40px' }}>
-                        <input type="checkbox" />
-                      </td>
-                      <td style={styles.td}><a href={privilege.url} target="_blank" rel="noreferrer" style={styles.link}>
-                        {privilege.url}
-                      </a></td>
-                      <td style={styles.td}>{privilege.title}</td>
-                    </tr>
-                  ))}
                 </tbody>
               </table>
             </Box>

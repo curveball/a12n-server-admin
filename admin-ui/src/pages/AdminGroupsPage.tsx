@@ -12,12 +12,6 @@ import {
   Avatar,
 } from '@radix-ui/themes';
 
-const mockGroups = [
-  { name: 'test group 1', createdAt: '2025-02-15', modifiedAt: '2025-02-15', privileges: 'read' },
-  { name: 'test group 2', createdAt: '2025-02-16', modifiedAt: '2025-02-16', privileges: 'read, update' },
-  { name: 'test group 3', createdAt: '2025-02-17', modifiedAt: '2025-02-17', privileges: 'read, update, delete' },
-];
-
 export default function AdminGroupsPage() {
   return (
     <Theme accentColor="orange" radius="small">
@@ -71,17 +65,6 @@ export default function AdminGroupsPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {mockGroups.map((group) => (
-                    <tr key={group.name} style={styles.tr}>
-                      <td style={{ ...styles.td, width: '40px' }}>
-                        <input type="checkbox" />
-                      </td>
-                      <td style={styles.td}>{group.name}</td>
-                      <td style={styles.td}>{group.createdAt}</td>
-                      <td style={styles.td}>{group.modifiedAt}</td>
-                      <td style={styles.td}>{group.privileges}</td>
-                    </tr>
-                  ))}
                 </tbody>
               </table>
             </Box>

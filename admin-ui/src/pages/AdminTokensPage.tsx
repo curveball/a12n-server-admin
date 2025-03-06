@@ -11,15 +11,6 @@ import {
   Avatar,
 } from '@radix-ui/themes';
 
-// Need to clarify tokens later, for now we can have some demo data
-const mockTokens = [
-    { code: '2YotnFZFEjr1zCsicMWpAA', created: '2025-02-15', expired: '2025-02-16' },
-    { code: 'tGzv3JOkF0XG5Qx2TlKWIA', created: '2025-02-16', expired: '2025-02-17' },
-    { code: 'abc123def456ghi789', created: '2025-02-14', expired: '2025-02-15' },
-    { code: '9A1B2C3D4E5F6G7H8I9J', created: '2025-02-12', expired: '2025-02-13' },
-    { code: 'ZxYwVUtSrQpOnMlKjIhG', created: '2025-02-17', expired: '2025-02-18' }
-];
-
 export default function AdminTokensPage() {
   return (
     <Theme accentColor="orange" radius="small">
@@ -73,16 +64,6 @@ export default function AdminTokensPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {mockTokens.map((token) => (
-                    <tr key={token.code} style={styles.tr}>
-                      <td style={{ ...styles.td, width: '40px' }}>
-                        <input type="checkbox" />
-                      </td>
-                      <td style={styles.td}>{token.code}</td>
-                      <td style={styles.td}>{token.created}</td>
-                      <td style={styles.td}>{token.expired}</td>
-                    </tr>
-                  ))}
                 </tbody>
               </table>
             </Box>

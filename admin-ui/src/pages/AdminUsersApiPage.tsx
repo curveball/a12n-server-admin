@@ -12,12 +12,6 @@ import {
 } from '@radix-ui/themes';
 import type { CSSProperties } from 'react';
 
-const mockUsers = [
-    { emailAddress: 'Jordane.Bednar@gmail.com', firstName: 'Santina', lastName: 'Kovacek', isActive: true },
-    { emailAddress: 'Eve.Stoltenberg21@gmail.com', firstName: 'Elwin', lastName: 'Sanford', isActive: true },
-    { emailAddress: 'Morton_Haag@yahoo.com', firstName: 'Elbert', lastName: 'Little', isActive: false },
-];
-
 export default function AdminUsersPage() {
     return (
         <Theme accentColor="orange" radius="small">
@@ -60,9 +54,9 @@ export default function AdminUsersPage() {
                     </Box>
                     <Card style={{ marginTop: '1rem', padding: '1rem' }}>
                         <Box style={styles.tableWrapper}>
-                            <pre style={styles.jsonDisplay}>
-                                {JSON.stringify({ users: mockUsers }, null, 2)}
-                            </pre>
+                            <Text size="2" color="gray" align="center">
+                                No users available.
+                            </Text>
                         </Box>
                     </Card>
                 </Flex>
