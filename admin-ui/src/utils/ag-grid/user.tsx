@@ -1,4 +1,3 @@
-import StatusPill from '../../components/StatusPill';
 import { Badge } from '@radix-ui/themes';
 
 const columnDefs = [
