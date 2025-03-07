@@ -372,7 +372,7 @@ import '@radix-ui/themes/styles.css';
 import { Theme, Box, Button } from '@radix-ui/themes';
 
 // Import the usersQuery from your utils (it already has the URL and token)
-import { usersQuery } from '@/utils/users/users';
+import { usersQuery } from '@/utils/queries/users/users';
 
 export function DeveloperTabComponent() {
   // We'll assume the query in users.ts always fetches from 'http://localhost:8531/user?embed=item'
