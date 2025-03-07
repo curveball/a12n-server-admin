@@ -13,6 +13,7 @@ function App() {
         <Router>
             <OAuthProvider>
                 <Routes>
+                    <Route path='/' element={<OAuthTriggerPage />} />
                     <Route path='/auth/trigger' element={<OAuthTriggerPage />} />
                     <Route path='/auth/redirect' element={<OAuthRedirectPage />} />
                     <Route path='/' element={<Layout />}>
