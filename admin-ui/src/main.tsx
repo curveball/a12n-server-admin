@@ -1,13 +1,12 @@
 // src/main.tsx
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// REMOVE BrowserRouter here (to avoid nesting)
-import App from '@/app/App';
+import { Theme, ThemePanel } from '@radix-ui/themes';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import App from './app/App';
+import { OAuthProvider } from './lib/OAuthProvider';
 
-const queryClient = new QueryClient();
-const rootElement = document.getElementById('root');
-if (!rootElement) throw new Error('Root element not found');
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 createRoot(rootElement).render(
   <React.StrictMode>
