@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronDownIcon, RocketIcon } from '@radix-ui/react-icons';
+import { usersQuery } from '../utils/queries/users/users';
 
 // Radix Themes
 import '@radix-ui/themes/styles.css';
