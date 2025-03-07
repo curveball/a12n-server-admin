@@ -361,7 +361,7 @@
 // }
 
 // export default DeveloperTabComponent;
-// src/components/DeveloperTabComponent.tsx
+
 import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -370,15 +370,11 @@ import { ChevronDownIcon, RocketIcon } from '@radix-ui/react-icons';
 // Radix Themes
 import '@radix-ui/themes/styles.css';
 import { Theme, Box, Button } from '@radix-ui/themes';
-
-// Import the usersQuery from your utils (it already has the URL and token)
 import { usersQuery } from '@/utils/queries/users/users';
 
 export function DeveloperTabComponent() {
-  // We'll assume the query in users.ts always fetches from 'http://localhost:8531/user?embed=item'
   const { data, error, isLoading, isFetching, refetch } = useQuery(usersQuery());
 
-  // UI State for snippet type and request timing
   const [snippetType, setSnippetType] = useState<'curl' | 'node' | 'python'>('curl');
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsed, setElapsed] = useState<number | null>(null);
