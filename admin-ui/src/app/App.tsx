@@ -1,7 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import '@radix-ui/themes/styles.css';
 
-import { OAuthTriggerPage, UserList, OAuthRedirectPage, NotFoundPage } from '../pages';
+import { OAuthTriggerPage, UserList, OAuthRedirectPage, NotFoundPage, DeveloperTabPage } from '../pages';
 import { OAuthProvider } from '../lib/OAuthProvider';
 import { Protected, Layout } from '../components';
 import '../config/theme.css';
@@ -25,6 +25,7 @@ function App() {
                             }
                         />
                     </Route>
+                    <Route path="/developer" element={<DeveloperTabPage />} />
                     <Route path='/404' element={<NotFoundPage />} />
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>
