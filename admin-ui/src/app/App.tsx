@@ -6,14 +6,15 @@ import { OAuthProvider } from '../lib/OAuthProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Protected, Layout } from '../components';
 import '../config/theme.css';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
 function App() {
     return (
         <Router>
-            <OAuthProvider>
-                <QueryClientProvider client={queryClient}>
+            <QueryClientProvider client={queryClient}>
+                <OAuthProvider>
                     <Routes>
                         <Route path='/auth/trigger' element={<OAuthTriggerPage />} />
                         <Route path='/auth/redirect' element={<OAuthRedirectPage />} />
@@ -30,8 +31,8 @@ function App() {
                         <Route path='/404' element={<NotFoundPage />} />
                         <Route path='*' element={<NotFoundPage />} />
                     </Routes>
-                </QueryClientProvider>
-            </OAuthProvider>
+                </OAuthProvider>
+            </QueryClientProvider>
         </Router>
     );
 }
