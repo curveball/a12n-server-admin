@@ -1,8 +1,9 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '@radix-ui/themes/styles.css';
 
 import { OAuthTriggerPage, UserList, OAuthRedirectPage, NotFoundPage } from '../pages';
 import { OAuthProvider } from '../lib/OAuthProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Protected, Layout } from '../components';
 import '../config/theme.css';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
