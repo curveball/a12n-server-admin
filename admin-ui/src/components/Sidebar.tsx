@@ -1,10 +1,13 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Box, Flex, Heading, Text, Avatar, Badge, Button } from '@radix-ui/themes';
 import { Link } from 'react-router-dom';
 import { GlobeIcon, PersonIcon, GridIcon, LockClosedIcon, GitHubLogoIcon, DotsVerticalIcon } from '@radix-ui/react-icons';
 import AdminUILogo from '../assets/icons/admin-ui-logo.svg';
 
 export default function Sidebar() {
+    const location = useLocation();
+
     return (
         <Box
             position="fixed"
@@ -20,72 +23,103 @@ export default function Sidebar() {
                 padding: '20px 16px'
             }}
         >
-            {/* Brand Section */}
             <Box mb="6">
-                <Flex align="center" justify="between">
+                <Flex align="center" justify="start">
                     <Flex align="center" gap="2">
-                        <img src={AdminUILogo} alt="Admin UI Logo" style={{ width: '40px', borderRadius: '10px' }} /> {/* Updated border radius */}
+                        <img src={AdminUILogo} alt="Admin UI Logo" style={{ width: '40px', borderRadius: '10px' }} />
                         <Box>
                             <Heading as="h2" size="4" weight="medium" style={{ color: '#DFCDC5' }}>
                                 a12n-server
                             </Heading>
                             <Flex align="center" gap="1">
                                 <Text size="2" style={{ color: '#DFCDC5BF' }}>Admin UI</Text>
-                                <Badge color="orange" variant="solid" radius="large" size="1">
+                                <Badge radius="large" size="1" style={{ backgroundColor: '#AB6400', color: 'white' }}>
                                     v1.0.0
                                 </Badge>
                             </Flex>
                         </Box>
                     </Flex>
-                    <Button
-                        variant="ghost"
-                        size="2"
-                        style={{ borderRadius: '8px', padding: '8px', marginRight: 'auto', marginLeft: '28px' }} // Adjusted marginLeft
-                        onClick={() => window.open('https://github.com/curveball/a12n-server', '_blank')}
+                    <Box
+                        style={{
+                            borderRadius: '6px',
+                            border: '1px solid #A18072',
+                            width: '32px',
+                            height: '32px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            marginLeft: '34px',
+                        }}
                     >
-                        <GitHubLogoIcon color="#A18072" />
-                    </Button>
+                        <Button
+                            variant="ghost"
+                            size="2"
+                            style={{ padding: '0', margin: '0', width: '100%', height: '100%' }}
+                            onClick={() => window.open('https://github.com/curveball/a12n-server', '_blank')}
+                        >
+                            <GitHubLogoIcon color="#A18072" width={18} height={18} />
+                        </Button>
+                    </Box>
                 </Flex>
             </Box>
 
-            {/* Navigation */}
             <Box asChild style={{ flex: 1 }}>
                 <nav>
                     <Box as="ul" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-                        {navItems.map(({ name, icon, count, path }) => (
-                            <Box as="li" key={name} mb="2">
-                                <Link
-                                    to={path}
-                                    style={{
-                                        textDecoration: 'none',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'space-between',
-                                        padding: '10px 12px',
-                                        borderRadius: '8px',
-                                        backgroundColor: name === 'Users' ? '#8C6D5E' : 'transparent',
-                                        color: name === 'Users' ? '#000000' : '#DFCDC5BF'
-                                    }}
-                                >
-                                    <Flex align="center" gap="2">
-                                        {React.cloneElement(icon, { color: name === 'Users' ? '#000000' : '#A18072' })}
-                                        <Text size="3" weight="medium">
-                                            {name}
-                                        </Text>
-                                    </Flex>
-                                    {count !== null && (
-                                        <Badge color="gray" variant="soft" size="1">
-                                            {count}
-                                        </Badge>
-                                    )}
-                                </Link>
-                            </Box>
-                        ))}
+                        {navItems.map(({ name, icon, count, path }) => {
+                            const isActive = location.pathname.startsWith(path);
+                            return (
+                                <Box as="li" key={name} mb="2">
+                                    <Link
+                                        to={path}
+                                        style={{
+                                            textDecoration: 'none',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                            padding: '8px 10px',
+                                            borderRadius: '6px',
+                                            backgroundColor: isActive ? '#8C6D5E' : 'transparent',
+                                            color: isActive ? '#000000' : '#DFCDC5BF'
+                                        }}
+                                    >
+                                        <Flex align="center" gap="2">
+                                            {React.cloneElement(icon, {
+                                                color: isActive ? '#000000' : '#A18072',
+                                                width: 18,
+                                                height: 18
+                                            })}
+                                            <Text size="2" weight="medium">
+                                                {name}
+                                            </Text>
+                                        </Flex>
+                                        {count !== null && (
+                                            <Box
+                                                style={{
+                                                    borderRadius: '6px',
+                                                    border: `1px solid ${isActive ? '#000000' : '#A18072'}`,
+                                                    width: '22px',
+                                                    height: '22px',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    fontSize: '14px',
+                                                    fontWeight: '500',
+                                                    color: isActive ? '#000000' : '#A18072'
+                                                }}
+                                            >
+                                                {count}
+                                            </Box>
+                                        )}
+                                    </Link>
+                                </Box>
+                            );
+                        })}
                     </Box>
                 </nav>
             </Box>
 
-            {/* Profile Section */}
             <Box pt="6" style={{ borderTop: '1px solid var(--gray-9)' }}>
                 <Flex gap="2" align="center" justify="between">
                     <Flex gap="2" align="center">
@@ -100,7 +134,11 @@ export default function Sidebar() {
                                 <Text size="2" weight="bold" style={{ color: '#DFCDC5' }}>
                                     Evert Pot
                                 </Text>
-                                <Badge color="orange" variant="solid" size="1">
+                                <Badge size="1" style={{
+                                    backgroundColor: '#CC4E00',
+                                    color: 'white',
+                                    borderRadius: '8px'
+                                }}>
                                     Admin
                                 </Badge>
                             </Flex>
@@ -109,7 +147,7 @@ export default function Sidebar() {
                             </Text>
                         </Box>
                     </Flex>
-                    <Button variant="ghost" size="2" style={{ borderRadius: '8px', padding: '8px', color: '#A18072' }}> {/* Updated hover style */}
+                    <Button variant="ghost" size="2" style={{ borderRadius: '8px', padding: '8px', color: '#A18072' }}>
                         <DotsVerticalIcon />
                     </Button>
                 </Flex>
