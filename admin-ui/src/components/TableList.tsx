@@ -1,18 +1,28 @@
 import { useState, useRef } from 'react';
-import { Theme, Button, Card, Text, Flex, Badge } from '@radix-ui/themes';
+import { Theme, Button, Card, Text, Flex } from '@radix-ui/themes';
 import { TrashIcon, DownloadIcon, PlusIcon, RowsIcon } from '@radix-ui/react-icons';
 import { AgGridReact } from 'ag-grid-react';
 import { themeQuartz } from 'ag-grid-community';
+import { CreateUserModal, UpdateUserModal } from '../containers';
 
 const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
     const gridRef = useRef<any>(null);
     const [selectedCount, setSelectedCount] = useState(0);
+    const [isNewModalOpen, setIsNewModalOpen] = useState(false);
+    const [isTableModalOpen, setIsTableModalOpen] = useState(false);
+    const [selectedUserData, setSelectedUserData] = useState<any>(null);
 
     const onSelectionChanged = () => {
         if (gridRef.current) {
             const selectedRows = gridRef.current.api.getSelectedRows();
             setSelectedCount(selectedRows.length);
         }
+    };
+
+    const handleRowDoubleClick = (event: any) => { 
+        const rowData = event.data;
+        setIsTableModalOpen(true);
+        setSelectedUserData(rowData)
     };
 
     return (
@@ -40,10 +50,11 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                                 <DownloadIcon />
                                 Export
                             </Button>
-                            <Button variant='solid' size='3' radius='full'>
+                            <Button variant='solid' size='3' radius='full' onClick={ () => setIsNewModalOpen(true) }>
                                 <PlusIcon />
                                 New {itemName}
                             </Button>
+                            { isNewModalOpen && itemName === 'user' && (<CreateUserModal onClose={() => setIsNewModalOpen(false)} />) }
                         </Flex>
                     </Flex>
 
@@ -59,8 +70,10 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                             suppressRowHoverHighlight={true}
                             columnHoverHighlight={false}
                             domLayout='autoHeight'
+                            onRowDoubleClicked={ handleRowDoubleClick }
                         />
                     </div>
+                    { isTableModalOpen && itemName === 'user' && (<UpdateUserModal onClose={() => setIsTableModalOpen(false)} userData={ selectedUserData } />) }
                 </Card>
             </div>
         </Theme>
