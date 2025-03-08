@@ -26,6 +26,14 @@ function App() {
                                     </Protected>
                                 }
                             />
+                            <Route
+                                path='/users/sandbox'
+                                element={
+                                    <Protected>
+                                        <DeveloperTabPage />
+                                    </Protected>
+                                }
+                            />
                         </Route>
                         <Route path='/404' element={<NotFoundPage />} />
                         <Route path='*' element={<NotFoundPage />} />
