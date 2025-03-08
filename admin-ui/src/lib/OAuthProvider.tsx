@@ -1,9 +1,12 @@
-import { createContext, useContext, useState } from 'react';
+// /lib/OAuthProvider.tsx
+
+import { createContext, useContext, useEffect, useState } from 'react';
 import { generateCodeVerifier, OAuth2Token } from '@badgateway/oauth2-client';
 import { useNavigate } from 'react-router-dom';
 
 import client from '../utils/oauth/client';
 import { AUTHORIZATION_CODE_QUERY_PARAM_NAME, CODE_VERIFIER_LOCAL_STORAGE_NAME } from '../utils/constants';
+import { setupAxiosInterceptors } from '../utils/axios/axios';
 
 type OAuthContextType = {
     tokens: OAuth2Token | null;
@@ -40,13 +43,27 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             });
 
             localStorage.removeItem(CODE_VERIFIER_LOCAL_STORAGE_NAME);
-            setTokens(oAuth2Token);
+
+            const timeStampToken = {
+                ...oAuth2Token,
+                expiresAt: Date.now() + (oAuth2Token.expiresAt ?? 0) * 1000,
+            };
+            setTokens(timeStampToken);
             setIsAuthenticated(true);
         } catch (err) {
             console.error(err);
             navigate('/404');
         }
     };
+
+    const getTokens = () => tokens;
+
+    useEffect(() => {
+        setupAxiosInterceptors(getTokens, (t) => {
+            setTokens({ ...t, expiresAt: Date.now() + (t.expiresAt ?? 0) * 1000 });
+            setIsAuthenticated(true);
+        });
+    }, []);
 
     return (
         <OAuthContext.Provider value={{ isAuthenticated, tokens, setTokens, triggerOAuthFlow, handleOAuthRedirect }}>
