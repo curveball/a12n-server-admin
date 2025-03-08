@@ -101,12 +101,13 @@ Briefly explain how you integrated the previously developed individuals componen
    - Stretch goal: basic OAuth2 app management, allowing admins to register new OAuth2 clients.
 
  * Did your partner accept the features? And were there change requests?
-  3.  **Partner Feedback**  
+  3. **Partner Feedback**  
    - They liked the streamlined user listing approach but suggested more robust search/filter.  
    - They also requested a working password reset flow in the next iteration.
 
  * What were your learnings through this process? This can be either from a process and/or product perspective.
  * *This section will be marked very leniently so keep it brief and just make sure the points are addressed*
+   
    4. **Learnings**  
    - Relying on placeholder data left some uncertainty. In the next sprint, we’ll integrate the real endpoints to instill confidence.  
    
