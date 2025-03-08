@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import client from '../config/oauth';
 import {
     AUTHORIZATION_CODE_QUERY_PARAM_NAME,
+    CLIENT_ROUTES,
     CODE_VERIFIER_LOCAL_STORAGE_NAME,
     POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME,
 } from '../utils/constants';
@@ -15,6 +16,7 @@ type OAuthContextType = {
     setTokens: React.Dispatch<React.SetStateAction<OAuth2Token | null>>;
     triggerOAuthFlow: (postAuthRedirectPath: string) => Promise<void>;
     handleOAuthRedirect: () => Promise<string | undefined>;
+    refreshAccessToken: () => Promise<OAuth2Token | undefined>;
 };
 
 const OAuthContext = createContext<OAuthContextType | undefined>(undefined);
@@ -61,8 +63,21 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         }
     };
 
+    const refreshAccessToken = async () => {
+        try {
+            const newTokens = await client.refreshToken(tokens!);
+            setTokens(newTokens);
+            return newTokens;
+        } catch (err) {
+            console.error(err);
+            navigate(CLIENT_ROUTES.AUTH_TRIGGER);
+        }
+    };
+
     return (
-        <OAuthContext.Provider value={{ isAuthenticated, tokens, setTokens, triggerOAuthFlow, handleOAuthRedirect }}>
+        <OAuthContext.Provider
+            value={{ isAuthenticated, tokens, setTokens, triggerOAuthFlow, handleOAuthRedirect, refreshAccessToken }}
+        >
             {children}
         </OAuthContext.Provider>
     );
