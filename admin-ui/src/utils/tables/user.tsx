@@ -1,3 +1,4 @@
+import { User } from '../helpers/models';
 import { Badge } from '@radix-ui/themes';
 
 const columnDefs = [
@@ -8,7 +9,7 @@ const columnDefs = [
         flex: 1,
         minWidth: 150,
         resizable: false,
-        valueGetter: (params: any) => params.data._links.self.href.replace('/user/', ''),
+        valueGetter: (params: any) => User.parseUserID(params.data),
     },
     {
         field: '_links.me',
