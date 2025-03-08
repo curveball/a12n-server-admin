@@ -28,7 +28,7 @@ function App() {
                                 }
                             />
                             <Route
-                                path='/users/sandbox'
+                                path={CLIENT_ROUTES.USERS_SANDBOX}
                                 element={
                                     <Protected>
                                         <DeveloperTabPage />
