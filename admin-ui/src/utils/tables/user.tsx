@@ -1,7 +1,16 @@
+import { User } from '../helpers/models';
 import { Badge } from '@radix-ui/themes';
 
 const columnDefs = [
     { field: 'nickname', headerName: 'User Name', flex: 1, minWidth: 150, resizable: false },
+    {
+        field: '_links.self.href',
+        headerName: 'ID',
+        flex: 1,
+        minWidth: 150,
+        resizable: false,
+        valueGetter: (params: any) => User.parseUserID(params.data),
+    },
     {
         field: '_links.me',
         headerName: 'Email',
