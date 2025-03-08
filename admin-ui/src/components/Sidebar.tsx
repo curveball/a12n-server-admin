@@ -11,6 +11,7 @@ import {
     DotsVerticalIcon,
 } from '@radix-ui/react-icons';
 import AdminUILogo from '../assets/icons/admin-ui-logo.svg';
+import { CLIENT_ROUTES } from '../utils/constants';
 
 export default function Sidebar() {
     const location = useLocation();
@@ -174,8 +175,8 @@ export default function Sidebar() {
 }
 
 const navItems = [
-    { name: 'Users', icon: <PersonIcon />, count: 14, path: '/users' },
-    { name: 'Groups', icon: <GlobeIcon />, count: 5, path: '/groups' },
-    { name: 'Apps', icon: <GridIcon />, count: 2, path: '/apps' },
-    { name: 'Privileges', icon: <LockClosedIcon />, count: 0, path: '/privileges' },
+    { name: 'Users', icon: <PersonIcon />, count: 14, path: CLIENT_ROUTES.USERS_TABLE },
+    { name: 'Groups', icon: <GlobeIcon />, count: 5, path: CLIENT_ROUTES.GROUPS_TABLE },
+    { name: 'Apps', icon: <GridIcon />, count: 2, path: CLIENT_ROUTES.APPS_TABLE },
+    { name: 'Privileges', icon: <LockClosedIcon />, count: 0, path: CLIENT_ROUTES.PRIVILEGES_TABLE },
 ];
