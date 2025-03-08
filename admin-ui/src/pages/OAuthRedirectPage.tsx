@@ -1,19 +1,25 @@
 import { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Box, Spinner } from '@radix-ui/themes';
 
 import { useOAuth } from '../lib/OAuthProvider';
 
 const OAuthRedirectPage = () => {
     const { isAuthenticated, handleOAuthRedirect } = useOAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (!isAuthenticated) handleOAuthRedirect();
+        const processOAuthRedirect = async () => {
+            if (!isAuthenticated) {
+                const postAuthRedirectPath = await handleOAuthRedirect();
+                navigate(postAuthRedirectPath!);
+            }
+        };
+
+        processOAuthRedirect();
     }, [isAuthenticated, handleOAuthRedirect]);
 
-    return isAuthenticated ? (
-        <Navigate to='/users' />
-    ) : (
+    return (
         <Box
             style={{
                 width: '100vw',

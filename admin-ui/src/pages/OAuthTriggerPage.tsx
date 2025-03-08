@@ -11,7 +11,7 @@ const LoadingPage = () => {
     });
 
     return isAuthenticated ? (
-        <Navigate to='/users' />
+        <Navigate to='/users/table' />
     ) : (
         <Box
             style={{

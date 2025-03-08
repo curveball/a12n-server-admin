@@ -19,7 +19,7 @@ function App() {
                         <Route path='/auth/redirect' element={<OAuthRedirectPage />} />
                         <Route path='/' element={<Layout />}>
                             <Route
-                                path='/users'
+                                path='/users/table'
                                 element={
                                     <Protected>
                                         <UserList />
