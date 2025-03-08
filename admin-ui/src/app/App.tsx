@@ -6,7 +6,6 @@ import { OAuthProvider } from '../lib/OAuthProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Protected, Layout } from '../components';
 import '../config/theme.css';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 

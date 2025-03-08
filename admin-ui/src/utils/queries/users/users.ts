@@ -1,25 +1,18 @@
 import { queryOptions } from '@tanstack/react-query';
 
-export function usersQuery() {
+export function usersQuery(tokens: { accessToken: string }) {
     return queryOptions({
         queryKey: ['users'],
-        queryFn: getUsers,
+        queryFn: () => getUsers(tokens),
     });
 }
 
-const getUsers = async () => {
+const getUsers = async (tokens: { accessToken: string }) => {
     const res = await fetch('http://localhost:8531/user?embed=item', {
         headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`,
+            Authorization: `Bearer ${tokens?.accessToken}`,
         },
     });
-
-    if (res.status === 401) {
-        // Handle 401 Unauthorized error
-        // For example, redirect to login page or show an error message
-        window.location.href = '/'; // Redirect to login page
-        throw new Error('Unauthorized. Please log in.');
-    }
 
     if (!res.ok) {
         throw new Error('Network response was not ok');
