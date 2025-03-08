@@ -1,12 +1,14 @@
 import TableList from '../components/TableList';
-import columnDefs from '../utils/ag-grid/user';
+import columnDefs from '../utils/tables/user';
 import { useQuery } from '@tanstack/react-query';
 import { usersQuery } from '../utils/queries/users/users';
 import { useOAuth } from '../lib/OAuthProvider';
 
 const UserList = () => {
     const { tokens } = useOAuth();
-    const { data, isLoading, error } = useQuery(tokens ? usersQuery(tokens) : { queryKey: [], queryFn: () => Promise.resolve([]) });
+    const { data, isLoading, error } = useQuery(
+        tokens ? usersQuery(tokens) : { queryKey: [], queryFn: () => Promise.resolve([]) },
+    );
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;

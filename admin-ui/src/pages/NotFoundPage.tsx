@@ -1,5 +1,6 @@
 import { Box, Heading, Text } from '@radix-ui/themes';
 import { Link } from 'react-router-dom';
+import { CLIENT_ROUTES } from '../utils/constants';
 
 const NotFoundPage = () => (
     <Box
@@ -16,7 +17,7 @@ const NotFoundPage = () => (
             <Heading style={{ fontSize: '40px' }}>404 Page Not Found</Heading>
             <Text style={{ fontSize: '20px', marginTop: '15px' }}>
                 Uh Oh! Looks like you got lost! Return to{' '}
-                <Link style={{ color: 'var(--amber-11)' }} to='/users'>
+                <Link style={{ color: 'var(--amber-11)' }} to={CLIENT_ROUTES.USERS_TABLE}>
                     home?
                 </Link>
             </Text>
