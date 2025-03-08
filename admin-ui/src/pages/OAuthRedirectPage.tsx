@@ -17,7 +17,7 @@ const OAuthRedirectPage = () => {
         };
 
         processOAuthRedirect();
-    }, [isAuthenticated, handleOAuthRedirect]);
+    }, [isAuthenticated, handleOAuthRedirect, navigate]);
 
     return (
         <Box

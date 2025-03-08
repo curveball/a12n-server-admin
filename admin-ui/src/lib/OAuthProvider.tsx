@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import { generateCodeVerifier, OAuth2Token } from '@badgateway/oauth2-client';
 import { useNavigate } from 'react-router-dom';
 
-import client from '../utils/oauth/client';
+import client from '../config/oauth';
 import {
     AUTHORIZATION_CODE_QUERY_PARAM_NAME,
     CODE_VERIFIER_LOCAL_STORAGE_NAME,
@@ -14,7 +14,7 @@ type OAuthContextType = {
     tokens: OAuth2Token | null;
     isAuthenticated: boolean;
     setTokens: React.Dispatch<React.SetStateAction<OAuth2Token | null>>;
-    triggerOAuthFlow: () => Promise<void>;
+    triggerOAuthFlow: (postAuthRedirectPath: string) => Promise<void>;
     handleOAuthRedirect: () => Promise<string | undefined>;
 };
 
@@ -25,10 +25,8 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [tokens, setTokens] = useState<OAuth2Token | null>(null);
     const navigate = useNavigate();
 
-    const triggerOAuthFlow = async () => {
+    const triggerOAuthFlow = async (postAuthRedirectPath: string) => {
         const codeVerifier = await generateCodeVerifier();
-        const searchParams = new URLSearchParams(window.location.search);
-        const postAuthRedirectPath = searchParams.get(POST_AUTH_REDIRECT_QUERY_PARAM_NAME)!;
         localStorage.setItem(CODE_VERIFIER_LOCAL_STORAGE_NAME, codeVerifier);
         localStorage.setItem(POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME, postAuthRedirectPath);
 
