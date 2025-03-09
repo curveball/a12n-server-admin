@@ -6,7 +6,6 @@ import client from '../config/oauth';
 import {
     AUTHORIZATION_CODE_QUERY_PARAM_NAME,
     CODE_VERIFIER_LOCAL_STORAGE_NAME,
-    POST_AUTH_REDIRECT_QUERY_PARAM_NAME,
     POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME,
 } from '../utils/constants';
 

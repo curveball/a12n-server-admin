@@ -1,24 +1,23 @@
-import { vi, describe, it, expect, beforeEach} from 'vitest';
-import { OAuthProvider, useOAuth } from '../lib/OAuthProvider';
+import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { OAuthProvider, useOAuth } from '../../lib/OAuthProvider';
 import { render, waitFor } from '@testing-library/react';
 import { generateCodeVerifier } from '@badgateway/oauth2-client';
 import { useEffect } from 'react';
 
-import client from '../config/oauth';
+import client from '../../config/oauth';
 
-vi.resetAllMocks()
+vi.resetAllMocks();
 
 vi.mock('@badgateway/oauth2-client', () => ({
-  generateCodeVerifier: vi.fn(() => Promise.resolve('mockedCodeVerifier')),
+    generateCodeVerifier: vi.fn(() => Promise.resolve('mockedCodeVerifier')),
 }));
 
-vi.mock('../config/oauth', () => ({
-    default : {
+vi.mock('../../config/oauth', () => ({
+    default: {
         getAuthorizeUri: vi.fn(() => Promise.resolve('https://mocked-auth-url.com')),
         getToken: vi.fn(() => Promise.resolve({ access_token: 'mockToken' })),
-        }
-    }
-));
+    },
+}));
 
 const navigate = vi.fn();
 
@@ -26,14 +25,12 @@ vi.mock('react-router-dom', () => ({
     useNavigate: vi.fn(() => navigate),
 }));
 
-
-
-describe ('OAuthProvider', () => {
+describe('OAuthProvider', () => {
     beforeEach(() => {
         vi.clearAllMocks();
     });
-    
-    it ('triggers auth flow correctly', async () => {
+
+    it('triggers auth flow correctly', async () => {
         const TestComponent = () => {
             const { triggerOAuthFlow } = useOAuth();
 
@@ -43,20 +40,19 @@ describe ('OAuthProvider', () => {
 
             return <div>Test</div>;
         };
-        render (
+        render(
             <OAuthProvider>
                 <TestComponent />
-            </OAuthProvider>
+            </OAuthProvider>,
         );
 
         await waitFor(() => {
             expect(vi.mocked(generateCodeVerifier)).toHaveBeenCalled();
             expect(vi.mocked(client.authorizationCode.getAuthorizeUri)).toHaveBeenCalled();
         });
-
     });
 
-    it ('handles a valid auth redirect correctly', async () => {
+    it('handles a valid auth redirect correctly', async () => {
         const TestComponent = () => {
             const { handleOAuthRedirect } = useOAuth();
 
@@ -67,10 +63,10 @@ describe ('OAuthProvider', () => {
             return <div>Test</div>;
         };
 
-        render (
+        render(
             <OAuthProvider>
                 <TestComponent />
-            </OAuthProvider>
+            </OAuthProvider>,
         );
 
         await waitFor(() => {
@@ -78,8 +74,8 @@ describe ('OAuthProvider', () => {
         });
     });
 
-    it ('handles an invalid auth redirect correctly', async () => {
-        vi.mock('../config/oauth', () => ({
+    it('handles an invalid auth redirect correctly', async () => {
+        vi.mock('../../config/oauth', () => ({
             default: {
                 authorizationCode: {
                     getAuthorizeUri: vi.fn(() => Promise.resolve('https://mocked-auth-url.com')),
@@ -89,7 +85,7 @@ describe ('OAuthProvider', () => {
                 },
             },
         }));
-        
+
         const TestComponent = () => {
             const { handleOAuthRedirect } = useOAuth();
 
@@ -100,10 +96,10 @@ describe ('OAuthProvider', () => {
             return <div>Test</div>;
         };
 
-        render (
+        render(
             <OAuthProvider>
                 <TestComponent />
-            </OAuthProvider>
+            </OAuthProvider>,
         );
 
         await waitFor(() => {
