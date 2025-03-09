@@ -17,3 +17,5 @@ export enum CLIENT_ROUTES {
     PRIVILEGES_SANDBOX = '/privileges/sandbox',
     NOT_FOUND = '/404',
 }
+
+export enum SERVER_ROUTES {}

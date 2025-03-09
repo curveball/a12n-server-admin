@@ -1,3 +1,7 @@
+export const formatAuthorizationHeader = (token: string) => {
+    return `Bearer ${token}`;
+};
+
 export const formatAPIPath = (
     args: (string | number)[],
     queryParams?: Record<string, string | number | boolean | undefined>,
