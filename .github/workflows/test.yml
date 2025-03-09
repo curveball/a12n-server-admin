@@ -1,0 +1,56 @@
+name: CI
+
+on:
+    push:
+        branches:
+            - main
+            - dev
+    pull_request:
+        branches:
+            - main
+            - dev
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        env:
+            VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
+            VITE_AUTH_CLIENT_ID: ${{ secrets.VITE_AUTH_CLIENT_ID }}
+            VITE_POST_AUTH_REDIRECT_URI: ${{ secrets.VITE_POST_AUTH_REDIRECT_URI }}
+            VITE_AUTH_SERVER_TEST_EMAIL: ${{ secrets.VITE_AUTH_SERVER_TEST_EMAIL }}
+            VITE_AUTH_SERVER_TEST_PASSWORD: ${{ secrets.VITE_AUTH_SERVER_TEST_PASSWORD }}
+        steps:
+            - name: Install sqlite3
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y sqlite3
+
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Verify seed.sql exists
+              run: ls -l src/tests/config/seed.sql
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run Unit Tests with Vitest
+              run: npm run test:unit
+
+            - name: Setup SQLite database
+              run: sqlite3 a12nserver.sqlite3 < src/tests/config/seed.sql
+
+            - name: Start authentication server
+              run: npx @curveball/a12n-server &
+
+            - name: Install Playwright Browsers
+              run: npx playwright install --with-deps chromium
+
+            - name: Run Integration Tests with Playwright
+              run: npm run test:integration
