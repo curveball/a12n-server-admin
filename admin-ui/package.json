@@ -10,7 +10,6 @@
         "preview": "vite preview",
         "test:unit": "vitest run",
         "test:integration": "playwright test && rm -rf test-results",
-        "test:actions": "act --container-architecture linux/amd64 --secret-file .env",
         "test": "npm run test:unit && npm run test:integration"
     },
     "dependencies": {
