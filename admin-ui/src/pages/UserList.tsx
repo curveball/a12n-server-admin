@@ -1,12 +1,11 @@
 import TableList from '../components/TableList';
 import columnDefs from '../utils/tables/user';
 import { useQuery } from '@tanstack/react-query';
+import { getAllUsers } from '../utils/queries/users';
+import { useAxios } from '../utils/hooks';
 import { usersWithVerificationQuery } from '../utils/queries/users';
-import { useOAuth } from '../lib/OAuthProvider';
-import { useAxios } from '../utils/hooks/useAxios';
 
 const UserList = () => {
-    const { tokens } = useOAuth();
     const api = useAxios();
     const { data, isLoading, error } = useQuery(
         tokens ? usersWithVerificationQuery(api) : { queryKey: [], queryFn: () => Promise.resolve([]) },
@@ -18,12 +17,14 @@ const UserList = () => {
     console.log(data);
 
     return (
-        <TableList
-            columnDefs={columnDefs}
-            data={data['_embedded'].item}
-            itemName='user'
-            onDelete={() => console.log('Delete')}
-        />
+        <>
+            <TableList
+                columnDefs={columnDefs}
+                data={data['_embedded'].item}
+                itemName='user'
+                onDelete={() => console.log('Delete')}
+            />
+        </>
     );
 };
 

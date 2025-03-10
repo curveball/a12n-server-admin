@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import '@radix-ui/themes/styles.css';
 
 import { OAuthTriggerPage, UserList, OAuthRedirectPage, NotFoundPage, DeveloperTabPage } from '../pages';
@@ -41,6 +42,7 @@ function App() {
                     </Routes>
                 </OAuthProvider>
             </QueryClientProvider>
+            <ToastContainer />
         </Router>
     );
 }
