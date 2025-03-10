@@ -16,16 +16,7 @@ const OAuthTriggerPage = () => {
     return isAuthenticated ? (
         <Navigate to={CLIENT_ROUTES.USERS_TABLE} />
     ) : (
-        <Box
-            style={{
-                width: '100vw',
-                height: '100vh',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
+        <Box className='w-screen h-screen flex! flex-row items-center justify-center'>
             <Spinner size='3' />
         </Box>
     );
