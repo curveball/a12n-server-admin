@@ -20,6 +20,18 @@ const columnDefs = [
         valueGetter: (params: any) => params.data._links.me[0].href.replace('mailto:', ''),
     },
     {
+        field: 'verified',
+        headerName: 'Verified',
+        flex: 1,
+        minWidth: 150,
+        resizable: false,
+        cellRenderer: (params: any) => (
+            <Badge radius='full' color={params.value ? 'green' : 'red'}>
+                {params.value ? 'Verified' : 'Not Verified'}
+            </Badge>
+        ),
+    },
+    {
         field: 'active',
         headerName: 'Status',
         flex: 1,
@@ -34,7 +46,7 @@ const columnDefs = [
     {
         field: 'hasPassword',
         headerName: 'Password',
-        flex: 1,
+        flex: 2,
         minWidth: 150,
         resizable: false,
         cellRenderer: (params: any) => (
@@ -46,7 +58,7 @@ const columnDefs = [
     {
         field: 'modifiedAt',
         headerName: 'Modified At',
-        flex: 1,
+        flex: 2,
         minWidth: 250,
         resizable: false,
         valueFormatter: (params: any) =>
