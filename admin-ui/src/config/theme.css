@@ -50,3 +50,43 @@ button:hover {
     cursor: pointer;
     filter: brightness(0.95);
 }
+
+.success_toast {
+    width: 350px;
+    max-width: 350px;
+    font-family: 'Matter';
+    border-radius: 10px;
+    background-color: var(--green-9);
+}
+
+.error_toast {
+    width: 350px;
+    max-width: 350px;
+    border-radius: 10px;
+    font-family: 'Matter';
+    background-color: var(--ruby-10);
+}
+
+.info_toast {
+    width: 350px;
+    max-width: 350px;
+    font-family: 'Matter';
+    border-radius: 10px;
+    background-color: var(--amber-11);
+}
+
+.warning_toast {
+    width: 350px;
+    max-width: 350px;
+    font-family: 'Matter';
+    border-radius: 10px;
+    background-color: var(--orange-11);
+}
+
+.warning_toast {
+    width: 350px;
+    max-width: 350px;
+    font-family: 'Matter';
+    border-radius: 10px;
+    background-color: white;
+}

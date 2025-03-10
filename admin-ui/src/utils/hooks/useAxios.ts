@@ -1,13 +1,15 @@
 import { useEffect, useMemo } from 'react';
-import axios from 'axios';
 
 import { useOAuth } from '../../lib/OAuthProvider';
 import { configureInterceptors, ejectInterceptors } from '../../config/axios';
+import useToast from './useToast';
+import APICore from '../api';
 
-export const useAxios = () => {
+const useAxios = () => {
     const { tokens, setTokens, refreshAccessToken } = useOAuth();
+    const toast = useToast();
 
-    const api = useMemo(() => axios.create({ baseURL: import.meta.env.VITE_SERVER_URL }), []);
+    const api = useMemo(() => new APICore(toast), []);
 
     useEffect(() => {
         const interceptors = configureInterceptors(api, tokens!, refreshAccessToken);
@@ -16,3 +18,5 @@ export const useAxios = () => {
 
     return api;
 };
+
+export default useAxios;
