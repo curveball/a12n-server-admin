@@ -6,9 +6,9 @@ import { CreateUserModalContent } from '../containers/CreateUserModalContent';
 
 export function CreateUserModal({ onClose }: UserModalProps) {
     const [userState, setUserState] = useState<UserModalState>({
-        userName: "",
-        email: "",
-        password: "",
+        userName: '',
+        email: '',
+        password: '',
         autoGeneratePassword: false,
         emailValidated: false,
     });
@@ -23,7 +23,7 @@ export function CreateUserModal({ onClose }: UserModalProps) {
     };
 
     const validateFields = () => {
-        let newErrors = { userName: '', email: '' };
+        const newErrors = { userName: '', email: '' };
         let isValid = true;
 
         if (!userState.userName.trim()) {
@@ -55,23 +55,15 @@ export function CreateUserModal({ onClose }: UserModalProps) {
     };
 
     return (
-        <Dialog.Root open={ true } onOpenChange={ onClose }>
+        <Dialog.Root open={true} onOpenChange={onClose}>
             <Dialog.Content width='md'>
-                <Dialog.Title>
-                    Create User
-                </Dialog.Title>
-                <Dialog.Description>
-                    Enter in details below to create a new user                        
-                </Dialog.Description>
-                <CreateUserModalContent 
-                    state={ userState }
-                    errors={ errors }
-                    onChange={ handleFieldChange }
-                />
-                <ActionButtons 
-                    onCreate={ handleCreateUser } 
-                    isValid={ !Object.values(errors).some(err => err) } 
-                    onClose={ onClose }
+                <Dialog.Title>Create User</Dialog.Title>
+                <Dialog.Description>Enter in details below to create a new user</Dialog.Description>
+                <CreateUserModalContent state={userState} errors={errors} onChange={handleFieldChange} />
+                <ActionButtons
+                    onCreate={handleCreateUser}
+                    isValid={!Object.values(errors).some((err) => err)}
+                    onClose={onClose}
                 />
             </Dialog.Content>
         </Dialog.Root>
