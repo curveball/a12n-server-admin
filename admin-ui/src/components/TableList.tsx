@@ -19,10 +19,24 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
         }
     };
 
-    const handleRowDoubleClick = (event: any) => { 
+    const handleRowDoubleClick = (event: any) => {
         const rowData = event.data;
         setIsTableModalOpen(true);
         setSelectedUserData(rowData)
+    };
+
+    const downloadCSV = () => {
+        const csvData = data.map((row: any) =>
+            columnDefs.map((col: any) => row[col.field]).join(',')
+        );
+        const csvContent = `data:text/csv;charset=utf-8,${columnDefs.map((col: any) => col.headerName).join(',')}\n${csvData.join('\n')}`;
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', `${itemName}_data.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
 
     return (
@@ -46,15 +60,15 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                                 <RowsIcon />
                                 Filters
                             </Button>
-                            <Button variant='outline' size='3' radius='full'>
+                            <Button variant='outline' size='3' radius='full' onClick={downloadCSV}>
                                 <DownloadIcon />
                                 Export
                             </Button>
-                            <Button variant='solid' size='3' radius='full' onClick={ () => setIsNewModalOpen(true) }>
+                            <Button variant='solid' size='3' radius='full' onClick={() => setIsNewModalOpen(true)}>
                                 <PlusIcon />
                                 New {itemName}
                             </Button>
-                            { isNewModalOpen && itemName === 'user' && (<CreateUserModal onClose={() => setIsNewModalOpen(false)} />) }
+                            {isNewModalOpen && itemName === 'user' && (<CreateUserModal onClose={() => setIsNewModalOpen(false)} />)}
                         </Flex>
                     </Flex>
 
@@ -70,10 +84,10 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                             suppressRowHoverHighlight={true}
                             columnHoverHighlight={false}
                             domLayout='autoHeight'
-                            onRowDoubleClicked={ handleRowDoubleClick }
+                            onRowDoubleClicked={handleRowDoubleClick}
                         />
                     </div>
-                    { isTableModalOpen && itemName === 'user' && (<UpdateUserModal onClose={() => setIsTableModalOpen(false)} userData={ selectedUserData } />) }
+                    {isTableModalOpen && itemName === 'user' && (<UpdateUserModal onClose={() => setIsTableModalOpen(false)} userData={selectedUserData} />)}
                 </Card>
             </div>
         </Theme>
