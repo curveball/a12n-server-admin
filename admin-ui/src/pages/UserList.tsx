@@ -7,9 +7,7 @@ import { usersWithVerificationQuery } from '../utils/queries/users';
 
 const UserList = () => {
     const api = useAxios();
-    const { data, isLoading, error } = useQuery(
-        tokens ? usersWithVerificationQuery(api) : { queryKey: [], queryFn: () => Promise.resolve([]) },
-    );
+    const { data, isLoading, error } = useQuery(getAllUsers(api));
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
