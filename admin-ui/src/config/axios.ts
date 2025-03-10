@@ -1,9 +1,10 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 import { OAuth2Token } from '@badgateway/oauth2-client';
 import { formatAuthorizationHeader } from '../utils/helpers/common';
+import APICore from '../utils/api';
 
 export const configureInterceptors = (
-    api: AxiosInstance,
+    api: APICore,
     tokens: OAuth2Token,
     refreshAccessToken: () => Promise<OAuth2Token | undefined>,
 ) => {
@@ -21,7 +22,7 @@ export const configureInterceptors = (
         return accessToken;
     };
 
-    const requestInterceptor = api.interceptors.request.use(
+    const requestInterceptor = api.client.interceptors.request.use(
         async (config) => {
             let accessToken = tokens.accessToken;
 
@@ -33,7 +34,7 @@ export const configureInterceptors = (
         (error) => Promise.reject(error),
     );
 
-    const responseInterceptor = api.interceptors.response.use(
+    const responseInterceptor = api.client.interceptors.response.use(
         (response) => response,
         async (error) => {
             const originalRequest = error.config;
@@ -55,9 +56,9 @@ export const configureInterceptors = (
 };
 
 export const ejectInterceptors = (
-    api: AxiosInstance,
+    api: APICore,
     interceptors: { requestInterceptor: number; responseInterceptor: number },
 ) => {
-    api.interceptors.request.eject(interceptors.requestInterceptor);
-    api.interceptors.response.eject(interceptors.responseInterceptor);
+    api.client.interceptors.request.eject(interceptors.requestInterceptor);
+    api.client.interceptors.response.eject(interceptors.responseInterceptor);
 };

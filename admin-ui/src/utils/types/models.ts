@@ -1,25 +1,24 @@
-import { HalResource, HalLink } from 'hal-types';
+import { HalResource } from 'hal-types';
+import { ResourceType } from '../constants';
 
-export enum ResourceType {
-    USER = 'user',
-    APP = 'app',
-    GROUP = 'group',
-}
+export type Resource<T extends Record<string, unknown> = Record<string, never>> = HalResource<T>;
 
-export interface BaseResource extends HalResource {
-    _links: {
-        self: HalLink;
-        [rel: string]: HalLink | HalLink[];
+export type Collection<T extends Record<string, unknown> = Record<string, never>> = HalResource<T> & {
+    _embedded: {
+        item: Resource<T>[];
     };
+};
+
+type BaseResource = {
     nickname: string;
     active: boolean;
     createdAt: string;
     modifiedAt: string;
     type: ResourceType;
     privileges: Record<string, string[]>;
-}
+};
 
-export type App = BaseResource & {};
+export type App = BaseResource;
 
 export type TemplateProperty = {
     type: string;
@@ -41,3 +40,5 @@ export type Group = BaseResource & {
 export type User = BaseResource & {
     hasPassword: boolean;
 };
+
+export type Model = App | Template | Group | User;

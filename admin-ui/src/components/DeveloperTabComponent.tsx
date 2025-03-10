@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronDownIcon, RocketIcon } from '@radix-ui/react-icons';
-import { usersQuery } from '../utils/queries/users';
+import { getAllUsers } from '../utils/queries/users';
 
 // Radix Themes
 import '@radix-ui/themes/styles.css';
 import { Theme, Box, Button } from '@radix-ui/themes';
 import { useOAuth } from '../lib/OAuthProvider';
-import { useAxios } from '../utils/hooks/useAxios';
+import { useAxios } from '../utils/hooks';
 
 export function DeveloperTabComponent() {
     const { tokens } = useOAuth();
     const api = useAxios();
-    const { data, error, isLoading, isFetching, refetch } = useQuery(usersQuery(api));
+    const { data, error, isLoading, isFetching, refetch } = useQuery(getAllUsers(api));
 
     const [snippetType, setSnippetType] = useState<'curl' | 'node' | 'python'>('curl');
     const [startTime, setStartTime] = useState<number | null>(null);

@@ -1,29 +1,38 @@
 import TableList from '../components/TableList';
 import columnDefs from '../utils/tables/user';
 import { useQuery } from '@tanstack/react-query';
-import { usersWithVerificationQuery } from '../utils/queries/users';
-import { useOAuth } from '../lib/OAuthProvider';
-import { useAxios } from '../utils/hooks/useAxios';
+import { getAllUsers, getVerifiedUsers } from '../utils/queries/users';
+import { useAxios } from '../utils/hooks';
 
 const UserList = () => {
-    const { tokens } = useOAuth();
     const api = useAxios();
-    const { data, isLoading, error } = useQuery(
-        tokens ? usersWithVerificationQuery(api) : { queryKey: [], queryFn: () => Promise.resolve([]) },
-    );
+    const { data, isLoading, error } = useQuery(getAllUsers(api));
+    const {
+        data: verifiedUsers,
+        isLoading: verifiedUsersLoading,
+        error: verifiedUsersError,
+    } = useQuery(getVerifiedUsers(api));
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading || verifiedUsersLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
-
-    console.log(data);
+    if (verifiedUsersError) return <div>Error: {verifiedUsersError.message}</div>;
 
     return (
-        <TableList
-            columnDefs={columnDefs}
-            data={data['_embedded'].item}
-            itemName='user'
-            onDelete={() => console.log('Delete')}
-        />
+        <>
+            <TableList
+                columnDefs={columnDefs}
+                data={
+                    data
+                        ? data['_embedded'].item.map((user) => ({
+                              ...user,
+                              verified: (verifiedUsers ?? new Set()).has(user['_links'].self.href),
+                          }))
+                        : []
+                }
+                itemName='user'
+                onDelete={() => console.log('Delete')}
+            />
+        </>
     );
 };
 
