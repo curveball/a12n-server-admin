@@ -19,7 +19,7 @@ export type MutationRequestParams = {
     onError?: (error: AxiosError) => void;
 };
 
-export type APIRequestBody = CreateUserAPIRequest | Record<string, never>;
+export type APIRequestBody = CreateUserAPIRequest | UpdateUserAPIRequest | Record<string, never>;
 
 export type APIResponseToastMessages = {
     [key: number]: {
@@ -36,5 +36,11 @@ export type CreateUserAPIRequest = {
     nickname: string;
     email: string;
     markEmailValid: string;
-    autoGeneratePassword: string;
+    autoGeneratePassword?: string;
+};
+
+export type UpdateUserAPIRequest = {
+    nickname: string;
+    type: string;
+    active: boolean;
 };
