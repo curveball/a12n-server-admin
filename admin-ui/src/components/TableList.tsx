@@ -22,21 +22,15 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
     const handleRowDoubleClick = (event: any) => {
         const rowData = event.data;
         setIsTableModalOpen(true);
-        setSelectedUserData(rowData)
+        setSelectedUserData(rowData);
     };
 
     const downloadCSV = () => {
-        const csvData = data.map((row: any) =>
-            columnDefs.map((col: any) => row[col.field]).join(',')
-        );
-        const csvContent = `data:text/csv;charset=utf-8,${columnDefs.map((col: any) => col.headerName).join(',')}\n${csvData.join('\n')}`;
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement('a');
-        link.setAttribute('href', encodedUri);
-        link.setAttribute('download', `${itemName}_data.csv`);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        if (gridRef.current) {
+            gridRef.current.api.exportDataAsCsv({
+                fileName: `${itemName}_data.csv`,
+            });
+        }
     };
 
     return (
