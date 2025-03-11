@@ -9,7 +9,8 @@
         "moduleResolution": "Node",
         "strict": true,
         "resolveJsonModule": true,
-        "isolatedModules": true
+        "isolatedModules": true,
+        "types": ["vitest", "@testing-library/jest-dom"]
     },
     "include": ["src", "**/*.test.ts", "**/*.test.tsx"]
 }

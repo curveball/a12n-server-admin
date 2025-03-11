@@ -4,13 +4,14 @@ import { TrashIcon, DownloadIcon, PlusIcon, RowsIcon } from '@radix-ui/react-ico
 import { AgGridReact } from 'ag-grid-react';
 import { themeQuartz } from 'ag-grid-community';
 import { CreateUserModal, UpdateUserModal } from '../containers';
+import { UserUpdateInitialValues } from '../utils/types';
 
 const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
     const gridRef = useRef<any>(null);
     const [selectedCount, setSelectedCount] = useState(0);
     const [isNewModalOpen, setIsNewModalOpen] = useState(false);
     const [isTableModalOpen, setIsTableModalOpen] = useState(false);
-    const [selectedUserData, setSelectedUserData] = useState<any>(null);
+    const [selectedUserData, setSelectedUserData] = useState<UserUpdateInitialValues | null>(null);
 
     const onSelectionChanged = () => {
         if (gridRef.current) {
@@ -57,6 +58,9 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                                 New {itemName}
                             </Button>
                             {isNewModalOpen && itemName === 'user' && (<CreateUserModal onClose={() => setIsNewModalOpen(false)} />)}
+                            {isNewModalOpen && itemName === 'user' && (
+                                <CreateUserModal onClose={() => setIsNewModalOpen(false)} />
+                            )}
                         </Flex>
                     </Flex>
 
@@ -76,6 +80,9 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                         />
                     </div>
                     {isTableModalOpen && itemName === 'user' && (<UpdateUserModal onClose={() => setIsTableModalOpen(false)} userData={selectedUserData} />)}
+                    {isTableModalOpen && itemName === 'user' && (
+                        <UpdateUserModal onClose={() => setIsTableModalOpen(false)} userData={selectedUserData} />
+                    )}
                 </Card>
             </div>
         </Theme>

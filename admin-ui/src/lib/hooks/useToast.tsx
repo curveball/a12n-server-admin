@@ -3,8 +3,8 @@ import { Heading, Spinner, Text } from '@radix-ui/themes';
 import { CheckCircledIcon, CrossCircledIcon, ExclamationTriangleIcon, InfoCircledIcon } from '@radix-ui/react-icons';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { ToastFns, ToastFnParams } from '../types';
-import { DEFAULT_TOAST_OPTIONS, TOAST_TYPE } from '../constants';
+import { ToastFns, ToastFnParams } from '../../utils/types';
+import { DEFAULT_TOAST_OPTIONS, TOAST_TYPE } from '../../utils/constants';
 
 const useToast = (): ToastFns => {
     const statusIcons = {

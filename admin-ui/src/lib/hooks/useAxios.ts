@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from 'react';
 
-import { useOAuth } from '../../lib/OAuthProvider';
+import { useOAuth } from '../';
 import { configureInterceptors, ejectInterceptors } from '../../config/axios';
 import useToast from './useToast';
-import APICore from '../api';
+import APICore from '../../utils/api';
 
 const useAxios = () => {
     const { tokens, setTokens, refreshAccessToken } = useOAuth();

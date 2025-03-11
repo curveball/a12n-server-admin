@@ -4,11 +4,9 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronDownIcon, RocketIcon } from '@radix-ui/react-icons';
 import { getAllUsers } from '../utils/queries/users';
 
-// Radix Themes
 import '@radix-ui/themes/styles.css';
 import { Theme, Box, Button } from '@radix-ui/themes';
-import { useOAuth } from '../lib/OAuthProvider';
-import { useAxios } from '../utils/hooks';
+import { useOAuth, useAxios } from '../lib';
 
 export function DeveloperTabComponent() {
     const { tokens } = useOAuth();

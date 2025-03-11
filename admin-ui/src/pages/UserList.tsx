@@ -1,8 +1,8 @@
 import TableList from '../components/TableList';
 import columnDefs from '../utils/tables/user';
 import { useQuery } from '@tanstack/react-query';
+import { useAxios } from '../lib';
 import { getAllUsers, getVerifiedUsers } from '../utils/queries/users';
-import { useAxios } from '../utils/hooks';
 
 const UserList = () => {
     const api = useAxios();
