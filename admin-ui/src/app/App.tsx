@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import '@radix-ui/themes/styles.css';
-
+import GroupList from '../pages/GroupList';
 import { OAuthTriggerPage, UserList, OAuthRedirectPage, NotFoundPage, DeveloperTabPage } from '../pages';
 import { OAuthProvider } from '../lib/OAuthProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -33,6 +33,14 @@ function App() {
                                 element={
                                     <Protected>
                                         <DeveloperTabPage />
+                                    </Protected>
+                                }
+                            />
+                            <Route
+                                path={CLIENT_ROUTES.GROUPS_TABLE}
+                                element={
+                                    <Protected>
+                                        <GroupList />
                                     </Protected>
                                 }
                             />
