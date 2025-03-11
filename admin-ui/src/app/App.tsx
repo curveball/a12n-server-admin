@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import '@radix-ui/themes/styles.css';
-import GroupList from '../pages/GroupList';
-import { OAuthTriggerPage, UserList, OAuthRedirectPage, NotFoundPage, DeveloperTabPage } from '../pages';
+import { OAuthTriggerPage, UserList, GroupList, OAuthRedirectPage, NotFoundPage, DeveloperTabPage } from '../pages';
 import { OAuthProvider } from '../lib/OAuthProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Protected, Layout } from '../components';

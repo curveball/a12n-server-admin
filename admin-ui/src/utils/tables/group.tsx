@@ -2,7 +2,14 @@ import { Groups } from '../helpers/models';
 import { Badge } from '@radix-ui/themes';
 
 const columnDefs = [
-    { field: 'nickname', headerName: 'App', flex: 1, minWidth: 150, resizable: false },
+    {
+        field: '_links.self.title',
+        headerName: 'Nickname',
+        flex: 1,
+        minWidth: 150,
+        resizable: false,
+        valueGetter: (params: any) => Groups.parseGroupID(params.data),
+    },
     {
         field: '_links.self.href',
         headerName: 'ID',
@@ -10,18 +17,6 @@ const columnDefs = [
         minWidth: 150,
         resizable: false,
         valueGetter: (params: any) => Groups.parseGroupID(params.data),
-    },
-    {
-        field: 'active',
-        headerName: 'Status',
-        flex: 1,
-        minWidth: 150,
-        resizable: false,
-        cellRenderer: (params: any) => (
-            <Badge radius='full' color={params.value ? 'green' : 'gray'}>
-                {params.value ? 'Active' : 'Inactive'}
-            </Badge>
-        ),
     },
     {
         field: 'modifiedAt',
