@@ -1,4 +1,3 @@
-// queries.test.ts
 import { describe, it, expect, beforeEach, vi, Mock, afterEach } from 'vitest';
 import { getAllUsers, getVerifiedUsers } from '../utils/queries/users';
 import { QueryClient } from '@tanstack/react-query';
