@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Spinner } from '@radix-ui/themes';
 
-import { useOAuth } from '../lib/OAuthProvider';
+import { useOAuth } from '../lib';
 
 const OAuthRedirectPage = () => {
     const { isAuthenticated, handleOAuthRedirect } = useOAuth();
