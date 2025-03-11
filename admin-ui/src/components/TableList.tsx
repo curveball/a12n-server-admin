@@ -26,7 +26,13 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
         setSelectedUserData(rowData);
     };
 
-
+    const downloadCSV = () => {
+        if (gridRef.current) {
+            gridRef.current.api.exportDataAsCsv({
+                fileName: `${itemName}_data.csv`,
+            });
+        }
+    };
 
     return (
         <Theme accentColor='brown'>
@@ -49,7 +55,7 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                                 <RowsIcon />
                                 Filters
                             </Button>
-                            <Button variant='outline' size='3' radius='full'>
+                            <Button variant='outline' size='3' radius='full' onClick={downloadCSV}>
                                 <DownloadIcon />
                                 Export
                             </Button>
