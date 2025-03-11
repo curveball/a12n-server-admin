@@ -1,21 +1,49 @@
 import { Box, Button, Checkbox, Dialog, Flex, Text } from '@radix-ui/themes';
-import { useFormValidation } from '../lib';
+import { useAxios, useFormValidation } from '../lib';
 import { CreateUserModalSchema } from '../utils/types/forms';
 import { InputField } from '../components';
 import { isValid } from 'zod';
+import { useCreateUserQuery } from '../utils/queries/users';
+import { Resource, User } from '../utils/types';
 
-export function CreateUserModal({ onClose }: { onClose: () => void }) {
+export function CreateUserModal({
+    onPasswordGenerated,
+    onClose,
+}: {
+    onClose: () => void;
+    onPasswordGenerated: (pass: string) => void;
+}) {
     const { formState, errors, handleInputChange, handleCheckboxChange, isFormValid } = useFormValidation({
         schema: CreateUserModalSchema,
     });
 
-    const handleCreateUser = (e: React.FormEvent) => {
+    const api = useAxios();
+    const mutation = useCreateUserQuery(api);
+
+    const handleCreateUser = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFormValid()) return false;
 
-        // TODO: API call to a12n server here
+        const { nickname: nickname, email } = formState;
+        const markEmailValid = String(formState.autoValidateEmail);
+        const autoGeneratePassword = String(formState.autoGeneratePassword);
 
-        console.log('User Created:', { formState });
+        try {
+            const response = await mutation.mutateAsync({ nickname, email, markEmailValid, autoGeneratePassword });
+            if (response) {
+                const password = (response as Resource<User>).password;
+                console.log('User Created Successfully', password);
+                if (password) {
+                    onPasswordGenerated(password);
+                }
+                console.log('User Created:', { formState });
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.error('Error creating user:', error);
+            return false;
+        }
     };
 
     return (
@@ -39,16 +67,16 @@ export function CreateUserModal({ onClose }: { onClose: () => void }) {
                             </Text>
 
                             <InputField
-                                name='userName'
+                                name='nickname'
                                 size='3'
                                 placeholder='Clark Kent'
                                 radius='large'
-                                value={formState.userName}
+                                value={formState.nickname}
                                 onChange={handleInputChange}
                                 style={{ width: '100%' }}
                             />
-                            {errors.userName && (
-                                <Text style={{ color: 'red', fontSize: '12px' }}>{errors.userName}</Text>
+                            {errors.nickname && (
+                                <Text style={{ color: 'red', fontSize: '12px' }}>{errors.nickname}</Text>
                             )}
                         </Box>
 

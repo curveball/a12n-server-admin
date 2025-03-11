@@ -1,9 +1,10 @@
-import { Box, Button, Dialog, Flex, TextField, Text } from '@radix-ui/themes';
+import { Box, Button, Dialog, Flex, TextField, Text, Checkbox } from '@radix-ui/themes';
 import { useState } from 'react';
 import { isValid } from 'zod';
-import { useFormValidation } from '../lib';
+import { useAxios, useFormValidation, useOAuth } from '../lib';
 import { UpdateUserModalSchema, UserUpdateInitialValues } from '../utils/types/forms';
 import { InputField } from '../components';
+import { useUpdateUserQuery } from '../utils/queries/users';
 
 export function UpdateUserModal({
     onClose,
@@ -12,19 +13,31 @@ export function UpdateUserModal({
     onClose: () => void;
     initialValues: UserUpdateInitialValues;
 }) {
-    const { formState, errors, handleInputChange, isFormValid } = useFormValidation({
+    const { formState, errors, handleInputChange, handleCheckboxChange, isFormValid } = useFormValidation({
         schema: UpdateUserModalSchema,
         initialValues,
     });
-    const [passwordVisible, setPasswordVisible] = useState(false);
 
-    const handleUpdateUser = (e: React.FormEvent) => {
+    const api = useAxios();
+    const mutation = useUpdateUserQuery(api);
+
+    const handleUpdateUser = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFormValid()) return false;
 
-        // TODO: API call to a12n server here
+        const { id } = initialValues;
+        const { nickname, active } = formState;
 
         console.log('User Updated:', { formState });
+
+        try {
+            const data = await mutation.mutateAsync({ nickname, id, active });
+            console.log('User Updated Successfully', data);
+            return true;
+        } catch (error) {
+            console.error('Error creating user:', error);
+            return false;
+        }
     };
 
     return (
@@ -52,77 +65,34 @@ export function UpdateUserModal({
                             </Text>
 
                             <InputField
-                                name='userName'
+                                name='nickname'
                                 size='3'
-                                placeholder={formState.userName || 'Clark Kent'}
+                                placeholder={initialValues.nickname || 'Clark Kent'}
                                 radius='large'
-                                value={formState.userName}
+                                value={formState.nickname}
                                 onChange={handleInputChange}
                                 style={{ width: '100%' }}
-                                error={errors.userName}
+                                error={errors.nickname}
                             />
                         </Box>
 
-                        <Box>
-                            <Text
-                                as='label'
-                                size='2'
-                                style={{
-                                    display: 'block',
-                                    marginBottom: '8px',
-                                }}
-                            >
-                                Email address<span style={{ color: 'red' }}>*</span>
+                        <Box
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                            }}
+                        >
+                            <Text as='label' size='2'>
+                                <Flex gap='2'>
+                                    <Checkbox
+                                        color='brown'
+                                        checked={formState.active}
+                                        onCheckedChange={(checked) => handleCheckboxChange('active', !!checked)}
+                                    />
+                                    isActive?
+                                </Flex>
                             </Text>
-
-                            <InputField
-                                name='email'
-                                size='3'
-                                placeholder={formState.email || 'clark.kent@superman.com'}
-                                radius='large'
-                                value={formState.email}
-                                onChange={handleInputChange}
-                                style={{ width: '100%' }}
-                                error={errors.email}
-                            />
-                        </Box>
-
-                        <Box>
-                            <Text
-                                as='label'
-                                size='2'
-                                style={{
-                                    display: 'block',
-                                    marginBottom: '8px',
-                                    textAlign: 'left',
-                                }}
-                            >
-                                Password<span style={{ color: 'red' }}>*</span>
-                            </Text>
-
-                            <InputField
-                                name='password'
-                                type={passwordVisible ? 'text' : 'password'}
-                                size='3'
-                                radius='large'
-                                value={formState.password}
-                                onChange={handleInputChange}
-                                style={{ width: '100%' }}
-                                error={errors.password}
-                            >
-                                <TextField.Slot side='right'>
-                                    <Button
-                                        size='1'
-                                        onClick={() => setPasswordVisible(!passwordVisible)}
-                                        style={{
-                                            backgroundColor: 'var(--bronze-11)',
-                                            cursor: 'pointer',
-                                        }}
-                                    >
-                                        Show
-                                    </Button>
-                                </TextField.Slot>
-                            </InputField>
                         </Box>
                     </Flex>
                     <Flex direction='row' gap='2' width='100%' align='center'>
@@ -156,7 +126,7 @@ export function UpdateUserModal({
                                 borderRadius: '8px',
                             }}
                         >
-                            Create
+                            Update
                         </Button>
                     </Flex>
                 </form>

@@ -1,17 +1,33 @@
 import { useState, useRef } from 'react';
 import { Theme, Button, Card, Text, Flex } from '@radix-ui/themes';
-import { TrashIcon, DownloadIcon, PlusIcon, RowsIcon } from '@radix-ui/react-icons';
+import { DownloadIcon, PlusIcon, RowsIcon, TrashIcon } from '@radix-ui/react-icons';
 import { AgGridReact } from 'ag-grid-react';
-import { themeQuartz } from 'ag-grid-community';
+import { RowDoubleClickedEvent, themeQuartz } from 'ag-grid-community';
 import { CreateUserModal, UpdateUserModal } from '../containers';
 import { UserUpdateInitialValues } from '../utils/types';
+import { PasswordGeneratedModal } from '../containers/PasswordGeneratedModal';
+import { Users } from '../utils/helpers/models';
 
 const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
+    const initialUserUpdateValues: UserUpdateInitialValues = {
+        nickname: '',
+        id: '',
+        active: false,
+    };
+
     const gridRef = useRef<any>(null);
     const [selectedCount, setSelectedCount] = useState(0);
     const [isNewModalOpen, setIsNewModalOpen] = useState(false);
     const [isTableModalOpen, setIsTableModalOpen] = useState(false);
-    const [selectedUserData, setSelectedUserData] = useState<UserUpdateInitialValues | null>(null);
+    const [selectedUserData, setSelectedUserData] = useState<UserUpdateInitialValues>(initialUserUpdateValues);
+    const [password, setPassword] = useState('');
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
+
+    const handlePasswordGenerated = (newPassword: string) => {
+        console.log('Password received in parent:', newPassword);
+        setPassword(newPassword);
+        setShowPasswordModal(true);
+    };
 
     const onSelectionChanged = () => {
         if (gridRef.current) {
@@ -20,10 +36,10 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
         }
     };
 
-    const handleRowDoubleClick = (event: any) => {
+    const handleRowDoubleClick = (event: RowDoubleClickedEvent) => {
         const rowData = event.data;
+        setSelectedUserData({ id: Users.parseUserID(rowData), ...rowData });
         setIsTableModalOpen(true);
-        setSelectedUserData(rowData);
     };
 
     const downloadCSV = () => {
@@ -59,17 +75,25 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                                 <DownloadIcon />
                                 Export
                             </Button>
-                            <Button variant='solid' size='3' radius='full' onClick={() => setIsNewModalOpen(true)}>
+                            <Button variant='solid' size='3' radius='large' onClick={() => setIsNewModalOpen(true)}>
                                 <PlusIcon />
                                 New {itemName}
                             </Button>
                             {isNewModalOpen && itemName === 'user' && (
-                                <CreateUserModal onClose={() => setIsNewModalOpen(false)} />
+                                <CreateUserModal
+                                    onClose={() => setIsNewModalOpen(false)}
+                                    onPasswordGenerated={handlePasswordGenerated}
+                                />
+                            )}
+                            {showPasswordModal && (
+                                <PasswordGeneratedModal
+                                    password={password}
+                                    onClose={() => setShowPasswordModal(false)}
+                                />
                             )}
                         </Flex>
                     </Flex>
 
-                    {/* Table */}
                     <div style={{ maxHeight: '80vh', height: 'auto', width: '100%', overflowX: 'scroll' }}>
                         <AgGridReact
                             ref={gridRef}
@@ -85,7 +109,7 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                         />
                     </div>
                     {isTableModalOpen && itemName === 'user' && (
-                        <UpdateUserModal onClose={() => setIsTableModalOpen(false)} userData={selectedUserData} />
+                        <UpdateUserModal onClose={() => setIsTableModalOpen(false)} initialValues={selectedUserData} />
                     )}
                 </Card>
             </div>

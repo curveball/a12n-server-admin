@@ -1,7 +1,7 @@
-import { queryOptions } from '@tanstack/react-query';
+import { queryOptions, useMutation, useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from './core';
 import { formatAPIPath } from '../helpers/common';
-import { SERVER_EMBED_ITEM_PARAM, SERVER_ROUTES } from '../constants';
+import { ResourceType, SERVER_EMBED_ITEM_PARAM, SERVER_ROUTES } from '../constants';
 import { Collection, User } from '../types';
 import APICore from '../api';
 
@@ -25,7 +25,7 @@ export const getVerifiedUsers = (client: APICore) => {
                 suffix: formatAPIPath([SERVER_ROUTES.USERS]),
             })) as any;
 
-            let verifiedUsers = new Set<string>();
+            const verifiedUsers = new Set<string>();
 
             for (const user of data['_links'].item) {
                 const identityRes = (await client.get({
@@ -48,38 +48,72 @@ export const getVerifiedUsers = (client: APICore) => {
     });
 };
 
-// export function usersWithVerificationQuery(api: AxiosInstance) {
-//     return queryOptions({
-//         queryKey: ['usersWithVerification'],
-//         queryFn: () => getUsersWithVerification(api),
-//     });
-// }
+export function useUpdateUserQuery(client: APICore) {
+    const queryClient = useQueryClient();
 
-// const getUsers = async (api: AxiosInstance) => {
-//     const res = await api.get('http://localhost:8531/user?embed=item');
-//     return res.data;
-// };
+    return useMutation({
+        mutationKey: queryKeys.puts.user,
+        mutationFn: async ({ nickname, id, active }: { nickname: string; id: string; active: boolean }) => {
+            return await client.put({
+                suffix: formatAPIPath([SERVER_ROUTES.USERS, id]),
+                body: {
+                    nickname: nickname,
+                    type: ResourceType.USER,
+                    active,
+                },
+            });
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: queryKeys.users.detail('verified') });
+            queryClient.invalidateQueries({ queryKey: queryKeys.users.all });
+        },
+    });
+}
 
-// const getUsersWithVerification = async (api: AxiosInstance) => {
-//     const res = await api.get('http://localhost:8531/user?embed=item');
-//     const users = res.data['_embedded'].item;
+export function useCreateUserQuery(client: APICore) {
+    const queryClient = useQueryClient();
 
-//     // Fetch identity information for each user
-//     const usersWithVerification = await Promise.all(
-//         users.map(async (user: any) => {
-//             const identityRes = await api.get(`http://localhost:8531${user._links.self.href}/identity`);
-//             const identityDetailsRes = await api.get(`http://localhost:8531${identityRes.data._links.item[0].href}`);
-//             return {
-//                 ...user,
-//                 verified: identityDetailsRes.data.verifiedAt != null,
-//             };
-//         }),
-//     );
+    return useMutation({
+        mutationKey: queryKeys.posts.user,
+        mutationFn: async ({
+            nickname,
+            email,
+            markEmailValid,
+            autoGeneratePassword,
+        }: {
+            nickname: string;
+            email: string;
+            markEmailValid: string;
+            autoGeneratePassword: string;
+        }) => {
+            if (autoGeneratePassword === 'true') {
+                const response = await client.post({
+                    suffix: formatAPIPath([SERVER_ROUTES.USERS, 'new']),
+                    body: {
+                        nickname: nickname,
+                        email: email,
+                        markEmailValid: markEmailValid,
+                        autoGeneratePassword: autoGeneratePassword,
+                    },
+                });
 
-//     return {
-//         ...res.data,
-//         _embedded: {
-//             item: usersWithVerification,
-//         },
-//     };
-// };
+                return response;
+            } else {
+                const response = await client.post({
+                    suffix: formatAPIPath([SERVER_ROUTES.USERS, 'new']),
+                    body: {
+                        nickname: nickname,
+                        email: email,
+                        markEmailValid: markEmailValid,
+                    },
+                });
+
+                return response;
+            }
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: queryKeys.users.detail('verified') });
+            queryClient.invalidateQueries({ queryKey: queryKeys.users.all });
+        },
+    });
+}
