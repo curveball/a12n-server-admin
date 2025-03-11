@@ -63,7 +63,6 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                                 <PlusIcon />
                                 New {itemName}
                             </Button>
-                            {isNewModalOpen && itemName === 'user' && (<CreateUserModal onClose={() => setIsNewModalOpen(false)} />)}
                             {isNewModalOpen && itemName === 'user' && (
                                 <CreateUserModal onClose={() => setIsNewModalOpen(false)} />
                             )}
@@ -85,7 +84,6 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                             onRowDoubleClicked={handleRowDoubleClick}
                         />
                     </div>
-                    {isTableModalOpen && itemName === 'user' && (<UpdateUserModal onClose={() => setIsTableModalOpen(false)} userData={selectedUserData} />)}
                     {isTableModalOpen && itemName === 'user' && (
                         <UpdateUserModal onClose={() => setIsTableModalOpen(false)} userData={selectedUserData} />
                     )}
