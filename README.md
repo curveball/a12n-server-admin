@@ -81,7 +81,7 @@ This command creates a configuration file and SQLite database in the current dir
 Run: 
 ```
 sqlite3 a12nserver.sqlite3
-INSERT INTO server_settings VALUES ("cors.allowOrigin", '["http://localhost:8531/", "*"]');
+INSERT INTO server_settings (setting, value)  VALUES ('cors.allowOrigin', '["http://localhost:8531", "*"]');
 ```
 To allow frontend access to the a12n-server backend
 
