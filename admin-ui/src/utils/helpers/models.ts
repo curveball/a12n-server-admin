@@ -1,4 +1,6 @@
-import { Resource, User, Group } from '../types';
+
+import { Resource, User, App, Group } from '../types';
+
 
 export class Users {
     static parseUserID(user: Resource<User>): string {
@@ -6,8 +8,17 @@ export class Users {
     }
 }
 
+
 export class Groups {
-    static parseGroupID(group: { href: string; title: string }) {
-        return group.href.replace('/group/', '');
+    static parseGroupID(group: Resource<Group>): string {
+        return group._links.self.href.replace('/group/', '');
     }
 }
+
+export class Apps {
+    static parseAppID(app: Resource<App>): string {
+        return app._links.self.href.replace('/app/', '');
+    }
+}
+
+

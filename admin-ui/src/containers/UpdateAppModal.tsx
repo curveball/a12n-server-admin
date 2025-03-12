@@ -1,51 +1,36 @@
-import { Box, Button, Dialog, Flex, Text, Checkbox } from '@radix-ui/themes';
+import { Box, Button, Dialog, Flex, TextField, Text } from '@radix-ui/themes';
 import { isValid } from 'zod';
-import { useAxios, useFormValidation } from '../lib';
-import { UpdateUserModalSchema, UserUpdateInitialValues } from '../utils/types/forms';
+import { useFormValidation } from '../lib';
+import { UpdateAppModalSchema, UserAppInitialValues } from '../utils/types/forms';
 import { InputField } from '../components';
-import { useUpdateUserQuery } from '../utils/queries/users';
 
 export function UpdateUserModal({
     onClose,
     initialValues,
 }: {
     onClose: () => void;
-    initialValues: UserUpdateInitialValues;
+    initialValues: UserAppInitialValues;
 }) {
-    const { formState, errors, handleInputChange, handleCheckboxChange, isFormValid } = useFormValidation({
-        schema: UpdateUserModalSchema,
+    const { formState, errors, handleInputChange, isFormValid } = useFormValidation({
+        schema: UpdateAppModalSchema,
         initialValues,
     });
 
-    const api = useAxios();
-    const mutation = useUpdateUserQuery(api);
-
-    const handleUpdateUser = async (e: React.FormEvent) => {
+    const handleUpdateApp = (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFormValid()) return false;
 
-        const { id } = initialValues;
-        const { nickname, active } = formState;
+        // TODO: API call to a12n server here
 
-        console.log('User Updated:', { formState });
-
-        try {
-            const data = await mutation.mutateAsync({ nickname, id, active });
-            console.log('User Updated Successfully', data);
-            onClose();
-            return true;
-        } catch (error) {
-            console.error('Error creating user:', error);
-            return false;
-        }
+        console.log('App Updated:', { formState });
     };
 
     return (
         <Dialog.Root open={true} onOpenChange={onClose}>
             <Dialog.Content width='md'>
-                <Dialog.Title>Update User</Dialog.Title>
-                <Dialog.Description>Enter in credentials below to update an existing user</Dialog.Description>
-                <form onSubmit={handleUpdateUser}>
+                <Dialog.Title>Update App</Dialog.Title>
+                <Dialog.Description>Enter in credentials below to update an existing app</Dialog.Description>
+                <form onSubmit={handleUpdateApp}>
                     <Flex
                         direction='column'
                         gap='4'
@@ -61,39 +46,45 @@ export function UpdateUserModal({
                                     marginBottom: '8px',
                                 }}
                             >
-                                User Name<span style={{ color: 'red' }}>*</span>
+                                App Name<span style={{ color: 'red' }}>*</span>
                             </Text>
 
                             <InputField
-                                name='nickname'
+                                name='appName'
                                 size='3'
-                                placeholder={initialValues.nickname || 'Clark Kent'}
+                                placeholder={formState.appName || 'My App'}
                                 radius='large'
-                                value={formState.nickname}
+                                value={formState.appName}
                                 onChange={handleInputChange}
                                 style={{ width: '100%' }}
-                                error={errors.nickname}
+                                error={errors.appName}
                             />
                         </Box>
 
-                        <Box
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                            }}
-                        >
-                            <Text as='label' size='2'>
-                                <Flex gap='2'>
-                                    <Checkbox
-                                        color='brown'
-                                        checked={formState.active}
-                                        onCheckedChange={(checked) => handleCheckboxChange('active', !!checked)}
-                                    />
-                                    Set user to be active?
-                                </Flex>
+                        <Box>
+                            <Text
+                                as='label'
+                                size='2'
+                                style={{
+                                    display: 'block',
+                                    marginBottom: '8px',
+                                }}
+                            >
+                                App URL<span style={{ color: 'red' }}>*</span>
                             </Text>
+
+                            <InputField
+                                name='email'
+                                size='3'
+                                placeholder={formState.appURL || 'https://my-app.com'}
+                                radius='large'
+                                value={formState.appURL}
+                                onChange={handleInputChange}
+                                style={{ width: '100%' }}
+                                error={errors.appURL}
+                            />
                         </Box>
+
                     </Flex>
                     <Flex direction='row' gap='2' width='100%' align='center'>
                         <Button
@@ -116,7 +107,7 @@ export function UpdateUserModal({
                             type='submit'
                             variant='soft'
                             radius='large'
-                            onClick={handleUpdateUser}
+                            onClick={handleUpdateApp}
                             disabled={!isValid}
                             style={{
                                 flex: 1,

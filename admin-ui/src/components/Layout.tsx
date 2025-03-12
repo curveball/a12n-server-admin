@@ -1,4 +1,3 @@
-import React from 'react';
 import { Theme, Flex } from '@radix-ui/themes';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';

@@ -15,6 +15,11 @@ const useFormValidation = <T extends ZodObject<z.ZodRawShape>>({
         const schemaDefaults = Object.fromEntries(
             Object.entries(schema.shape).map(([key, field]) => {
                 const fieldDefault = field._def.default;
+
+                if (field instanceof z.ZodBoolean) {
+                    return [key, fieldDefault ? fieldDefault() : false];
+                }
+
                 return [key, fieldDefault ? fieldDefault() : ''];
             }),
         );

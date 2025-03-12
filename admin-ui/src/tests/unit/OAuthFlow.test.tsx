@@ -1,10 +1,10 @@
 import { vi, describe, it, expect, beforeEach } from 'vitest';
-import { OAuthProvider, useOAuth } from '../lib/OAuthProvider';
+import { OAuthProvider, useOAuth } from '../../lib/OAuthProvider';
 import { render, waitFor } from '@testing-library/react';
 import { generateCodeVerifier } from '@badgateway/oauth2-client';
 import { useEffect } from 'react';
 
-import client from '../config/oauth';
+import client from '../../config/oauth';
 
 vi.resetAllMocks();
 
@@ -12,7 +12,7 @@ vi.mock('@badgateway/oauth2-client', () => ({
     generateCodeVerifier: vi.fn(() => Promise.resolve('mockedCodeVerifier')),
 }));
 
-vi.mock('../config/oauth', () => ({
+vi.mock('../../config/oauth', () => ({
     default: {
         getAuthorizeUri: vi.fn(() => Promise.resolve('https://mocked-auth-url.com')),
         getToken: vi.fn(() => Promise.resolve({ access_token: 'mockToken' })),
@@ -75,7 +75,7 @@ describe('OAuthProvider', () => {
     });
 
     it('handles an invalid auth redirect correctly', async () => {
-        vi.mock('../config/oauth', () => ({
+        vi.mock('../../config/oauth', () => ({
             default: {
                 authorizationCode: {
                     getAuthorizeUri: vi.fn(() => Promise.resolve('https://mocked-auth-url.com')),
