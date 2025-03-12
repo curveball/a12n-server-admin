@@ -8,6 +8,10 @@ export const queryKeys = {
         user: ['posts', 'user'] as const,
         detail: (id: string) => ['posts', id] as const,
     },
+    apps: {
+        all: ['apps'] as const,
+        detail: (id: string) => ['apps', id] as const,
+    },
     puts: {
         all: ['puts'] as const,
         user: ['puts', 'user'] as const,

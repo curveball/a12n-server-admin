@@ -18,6 +18,22 @@ export type UserUpdateInitialValues = {
     active: boolean;
 };
 
+export const CreateAppModalSchema = z.object({
+    appName: z.string().min(1, { message: 'App Name is required' }),
+    appURL: z.string().url({ message: 'Invalid URL format' }).optional().or(z.literal('')),
+});
+
+export const UpdateAppModalSchema = z.object({
+    appName: z.string().min(1, { message: 'App Name is required' }),
+    appURL: z.string().url({ message: 'Invalid URL format' }).optional().or(z.literal('')),
+});
+
+
+export type UserAppInitialValues = {
+    appName: string;
+    appURL: string;
+};
+
 export interface ActionButtonsProps {
     isUpdate?: boolean;
     isValid: boolean;

@@ -22,6 +22,7 @@ export enum CLIENT_ROUTES {
 
 export enum SERVER_ROUTES {
     USERS = '/user',
+    APPS = '/app'
 }
 
 export enum ResourceType {
