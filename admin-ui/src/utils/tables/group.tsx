@@ -3,12 +3,11 @@ import { Badge } from '@radix-ui/themes';
 
 const columnDefs = [
     {
-        field: '_links.self.title',
+        field: 'title',
         headerName: 'Nickname',
         flex: 1,
         minWidth: 150,
         resizable: false,
-        valueGetter: (params: any) => Groups.parseGroupID(params.data),
     },
     {
         field: '_links.self.href',
