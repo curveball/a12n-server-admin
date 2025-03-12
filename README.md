@@ -1,7 +1,7 @@
 # Project 21: a12n-server
 
 ## Partner Intro
-Evert Pot, evert@sproutfamily.com
+Evert Pot, evert@sproutfamily.ca
 
 ## About the Project
 a12n-server is a lightweight authentication server designed to provide developers with a simple and efficient authentication system. The project was initiated in 2018 as a personal endeavor by our partner, Evert Pot, to address the lack of lightweight, open-source OAuth2 servers for Node.js that support TypeScript. In this context, 'lightweight' refers to faster startup times , lower memory usage, and simpler configuration compared to what would be considered heavyweight solutions such as Keycloak, which can require several minutes to start, use hundreds of MB of RAM, and demand complex setup and maintenance. Integration time is also minimized as a12n-server provides a ready-to-use API with minimal setup, typically taking less than an hour to integrate into an existing Node.js project, as opposed to days for more comprehensive systems. It was created to address the lack of simple yet secure OAuth2 solutions that offer fast startup times, minimal resource usage, and an easy-to-use admin UI. This project began as a personal endeavor by our partner, Evert Pot, and it continues to grow in features and community adoption.
