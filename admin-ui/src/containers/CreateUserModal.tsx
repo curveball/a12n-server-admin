@@ -29,6 +29,7 @@ export function CreateUserModal({
         const autoGeneratePassword = String(formState.autoGeneratePassword);
 
         try {
+            console.log(markEmailValid);
             const response = await mutation.mutateAsync({ nickname, email, markEmailValid, autoGeneratePassword });
             if (response) {
                 const password = (response as Resource<User>).password;
@@ -37,6 +38,7 @@ export function CreateUserModal({
                     onPasswordGenerated(password);
                 }
                 console.log('User Created:', { formState });
+                onClose();
                 return true;
             }
             return false;
@@ -80,7 +82,7 @@ export function CreateUserModal({
                             )}
                         </Box>
 
-                        <Box style={{ marginTop: '10px', paddingBottom: '8px' }}>
+                        <Box style={{ marginTop: '20px', paddingBottom: '8px' }}>
                             <Text
                                 as='label'
                                 size='2'
@@ -105,7 +107,7 @@ export function CreateUserModal({
                             {errors.email && <Text style={{ color: 'red', fontSize: '12px' }}>{errors.email}</Text>}
                         </Box>
 
-                        <Flex direction='row' gap='3' justify='start'>
+                        <Flex direction='row' gap='3' justify='start' style={{ marginTop: '20px' }}>
                             <Box
                                 style={{
                                     display: 'flex',
@@ -150,7 +152,7 @@ export function CreateUserModal({
                                 </Text>
                             </Box>
                         </Flex>
-                        <Flex direction='row' gap='2' width='100%' align='center' style={{ marginTop: '20px' }}>
+                        <Flex direction='row' gap='2' width='100%' align='center' style={{ marginTop: '36px' }}>
                             <Button
                                 variant='soft'
                                 radius='large'

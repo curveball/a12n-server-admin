@@ -67,11 +67,11 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                                     Delete
                                 </Button>
                             )}
-                            <Button variant='outline' size='3' radius='full'>
+                            <Button variant='outline' size='3' radius='large'>
                                 <RowsIcon />
                                 Filters
                             </Button>
-                            <Button variant='outline' size='3' radius='full' onClick={downloadCSV}>
+                            <Button variant='outline' size='3' radius='large' onClick={downloadCSV}>
                                 <DownloadIcon />
                                 Export
                             </Button>

@@ -1,7 +1,6 @@
-import { Box, Button, Dialog, Flex, TextField, Text, Checkbox } from '@radix-ui/themes';
-import { useState } from 'react';
+import { Box, Button, Dialog, Flex, Text, Checkbox } from '@radix-ui/themes';
 import { isValid } from 'zod';
-import { useAxios, useFormValidation, useOAuth } from '../lib';
+import { useAxios, useFormValidation } from '../lib';
 import { UpdateUserModalSchema, UserUpdateInitialValues } from '../utils/types/forms';
 import { InputField } from '../components';
 import { useUpdateUserQuery } from '../utils/queries/users';
@@ -33,6 +32,7 @@ export function UpdateUserModal({
         try {
             const data = await mutation.mutateAsync({ nickname, id, active });
             console.log('User Updated Successfully', data);
+            onClose();
             return true;
         } catch (error) {
             console.error('Error creating user:', error);
@@ -90,7 +90,7 @@ export function UpdateUserModal({
                                         checked={formState.active}
                                         onCheckedChange={(checked) => handleCheckboxChange('active', !!checked)}
                                     />
-                                    isActive?
+                                    Set user to be active?
                                 </Flex>
                             </Text>
                         </Box>
