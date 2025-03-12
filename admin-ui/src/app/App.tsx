@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import '@radix-ui/themes/styles.css';
 
-import { OAuthTriggerPage, UserList, AppList, OAuthRedirectPage, NotFoundPage, DeveloperTabPage } from '../pages';
+import { OAuthTriggerPage, UserList, AppList OAuthRedirectPage, NotFoundPage, DeveloperTabPage, PrivilegeList } from '../pages';
+
 import { OAuthProvider } from '../lib/OAuthProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Protected, Layout } from '../components';
@@ -36,6 +37,14 @@ function App() {
                                     </Protected>
                                 }
                             />
+                            <Route
+                                path={CLIENT_ROUTES.PRIVILEGES_TABLE}
+                                element={
+                                  <Protected>
+                                    <PrivilegeList />
+                                  </Protected>
+                                }
+                             />
                             <Route  
                                 path={CLIENT_ROUTES.APPS_TABLE}
                                 element={
@@ -56,3 +65,4 @@ function App() {
 }
 
 export default App;
+
