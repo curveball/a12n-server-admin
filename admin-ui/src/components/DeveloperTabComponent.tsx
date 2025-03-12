@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, QueryOptions } from '@tanstack/react-query';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronDownIcon, RocketIcon } from '@radix-ui/react-icons';
-import { usersQuery } from '../utils/queries/users/users';
 
-// Radix Themes
 import '@radix-ui/themes/styles.css';
 import { Theme, Box, Button } from '@radix-ui/themes';
-import { userQuery } from '../utils/queries/users/user';
-import { useOAuth } from '../lib/OAuthProvider';
+import { useOAuth } from '../lib';
 
-export function DeveloperTabComponent() {
+export function DeveloperTabComponent({ queryOptions, fullUrl }: { queryOptions: QueryOptions; fullUrl: string }) {
     const { tokens } = useOAuth();
-    const { data, error, isLoading, isFetching, refetch } = useQuery(usersQuery(tokens!));
+    const { data, error, isLoading, isFetching, refetch } = useQuery({
+        ...queryOptions,
+        queryKey: queryOptions.queryKey ?? ['defaultKey'],
+    });
 
     const [snippetType, setSnippetType] = useState<'curl' | 'node' | 'python'>('curl');
     const [startTime, setStartTime] = useState<number | null>(null);
@@ -28,9 +28,6 @@ export function DeveloperTabComponent() {
             setStartTime(null);
         }
     }, [isFetching, data, error, startTime]);
-
-    // For display purposes, we use the same URL that your query uses.
-    const fullUrl = 'http://localhost:8531/user?embed=item';
     // Get the token from the environment (already used in your query, but for snippet display)
     const token = tokens ? tokens.accessToken : 'NO_TOKEN_FOUND';
 
@@ -268,7 +265,7 @@ print(resp.json())`;
                         ) : (
                             <Box asChild>
                                 <pre style={{ marginTop: '2.5rem', ...preWrapStyle }}>
-                                    {data ? JSON.stringify(data, null, 2) : 'No data'}
+                                    {data && typeof data == 'object' ? JSON.stringify(data, null, 2) : 'No data'}
                                 </pre>
                             </Box>
                         )}

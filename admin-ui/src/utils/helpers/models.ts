@@ -1,7 +1,7 @@
-import { User as UserType } from "../types";
+import { Resource, User } from '../types';
 
-export class User {
-    static parseUserID(user: UserType): string {
+export class Users {
+    static parseUserID(user: Resource<User>): string {
         return user._links.self.href.replace('/user/', '');
     }
 }

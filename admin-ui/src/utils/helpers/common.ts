@@ -1,7 +1,10 @@
-export const formatAPIPath = (
-    args: (string | number)[],
-    queryParams?: Record<string, string | number | boolean | undefined>,
-): string => {
+import { APIQueryParams } from '../types';
+
+export const formatAuthorizationHeader = (token: string) => {
+    return `Bearer ${token}`;
+};
+
+export const formatAPIPath = (args: (string | number)[], queryParams?: APIQueryParams): string => {
     let formattedURL = args.map((arg) => `/${arg.toString().replace(/^\/+/, '')}`).join('');
 
     if (queryParams) {

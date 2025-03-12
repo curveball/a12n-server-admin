@@ -1,9 +1,9 @@
 import { Box, Spinner } from '@radix-ui/themes';
-import { useOAuth } from '../lib/OAuthProvider';
+import { useOAuth } from '../lib';
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { CLIENT_ROUTES, POST_AUTH_REDIRECT_QUERY_PARAM_NAME } from '../utils/constants';
-import { useQueryParams } from '../utils/hooks';
+import { useQueryParams } from '../lib';
 
 const OAuthTriggerPage = () => {
     const { isAuthenticated, triggerOAuthFlow } = useOAuth();
@@ -16,16 +16,7 @@ const OAuthTriggerPage = () => {
     return isAuthenticated ? (
         <Navigate to={CLIENT_ROUTES.USERS_TABLE} />
     ) : (
-        <Box
-            style={{
-                width: '100vw',
-                height: '100vh',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
+        <Box className='w-screen h-screen flex! flex-row items-center justify-center'>
             <Spinner size='3' />
         </Box>
     );
