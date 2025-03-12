@@ -1,0 +1,1 @@
+cd admin-ui && npx lint-staged
