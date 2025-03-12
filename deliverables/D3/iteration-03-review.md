@@ -5,9 +5,9 @@
  > _Suggestion:_ Have your review meeting a day or two before the due date. This way you will have some time to go over (and edit) this document, and all team members should have a chance to make their contribution.
 
 
-## Iteration XX - Review & Retrospect
+## Iteration 3 - Review & Retrospect
 
- * When: FILL IN THE DATE WHEN YOU ACTUALLY HAD YOUR REVIEW MEETING
+ * When: Monday March 10, 2025
  * Where: Google Meet
 
 ## Process - Reflection
@@ -46,7 +46,7 @@ List **process-related** (i.e. team organization and how you work) decisions and
 
 1. **Last-Minute Merging**  
    - Some sub-teams waited until the final day to merge feature branches, causing merge conflicts and rushed bug fixes.  
-   - **Reasoning**: Big-bang merges introduced unexpected breakages; continuous integration would reduce frantic last-day merges.
+   - **Reasoning**: Big-bang merges introduced unexpected breakages; continuous integration would reduce frantic last-day merges. Last minute merges created cumbersome merge conflicts and 
 
 2. **Unclear Testing Strategy**  
    - We intended to use Jest + React Testing Library but also considered Vitest. Ended up with partial coverage and inconsistent test files.  
@@ -55,6 +55,10 @@ List **process-related** (i.e. team organization and how you work) decisions and
 3. **Overlapping Design Guidelines**  
    - Our design team updated the color palette mid-sprint, conflicting with the dev sub-team’s existing styling.  
    - **Reasoning**: This led to rework on UI components. We should lock color/fonts earlier to avoid mid-sprint changes.
+  
+4. **Unforseen setup**
+   - We spent a lot of time working on things like Zod or Axios interceptors that made our life easy, but these decisions were made on the fly.
+   - **Reasoning**: If we had better planned out tasks we may have had a better understanding of what we needed to accomplish to account for this. Things like Zod could have been added at a high level without having to rely on other components being made, but we had to change and tweak implementation around it as Zod was being added.
 
 
 #### Q3(a). Planned changes
@@ -90,15 +94,16 @@ Briefly explain how you integrated the previously developed individuals componen
 #### Q4. How was your product demo?
  * How did you prepare your demo?
 1. **Preparation**  
-   - We recorded a short loom video walking through the Admin UI: listing demo users, searching them, and showing the login page.  
-   - We then did a live run with `docker-compose` to spin up both the Admin UI and a12n-server simultaneously.
+   - We set up the a12n-server by creating an App, and using the `clientId` to provide authentification for our admin-ui
+   - After editing certain server settings, we're able to run our Admin UI connected and authenticated by the a12n-server
 
  * What did you manage to demo to your partner?
-2. **What We Demoed**  
-   - Showed user listing with dummy data.  
-   - A fully functional login page that authenticates via the a12n-server’s OAuth2 endpoint.  
-   - Highlighted our color theme and basic navigation structure.
-   - Stretch goal: basic OAuth2 app management, allowing admins to register new OAuth2 clients.
+2. **What We Demoed**
+   - We showed UI designs of components within the Admin UI
+   - Using endpoints from the a12n server, we were able to demo how the Users page would work
+       - The User page displays users that the admin has created in a main table
+       - Our demo showed how we were able to add new users with certain options (Automatically creating a password, verifying their email, etc.)
+       - We also showed how we were able to update users in order to deactivate them or change their names
 
  * Did your partner accept the features? And were there change requests?
 3. **Partner Feedback**  
