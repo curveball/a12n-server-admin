@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import '@radix-ui/themes/styles.css';
 
-import { OAuthTriggerPage, UserList, AppList OAuthRedirectPage, NotFoundPage, DeveloperTabPage, PrivilegeList } from '../pages';
+import { OAuthTriggerPage, UserList, AppList, OAuthRedirectPage, NotFoundPage, DeveloperTabPage, PrivilegeList } from '../pages';
 
 import { OAuthProvider } from '../lib/OAuthProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
