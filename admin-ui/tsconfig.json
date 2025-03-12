@@ -1,21 +1,16 @@
-{   "files": [],
+{
+    "files": [],
     "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
     "compilerOptions": {
-      "baseUrl": ".",
-        "paths": {
-            "@/*": ["./src/*"]},
-      "target": "ESNext",
-      "lib": ["DOM", "DOM.Iterable", "ESNext"],
-      "jsx": "react-jsx", 
-      "module": "ESNext",
-      "moduleResolution": "Node",
-      "strict": true,
-      "resolveJsonModule": true,
-      "isolatedModules": true
+        "target": "ESNext",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "jsx": "react-jsx",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "strict": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "types": ["vitest", "@testing-library/jest-dom"]
     },
-    "include": [
-      "src", 
-      "**/*.test.ts", 
-      "**/*.test.tsx"
-    ]
-  }
+    "include": ["src", "**/*.test.ts", "**/*.test.tsx"]
+}

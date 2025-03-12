@@ -1,35 +1,50 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HomePage, LoginPage } from '@/pages';
-import { Box, ThemePanel } from '@radix-ui/themes';
-import AdminUsersPage from '@/pages/AdminUsersPage';
-import AdminGroupsPage from '@/pages/AdminGroupsPage';
-import AdminTokensPage from '@/pages/AdminTokensPage';
-import AdminPrivilegesPage from '@/pages/AdminPrivilegesPage';
-import AppsListPage from '@/pages/AppsListPage';
-import Layout from '@/Layout';
-import APIRequestPage from '@/pages/AdminUsersApiPage';
+import { ToastContainer } from 'react-toastify';
 import '@radix-ui/themes/styles.css';
-import '@/config/fonts.css';
 
+import { OAuthTriggerPage, UserList, OAuthRedirectPage, NotFoundPage, DeveloperTabPage } from '../pages';
+import { OAuthProvider } from '../lib/OAuthProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Protected, Layout } from '../components';
+import '../config/theme.css';
+import { CLIENT_ROUTES } from '../utils/constants';
+
+const queryClient = new QueryClient();
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        {/* The root route uses <Layout>, which contains the sidebar + <Outlet> */}
-        <Route path="/" element={<Layout />}>
-          {/* Child routes (render in <Outlet>) */}
-          <Route path="users" element={<AdminUsersPage />} />
-          <Route path="groups" element={<AdminGroupsPage />} />
-          <Route path="apps" element={<AppsListPage />} />
-          <Route path="tokens" element={<AdminTokensPage />} />
-          <Route path="privileges" element={<AdminPrivilegesPage />} />
-
-          {/* Optionally, you could have an index route, e.g. <Route index element={<HomePage />} /> */}
-        </Route>
-      </Routes>
-    </Router>
-  );
+    return (
+        <Router>
+            <QueryClientProvider client={queryClient}>
+                <OAuthProvider>
+                    <Routes>
+                        <Route path={CLIENT_ROUTES.AUTH_TRIGGER} element={<OAuthTriggerPage />} />
+                        <Route path={CLIENT_ROUTES.AUTH_REDIRECT} element={<OAuthRedirectPage />} />
+                        <Route path={CLIENT_ROUTES.ROOT} element={<Layout />}>
+                            <Route
+                                path={CLIENT_ROUTES.USERS_TABLE}
+                                element={
+                                    <Protected>
+                                        <UserList />
+                                    </Protected>
+                                }
+                            />
+                            <Route
+                                path={CLIENT_ROUTES.USERS_SANDBOX}
+                                element={
+                                    <Protected>
+                                        <DeveloperTabPage />
+                                    </Protected>
+                                }
+                            />
+                        </Route>
+                        <Route path={CLIENT_ROUTES.NOT_FOUND} element={<NotFoundPage />} />
+                        <Route path='*' element={<NotFoundPage />} />
+                    </Routes>
+                </OAuthProvider>
+            </QueryClientProvider>
+            <ToastContainer />
+        </Router>
+    );
 }
 
 export default App;
