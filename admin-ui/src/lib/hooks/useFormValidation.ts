@@ -19,7 +19,7 @@ const useFormValidation = <T extends ZodObject<z.ZodRawShape>>({
                 if (field instanceof z.ZodBoolean) {
                     return [key, fieldDefault ? fieldDefault() : false];
                 }
-                
+
                 return [key, fieldDefault ? fieldDefault() : ''];
             }),
         );
