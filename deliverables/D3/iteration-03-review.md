@@ -114,5 +114,5 @@ Briefly explain how you integrated the previously developed individuals componen
  * *This section will be marked very leniently so keep it brief and just make sure the points are addressed*
    
 4. **Learnings**  
-   - Relying on placeholder data left some uncertainty. In the next sprint, we’ll integrate the real endpoints to instill confidence.  
+   - We value iterative feedback. The partner gave us feedback in a very structured and comprehensive way to consider things that we hadn't initially considered. Their feedback gave us a sense of things we need to complete before the next deliverable. 
    
