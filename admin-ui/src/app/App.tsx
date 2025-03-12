@@ -1,27 +1,49 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Layout from '@/Layout';
-import UserList from '@/pages/UserList';
+import { ToastContainer } from 'react-toastify';
 import '@radix-ui/themes/styles.css';
-import '@/config/theme.css';
+
+import { OAuthTriggerPage, UserList, OAuthRedirectPage, NotFoundPage, DeveloperTabPage } from '../pages';
+import { OAuthProvider } from '../lib/OAuthProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Protected, Layout } from '../components';
+import '../config/theme.css';
+import { CLIENT_ROUTES } from '../utils/constants';
 
 const queryClient = new QueryClient();
 
 function App() {
     return (
-        <QueryClientProvider client={queryClient}>
-            <Router>
-                <Routes>
-                    {/* The root route uses <Layout>, which contains the sidebar + <Outlet> */}
-                    <Route path='/' element={<Layout />}>
-                        {/* Child routes (render in <Outlet>) */}
-                        <Route path='users' element={<UserList />} />
-
-                        {/* Optionally, you could have an index route, e.g. <Route index element={<HomePage />} /> */}
-                    </Route>
-                </Routes>
-            </Router>
-        </QueryClientProvider>
+        <Router>
+            <QueryClientProvider client={queryClient}>
+                <OAuthProvider>
+                    <Routes>
+                        <Route path={CLIENT_ROUTES.AUTH_TRIGGER} element={<OAuthTriggerPage />} />
+                        <Route path={CLIENT_ROUTES.AUTH_REDIRECT} element={<OAuthRedirectPage />} />
+                        <Route path={CLIENT_ROUTES.ROOT} element={<Layout />}>
+                            <Route
+                                path={CLIENT_ROUTES.USERS_TABLE}
+                                element={
+                                    <Protected>
+                                        <UserList />
+                                    </Protected>
+                                }
+                            />
+                            <Route
+                                path={CLIENT_ROUTES.USERS_SANDBOX}
+                                element={
+                                    <Protected>
+                                        <DeveloperTabPage />
+                                    </Protected>
+                                }
+                            />
+                        </Route>
+                        <Route path={CLIENT_ROUTES.NOT_FOUND} element={<NotFoundPage />} />
+                        <Route path='*' element={<NotFoundPage />} />
+                    </Routes>
+                </OAuthProvider>
+            </QueryClientProvider>
+            <ToastContainer />
+        </Router>
     );
 }
 
