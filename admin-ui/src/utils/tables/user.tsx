@@ -17,7 +17,7 @@ const columnDefs = [
         flex: 1,
         minWidth: 200,
         resizable: false,
-        valueGetter: (params: any) => params.data._links.me[0].href.replace('mailto:', ''),
+        // valueGetter: (params: any) => params.data._links.me[0].href.replace('mailto:', ''),
     },
     {
         field: 'verified',
