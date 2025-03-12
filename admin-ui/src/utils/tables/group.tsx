@@ -1,9 +1,8 @@
 import { Groups } from '../helpers/models';
-import { Badge } from '@radix-ui/themes';
 
 const columnDefs = [
     {
-        field: 'title',
+        field: 'nickname',
         headerName: 'Nickname',
         flex: 1,
         minWidth: 150,

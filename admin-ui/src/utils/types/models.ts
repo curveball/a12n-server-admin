@@ -33,9 +33,7 @@ export type Template = {
     properties: TemplateProperty[];
 };
 
-export type Group = BaseResource & {
-    _templates: Record<string, Template>;
-};
+export type Group = BaseResource
 
 export type User = BaseResource & {
     hasPassword: boolean;
