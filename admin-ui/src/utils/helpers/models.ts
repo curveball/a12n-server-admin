@@ -4,6 +4,28 @@ export class Users {
     static parseUserID(user: Resource<User>): string {
         return user._links.self.href.replace('/user/', '');
     }
+
+    static parseEmail(user: Resource<User>): string {
+        let email = 'N/A';
+        let me = user._links.me;
+
+        if (me == undefined || me == null) {
+            return email;
+        }
+
+        if (!Array.isArray(me)) {
+            me = [me];
+        }
+
+        for (const item of me) {
+            if (item.href.startsWith('mailto:')) {
+                email = item.href.replace('mailto:', '');
+                break;
+            }
+        }
+
+        return email;
+    }
 }
 
 export class Groups {
