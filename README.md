@@ -86,7 +86,7 @@ INSERT INTO server_settings (setting, value)  VALUES ('cors.allowOrigin', '["htt
 To allow frontend access to the a12n-server backend
 
 Open [http://localhost:8531/](http://localhost:8531/) to create your admin account. After creating your admin account, head to this URL to set up
-an OAuth2 client: <http://localhost:8531/app/new?nickname=admin-ui-client&url=http://localhost:5173&clientId=admin-ui-client&allowedGrantTypes=refresh_token,authorization_code&redirectUris=http://localhost:5183/auth/redirect>,
+an OAuth2 client: <http://localhost:8531/app/new?nickname=admin-ui-client&url=http://localhost:5173&clientId=admin-ui-client&allowedGrantTypes=refresh_token,authorization_code&redirectUris=http://localhost:5173/auth/redirect>,
 or do this manually by navigating to apps and press add new app. Name, the app whatever you want and leave the URL to the app as blank
 
 Next, click on the url next to client-collection: 
