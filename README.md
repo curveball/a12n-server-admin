@@ -109,7 +109,7 @@ VITE_AUTH_CLIENT_ID=admin-ui-client
 VITE_POST_AUTH_REDIRECT_URI=http://localhost:5173/auth/redirect
 ```
 
-And you should be able to run the server with `npx run dev`!
+And you should be able to run the server with `npm run dev`!
 
 ### Use case run through:
 We are able to read, create, and update users, groups, and apps. The functionality will be the similar across all entities:
