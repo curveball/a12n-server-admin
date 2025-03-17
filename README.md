@@ -85,16 +85,17 @@ INSERT INTO server_settings (setting, value)  VALUES ('cors.allowOrigin', '["htt
 ```
 To allow frontend access to the a12n-server backend
 
-Open [http://localhost:8531/](http://localhost:8531/) to create your admin account. After creating your admin account, navigate to apps and press add new app. Name, the app whatever you want and leave the URL to the app as blank
+Open [http://localhost:8531/](http://localhost:8531/) to create your admin account. After creating your admin account, head to this URL to set up
+an OAuth2 client: <http://localhost:8531/app/new?nickname=admin-ui-client&url=http://localhost:5173&clientId=admin-ui-client&allowedGrantTypes=refresh_token,authorization_code&redirectUris=http://localhost:5183/auth/redirect>,
+or do this manually by navigating to apps and press add new app. Name, the app whatever you want and leave the URL to the app as blank
 
-Next, click on the url next to client-collection:
+Next, click on the url next to client-collection: 
 <img width="757" alt="Screenshot 2025-03-11 at 10 02 42 PM" src="https://github.com/user-attachments/assets/27314f01-7bf3-408d-b062-794e93f52854" />
 
 Click Add new OAuth2 credentials at the top. Check the following options and add `http://localhost:5173/auth/redirect` as the redirect uri.
 <img width="1285" alt="Screenshot 2025-03-11 at 10 04 20 PM" src="https://github.com/user-attachments/assets/1d1d51d8-ac48-4a29-9a25-24668cb9f780" />
 
-
-Copy the clientId field after creating the OAuth2 crendentials
+Copy the clientId (`admin-ui-client` by default) field after creating the OAuth2 crendentials
 ![image](https://github.com/user-attachments/assets/e96b05c3-e55b-43f4-9e58-bb55a734115f)
 
 Nagivate to the .env file and add the following, replacing the client id field with the clientId of the app you just created:
