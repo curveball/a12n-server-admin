@@ -1,10 +1,24 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import TableList from '../components/TableList';
-import columnDefs from '../utils/tables/privilegeTable';
-import { privilegesQuery } from '../utils/queries/privileges';
+import Table from '../components/Table';
 import { useAxios } from '../lib';
+import { privilegesQuery } from '../utils/queries/privileges';
 
+const privilegeTableHeadings = [
+    {
+        field: 'title',
+        headerName: 'Privilege Title',
+        flex: 1,
+        minWidth: 300,
+        resizable: false,
+    },
+    {
+        field: 'href',
+        headerName: 'URL',
+        flex: 1,
+        minWidth: 300,
+        resizable: false,
+    },
+];
 function PrivilegeList() {
     const api = useAxios();
 
@@ -13,12 +27,18 @@ function PrivilegeList() {
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {(error as Error).message}</div>;
 
+    const privilegeTableData = data ? data['_links'].item : [];
+
+    const handleDelete = () => {
+        console.log('delete privilege?');
+    };
     return (
-        <TableList
-            columnDefs={columnDefs}
-            data={data ? data['_links'].item : []}
+        <Table
+            initialValues={[]}
+            columnDefs={privilegeTableHeadings}
+            data={privilegeTableData}
             itemName='privilege'
-            onDelete={() => console.log('Delete privilege')}
+            onDelete={handleDelete}
         />
     );
 }

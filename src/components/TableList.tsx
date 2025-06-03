@@ -1,14 +1,26 @@
-import { useState, useRef } from 'react';
-import { Theme, Button, Card, Text, Flex } from '@radix-ui/themes';
 import { DownloadIcon, PlusIcon, RowsIcon, TrashIcon } from '@radix-ui/react-icons';
+import { Button, Card, Flex, Text, Theme } from '@radix-ui/themes';
+import { GridOptions, RowDoubleClickedEvent, themeQuartz } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { RowDoubleClickedEvent, themeQuartz } from 'ag-grid-community';
-import { CreateUserModal, UpdateUserModal } from '../containers';
-import { UserUpdateInitialValues } from '../utils/types';
-import { PasswordGeneratedModal } from '../containers/PasswordGeneratedModal';
+import { useRef, useState } from 'react';
 import { Users } from '../utils/helpers/models';
+import { UserUpdateInitialValues } from '../utils/types';
+import { CreateUserModal, PasswordGeneratedModal, UpdateUserModal } from './Modal';
 
-const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
+// TODO: Refactor this component by creating a Table component
+// that will be reused for different table lists
+// AKA. we should not be using the same table to funnel
+// different domain data fetching concerns through.
+// As the different use-cases build up, it becomes harder to read and debug
+
+type TableListProps = {
+    columnDefs: GridOptions['columnDefs'];
+    data: GridOptions['rowData'];
+    itemName: string;
+    onDelete: () => void;
+};
+
+const TableList = ({ columnDefs, data, itemName, onDelete }: TableListProps) => {
     const initialUserUpdateValues: UserUpdateInitialValues = {
         nickname: '',
         id: '',
@@ -54,8 +66,7 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
         <Theme accentColor='brown'>
             <div>
                 <Card style={{ marginTop: '1rem', padding: '1rem', width: '100%', height: 'calc(100% - 2rem)' }}>
-                    {/* Action Bar */}
-                    <Flex justify='between' align='center' style={{ marginBottom: '1rem' }}>
+                    <Flex justify='between' align='center' mb='4'>
                         <Text size='2' weight='bold'>
                             {selectedCount} {itemName}
                             {selectedCount > 1 || selectedCount == 0 ? 's' : ''} selected
@@ -81,12 +92,14 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                             </Button>
                             {isNewModalOpen && itemName === 'user' && (
                                 <CreateUserModal
+                                    isOpen={isNewModalOpen}
                                     onClose={() => setIsNewModalOpen(false)}
                                     onPasswordGenerated={handlePasswordGenerated}
                                 />
                             )}
                             {showPasswordModal && (
                                 <PasswordGeneratedModal
+                                    isOpen={showPasswordModal}
                                     password={password}
                                     onClose={() => setShowPasswordModal(false)}
                                 />
@@ -94,7 +107,7 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                         </Flex>
                     </Flex>
 
-                    <div style={{ maxHeight: '80vh', height: 'auto', width: '100%', overflowX: 'scroll' }}>
+                    <div className='max-h-[80vh] h-auto w-full overflow-x-scroll'>
                         <AgGridReact
                             ref={gridRef}
                             columnDefs={columnDefs}
@@ -109,7 +122,11 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: any) => {
                         />
                     </div>
                     {isTableModalOpen && itemName === 'user' && (
-                        <UpdateUserModal onClose={() => setIsTableModalOpen(false)} initialValues={selectedUserData} />
+                        <UpdateUserModal
+                            initialValues={selectedUserData}
+                            isOpen={isTableModalOpen}
+                            onClose={() => setIsTableModalOpen(false)}
+                        />
                     )}
                 </Card>
             </div>
