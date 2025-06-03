@@ -1,22 +1,22 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import '@radix-ui/themes/styles.css';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import {
-    OAuthTriggerPage,
-    UserList,
     AppList,
     GroupList,
-    OAuthRedirectPage,
     NotFoundPage,
-    DeveloperTabPage,
+    OAuthRedirectPage,
+    OAuthTriggerPage,
     PrivilegeList,
+    UserList,
 } from '../pages';
 
-import { OAuthProvider } from '../lib/OAuthProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Protected, Layout } from '../components';
+import { Layout, Protected } from '../components';
 import '../config/theme.css';
+import { OAuthProvider } from '../lib/OAuthProvider';
+import ApiSandbox from '../pages/ApiSandbox';
 import { CLIENT_ROUTES } from '../utils/constants';
 
 const queryClient = new QueryClient();
@@ -42,7 +42,7 @@ function App() {
                                 path={CLIENT_ROUTES.USERS_SANDBOX}
                                 element={
                                     <Protected>
-                                        <DeveloperTabPage />
+                                        <ApiSandbox />
                                     </Protected>
                                 }
                             />
