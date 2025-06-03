@@ -1,19 +1,29 @@
-import {
-    DotsVerticalIcon,
-    GitHubLogoIcon,
-    GlobeIcon,
-    GridIcon,
-    LockClosedIcon,
-    PersonIcon,
-    RocketIcon,
-} from '@radix-ui/react-icons';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { Avatar, Badge, Box, Button, Flex, Heading, Text } from '@radix-ui/themes';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import AdminUILogo from '../assets/icons/admin-ui-logo.svg';
-import { CLIENT_ROUTES } from '../utils/constants';
+import AdminUILogo from '../../assets/icons/admin-ui-logo.svg';
+import ProfileDropdown from './ProfileDropdown';
 
-export default function Sidebar() {
+type NavItem = {
+    name: string;
+    icon: React.ReactNode;
+    count: number;
+    path: string;
+};
+
+type ProfileOption = {
+    label: string;
+    onClick: () => void;
+};
+
+type SidebarProps = {
+    version: string;
+    navItems: NavItem[];
+    profileOptions: ProfileOption[];
+};
+
+const Sidebar = ({ version, navItems, profileOptions }: SidebarProps) => {
     const location = useLocation();
 
     return (
@@ -44,7 +54,7 @@ export default function Sidebar() {
                                     Admin UI
                                 </Text>
                                 <Badge radius='large' size='1' style={{ backgroundColor: '#AB6400', color: 'white' }}>
-                                    v1.0.0
+                                    {version}
                                 </Badge>
                             </Flex>
                         </Box>
@@ -166,18 +176,10 @@ export default function Sidebar() {
                         </Text>
                     </Box>
                 </Flex>
-                <Button variant='ghost' size='2' style={{ borderRadius: '8px', padding: '8px', color: '#A18072' }}>
-                    <DotsVerticalIcon style={{ width: '16px', height: '16px' }} />
-                </Button>
+                <ProfileDropdown profileOptions={profileOptions} />
             </Box>
         </Box>
     );
-}
+};
 
-const navItems = [
-    { name: 'Users', icon: <PersonIcon />, count: 14, path: CLIENT_ROUTES.USERS_TABLE },
-    { name: 'Groups', icon: <GlobeIcon />, count: 5, path: CLIENT_ROUTES.GROUPS_TABLE },
-    { name: 'Apps', icon: <GridIcon />, count: 2, path: CLIENT_ROUTES.APPS_TABLE },
-    { name: 'Privileges', icon: <LockClosedIcon />, count: 0, path: CLIENT_ROUTES.PRIVILEGES_TABLE },
-    { name: 'Sandbox', icon: <RocketIcon />, path: CLIENT_ROUTES.USERS_SANDBOX },
-];
+export default Sidebar;
