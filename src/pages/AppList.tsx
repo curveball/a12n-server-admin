@@ -13,14 +13,7 @@ const AppList = () => {
 
     console.log(data);
 
-    return (
-        <TableList
-            columnDefs={columnDefs}
-            data={data}
-            itemName='app'
-            onDelete={() => console.log('Delete')}
-        />
-    );
+    return <TableList columnDefs={columnDefs} data={data} itemName='app' onDelete={() => console.log('Delete')} />;
 };
 
 export default AppList;

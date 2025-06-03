@@ -1,5 +1,5 @@
 {
-    "name": "admin-ui",
+    "name": "a12n-server-admin",
     "private": true,
     "version": "0.0.0",
     "type": "module",
@@ -9,9 +9,9 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "test:unit": "vitest run --watch",
-        "test:integration": "playwright test",
-        "test": "npm run test:unit && npm run test:integration",
-        "prepare": "cd .. && husky admin-ui/.husky"
+        "test:e2e": "playwright test",
+        "test": "npm run test:unit && npm run test:e2e",
+        "prepare": "husky .husky"
     },
     "dependencies": {
         "@badgateway/oauth2-client": "^2.4.2",

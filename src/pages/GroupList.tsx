@@ -11,14 +11,7 @@ const AppList = () => {
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
-    return (
-        <TableList
-            columnDefs={columnDefs}
-            data={data}
-            itemName='group'
-            onDelete={() => console.log('Delete')}
-        />
-    );
+    return <TableList columnDefs={columnDefs} data={data} itemName='group' onDelete={() => console.log('Delete')} />;
 };
 
 export default AppList;

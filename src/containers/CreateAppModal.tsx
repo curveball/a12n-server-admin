@@ -47,9 +47,7 @@ export function CreateAppModal({ onClose }: { onClose: () => void }) {
                                 onChange={handleInputChange}
                                 style={{ width: '100%' }}
                             />
-                            {errors.appName && (
-                                <Text style={{ color: 'red', fontSize: '12px' }}>{errors.appName}</Text>
-                            )}
+                            {errors.appName && <Text style={{ color: 'red', fontSize: '12px' }}>{errors.appName}</Text>}
                         </Box>
 
                         <Box style={{ marginTop: '10px', paddingBottom: '8px' }}>

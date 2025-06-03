@@ -10,7 +10,7 @@ export const privilegesQuery = (client: APICore) => {
         queryFn: async () => {
             const data = (await client.get({
                 suffix: formatAPIPath([SERVER_ROUTES.PRIVILEGES]),
-            })) as any
+            })) as any;
             return data;
         },
     });

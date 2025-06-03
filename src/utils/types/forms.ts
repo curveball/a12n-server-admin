@@ -28,7 +28,6 @@ export const UpdateAppModalSchema = z.object({
     appURL: z.string().url({ message: 'Invalid URL format' }).optional().or(z.literal('')),
 });
 
-
 export type UserAppInitialValues = {
     appName: string;
     appURL: string;

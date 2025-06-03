@@ -84,7 +84,6 @@ export function UpdateUserModal({
                                 error={errors.appURL}
                             />
                         </Box>
-
                     </Flex>
                     <Flex direction='row' gap='2' width='100%' align='center'>
                         <Button
