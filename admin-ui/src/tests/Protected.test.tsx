@@ -1,10 +1,10 @@
 // Protected.test.tsx
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 import Protected from '../components/Protected';
+import useOAuth from '../lib/hooks/useOAuth';
 import { CLIENT_ROUTES } from '../utils/constants';
-import { vi } from 'vitest';
 
 // Patch window.location to avoid navigation errors.
 beforeAll(() => {
@@ -20,9 +20,8 @@ beforeAll(() => {
 });
 
 // Mock the useOAuth hook.
-import { useOAuth } from '../lib/OAuthProvider';
-vi.mock('../lib/OAuthProvider', () => ({
-    useOAuth: vi.fn(),
+vi.mock('../lib/hooks/useOAuth', () => ({
+    default: vi.fn().mockReturnValue({ isAuthenticated: true }),
 }));
 
 describe('Protected Component', () => {

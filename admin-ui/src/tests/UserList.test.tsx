@@ -1,9 +1,9 @@
-import '@testing-library/jest-dom';
-import { render, screen, fireEvent } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { vi, expect, beforeEach, describe, it } from 'vitest';
-import UserList from '../pages/UserList';
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import TableList from '../components/TableList';
+import UserList from '../pages/UserList';
 
 vi.mock('../utils/hooks', () => ({
     useAxios: () => ({}),

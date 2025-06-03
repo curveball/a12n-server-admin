@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react';
 import { generateCodeVerifier, OAuth2Token } from '@badgateway/oauth2-client';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import client from '../config/oauth';
@@ -9,17 +9,7 @@ import {
     CODE_VERIFIER_LOCAL_STORAGE_NAME,
     POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME,
 } from '../utils/constants';
-
-type OAuthContextType = {
-    tokens: OAuth2Token | null;
-    isAuthenticated: boolean;
-    setTokens: React.Dispatch<React.SetStateAction<OAuth2Token | null>>;
-    triggerOAuthFlow: (postAuthRedirectPath: string) => Promise<void>;
-    handleOAuthRedirect: () => Promise<string | undefined>;
-    refreshAccessToken: () => Promise<OAuth2Token | undefined>;
-};
-
-const OAuthContext = createContext<OAuthContextType | undefined>(undefined);
+import { OAuthContext } from './hooks/useOAuth';
 
 export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -81,12 +71,4 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             {children}
         </OAuthContext.Provider>
     );
-};
-
-export const useOAuth = (): OAuthContextType => {
-    const context = useContext(OAuthContext);
-    if (!context) {
-        throw new Error('useUser must be used within a UserProvider');
-    }
-    return context;
 };

@@ -1,15 +1,15 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Box, Flex, Heading, Text, Avatar, Badge, Button } from '@radix-ui/themes';
-import { Link } from 'react-router-dom';
 import {
+    DotsVerticalIcon,
+    GitHubLogoIcon,
     GlobeIcon,
-    PersonIcon,
     GridIcon,
     LockClosedIcon,
-    GitHubLogoIcon,
-    DotsVerticalIcon,
+    PersonIcon,
+    RocketIcon,
 } from '@radix-ui/react-icons';
+import { Avatar, Badge, Box, Button, Flex, Heading, Text } from '@radix-ui/themes';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import AdminUILogo from '../assets/icons/admin-ui-logo.svg';
 import { CLIENT_ROUTES } from '../utils/constants';
 
@@ -76,11 +76,11 @@ export default function Sidebar() {
 
             <Box asChild style={{ flex: 1 }}>
                 <nav>
-                    <Box as='ul' style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+                    <Box as='div' style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                         {navItems.map(({ name, icon, count, path }) => {
                             const isActive = location.pathname.startsWith(path);
                             return (
-                                <Box as='li' key={name} mb='2'>
+                                <Box as='div' key={name} mb='2'>
                                     <Link
                                         to={path}
                                         style={{
@@ -110,7 +110,7 @@ export default function Sidebar() {
                                                 {name}
                                             </Text>
                                         </Flex>
-                                        {count !== null && (
+                                        {count && (
                                             <Box
                                                 style={{
                                                     borderRadius: '7px',
@@ -138,7 +138,7 @@ export default function Sidebar() {
 
             <Box style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '22px' }}>
                 <Flex gap='2' align='center'>
-                    <Avatar size='3' src='https://placekitten.com/40/40' fallback='EP' radius='large' />
+                    <Avatar size='3' src='https://placekitten.com/40x40' fallback='EP' radius='large' />
                     <Box style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
                         <Flex align='center' gap='2'>
                             <Text size='2' style={{ fontWeight: 500, color: '#DFCDC5', marginBottom: '-2px' }}>
@@ -179,4 +179,5 @@ const navItems = [
     { name: 'Groups', icon: <GlobeIcon />, count: 5, path: CLIENT_ROUTES.GROUPS_TABLE },
     { name: 'Apps', icon: <GridIcon />, count: 2, path: CLIENT_ROUTES.APPS_TABLE },
     { name: 'Privileges', icon: <LockClosedIcon />, count: 0, path: CLIENT_ROUTES.PRIVILEGES_TABLE },
+    { name: 'Sandbox', icon: <RocketIcon />, path: CLIENT_ROUTES.USERS_SANDBOX },
 ];

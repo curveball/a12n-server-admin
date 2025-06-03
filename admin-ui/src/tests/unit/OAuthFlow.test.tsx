@@ -1,10 +1,10 @@
-import { vi, describe, it, expect, beforeEach } from 'vitest';
-import { OAuthProvider, useOAuth } from '../../lib/OAuthProvider';
-import { render, waitFor } from '@testing-library/react';
 import { generateCodeVerifier } from '@badgateway/oauth2-client';
+import { render, waitFor } from '@testing-library/react';
 import { useEffect } from 'react';
-
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import client from '../../config/oauth';
+import { OAuthProvider } from '../../lib/OAuthProvider';
+import useOAuth from '../../lib/hooks/useOAuth';
 
 vi.resetAllMocks();
 
