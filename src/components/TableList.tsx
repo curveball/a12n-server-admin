@@ -7,12 +7,14 @@ import { Users } from '../utils/helpers/models';
 import { UserUpdateInitialValues } from '../utils/types';
 import { CreateUserModal, PasswordGeneratedModal, UpdateUserModal } from './Modal';
 
-// TODO: Refactor this component by creating a Table component
-// that will be reused for different table lists
-// AKA. we should not be using the same table to funnel
-// different domain data fetching concerns through.
-// As the different use-cases build up, it becomes harder to read and debug
-
+/**
+ * @deprecated Do NOT add more functionality to this
+ * FIXME: Refactor this component and transition to a Table component
+ * that will be reused for different table lists
+ * AKA. we should not be using the same table to funnel
+ * different domain data fetching concerns through.
+ * As the different use-cases build up, it becomes harder to read and debug
+ */
 type TableListProps = {
     columnDefs: GridOptions['columnDefs'];
     data: GridOptions['rowData'];
