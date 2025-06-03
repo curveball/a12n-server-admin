@@ -40,11 +40,6 @@ export interface ActionButtonsProps {
     onClose: () => void;
 }
 
-export interface PasswordGeneratedModalProps {
-    password: string;
-    onClose: () => void;
-}
-
 export type FormErrors<T extends z.ZodType<unknown, z.ZodTypeDef, unknown>> = Partial<
     Record<keyof z.TypeOf<T>, string>
 >;
