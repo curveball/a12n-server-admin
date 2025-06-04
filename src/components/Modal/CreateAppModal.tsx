@@ -2,7 +2,7 @@ import { Box, Button, Flex, Text } from '@radix-ui/themes';
 import { isValid } from 'zod';
 import { Modal } from '.';
 import { InputField } from '..';
-import { useFormValidation } from '../../lib';
+import { useFormValidation } from '../../hooks';
 import { CreateAppModalSchema } from '../../types/forms';
 
 export default function CreateAppModal({ onClose, isOpen }: { onClose: () => void; isOpen: boolean }) {

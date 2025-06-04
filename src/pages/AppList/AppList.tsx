@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { Table } from '../../components';
 import UpdateAppModal from '../../components/Modal/UpdateAppModal';
-import { useAxios } from '../../lib';
+import { useAxios } from '../../hooks';
 import { Apps } from '../../utils/helpers/models';
 import { getAllApps } from '../../utils/queries/apps';
 

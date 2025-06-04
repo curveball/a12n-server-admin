@@ -2,7 +2,7 @@ import { Badge } from '@radix-ui/themes';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import TableList from '../../components/TableList/TableList';
-import { useAxios } from '../../lib';
+import { useAxios } from '../../hooks';
 import { Users } from '../../utils/helpers/models';
 import { getAllUsers, getVerifiedUsers } from '../../utils/queries/users';
 

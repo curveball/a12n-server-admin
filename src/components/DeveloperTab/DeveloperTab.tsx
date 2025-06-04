@@ -2,7 +2,7 @@ import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import { QueryOptions, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import useOAuth from '../../lib/hooks/useOAuth';
+import useOAuth from '../../hooks/useOAuth';
 import { RequestDetails } from './RequestDetails';
 import { ResponseDetails } from './ResponseDetails';
 

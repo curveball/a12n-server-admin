@@ -1,7 +1,7 @@
 import { Box, Button, Checkbox, Flex, Text } from '@radix-ui/themes';
 import { isValid } from 'zod';
 import { InputField } from '..';
-import { useAxios, useFormValidation } from '../../lib';
+import { useAxios, useFormValidation } from '../../hooks';
 import { Resource, User } from '../../types';
 import { CreateUserModalSchema } from '../../types/forms';
 import { useCreateUserQuery } from '../../utils/queries/users';

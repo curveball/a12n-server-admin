@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { Table } from '../components';
-import { useAxios } from '../lib';
+import { useAxios } from '../hooks';
 import { Groups } from '../utils/helpers/models';
 import { getAllGroups } from '../utils/queries/groups';
 

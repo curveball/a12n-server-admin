@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import Protected from '../components/Protected';
-import useOAuth from '../lib/hooks/useOAuth';
+import useOAuth from '../hooks/useOAuth';
 import { CLIENT_ROUTES } from '../utils/constants';
 
 // Patch window.location to avoid navigation errors.

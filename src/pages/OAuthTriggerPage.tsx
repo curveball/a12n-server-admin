@@ -1,9 +1,8 @@
 import { Box, Spinner } from '@radix-ui/themes';
-import { useOAuth } from '../lib';
-import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import { useOAuth, useQueryParams } from '../hooks';
 import { CLIENT_ROUTES, POST_AUTH_REDIRECT_QUERY_PARAM_NAME } from '../utils/constants';
-import { useQueryParams } from '../lib';
 
 const OAuthTriggerPage = () => {
     const { isAuthenticated, triggerOAuthFlow } = useOAuth();

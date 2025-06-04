@@ -2,7 +2,7 @@ import { Box, Button, Checkbox, Flex, Text } from '@radix-ui/themes';
 import { isValid } from 'zod';
 import { Modal } from '.';
 import { InputField } from '..';
-import { useAxios, useFormValidation } from '../../lib';
+import { useAxios, useFormValidation } from '../../hooks';
 import { UpdateUserModalSchema, UserUpdateInitialValues } from '../../types/forms';
 import { useUpdateUserQuery } from '../../utils/queries/users';
 

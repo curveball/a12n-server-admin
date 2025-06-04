@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { z, infer as ZodInfer, ZodObject } from 'zod';
-import { useToast } from '../';
+import { useToast } from '.';
 
 const useFormValidation = <T extends ZodObject<z.ZodRawShape>>({
     schema,

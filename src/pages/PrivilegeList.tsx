@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Table } from '../components';
-import { useAxios } from '../lib';
+import { useAxios } from '../hooks';
 import { privilegesQuery } from '../utils/queries/privileges';
 
 const privilegeColumnHeadings = [
