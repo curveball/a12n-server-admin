@@ -9,6 +9,7 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "test:unit": "vitest run --watch",
+        "test:unit:ci": "vitest run --coverage",
         "test:e2e": "playwright test",
         "test": "npm run test:unit && npm run test:e2e",
         "prepare": "husky .husky"
