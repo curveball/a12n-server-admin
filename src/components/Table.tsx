@@ -1,6 +1,6 @@
 import { DownloadIcon, PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 import { Button, Card, Flex, Text, Theme } from '@radix-ui/themes';
-import { GridOptions, RowDoubleClickedEvent, themeQuartz } from 'ag-grid-community';
+import { GridOptions, themeQuartz } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { useRef, useState } from 'react';
 
@@ -12,9 +12,10 @@ type TableProps = {
     initialValues: unknown;
     onAdd?: () => void;
     onDelete: () => void;
+    onDoubleClick?: (rowData: unknown) => void;
 };
 
-const Table = ({ columnDefs, data, itemName, initialValues, testId, onAdd, onDelete }: TableProps) => {
+const Table = ({ columnDefs, data, itemName, initialValues, testId, onAdd, onDelete, onDoubleClick }: TableProps) => {
     const gridRef = useRef<any>(null);
     const [selectedCount, setSelectedCount] = useState(0);
     const [selectedItem, setSelectedItem] = useState<unknown>(initialValues);
@@ -24,11 +25,6 @@ const Table = ({ columnDefs, data, itemName, initialValues, testId, onAdd, onDel
             const selectedRows = gridRef.current.api.getSelectedRows();
             setSelectedCount(selectedRows.length);
         }
-    };
-
-    const handleRowDoubleClick = (event: RowDoubleClickedEvent) => {
-        const rowData = event.data;
-        setSelectedItem(rowData);
     };
 
     const downloadCSV = () => {
@@ -76,7 +72,7 @@ const Table = ({ columnDefs, data, itemName, initialValues, testId, onAdd, onDel
                         suppressRowHoverHighlight={true}
                         columnHoverHighlight={false}
                         domLayout='autoHeight'
-                        onRowDoubleClicked={handleRowDoubleClick}
+                        onRowDoubleClicked={onDoubleClick}
                     />
                 </div>
             </Card>
