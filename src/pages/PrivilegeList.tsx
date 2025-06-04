@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import TableList from '../components/TableList';
+import { Table } from '../components';
 import { useAxios } from '../lib';
 import { privilegesQuery } from '../utils/queries/privileges';
 
@@ -32,12 +32,20 @@ function PrivilegeList() {
     const handleDelete = () => {
         console.log('delete privilege?');
     };
+
+    const handleAddPrivilege = () => {
+        console.log('add privilege');
+    };
+
     return (
-        <TableList
+        <Table
+            testId='privilege-list'
             columnDefs={privilegeColumnHeadings}
             data={privilegeTableData}
             itemName='privilege'
             onDelete={handleDelete}
+            initialValues={{}}
+            onAdd={handleAddPrivilege}
         />
     );
 }
