@@ -20,7 +20,7 @@ vi.mock('../../lib/hooks/useOAuth', () => ({
     }),
 }));
 
-vi.mock(import('../../lib/hooks/useAxios'), async (importOriginal) => {
+vi.mock(import('../../hooks/useAxios'), async (importOriginal) => {
     const actual = await importOriginal();
     return {
         ...actual,

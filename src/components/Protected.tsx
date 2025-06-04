@@ -1,7 +1,7 @@
-import { useOAuth } from '../lib';
 import { Navigate, useLocation } from 'react-router-dom';
-import { formatAPIPath } from '../utils/helpers/common';
+import { useOAuth } from '../hooks';
 import { CLIENT_ROUTES, POST_AUTH_REDIRECT_QUERY_PARAM_NAME } from '../utils/constants';
+import { formatAPIPath } from '../utils/helpers/common';
 
 const Protected = ({ children }: { children: React.ReactNode }) => {
     const { isAuthenticated } = useOAuth();

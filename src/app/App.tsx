@@ -15,8 +15,8 @@ import {
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Layout, Protected } from '../components';
 import '../config/theme.css';
-import { OAuthProvider } from '../lib/OAuthProvider';
 import ApiSandbox from '../pages/ApiSandbox';
+import { OAuthProvider } from '../providers/OAuthProvider';
 import { CLIENT_ROUTES } from '../utils/constants';
 
 const queryClient = new QueryClient();

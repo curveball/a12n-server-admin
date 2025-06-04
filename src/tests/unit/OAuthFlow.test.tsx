@@ -3,8 +3,8 @@ import { render, waitFor } from '@testing-library/react';
 import { useEffect } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import client from '../../config/oauth';
-import { OAuthProvider } from '../../lib/OAuthProvider';
-import useOAuth from '../../lib/hooks/useOAuth';
+import useOAuth from '../../hooks/useOAuth';
+import { OAuthProvider } from '../../providers/OAuthProvider';
 
 vi.resetAllMocks();
 
