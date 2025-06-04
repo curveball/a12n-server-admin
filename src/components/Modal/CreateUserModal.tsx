@@ -35,7 +35,6 @@ export default function CreateUserModal({
         const autoGeneratePassword = String(formState.autoGeneratePassword);
 
         try {
-            console.log(markEmailValid);
             const response = await mutation.mutateAsync({ nickname, email, markEmailValid, autoGeneratePassword });
             if (response) {
                 const password = (response as Resource<User>).password;
@@ -43,7 +42,7 @@ export default function CreateUserModal({
                 if (password) {
                     onPasswordGenerated(password);
                 }
-                console.log('User Created:', { formState });
+                console.info('User Created:', { formState });
                 onClose();
                 return true;
             }
@@ -141,6 +140,7 @@ export default function CreateUserModal({
                     </Flex>
                     <Flex direction='row' gap='2' width='100%' align='center' style={{ marginTop: '36px' }}>
                         <Button
+                            data-testid='cancel-create-user'
                             variant='outline'
                             color='brown'
                             radius='large'

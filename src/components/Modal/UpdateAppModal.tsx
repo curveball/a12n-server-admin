@@ -72,6 +72,7 @@ export default function UpdateUserModal({
                 </Flex>
                 <Flex direction='row' gap='2' width='100%' align='center'>
                     <Button
+                        data-testid='cancel-update-app'
                         variant='outline'
                         color='red'
                         radius='large'

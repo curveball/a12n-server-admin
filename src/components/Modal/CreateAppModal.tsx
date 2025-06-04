@@ -27,15 +27,7 @@ export default function CreateAppModal({ onClose, isOpen }: { onClose: () => voi
             <Flex direction='column' gap='4' className='pt-5 pb-3' justify='start'>
                 <form>
                     <Box>
-                        <Text
-                            as='label'
-                            size='2'
-                            style={{
-                                display: 'block',
-                                marginBottom: '8px',
-                                fontWeight: '600',
-                            }}
-                        >
+                        <Text as='label' size='2' className='block mb-2 font-semibold'>
                             App Name<span style={{ color: 'red' }}>*</span>
                         </Text>
 
@@ -70,6 +62,7 @@ export default function CreateAppModal({ onClose, isOpen }: { onClose: () => voi
 
                     <Flex direction='row' gap='2' width='100%' align='center' className='mt-5'>
                         <Button
+                            data-testid='cancel-create-app'
                             variant='soft'
                             radius='large'
                             onClick={onClose}
