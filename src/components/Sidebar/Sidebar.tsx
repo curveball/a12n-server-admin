@@ -105,11 +105,12 @@ const Sidebar = ({ version, navItems, profileOptions }: SidebarProps) => {
                                         }}
                                     >
                                         <Flex align='center' gap='2'>
-                                            {React.cloneElement(icon, {
-                                                color: isActive ? '#000000' : '#A18072',
-                                                width: 18,
-                                                height: 18,
-                                            })}
+                                            {icon &&
+                                                React.isValidElement(icon) &&
+                                                React.cloneElement(icon as React.ReactElement<any>, {
+                                                    className: 'w-5 h-5',
+                                                    style: { color: isActive ? '#000000' : '#A18072' },
+                                                })}
                                             <Text
                                                 weight='medium'
                                                 style={{
