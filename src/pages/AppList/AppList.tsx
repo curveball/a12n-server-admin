@@ -1,28 +1,37 @@
+import { Badge } from '@radix-ui/themes';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { Table } from '../components';
-import { useAxios } from '../lib';
-import { Groups } from '../utils/helpers/models';
-import { getAllGroups } from '../utils/queries/groups';
+import { Table } from '../../components';
+import { useAxios } from '../../lib';
+import { Apps } from '../../utils/helpers/models';
+import { getAllApps } from '../../utils/queries/apps';
 
 const AppList = () => {
     const api = useAxios();
-    const groupColumnHeadings = useMemo(
+    const { data, isLoading, error } = useQuery(getAllApps(api));
+
+    const appColumnHeadings = useMemo(
         () => [
-            {
-                field: 'nickname',
-                headerName: 'Nickname',
-                flex: 1,
-                minWidth: 150,
-                resizable: false,
-            },
+            { field: 'nickname', headerName: 'App', flex: 1, minWidth: 150, resizable: false },
             {
                 field: '_links.self.href',
                 headerName: 'ID',
                 flex: 1,
                 minWidth: 150,
                 resizable: false,
-                valueGetter: (params: any) => Groups.parseGroupID(params.data),
+                valueGetter: (params: any) => Apps.parseAppID(params.data),
+            },
+            {
+                field: 'active',
+                headerName: 'Status',
+                flex: 1,
+                minWidth: 150,
+                resizable: false,
+                cellRenderer: (params: any) => (
+                    <Badge radius='full' color={params.value ? 'green' : 'gray'}>
+                        {params.value ? 'Active' : 'Inactive'}
+                    </Badge>
+                ),
             },
             {
                 field: 'modifiedAt',
@@ -57,27 +66,26 @@ const AppList = () => {
         ],
         [],
     );
-    const { data, isLoading, error } = useQuery(getAllGroups(api));
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading || !data) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
-
-    const handleAddGroup = () => {
-        console.log('Add group');
+    const handleAddApp = () => {
+        console.log('Add app');
     };
 
-    const handleDeleteGroup = () => {
-        console.log('Delete group');
+    const handleDeleteApp = () => {
+        console.log('Delete app');
     };
+
     return (
         <Table
-            testId='group-list'
-            columnDefs={groupColumnHeadings}
+            testId='app-list'
+            columnDefs={appColumnHeadings}
             data={data}
-            itemName='group'
-            onDelete={handleDeleteGroup}
-            onAdd={handleAddGroup}
+            itemName='app'
             initialValues={{}}
+            onDelete={handleDeleteApp}
+            onAdd={handleAddApp}
         />
     );
 };
