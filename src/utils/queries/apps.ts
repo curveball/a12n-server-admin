@@ -1,4 +1,5 @@
 import { queryOptions } from '@tanstack/react-query';
+import { HalLink } from 'hal-types';
 import { App, Collection } from '../../types';
 import APICore from '../api';
 import { SERVER_ROUTES } from '../constants';
@@ -13,7 +14,7 @@ export const getAllApps = (client: APICore) => {
                 suffix: formatAPIPath([SERVER_ROUTES.APPS]),
             })) as Collection<App>;
 
-            const apps = data._links.item;
+            const apps = data._links.item as HalLink[];
             console.log(apps);
             // Need to manually unpack
             const appDetailsPromises = apps.map(async (app: any) => {
