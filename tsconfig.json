@@ -2,6 +2,8 @@
     "files": [],
     "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
     "compilerOptions": {
+        "composite": true,
+        "outDir": "./dist",
         "target": "ESNext",
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "jsx": "react-jsx",
@@ -10,7 +12,8 @@
         "strict": true,
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "types": ["vitest", "@testing-library/jest-dom"]
+        "types": ["vitest", "@testing-library/jest-dom"],
+        "noEmit": true
     },
-    "include": ["src", "**/*.test.ts", "**/*.test.tsx"]
+    "exclude": ["node_modules", "dist"]
 }
