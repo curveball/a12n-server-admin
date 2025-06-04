@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import AdminUILogo from '../../assets/icons/admin-ui-logo.svg';
 import ProfileDropdown from './ProfileDropdown';
 
-type NavItem = {
+export type NavItem = {
     name: string;
     icon: React.ReactNode;
     count: number;
