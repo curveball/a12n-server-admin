@@ -18,6 +18,7 @@ type TableProps = {
 const Table = ({ columnDefs, data, itemName, initialValues, testId, onAdd, onDelete, onDoubleClick }: TableProps) => {
     const gridRef = useRef<any>(null);
     const [selectedCount, setSelectedCount] = useState(0);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [selectedItem, setSelectedItem] = useState<unknown>(initialValues);
 
     const onSelectionChanged = () => {
