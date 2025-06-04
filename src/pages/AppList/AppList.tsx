@@ -1,7 +1,8 @@
 import { Badge } from '@radix-ui/themes';
 import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Table } from '../../components';
+import UpdateAppModal from '../../components/Modal/UpdateAppModal';
 import { useAxios } from '../../lib';
 import { Apps } from '../../utils/helpers/models';
 import { getAllApps } from '../../utils/queries/apps';
@@ -9,6 +10,7 @@ import { getAllApps } from '../../utils/queries/apps';
 const AppList = () => {
     const api = useAxios();
     const { data, isLoading, error } = useQuery(getAllApps(api));
+    const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
     const appColumnHeadings = useMemo(
         () => [
@@ -77,16 +79,25 @@ const AppList = () => {
         console.log('Delete app');
     };
 
+    const handleDoubleClick = (rowData: unknown) => {
+        console.log(rowData);
+        setIsUpdateModalOpen(true);
+    };
     return (
-        <Table
-            testId='app-list'
-            columnDefs={appColumnHeadings}
-            data={data}
-            itemName='app'
-            initialValues={{}}
-            onDelete={handleDeleteApp}
-            onAdd={handleAddApp}
-        />
+        <>
+            <Table
+                testId='app-list'
+                columnDefs={appColumnHeadings}
+                data={data}
+                itemName='app'
+                initialValues={{}}
+                onDelete={handleDeleteApp}
+                onAdd={handleAddApp}
+                onDoubleClick={handleDoubleClick}
+            />
+
+            <UpdateAppModal onClose={() => setIsUpdateModalOpen(false)} isOpen={isUpdateModalOpen} />
+        </>
     );
 };
 

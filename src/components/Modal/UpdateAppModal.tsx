@@ -3,15 +3,15 @@ import { isValid } from 'zod';
 import { Modal } from '.';
 import { InputField } from '..';
 import { useFormValidation } from '../../lib';
-import { UpdateAppModalSchema, UserAppInitialValues } from '../../utils/types/forms';
+import { UpdateAppModalSchema, UserAppInitialValues } from '../../types/forms';
 
-export default function UpdateUserModal({
-    onClose,
-    initialValues,
-}: {
+type UpdateAppModalProps = {
+    isOpen: boolean;
     onClose: () => void;
-    initialValues: UserAppInitialValues;
-}) {
+    initialValues?: UserAppInitialValues;
+};
+
+export default function UpdateAppModal({ onClose, isOpen, initialValues }: UpdateAppModalProps) {
     const { formState, errors, handleInputChange, isFormValid } = useFormValidation({
         schema: UpdateAppModalSchema,
         initialValues,
@@ -29,7 +29,7 @@ export default function UpdateUserModal({
     return (
         <Modal
             data-testid='update-app-modal'
-            isOpen={true}
+            isOpen={isOpen}
             title='Update App'
             description='Enter in credentials below to update an existing app'
             onClose={onClose}
