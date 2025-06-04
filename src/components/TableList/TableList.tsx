@@ -3,9 +3,9 @@ import { Button, Card, Flex, Text, Theme } from '@radix-ui/themes';
 import { GridOptions, RowDoubleClickedEvent, themeQuartz } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { useRef, useState } from 'react';
-import { Users } from '../utils/helpers/models';
-import { UserUpdateInitialValues } from '../utils/types';
-import { CreateUserModal, PasswordGeneratedModal, UpdateUserModal } from './Modal';
+import { UserUpdateInitialValues } from '../../types';
+import { Users } from '../../utils/helpers/models';
+import { CreateUserModal, PasswordGeneratedModal, UpdateUserModal } from '../Modal';
 
 /**
  * @deprecated Do NOT add more functionality to this
@@ -31,8 +31,8 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: TableListProps) => 
 
     const gridRef = useRef<any>(null);
     const [selectedCount, setSelectedCount] = useState(0);
-    const [isNewModalOpen, setIsNewModalOpen] = useState(false);
-    const [isTableModalOpen, setIsTableModalOpen] = useState(false);
+    const [isCreateUserModalOpen, setCreateUserModalOpen] = useState(false);
+    const [isUpdateUserModalOpen, setUpdateUserModalOpen] = useState(false);
     const [selectedUserData, setSelectedUserData] = useState<UserUpdateInitialValues>(initialUserUpdateValues);
     const [password, setPassword] = useState('');
     const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -53,7 +53,7 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: TableListProps) => 
     const handleRowDoubleClick = (event: RowDoubleClickedEvent) => {
         const rowData = event.data;
         setSelectedUserData({ id: Users.parseUserID(rowData), ...rowData });
-        setIsTableModalOpen(true);
+        setUpdateUserModalOpen(true);
     };
 
     const downloadCSV = () => {
@@ -66,7 +66,7 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: TableListProps) => 
 
     return (
         <Theme accentColor='brown'>
-            <div>
+            <div data-testid='table-list'>
                 <Card style={{ marginTop: '1rem', padding: '1rem', width: '100%', height: 'calc(100% - 2rem)' }}>
                     <Flex justify='between' align='center' mb='4'>
                         <Text size='2' weight='bold'>
@@ -88,14 +88,20 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: TableListProps) => 
                                 <DownloadIcon />
                                 Export
                             </Button>
-                            <Button variant='solid' size='3' radius='large' onClick={() => setIsNewModalOpen(true)}>
+                            <Button
+                                data-testid={`new-${itemName}-button`}
+                                variant='solid'
+                                size='3'
+                                radius='large'
+                                onClick={() => setCreateUserModalOpen(true)}
+                            >
                                 <PlusIcon />
                                 New {itemName}
                             </Button>
-                            {isNewModalOpen && itemName === 'user' && (
+                            {isCreateUserModalOpen && itemName === 'user' && (
                                 <CreateUserModal
-                                    isOpen={isNewModalOpen}
-                                    onClose={() => setIsNewModalOpen(false)}
+                                    isOpen={isCreateUserModalOpen}
+                                    onClose={() => setCreateUserModalOpen(false)}
                                     onPasswordGenerated={handlePasswordGenerated}
                                 />
                             )}
@@ -123,11 +129,11 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: TableListProps) => 
                             onRowDoubleClicked={handleRowDoubleClick}
                         />
                     </div>
-                    {isTableModalOpen && itemName === 'user' && (
+                    {isUpdateUserModalOpen && itemName === 'user' && (
                         <UpdateUserModal
                             initialValues={selectedUserData}
-                            isOpen={isTableModalOpen}
-                            onClose={() => setIsTableModalOpen(false)}
+                            isOpen={isUpdateUserModalOpen}
+                            onClose={() => setUpdateUserModalOpen(false)}
                         />
                     )}
                 </Card>
