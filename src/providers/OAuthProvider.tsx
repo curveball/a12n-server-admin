@@ -3,13 +3,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import client from '../config/oauth';
+import { OAuthContext } from '../hooks/useOAuth';
 import {
     AUTHORIZATION_CODE_QUERY_PARAM_NAME,
     CLIENT_ROUTES,
     CODE_VERIFIER_LOCAL_STORAGE_NAME,
     POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME,
 } from '../utils/constants';
-import { OAuthContext } from './hooks/useOAuth';
 
 export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
