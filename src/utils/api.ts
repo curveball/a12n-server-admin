@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { DEFAULT_TOAST_MESSAGES } from '../hooks/useToast';
 import {
     APICollectionResponse,
     APIQueryParams,
@@ -9,7 +10,7 @@ import {
     QueryRequestParams,
     ToastFns,
 } from '../types';
-import { DEFAULT_TOAST_MESSAGES, HTTP_METHODS } from './constants';
+import { HTTP_METHODS } from './constants';
 import { formatAPIPath } from './helpers/common';
 
 class APICore {
