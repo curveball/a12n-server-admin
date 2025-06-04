@@ -3,18 +3,16 @@ import { isValid } from 'zod';
 import { Modal } from '.';
 import { InputField } from '..';
 import { useAxios, useFormValidation } from '../../lib';
+import { UpdateUserModalSchema, UserUpdateInitialValues } from '../../types/forms';
 import { useUpdateUserQuery } from '../../utils/queries/users';
-import { UpdateUserModalSchema, UserUpdateInitialValues } from '../../utils/types/forms';
 
-export default function UpdateUserModal({
-    isOpen,
-    onClose,
-    initialValues,
-}: {
+type UpdateUserModalProps = {
     isOpen: boolean;
     onClose: () => void;
     initialValues: UserUpdateInitialValues;
-}) {
+};
+
+export default function UpdateUserModal({ isOpen, onClose, initialValues }: UpdateUserModalProps) {
     const title = 'Update User';
     const description = 'Enter in credentials below to update an existing user';
 
@@ -101,6 +99,7 @@ export default function UpdateUserModal({
                 </Flex>
                 <Flex direction='row' gap='2' width='100%' align='center'>
                     <Button
+                        data-testid='cancel-update-user'
                         variant='soft'
                         radius='large'
                         onClick={onClose}
@@ -110,6 +109,7 @@ export default function UpdateUserModal({
                     </Button>
 
                     <Button
+                        data-testid='update-user-button'
                         type='submit'
                         variant='soft'
                         radius='large'
