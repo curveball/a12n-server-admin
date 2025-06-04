@@ -1,9 +1,9 @@
 import { queryOptions } from '@tanstack/react-query';
-import { queryKeys } from './core';
-import { formatAPIPath } from '../helpers/common';
-import { SERVER_ROUTES } from '../constants';
-import { Collection, Group } from '../types';
+import { Collection, Group } from '../../types';
 import APICore from '../api';
+import { SERVER_ROUTES } from '../constants';
+import { formatAPIPath } from '../helpers/common';
+import { queryKeys } from './core';
 
 export const getAllGroups = (client: APICore) => {
     return queryOptions({

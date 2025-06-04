@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { TOAST_TYPE } from '../constants';
+import { TOAST_TYPE } from '../utils/constants';
 import { App, Collection, Group, Resource, User } from './models';
 
 export type APIQueryParams = Record<string, string | number | boolean | undefined>;

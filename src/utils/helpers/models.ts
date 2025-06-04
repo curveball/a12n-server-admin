@@ -1,4 +1,4 @@
-import { Resource, User, App, Group } from '../types';
+import { App, Group, Resource, User } from '../../types';
 
 export class Users {
     static parseUserID(user: Resource<User>): string {

@@ -1,10 +1,50 @@
-import { toast, ToastOptions } from 'react-toastify';
-import { Heading, Spinner, Text } from '@radix-ui/themes';
 import { CheckCircledIcon, CrossCircledIcon, ExclamationTriangleIcon, InfoCircledIcon } from '@radix-ui/react-icons';
+import { Heading, Spinner, Text } from '@radix-ui/themes';
+import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { ToastFns, ToastFnParams } from '../../utils/types';
-import { DEFAULT_TOAST_OPTIONS, TOAST_TYPE } from '../../utils/constants';
+type ToastFns = {
+    success: ({ title, description }: ToastFnParams) => void;
+    error: ({ title, description }: ToastFnParams) => void;
+    info: ({ title, description }: ToastFnParams) => void;
+    warning: ({ title, description }: ToastFnParams) => void;
+    loading: ({ title, description }: ToastFnParams) => void;
+};
+
+type ToastFnParams = {
+    title: string;
+    description?: string;
+};
+
+export const DEFAULT_TOAST_OPTIONS: ToastOptions = {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: true,
+    pauseOnHover: true,
+    theme: 'light',
+    icon: false,
+};
+
+export enum TOAST_TYPE {
+    SUCCESS = 'success',
+    INFO = 'info',
+    ERROR = 'error',
+    WARNING = 'warning',
+    LOADING = 'loading',
+}
+
+export const DEFAULT_TOAST_MESSAGES = {
+    success: {
+        status: TOAST_TYPE.SUCCESS,
+        title: 'Action succeeded!',
+        description: 'The specified action went through!',
+    },
+    error: {
+        status: TOAST_TYPE.ERROR,
+        title: 'Something went wrong!',
+        description: 'An unexpected error occurred. Please try again later.',
+    },
+};
 
 const useToast = (): ToastFns => {
     const statusIcons = {

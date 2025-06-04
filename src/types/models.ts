@@ -1,5 +1,5 @@
 import { HalResource } from 'hal-types';
-import { ResourceType } from '../constants';
+import { ResourceType } from '../utils/constants';
 
 export type Resource<T extends Record<string, unknown> = Record<string, never>> = HalResource<T>;
 

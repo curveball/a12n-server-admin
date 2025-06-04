@@ -8,7 +8,7 @@ import {
     MutationRequestParams,
     QueryRequestParams,
     ToastFns,
-} from './types';
+} from '../types';
 import { DEFAULT_TOAST_MESSAGES, HTTP_METHODS } from './constants';
 import { formatAPIPath } from './helpers/common';
 

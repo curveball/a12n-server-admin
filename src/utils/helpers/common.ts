@@ -1,4 +1,4 @@
-import { APIQueryParams } from '../types';
+import { APIQueryParams } from '../../types';
 
 export const formatAuthorizationHeader = (token: string) => {
     return `Bearer ${token}`;

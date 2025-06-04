@@ -1,4 +1,5 @@
 import { queryOptions } from '@tanstack/react-query';
+import { App, Collection } from '../../types';
 import APICore from '../api';
 import { SERVER_ROUTES } from '../constants';
 import { formatAPIPath } from '../helpers/common';
@@ -10,12 +11,12 @@ export const getAllApps = (client: APICore) => {
         queryFn: async () => {
             const data = (await client.get({
                 suffix: formatAPIPath([SERVER_ROUTES.APPS]),
-            })) as any;
+            })) as Collection<App>;
 
             const apps = data._links.item;
             console.log(apps);
             // Need to manually unpack
-            const appDetailsPromises = apps.map(async (app: { href: string }) => {
+            const appDetailsPromises = apps.map(async (app: any) => {
                 try {
                     // Fetch each app's detailed information using its href
                     const appData = (await client.get({

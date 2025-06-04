@@ -3,7 +3,7 @@ import { isValid } from 'zod';
 import { Modal } from '.';
 import { InputField } from '..';
 import { useFormValidation } from '../../lib';
-import { CreateAppModalSchema } from '../../utils/types/forms';
+import { CreateAppModalSchema } from '../../types/forms';
 
 export default function CreateAppModal({ onClose, isOpen }: { onClose: () => void; isOpen: boolean }) {
     const title = 'Create App';

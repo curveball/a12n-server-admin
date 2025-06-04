@@ -1,9 +1,9 @@
 import { queryOptions, useMutation, useQueryClient } from '@tanstack/react-query';
-import { queryKeys } from './core';
-import { formatAPIPath } from '../helpers/common';
-import { ResourceType, SERVER_EMBED_ITEM_PARAM, SERVER_ROUTES } from '../constants';
-import { Collection, User } from '../types';
+import { Collection, User } from '../../types';
 import APICore from '../api';
+import { ResourceType, SERVER_EMBED_ITEM_PARAM, SERVER_ROUTES } from '../constants';
+import { formatAPIPath } from '../helpers/common';
+import { queryKeys } from './core';
 
 export const getAllUsers = (client: APICore) => {
     return queryOptions({
