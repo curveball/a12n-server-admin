@@ -29,7 +29,7 @@ vi.mock(import('../../hooks/useAxios'), async (importOriginal) => {
 });
 
 vi.mock('../../utils/queries/users', () => ({
-    getAllUsers: (api: unknown) => ({
+    getAllUsers: (_api: unknown) => ({
         queryKey: ['users'],
         queryFn: async () =>
             Promise.resolve([
@@ -45,7 +45,7 @@ vi.mock('../../utils/queries/users', () => ({
 if (!navigator.clipboard) {
     Object.defineProperty(navigator, 'clipboard', {
         value: {
-            writeText: async (text: string) => Promise.resolve(),
+            writeText: async (_text: string) => Promise.resolve(),
             readText: async () => Promise.resolve(''),
         },
         writable: true,
@@ -54,7 +54,7 @@ if (!navigator.clipboard) {
     Object.defineProperty(navigator, 'clipboard', {
         value: {
             ...navigator.clipboard,
-            writeText: async (text: string) => Promise.resolve(),
+            writeText: async (_text: string) => Promise.resolve(),
         },
         writable: true,
     });
