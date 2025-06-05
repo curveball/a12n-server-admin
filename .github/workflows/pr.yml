@@ -40,5 +40,5 @@ jobs:
         with:
           node-version: 20.x
           cache: 'npm'
-      - run: npm I
+      - run: npm install
       - run: npm run build 
