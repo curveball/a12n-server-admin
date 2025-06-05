@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { test as baseTest, expect } from '@playwright/test';
 import dotenv from 'dotenv';
 import fs from 'fs';
@@ -14,7 +15,6 @@ export const test = baseTest.extend<
     },
     { workerStorageState: string }
 >({
-    /** eslint-disable-next-line react-hooks/rules-of-hooks - This is NOT a react hook */
     storageState: ({ workerStorageState }, useFixture) => useFixture(workerStorageState),
 
     // Authenticate once per worker with a worker-scoped fixture.
@@ -44,7 +44,6 @@ export const test = baseTest.extend<
             await page.context().storageState({ path: fileName });
             await page.close();
 
-            /** eslint-disable-next-line react-hooks/rules-of-hooks - This is NOT a react hook */
             await useFixture(fileName);
         },
         { scope: 'worker' },
