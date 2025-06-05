@@ -3,7 +3,7 @@ import { Heading, Spinner, Text } from '@radix-ui/themes';
 import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-type ToastFns = {
+export type ToastFns = {
     success: ({ title, description }: ToastFnParams) => void;
     error: ({ title, description }: ToastFnParams) => void;
     info: ({ title, description }: ToastFnParams) => void;
@@ -11,7 +11,7 @@ type ToastFns = {
     loading: ({ title, description }: ToastFnParams) => void;
 };
 
-type ToastFnParams = {
+export type ToastFnParams = {
     title: string;
     description?: string;
 };

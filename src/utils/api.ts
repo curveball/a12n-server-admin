@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { DEFAULT_TOAST_MESSAGES } from '../hooks/useToast';
+import { DEFAULT_TOAST_MESSAGES, ToastFns } from '../hooks/useToast';
 import {
     APICollectionResponse,
     APIQueryParams,
@@ -8,7 +8,6 @@ import {
     APIResponseToastMessages,
     MutationRequestParams,
     QueryRequestParams,
-    ToastFns,
 } from '../types';
 import { formatAPIPath } from './helpers/common';
 
