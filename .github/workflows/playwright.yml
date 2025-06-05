@@ -4,6 +4,14 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+env:
+  CI: true
+  environment: test
+  VITE_CLIENT_SECRET: ${{ secrets.VITE_CLIENT_SECRET }}
+  VITE_AUTH_SERVER_URL: ${{ vars.VITE_AUTH_SERVER_URL }}
+  VITE_POST_AUTH_REDIRECT_URI: ${{ vars.VITE_POST_AUTH_REDIRECT_URI }}
+  VITE_AUTH_SERVER_EMAIL: ${{ vars.VITE_AUTH_SERVER_EMAIL }}
+  VITE_AUTH_SERVER_PASSWORD: ${{ vars.VITE_AUTH_SERVER_PASSWORD }}
 jobs:
   playwright:
     name: 'Integration and E2E Tests'
