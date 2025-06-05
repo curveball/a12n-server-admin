@@ -11,8 +11,7 @@ export const privilegesQuery = (client: APICore) => {
         queryFn: async () => {
             const data = (await client.get({
                 suffix: formatAPIPath([SERVER_ROUTES.PRIVILEGES]),
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            })) as Collection<Record<string, any>>;
+            })) as Collection<Record<string, unknown>>;
             return data;
         },
     });
