@@ -9,7 +9,7 @@ const useAxios = () => {
     const { tokens, setTokens, refreshAccessToken } = useOAuth();
     const toast = useToast();
 
-    const api = useMemo(() => new APICore(toast), []);
+    const api = useMemo(() => new APICore(toast), [toast]);
 
     useEffect(() => {
         const interceptors = configureInterceptors(api, tokens!, refreshAccessToken);

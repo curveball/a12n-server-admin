@@ -38,6 +38,7 @@ export type Group = BaseResource;
 export type User = BaseResource & {
     hasPassword: boolean;
     password?: string;
+    verifiedAt?: string;
 };
 
 export type Model = App | Template | Group | User;

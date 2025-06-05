@@ -9,6 +9,7 @@ import type { NavItem } from './Sidebar/Sidebar';
 
 export default function Layout() {
     const version = packageJson.version;
+    // FIXME: count on navItem should be dynamic
     const navItems = useMemo<NavItem[]>(
         () => [
             { name: 'Users', icon: <PersonIcon />, count: 14, path: CLIENT_ROUTES.USERS_TABLE },

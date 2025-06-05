@@ -1,6 +1,7 @@
-import { describe, it, expect, beforeEach, vi, Mock, afterEach } from 'vitest';
-import { getAllUsers, getVerifiedUsers } from '../utils/queries/users';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { QueryClient } from '@tanstack/react-query';
+import { Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { getAllUsers, getVerifiedUsers } from '../utils/queries/users';
 
 describe('queries', () => {
     let mockClient: { get: Mock };

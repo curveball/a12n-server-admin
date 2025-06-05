@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DownloadIcon, PlusIcon, RowsIcon, TrashIcon } from '@radix-ui/react-icons';
 import { Button, Card, Flex, Text, Theme } from '@radix-ui/themes';
 import { GridOptions, RowDoubleClickedEvent, themeQuartz } from 'ag-grid-community';

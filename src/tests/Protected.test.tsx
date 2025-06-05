@@ -1,4 +1,4 @@
-// Protected.test.tsx
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
@@ -20,8 +20,11 @@ beforeAll(() => {
 });
 
 // Mock the useOAuth hook.
-vi.mock('../lib/hooks/useOAuth', () => ({
-    default: vi.fn().mockReturnValue({ isAuthenticated: true }),
+vi.mock('../hooks/useOAuth', () => ({
+    default: vi.fn().mockReturnValue({
+        isAuthenticated: true,
+        tokens: { accessToken: 'test-token', tokenType: 'Bearer' },
+    }),
 }));
 
 describe('Protected Component', () => {

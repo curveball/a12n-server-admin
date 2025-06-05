@@ -32,11 +32,3 @@ export enum ResourceType {
 }
 
 export const SERVER_EMBED_ITEM_PARAM = { embed: 'item' };
-
-export enum HTTP_METHODS {
-    GET = 'get',
-    POST = 'post',
-    PUT = 'put',
-    PATCH = 'patch',
-    DELETE = 'delete',
-}

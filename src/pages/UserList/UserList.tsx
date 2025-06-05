@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from '@radix-ui/themes';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
@@ -17,7 +18,7 @@ const UserList = () => {
                 flex: 1,
                 minWidth: 150,
                 resizable: false,
-                valueGetter: (params: any) => Users.parseUserID(params.data),
+                valueGetter: (params: { data: any }) => Users.parseUserID(params.data),
             },
             {
                 field: '_links.me',
@@ -25,7 +26,7 @@ const UserList = () => {
                 flex: 1,
                 minWidth: 200,
                 resizable: false,
-                valueGetter: (params: any) => Users.parseEmail(params.data),
+                valueGetter: (params: { data: any }) => Users.parseEmail(params.data),
             },
             {
                 field: 'verified',
@@ -113,9 +114,9 @@ const UserList = () => {
                 columnDefs={userColumnHeadings}
                 data={
                     data
-                        ? data['_embedded'].item.map((user) => ({
+                        ? data['_embedded']?.item?.map((user) => ({
                               ...user,
-                              verified: (verifiedUsers ?? new Set()).has(user['_links'].self.href),
+                              verified: (verifiedUsers ?? new Set()).has(user['_links']?.self?.href),
                           }))
                         : []
                 }

@@ -70,7 +70,7 @@ print(response.json())`;
             <div className='flex items-center gap-x-2 mb-2'>
                 <DropdownSelector
                     selectedOption={snippetType}
-                    onSelectionChange={setSnippetType}
+                    onSelectionChange={(type: string) => setSnippetType(type as SnippetType)}
                     options={['curl', 'node', 'python']}
                 />
 

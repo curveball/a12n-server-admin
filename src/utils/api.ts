@@ -10,9 +10,15 @@ import {
     QueryRequestParams,
     ToastFns,
 } from '../types';
-import { HTTP_METHODS } from './constants';
 import { formatAPIPath } from './helpers/common';
 
+export enum HTTP_METHODS {
+    GET = 'get',
+    POST = 'post',
+    PUT = 'put',
+    PATCH = 'patch',
+    DELETE = 'delete',
+}
 class APICore {
     client: AxiosInstance;
     #toast: ToastFns;

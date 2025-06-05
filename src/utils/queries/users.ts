@@ -1,5 +1,6 @@
 import { queryOptions, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Collection, User } from '../../types';
+import { HalLink } from 'hal-types';
+import { Collection, Resource, User } from '../../types';
 import APICore from '../api';
 import { ResourceType, SERVER_EMBED_ITEM_PARAM, SERVER_ROUTES } from '../constants';
 import { formatAPIPath } from '../helpers/common';
@@ -23,19 +24,19 @@ export const getVerifiedUsers = (client: APICore) => {
         queryFn: async () => {
             const data = (await client.get({
                 suffix: formatAPIPath([SERVER_ROUTES.USERS]),
-            })) as any;
+            })) as Collection<User>;
 
             const verifiedUsers = new Set<string>();
 
-            for (const user of data['_links'].item) {
+            for (const user of data['_links'].item as HalLink[]) {
                 const identityRes = (await client.get({
                     suffix: formatAPIPath([user.href, '/identity']),
-                })) as any;
+                })) as Collection<User>;
 
-                for (const item of identityRes['_links'].item) {
+                for (const item of identityRes['_links'].item as HalLink[]) {
                     const identityDetailsRes = (await client.get({
                         suffix: formatAPIPath([item.href]),
-                    })) as any;
+                    })) as Resource<User>;
 
                     if (identityDetailsRes.verifiedAt != null) {
                         verifiedUsers.add(user.href);

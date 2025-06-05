@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DownloadIcon, PlusIcon, TrashIcon } from '@radix-ui/react-icons';
 import { Button, Card, Flex, Text, Theme } from '@radix-ui/themes';
 import { GridOptions, themeQuartz } from 'ag-grid-community';
@@ -18,7 +19,8 @@ type TableProps = {
 const Table = ({ columnDefs, data, itemName, initialValues, testId, onAdd, onDelete, onDoubleClick }: TableProps) => {
     const gridRef = useRef<any>(null);
     const [selectedCount, setSelectedCount] = useState(0);
-    const [selectedItem, setSelectedItem] = useState<unknown>(initialValues);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_selectedItem, _setSelectedItem] = useState<unknown>(initialValues);
 
     const onSelectionChanged = () => {
         if (gridRef.current) {
