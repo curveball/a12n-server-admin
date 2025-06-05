@@ -13,10 +13,11 @@ import {
 } from '../pages';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Layout, Protected } from '../components';
 import '../config/theme.css';
 import ApiSandbox from '../pages/ApiSandbox';
-import { OAuthProvider } from '../providers/OAuthProvider';
+import { OAuthProvider } from '../providers/OAuthProvider/OAuthProvider';
 import { CLIENT_ROUTES } from '../utils/constants';
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ function App() {
     return (
         <Router>
             <QueryClientProvider client={queryClient}>
+                <ReactQueryDevtools initialIsOpen={false} />
                 <OAuthProvider>
                     <Routes>
                         <Route path={CLIENT_ROUTES.AUTH_TRIGGER} element={<OAuthTriggerPage />} />
