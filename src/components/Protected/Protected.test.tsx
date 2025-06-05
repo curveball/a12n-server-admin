@@ -2,9 +2,9 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
-import Protected from '../components/Protected';
-import useOAuth from '../hooks/useOAuth';
-import { CLIENT_ROUTES } from '../utils/constants';
+import useOAuth from '../../hooks/useOAuth';
+import { CLIENT_ROUTES } from '../../utils/constants';
+import Protected from './Protected';
 
 // Patch window.location to avoid navigation errors.
 beforeAll(() => {
