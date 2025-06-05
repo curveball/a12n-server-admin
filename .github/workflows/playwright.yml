@@ -38,4 +38,3 @@ jobs:
         run: |
           npm run setup:backend
           npx playwright test
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
