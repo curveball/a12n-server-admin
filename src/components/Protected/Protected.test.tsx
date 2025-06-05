@@ -30,7 +30,10 @@ vi.mock('../hooks/useOAuth', () => ({
 describe('Protected Component', () => {
     it('renders children when authenticated', () => {
         // Simulate an authenticated user.
-        (useOAuth as any).mockReturnValue({ isAuthenticated: true });
+        (useOAuth as any).mockReturnValue({
+            isAuthenticated: true,
+            tokens: { accessToken: 'test-token', tokenType: 'Bearer' },
+        });
 
         render(
             <MemoryRouter initialEntries={['/protected']}>
