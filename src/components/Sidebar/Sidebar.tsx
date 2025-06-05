@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { Avatar, Badge, Box, Button, Flex, Heading, Text } from '@radix-ui/themes';
 import React from 'react';

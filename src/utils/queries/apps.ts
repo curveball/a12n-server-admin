@@ -17,7 +17,7 @@ export const getAllApps = (client: APICore) => {
             const apps = data._links.item as HalLink[];
             console.log(apps);
             // Need to manually unpack
-            const appDetailsPromises = apps.map(async (app: any) => {
+            const appDetailsPromises = apps.map(async (app: HalLink) => {
                 try {
                     // Fetch each app's detailed information using its href
                     const appData = (await client.get({

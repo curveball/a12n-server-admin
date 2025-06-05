@@ -6,7 +6,7 @@ import UpdateAppModal from '../../components/Modal/UpdateAppModal';
 import { useAxios } from '../../hooks';
 import { Apps } from '../../utils/helpers/models';
 import { getAllApps } from '../../utils/queries/apps';
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const AppList = () => {
     const api = useAxios();
     const { data, isLoading, error } = useQuery(getAllApps(api));

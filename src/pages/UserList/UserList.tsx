@@ -5,7 +5,7 @@ import TableList from '../../components/TableList/TableList';
 import { useAxios } from '../../hooks';
 import { Users } from '../../utils/helpers/models';
 import { getAllUsers, getVerifiedUsers } from '../../utils/queries/users';
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const UserList = () => {
     const api = useAxios();
     const userColumnHeadings = useMemo(
@@ -17,7 +17,7 @@ const UserList = () => {
                 flex: 1,
                 minWidth: 150,
                 resizable: false,
-                valueGetter: (params: any) => Users.parseUserID(params.data),
+                valueGetter: (params: unknown) => Users.parseUserID(params.data),
             },
             {
                 field: '_links.me',
@@ -25,7 +25,7 @@ const UserList = () => {
                 flex: 1,
                 minWidth: 200,
                 resizable: false,
-                valueGetter: (params: any) => Users.parseEmail(params.data),
+                valueGetter: (params: unknown) => Users.parseEmail(params.data),
             },
             {
                 field: 'verified',
