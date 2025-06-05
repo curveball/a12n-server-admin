@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { HalLink } from 'hal-types';
 import { useMemo } from 'react';
-import { Table } from '../components';
-import ErrorBoundary from '../components/ErrorBoundary';
-import { useAxios } from '../hooks';
-import { privilegesQuery } from '../utils/queries/privileges';
+import { Table } from '../../components';
+import ErrorBoundary from '../../components/ErrorBoundary';
+import { useAxios } from '../../hooks';
+import { privilegesQuery } from '../../utils/queries/privileges';
 
 function PrivilegeList() {
     const privilegeColumnHeadings = useMemo(

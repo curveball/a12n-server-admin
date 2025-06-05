@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
-import PrivilegeList from '../pages/PrivilegeList';
+import PrivilegeList from './PrivilegeList';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
