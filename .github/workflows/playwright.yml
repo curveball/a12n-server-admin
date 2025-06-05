@@ -36,6 +36,7 @@ jobs:
         run: npx playwright install
       - name: Run e2e tests
         run: |
+          mkdir -p ./src/tests/a12n-server
           echo "JWT_PRIVATE_KEY=${{ secrets.JWT_PRIVATE_KEY }}" >> ./src/tests/a12n-server/.env
           npx playwright test
 
