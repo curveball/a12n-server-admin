@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from '@radix-ui/themes';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
@@ -5,7 +6,7 @@ import TableList from '../../components/TableList/TableList';
 import { useAxios } from '../../hooks';
 import { Users } from '../../utils/helpers/models';
 import { getAllUsers, getVerifiedUsers } from '../../utils/queries/users';
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 const UserList = () => {
     const api = useAxios();
     const userColumnHeadings = useMemo(
@@ -113,9 +114,9 @@ const UserList = () => {
                 columnDefs={userColumnHeadings}
                 data={
                     data
-                        ? data['_embedded'].item.map((user) => ({
+                        ? data['_embedded']?.item?.map((user) => ({
                               ...user,
-                              verified: (verifiedUsers ?? new Set()).has(user['_links'].self.href),
+                              verified: (verifiedUsers ?? new Set()).has(user['_links']?.self?.href),
                           }))
                         : []
                 }
