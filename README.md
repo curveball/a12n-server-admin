@@ -1,12 +1,30 @@
 # a12n-server-admin
 
+[![Unit Tests](https://github.com/curveball/a12n-server-admin/actions/workflows/vitest.yml/badge.svg)](https://github.com/curveball/a12n-server-admin/actions/workflows/vitest.yml)
+[![Integration and E2E Tests](https://github.com/curveball/a12n-server-admin/actions/workflows/playwright.yml/badge.svg)](https://github.com/curveball/a12n-server-admin/actions/workflows/playwright.yml)
+[![CodeQL](https://github.com/curveball/a12n-server-admin/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/curveball/a12n-server-admin/actions/workflows/github-code-scanning/codeql)
+
 The admin UI counterpart to [`@curveball/a12n-server`](https://github.com/curveball/a12n-server), a lightweight OAuth2 server.
+
+## Tech Stack
+
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Vitest](https://vitest.dev/)
+- [Playwright](https://playwright.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [Tanstack Query](https://tanstack.com/query/latest)
+- [React Router](https://reactrouter.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/)
 
 ## Getting Started
 
 ### Prerequistes
 
-- Node.js 18.x or newer
+- Node.js 20.x or newer
 - Running `a12n-server` with a supported database (MySQL, Postgres, or SQLite) or run the server with [Docker](https://github.com/curveball/a12n-server/blob/main/docs/getting-started.md#running-with-docker-compose) if you like.
   For more, check out [server setup instructions](https://github.com/curveball/a12n-server/blob/main/docs/getting-started.md) for more details.
 
@@ -63,15 +81,16 @@ VITE_POST_AUTH_REDIRECT_URI=http://localhost:5173/auth/redirect
 
 Now you should be able to run the server with `npm run dev`!
 
-## Design Guidelines
-
-- **Color Palette:**
-    - Primary: #A18072, #211F26, #E3DFE6, #AB6400
-    - Secondary: #008573, #641723, #027864
-- **Font:**
-    - Primary: Typography
-    - Title: Mona Sans
-
 ## License
 
 This project is licensed under the Apache License 2.0, consistent with the original project.
+
+## Lore
+
+This project began as a partnership between University of Toronto Scarborough's Software Engineering program and the maintainers of `@curveball/a12n-server`. :maple_leaf:
+
+`@curveball/a12n-server` is a project by [Evert Pot](https://evertpot.com). Its building blocks use `@curveball`, a framework for building server apps in TypeScript which was started in 2018. At the time, a lot of features we take for granted in server-side JS apps were missing.
+
+`a12n-server` stands for "authentication server". It's a lightweight OAuth2 server that can be used to authenticate users and manage their access to resources.
+
+This project provides the admin UI for `a12n-server`. It's built with React and TypeScript, and uses the `@tanstack/react-query` library for data fetching and caching.
