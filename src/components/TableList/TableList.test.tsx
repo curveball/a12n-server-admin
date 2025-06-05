@@ -1,8 +1,12 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { cleanup, render, screen } from '@testing-library/react';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { withResizeObserver } from '../../tests/setup';
 import TableList from './TableList';
+
+// Register all AG Grid Community modules
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 const mockOnDelete = vi.fn();
 const mockColumnDefs = [
