@@ -18,7 +18,7 @@ const UserList = () => {
                 flex: 1,
                 minWidth: 150,
                 resizable: false,
-                valueGetter: (params: unknown) => Users.parseUserID(params.data),
+                valueGetter: (params: { data: any }) => Users.parseUserID(params.data),
             },
             {
                 field: '_links.me',
@@ -26,7 +26,7 @@ const UserList = () => {
                 flex: 1,
                 minWidth: 200,
                 resizable: false,
-                valueGetter: (params: unknown) => Users.parseEmail(params.data),
+                valueGetter: (params: { data: any }) => Users.parseEmail(params.data),
             },
             {
                 field: 'verified',
