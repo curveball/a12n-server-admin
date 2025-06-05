@@ -10,10 +10,7 @@ echo "Restoring database...";
 sqlite3 a12nserver.sqlite3 < snapshot.sql
 
 touch .env;
-echo "APP_NAME=admin-ui-client" >> .env;
 echo "DB_DRIVER=sqlite3" >> .env;
 echo "DB_FILENAME=a12nserver.sqlite3" >> .env;
 echo "CURVEBALL_ORIGIN=http://localhost:8531" >> .env;
-echo "JWT_PRIVATE_KEY=${process.env.JWT_PRIVATE_KEY}" >> .env;
-
 npx @curveball/a12n-server;
