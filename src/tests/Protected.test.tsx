@@ -20,8 +20,11 @@ beforeAll(() => {
 });
 
 // Mock the useOAuth hook.
-vi.mock('../lib/hooks/useOAuth', () => ({
-    default: vi.fn().mockReturnValue({ isAuthenticated: true }),
+vi.mock('../hooks/useOAuth', () => ({
+    default: vi.fn().mockReturnValue({
+        isAuthenticated: true,
+        tokens: { accessToken: 'test-token', tokenType: 'Bearer' },
+    }),
 }));
 
 describe('Protected Component', () => {
