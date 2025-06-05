@@ -9,9 +9,9 @@ afterEach(() => {
     cleanup();
 });
 
-vi.mock('../../lib/hooks/useOAuth', () => ({
+vi.mock('../../hooks/useOAuth', () => ({
     default: () => ({
-        tokens: { accessToken: 'test-token' },
+        tokens: { accessToken: 'test-token', tokenType: 'Bearer' },
         isAuthenticated: true,
         setTokens: vi.fn(),
         triggerOAuthFlow: vi.fn(),
