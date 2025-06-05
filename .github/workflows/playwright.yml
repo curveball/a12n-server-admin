@@ -10,8 +10,9 @@ env:
   VITE_CLIENT_SECRET: ${{ secrets.VITE_CLIENT_SECRET }}
   VITE_AUTH_SERVER_URL: ${{ vars.VITE_AUTH_SERVER_URL }}
   VITE_POST_AUTH_REDIRECT_URI: ${{ vars.VITE_POST_AUTH_REDIRECT_URI }}
-  VITE_AUTH_SERVER_EMAIL: ${{ vars.VITE_AUTH_SERVER_EMAIL }}
-  VITE_AUTH_SERVER_PASSWORD: ${{ vars.VITE_AUTH_SERVER_PASSWORD }}
+  VITE_AUTH_SERVER_EMAIL: ${{ secrets.VITE_AUTH_SERVER_EMAIL }}
+  VITE_AUTH_SERVER_PASSWORD: ${{ secrets.VITE_AUTH_SERVER_PASSWORD }}
+  JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
 jobs:
   playwright:
     name: 'Integration and E2E Tests'
@@ -34,5 +35,8 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install
       - name: Run e2e tests
-        run: npx playwright test
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p ./src/tests/a12n-server
+          echo "JWT_PRIVATE_KEY=${{ secrets.JWT_PRIVATE_KEY }}" >> ./src/tests/a12n-server/.env
+          npx playwright test
+
