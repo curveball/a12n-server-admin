@@ -15,7 +15,7 @@ export const test = baseTest.extend<
     { workerStorageState: string }
 >({
     /** eslint-disable-next-line react-hooks/rules-of-hooks - This is NOT a react hook */
-    storageState: ({ workerStorageState }, use) => use(workerStorageState),
+    storageState: ({ workerStorageState }, useFixture) => useFixture(workerStorageState),
 
     // Authenticate once per worker with a worker-scoped fixture.
     workerStorageState: [
@@ -33,7 +33,7 @@ export const test = baseTest.extend<
 
             await page.goto(CLIENT_ROUTES.AUTH_TRIGGER);
 
-            await expect(page).toHaveURL(new RegExp(`^${process.env.VITE_SERVER_URL!}`));
+            await expect(page.url()).toContain(`${process.env.VITE_SERVER_URL}`);
 
             await page.fill('input[name="userName"]', process.env.VITE_AUTH_SERVER_EMAIL!);
             await page.fill('input[name="password"]', process.env.VITE_AUTH_SERVER_PASSWORD!);
@@ -45,7 +45,7 @@ export const test = baseTest.extend<
             await page.close();
 
             /** eslint-disable-next-line react-hooks/rules-of-hooks - This is NOT a react hook */
-            await use(fileName);
+            await useFixture(fileName);
         },
         { scope: 'worker' },
     ],
