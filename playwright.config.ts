@@ -8,7 +8,7 @@ export default defineConfig({
     timeout: 30000,
     use: {
         baseURL: 'http://localhost:5173',
-        headless: false,
+        headless: process.env.CI ? true : false,
     },
     webServer: {
         command: 'npm run dev',
@@ -17,5 +17,5 @@ export default defineConfig({
         stdout: 'ignore',
         stderr: 'pipe',
     },
-    reporter: 'line',
+    reporter: 'html',
 });
