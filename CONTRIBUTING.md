@@ -16,33 +16,32 @@ First-time contributors:
     npm install
     ```
 3. Set up your local environment as described in the [README.md](./README.md).
-4. Create a new branch for your feature or bugfix:
-    ```sh
-    git checkout -b my-feature
-    ```
+4. Create a new branch for your task against `<yourfork>/main` ```
 
 ## 🛠️ Development Workflow
 
-- **Branching:** Use descriptive branch names (e.g., `fix/login-bug`, `feature/add-user-list`).
-- **Commits:** Write clear, concise commit messages. Follow [Conventional Commits](https://www.conventionalcommits.org/) if possible.
+- Pick an issue from the [issues](https://github.com/curveball/a12n-server-admin/issues) page.
+
 - **Pull Requests:**
+
     - Open a PR against the `main` branch.
     - Reference related issues (e.g., `Closes #123`).
-    - Ensure your PR passes all [CI checks](.github/workflows/pr.yml).
+    - Ensure your PR passes all [CI checks](.github/workflows/pr.yml). Linting is handled by `tsc` and `eslint`, which serve to prevent builds from breaking.
 
-## 🧹 Code Style & Linting
+## Design Guidelines
 
-- **Linting:**
-    - Run `npm run lint` before pushing.
-    - ESLint is configured for TypeScript and React ([eslint.config.js](./eslint.config.js)).
-- **Formatting:**
-    - Prettier is used for code formatting. Most files are auto-formatted on commit via [Husky](https://typicode.github.io/husky/) and [lint-staged](https://github.com/okonet/lint-staged).
-- **Type Safety:**
-    - Use TypeScript for all code. Prefer explicit types and interfaces from `src/types/`.
+- **Color Palette:**
+
+    - Primary: #A18072, #211F26, #E3DFE6, #AB6400
+    - Secondary: #008573, #641723, #027864
+
+- **Font:**
+    - Primary: Typography
+    - Title: Mona Sans
 
 ## 🧪 Testing
 
-Collocate tests with the code they test. For example, if you are adding a new feature, add a test for it in the same folder.
+Collocate tests within the same folder as the code they test.
 
 - **Unit Tests:**
     - Use [Vitest](https://vitest.dev/) for unit tests. These tests use the `*.test.ts(x)` suffix.
@@ -81,29 +80,22 @@ Collocate tests with the code they test. For example, if you are adding a new fe
 ├── playwright.config.ts      # E2E test configuration
 ├── public                    # Static files for build
 ├── src
-│   ├── app
 │   ├── assets                  # Static assets that wind up in build
 │   ├── components              # Reusable UI components
-│   ├── config                  # Configuration files
 │   ├── hooks                   # Custom hooks
 │   ├── main.tsx                # App Entry point
 │   ├── pages                   # App views
 │   ├── providers               # Providers for context
 │   ├── tests                   # Test setup
 │   ├── types                   # Type definitions (*d.ts, .ts)
-│   └── utils
+│   └── utils                   # Utility and helper functions
 ├── test-results                # Test results from Playwright
 ├── tsconfig.app.json
 ├── tsconfig.json
 ├── tsconfig.node.json
-├── vite.config.ts
+├── vite.config.ts             # Build configuration
 └── vitest.config.ts           # Unit test config
 ```
-
-## 🧹 Housekeeping
-
-- Keep dependencies up to date. Run `npm audit` and address vulnerabilities if possible.
-- Write or update documentation as needed (in `README.md` or `docs/`).
 
 ## 🤝 Getting Help
 
