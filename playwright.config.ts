@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config({ path: `.env` });
 
 export default defineConfig({
-    testDir: 'src/tests/integration',
+    testMatch: '**/*.spec.ts',
     timeout: 30000,
     use: {
         baseURL: 'http://localhost:5173',

@@ -1,5 +1,5 @@
 // src/tests/OAuthFlow.test.tsx
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { CLIENT_ROUTES } from '../../utils/constants';
 import { formatAPIPath } from '../../utils/helpers/common';
 

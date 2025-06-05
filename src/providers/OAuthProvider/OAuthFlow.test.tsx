@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import client from '../../config/oauth';
 import useOAuth from '../../hooks/useOAuth';
-import { OAuthProvider } from '../../providers/OAuthProvider';
+import { OAuthProvider } from './OAuthProvider';
 
 vi.resetAllMocks();
 
