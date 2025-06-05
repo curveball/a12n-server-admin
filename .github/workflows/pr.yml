@@ -40,5 +40,6 @@ jobs:
         with:
           node-version: 20.x
           cache: 'npm'
+      - run: rm -rf node_modules package-lock.json
       - run: npm install
       - run: npm run build 
