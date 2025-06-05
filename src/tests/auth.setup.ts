@@ -3,7 +3,7 @@ import { CLIENT_ROUTES } from '../utils/constants';
 
 const authFile = 'playwright/.auth/user.json';
 
-setup('authenticate', async ({ page, request }) => {
+setup('authenticate', async ({ page }) => {
     await page.goto(CLIENT_ROUTES.AUTH_TRIGGER);
 
     await expect(page).toHaveURL(new RegExp(`^${process.env.VITE_SERVER_URL!}`));
