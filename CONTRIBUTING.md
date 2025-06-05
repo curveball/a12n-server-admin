@@ -28,39 +28,6 @@ First-time contributors:
     - Reference related issues (e.g., `Closes #123`).
     - Ensure your PR passes all [CI checks](.github/workflows/pr.yml). Linting is handled by `tsc` and `eslint`, which serve to prevent builds from breaking.
 
-## Design Guidelines
-
-- **Color Palette:**
-
-    - Primary: #A18072, #211F26, #E3DFE6, #AB6400
-    - Secondary: #008573, #641723, #027864
-
-- **Font:**
-    - Primary: Typography
-    - Title: Mona Sans
-
-## 🧪 Testing
-
-Collocate tests within the same folder as the code they test.
-
-- **Unit Tests:**
-    - Use [Vitest](https://vitest.dev/) for unit tests. These tests use the `*.test.ts(x)` suffix.
-    - Run with `npm run test:unit`.
-- **Integration & E2E Tests:**
-    - Use [Playwright](https://playwright.dev/) for integration and end-to-end tests. These tests use the `*.spec.ts` suffix.
-    - Run with `npm run test:e2e`.
-- **All Tests:**
-    - Run all tests with `npm test`.
-- **CI:**
-    - All PRs are checked by GitHub Actions ([see workflows](.github/workflows/)).
-
-## 🐛 Bug Reports & Feature Requests
-
-- **Bugs:**
-    - Please [open an issue](https://github.com/curveball/a12n-server-admin/issues/new) with steps to reproduce, expected behavior, and screenshots/logs if possible.
-- **Features:**
-    - Suggest new features by [opening an issue](https://github.com/curveball/a12n-server-admin/issues/new?template=feature_request.md) and describing your idea and use case.
-
 ## 📁 Project Structure
 
 ```sh
@@ -96,6 +63,39 @@ Collocate tests within the same folder as the code they test.
 ├── vite.config.ts             # Build configuration
 └── vitest.config.ts           # Unit test config
 ```
+
+## Design Guidelines
+
+- **Color Palette:**
+
+    - Primary: #A18072, #211F26, #E3DFE6, #AB6400
+    - Secondary: #008573, #641723, #027864
+
+- **Font:**
+    - Primary: Typography
+    - Title: Mona Sans
+
+## 🧪 Testing
+
+Collocate tests within the same folder as the code they test.
+
+- **Unit Tests:**
+    - Use [Vitest](https://vitest.dev/) for unit tests. These tests use the `*.test.ts(x)` suffix.
+    - Run with `npm run test:unit`.
+- **Integration & E2E Tests:**
+    - Use [Playwright](https://playwright.dev/) for integration and end-to-end tests. These tests use the `*.spec.ts` suffix.
+    - Run with `npm run test:e2e`.
+- **All Tests:**
+    - Run all tests with `npm test`.
+- **CI:**
+    - All PRs are checked by GitHub Actions ([see workflows](.github/workflows/)).
+
+## 🐛 Bug Reports & Feature Requests
+
+- **Bugs:**
+    - Please [open an issue](https://github.com/curveball/a12n-server-admin/issues/new) with steps to reproduce, expected behavior, and screenshots/logs if possible.
+- **Features:**
+    - Suggest new features by [opening an issue](https://github.com/curveball/a12n-server-admin/issues/new?template=feature_request.md) and describing your idea and use case.
 
 ## 🤝 Getting Help
 
