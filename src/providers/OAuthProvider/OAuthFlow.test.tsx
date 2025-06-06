@@ -2,8 +2,8 @@ import { generateCodeVerifier } from '@badgateway/oauth2-client';
 import { render, waitFor } from '@testing-library/react';
 import { useEffect } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import client from '../../config/oauth';
 import useOAuth from '../../hooks/useOAuth';
+import client from './OAuth2Client';
 import { OAuthProvider } from './OAuthProvider';
 
 vi.resetAllMocks();
