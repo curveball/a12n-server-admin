@@ -10,15 +10,14 @@ import {
     OAuthTriggerPage,
     PrivilegeList,
     UserList,
-} from '../pages';
+} from './pages';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Layout, Protected } from '../components';
-import '../config/theme.css';
-import ApiSandbox from '../pages/ApiSandbox';
-import { OAuthProvider } from '../providers/OAuthProvider/OAuthProvider';
-import { CLIENT_ROUTES } from '../utils/constants';
+import { Layout, Protected } from './components';
+import ApiSandbox from './pages/ApiSandbox';
+import { OAuthProvider } from './providers/OAuthProvider/OAuthProvider';
+import { CLIENT_ROUTES } from './utils/constants';
 
 const queryClient = new QueryClient();
 
