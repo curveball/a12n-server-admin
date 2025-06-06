@@ -1,11 +1,11 @@
 import { Badge } from '@radix-ui/themes';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
+import { getAllApps } from '../../api';
 import { Table } from '../../components';
 import UpdateAppModal from '../../components/Modal/UpdateAppModal';
 import { useAxios } from '../../hooks';
 import { Apps } from '../../utils/helpers/models';
-import { getAllApps } from '../../utils/queries/apps';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const AppList = () => {
     const api = useAxios();

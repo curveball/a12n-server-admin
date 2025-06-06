@@ -2,9 +2,9 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
-import Protected from '../components/Protected';
-import useOAuth from '../hooks/useOAuth';
-import { CLIENT_ROUTES } from '../utils/constants';
+import useOAuth from '../../hooks/useOAuth';
+import { CLIENT_ROUTES } from '../../utils/constants';
+import Protected from './Protected';
 
 // Patch window.location to avoid navigation errors.
 beforeAll(() => {
@@ -30,7 +30,10 @@ vi.mock('../hooks/useOAuth', () => ({
 describe('Protected Component', () => {
     it('renders children when authenticated', () => {
         // Simulate an authenticated user.
-        (useOAuth as any).mockReturnValue({ isAuthenticated: true });
+        (useOAuth as any).mockReturnValue({
+            isAuthenticated: true,
+            tokens: { accessToken: 'test-token', tokenType: 'Bearer' },
+        });
 
         render(
             <MemoryRouter initialEntries={['/protected']}>

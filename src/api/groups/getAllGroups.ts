@@ -1,11 +1,11 @@
 import { queryOptions } from '@tanstack/react-query';
 import { Collection, Group } from '../../types';
-import APICore from '../api';
-import { SERVER_ROUTES } from '../constants';
-import { formatAPIPath } from '../helpers/common';
-import { queryKeys } from './core';
+import { SERVER_ROUTES } from '../../utils/constants';
+import { formatAPIPath } from '../../utils/helpers/common';
+import APICore from '../core';
+import { queryKeys } from '../query-keys';
 
-export const getAllGroups = (client: APICore) => {
+const getAllGroups = (client: APICore) => {
     return queryOptions({
         queryKey: queryKeys.groups.all,
         queryFn: async () => {
@@ -29,3 +29,5 @@ export const getAllGroups = (client: APICore) => {
         },
     });
 };
+
+export default getAllGroups;

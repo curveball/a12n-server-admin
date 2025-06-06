@@ -1,9 +1,9 @@
-import axios from 'axios';
 import { OAuth2Token } from '@badgateway/oauth2-client';
-import { formatAuthorizationHeader } from '../utils/helpers/common';
-import APICore from '../utils/api';
+import axios from 'axios';
+import { formatAuthorizationHeader } from '../../utils/helpers/common';
+import APICore from '../core';
 
-export const configureInterceptors = (
+const configureInterceptors = (
     api: APICore,
     tokens: OAuth2Token,
     refreshAccessToken: () => Promise<OAuth2Token | undefined>,
@@ -55,10 +55,4 @@ export const configureInterceptors = (
     return { requestInterceptor, responseInterceptor };
 };
 
-export const ejectInterceptors = (
-    api: APICore,
-    interceptors: { requestInterceptor: number; responseInterceptor: number },
-) => {
-    api.client.interceptors.request.eject(interceptors.requestInterceptor);
-    api.client.interceptors.response.eject(interceptors.responseInterceptor);
-};
+export default configureInterceptors;
