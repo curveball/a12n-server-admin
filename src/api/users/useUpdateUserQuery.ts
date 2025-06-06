@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ResourceType, SERVER_ROUTES } from '../../utils/constants';
 import { formatAPIPath } from '../../utils/helpers/common';
 import APICore from '../core';
-import { queryKeys } from '../queries/core';
+import { queryKeys } from '../query-keys';
 
 function useUpdateUserQuery(client: APICore) {
     const queryClient = useQueryClient();

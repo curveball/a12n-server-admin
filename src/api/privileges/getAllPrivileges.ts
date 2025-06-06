@@ -3,7 +3,7 @@ import { Collection } from '../../types';
 import { SERVER_ROUTES } from '../../utils/constants';
 import { formatAPIPath } from '../../utils/helpers/common';
 import APICore from '../core';
-import { queryKeys } from '../queries/core';
+import { queryKeys } from '../query-keys';
 
 const getAllPrivileges = (client: APICore) => {
     return queryOptions({
