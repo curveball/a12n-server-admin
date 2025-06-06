@@ -31,3 +31,4 @@ dist-ssr
 
 # Test results
 test-results/*
+playwright/.auth/*
