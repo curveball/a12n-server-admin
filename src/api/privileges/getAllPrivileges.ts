@@ -1,11 +1,11 @@
 import { queryOptions } from '@tanstack/react-query';
 import { Collection } from '../../types';
-import APICore from '../api';
-import { SERVER_ROUTES } from '../constants';
-import { formatAPIPath } from '../helpers/common';
-import { queryKeys } from './core';
+import { SERVER_ROUTES } from '../../utils/constants';
+import { formatAPIPath } from '../../utils/helpers/common';
+import APICore from '../core';
+import { queryKeys } from '../queries/core';
 
-export const privilegesQuery = (client: APICore) => {
+const getAllPrivileges = (client: APICore) => {
     return queryOptions({
         queryKey: queryKeys.privileges.all,
         queryFn: async () => {
@@ -16,3 +16,4 @@ export const privilegesQuery = (client: APICore) => {
         },
     });
 };
+export default getAllPrivileges;
