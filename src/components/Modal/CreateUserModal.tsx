@@ -3,8 +3,8 @@ import { isValid } from 'zod';
 import { InputField } from '..';
 import { useCreateUserQuery } from '../../api/users';
 import { useAxios, useFormValidation } from '../../hooks';
-import { Resource, User } from '../../types';
 import { CreateUserModalSchema } from '../../types/forms';
+import { Resource, User } from '../../types/models';
 import Modal from './Modal';
 
 export default function CreateUserModal({

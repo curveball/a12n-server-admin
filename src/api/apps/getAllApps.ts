@@ -1,8 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
 import { HalLink } from 'hal-types';
+import { SERVER_ROUTES } from '../../routes';
 import { App, Collection, Resource } from '../../types';
-import { SERVER_ROUTES } from '../../utils/constants';
-import { formatAPIPath } from '../../utils/helpers/common';
+import { formatAPIPath } from '../../utils';
 import APICore from '../core';
 import { queryKeys } from '../query-keys';
 

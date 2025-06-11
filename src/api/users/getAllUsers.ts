@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
+import { SERVER_ROUTES } from '../../routes';
 import { Collection, User } from '../../types';
-import { SERVER_ROUTES } from '../../types/models';
-import { formatAPIPath } from '../../utils/helpers/common';
+import { formatAPIPath } from '../../utils';
 import APICore from '../core';
 import { queryKeys } from '../query-keys';
 

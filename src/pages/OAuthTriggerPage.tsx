@@ -2,11 +2,11 @@ import { Box, Spinner } from '@radix-ui/themes';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useOAuth, useQueryParams } from '../hooks';
-import { CLIENT_ROUTES, POST_AUTH_REDIRECT_QUERY_PARAM_NAME } from '../utils/constants';
+import { CLIENT_ROUTES } from '../routes';
 
 const OAuthTriggerPage = () => {
     const { isAuthenticated, triggerOAuthFlow } = useOAuth();
-    const postAuthRedirectPath = useQueryParams(POST_AUTH_REDIRECT_QUERY_PARAM_NAME) || CLIENT_ROUTES.USERS_TABLE;
+    const postAuthRedirectPath = useQueryParams('redirect') || CLIENT_ROUTES.USERS_TABLE;
 
     useEffect(() => {
         if (!isAuthenticated) triggerOAuthFlow(postAuthRedirectPath);
