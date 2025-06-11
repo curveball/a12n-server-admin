@@ -34,6 +34,7 @@ const getAllApps = (client: APICore) => {
 
             return appDetails;
         },
+        staleTime: 1000 * 60 * 5, // 5 minutes
     });
 };
 
