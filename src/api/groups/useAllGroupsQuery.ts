@@ -14,7 +14,7 @@ const useAllGroupsQuery = () => {
     useEffect(() => {
         if (data) {
             setGroups(data?._links?.item as unknown as HalLink[]);
-            setGroupCount(data?.length ?? 0);
+            setGroupCount((data?._links?.item?.length) ?? 0);
         }
     }, [data]);
 
