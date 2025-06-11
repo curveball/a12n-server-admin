@@ -1,7 +1,10 @@
 import { OAuth2Token } from '@badgateway/oauth2-client';
 import axios from 'axios';
-import { formatAuthorizationHeader } from '../../utils/helpers/common';
 import APICore from '../core';
+
+const formatAuthorizationHeader = (token: string) => {
+    return `Bearer ${token}`;
+};
 
 const configureInterceptors = (
     api: APICore,
