@@ -1,41 +1,28 @@
-import { useQuery } from '@tanstack/react-query';
-import { HalLink } from 'hal-types';
-import { useMemo } from 'react';
-import { getAllPrivileges } from '../../api/privileges';
+import { useReadPrivilegesQuery } from '../../api/privileges';
 import { Table } from '../../components';
 import ErrorBoundary from '../../components/ErrorBoundary';
-import { useAxios } from '../../hooks';
-import { Collection } from '../../types';
 
 function PrivilegeList() {
-    const privilegeColumnHeadings = useMemo(
-        () => [
-            {
-                field: 'title',
-                headerName: 'Privilege Title',
-                flex: 1,
-                minWidth: 300,
-                resizable: false,
-            },
-            {
-                field: 'href',
-                headerName: 'URL',
-                flex: 1,
-                minWidth: 300,
-                resizable: false,
-            },
-        ],
-        [],
-    );
+    const privilegeColumnHeadings = [
+        {
+            field: 'title',
+            headerName: 'Privilege Title',
+            flex: 1,
+            minWidth: 300,
+            resizable: false,
+        },
+        {
+            field: 'href',
+            headerName: 'URL',
+            flex: 1,
+            minWidth: 300,
+            resizable: false,
+        },
+    ];
 
-    const api = useAxios();
-
-    const { data, isLoading, error } = useQuery(getAllPrivileges(api));
-
+    const { isLoading, error, privileges, refetch } = useReadPrivilegesQuery();
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {(error as Error).message}</div>;
-
-    const privilegeTableData = data ? ((data as Collection<Record<string, unknown>>)['_links']?.item as HalLink[]) : [];
 
     const handleDelete = () => {
         console.log('delete privilege?');
@@ -50,7 +37,7 @@ function PrivilegeList() {
             <Table
                 testId='privilege-list'
                 columnDefs={privilegeColumnHeadings}
-                data={privilegeTableData}
+                data={privileges ?? []}
                 itemName='privilege'
                 onDelete={handleDelete}
                 initialValues={[]}
