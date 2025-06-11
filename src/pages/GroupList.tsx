@@ -56,7 +56,7 @@ const GroupList = () => {
         [],
     );
 
-    const { data, groups, isLoading, error } = useAllGroupsQuery();
+    const { data, isLoading, error } = useAllGroupsQuery();
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
