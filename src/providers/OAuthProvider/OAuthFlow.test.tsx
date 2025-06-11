@@ -32,9 +32,11 @@ beforeAll(() => {
     window.location = {
         assign: vi.fn(),
         set href(url) {
+            // @ts-expect-error override window.location for jsdom navigation
             this._href = url;
         },
         get href() {
+            // @ts-expect-error override window.location for jsdom navigation
             return this._href;
         },
     };
