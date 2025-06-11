@@ -31,5 +31,6 @@ dist-ssr
 
 # Test results
 test-results/*
-playwright/.auth/*
 playwright-report/*
+playwright/.auth
+src/tests/a12n-server/*
