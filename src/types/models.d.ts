@@ -1,5 +1,4 @@
 import { HalResource } from 'hal-types';
-import { ResourceType } from '../utils/constants';
 
 export type Resource<T extends Record<string, unknown> = Record<string, never>> = HalResource<T>;
 
@@ -42,3 +41,31 @@ export type User = BaseResource & {
 };
 
 export type Model = App | Template | Group | User;
+
+export enum CLIENT_ROUTES {
+    ROOT = '/',
+    AUTH_TRIGGER = '/auth/trigger',
+    AUTH_REDIRECT = '/auth/redirect',
+    USERS_TABLE = '/users/table',
+    USERS_SANDBOX = '/users/sandbox',
+    GROUPS_TABLE = '/groups/table',
+    GROUPS_SANDBOX = '/groups/sandbox',
+    APPS_TABLE = '/apps/table',
+    APPS_SANDBOX = '/apps/sandbox',
+    PRIVILEGES_TABLE = '/privileges/table',
+    PRIVILEGES_SANDBOX = '/privileges/sandbox',
+    NOT_FOUND = '/404',
+}
+
+export enum SERVER_ROUTES {
+    USERS = '/user',
+    PRIVILEGES = '/privilege',
+    APPS = '/app',
+    GROUPS = '/group',
+}
+
+export enum ResourceType {
+    USER = 'user',
+    APP = 'app',
+    GROUP = 'group',
+}
