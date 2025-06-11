@@ -20,7 +20,7 @@ function PrivilegeList() {
         },
     ];
 
-    const { isLoading, error, privileges, refetch } = useReadPrivilegesQuery();
+    const { isLoading, error, privileges } = useReadPrivilegesQuery();
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {(error as Error).message}</div>;
 
