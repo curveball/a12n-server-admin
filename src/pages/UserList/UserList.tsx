@@ -111,8 +111,8 @@ const UserList = () => {
         }
     }, [allUsersLoading, data, verifiedUsers, refetch]);
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    if (isLoading) return <div data-testid='user-list-loading'>Loading...</div>;
+    if (error) return <div data-testid='user-list-error'>Error: {error.message}</div>;
 
     return (
         <>
