@@ -55,7 +55,11 @@ First-time contributors:
 │   ├── providers               # Providers for context
 │   ├── tests                   # Test setup
 │   ├── types                   # Type definitions (*d.ts, .ts)
-│   └── utils                   # Utility and helper functions
+│   ├── utils                   # Utility and helper functions
+│   ├── App.tsx                 # Root application component
+│   ├── main.tsx                # Application entry point
+│   ├── theme.css               # Global styling and theming
+│   └── routes.ts               # Routes configuration
 ├── test-results                # Test results from Playwright
 ├── tsconfig.app.json
 ├── tsconfig.json

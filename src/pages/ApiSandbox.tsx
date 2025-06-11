@@ -1,7 +1,7 @@
 import { QueryOptions } from '@tanstack/react-query';
+import { getAllUsers } from '../api';
 import DeveloperTabComponent from '../components/DeveloperTab/DeveloperTab';
 import { useAxios } from '../hooks';
-import { getAllUsers } from '../utils/queries/users';
 
 const ApiSandbox = () => {
     const api = useAxios();

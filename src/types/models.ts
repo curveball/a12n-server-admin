@@ -1,5 +1,4 @@
 import { HalResource } from 'hal-types';
-import { ResourceType } from '../utils/constants';
 
 export type Resource<T extends Record<string, unknown> = Record<string, never>> = HalResource<T>;
 
@@ -42,3 +41,9 @@ export type User = BaseResource & {
 };
 
 export type Model = App | Template | Group | User;
+
+export enum ResourceType {
+    USER = 'user',
+    APP = 'app',
+    GROUP = 'group',
+}

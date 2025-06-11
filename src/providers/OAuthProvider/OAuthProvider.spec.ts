@@ -1,7 +1,7 @@
 // src/tests/OAuthFlow.test.tsx
 import { expect, test } from '@playwright/test';
-import { CLIENT_ROUTES } from '../../utils/constants';
-import { formatAPIPath } from '../../utils/helpers/common';
+import { CLIENT_ROUTES } from '../../routes';
+import { formatAPIPath } from '../../utils';
 
 test('should trigger OAuth flow and finish at /users/table', async ({ page }) => {
     await page.goto(CLIENT_ROUTES.AUTH_TRIGGER);

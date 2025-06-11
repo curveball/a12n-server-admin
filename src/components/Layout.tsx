@@ -3,7 +3,7 @@ import { Flex, Theme } from '@radix-ui/themes';
 import { useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 import packageJson from '../../package.json';
-import { CLIENT_ROUTES } from '../utils/constants';
+import { CLIENT_ROUTES } from '../routes';
 import { Sidebar } from './Sidebar';
 import type { NavItem } from './Sidebar/Sidebar';
 

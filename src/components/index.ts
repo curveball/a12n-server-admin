@@ -4,7 +4,7 @@ export { default as DropdownSelector } from './DropdownSelector';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as InputField } from './InputField';
 export { default as Layout } from './Layout';
-export { default as Protected } from './Protected';
+export { default as Protected } from './Protected/Protected';
 export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as Table } from './Table';
 export { default as TableList } from './TableList/TableList';

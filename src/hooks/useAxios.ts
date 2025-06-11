@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 
-import { configureInterceptors, ejectInterceptors } from '../config/axios';
-import APICore from '../utils/api';
+import { configureInterceptors, ejectInterceptors } from '../api';
+import APICore from '../api/core';
 import useOAuth from './useOAuth';
 import useToast from './useToast';
 

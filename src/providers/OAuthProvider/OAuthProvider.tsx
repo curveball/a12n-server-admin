@@ -2,14 +2,10 @@ import { generateCodeVerifier, OAuth2Token } from '@badgateway/oauth2-client';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import client from '../../config/oauth';
 import { OAuthContext } from '../../hooks/useOAuth';
-import {
-    AUTHORIZATION_CODE_QUERY_PARAM_NAME,
-    CLIENT_ROUTES,
-    CODE_VERIFIER_LOCAL_STORAGE_NAME,
-    POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME,
-} from '../../utils/constants';
+import { CLIENT_ROUTES } from '../../routes';
+import { CODE_VERIFIER_LOCAL_STORAGE_NAME, POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME } from '../../utils/constants';
+import client from './OAuth2Client';
 
 export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -35,7 +31,7 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             const searchParams = new URLSearchParams(window.location.search);
 
             const oAuth2Token = await client.authorizationCode.getToken({
-                code: searchParams.get(AUTHORIZATION_CODE_QUERY_PARAM_NAME)!,
+                code: searchParams.get('code')!,
                 redirectUri: import.meta.env.VITE_POST_AUTH_REDIRECT_URI,
                 codeVerifier,
                 state: postAuthRedirectPath,

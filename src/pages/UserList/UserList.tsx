@@ -2,10 +2,10 @@
 import { Badge } from '@radix-ui/themes';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
+import { getAllUsers, getVerifiedUsers } from '../../api/users';
 import TableList from '../../components/TableList/TableList';
 import { useAxios } from '../../hooks';
 import { Users } from '../../utils/helpers/models';
-import { getAllUsers, getVerifiedUsers } from '../../utils/queries/users';
 
 const UserList = () => {
     const api = useAxios();
