@@ -14,7 +14,7 @@ interface QueryResult<T, K extends string = string> {
     queryFn: () => Promise<T>;
 }
 
-vi.mock('../utils/queries/users', () => ({
+vi.mock('../../api/users', () => ({
     getAllUsers: () => ({
         queryKey: ['users'],
         queryFn: async () =>
@@ -44,6 +44,23 @@ vi.mock('../utils/queries/users', () => ({
     }),
     useCreateUserQuery: () => ({
         mutateAsync: async () => Promise.resolve({}),
+    }),
+    useAllUsersQuery: vi.fn().mockReturnValue({
+        refetch: vi.fn(),
+        data: {
+            total: 3,
+            _embedded: {
+                item: [
+                    { id: 1, nickname: 'John Doe', email: 'john@example.com', _links: { self: { href: '/users/1' } } },
+                    {
+                        id: 2,
+                        nickname: 'Jane Smith',
+                        email: 'jane@example.com',
+                        _links: { self: { href: '/users/2' } },
+                    },
+                ],
+            },
+        },
     }),
 }));
 
@@ -79,20 +96,6 @@ describe('UserList Tests', () => {
     });
 
     it('renders loading state initially', async () => {
-        vi.mock('../utils/queries/users', () => ({
-            getAllUsers: () => ({
-                queryKey: ['users'],
-                queryFn: () => new Promise(() => {}),
-            }),
-            getVerifiedUsers: () => ({
-                queryKey: ['verifiedUsers'],
-                queryFn: () => new Promise(() => {}),
-            }),
-            useCreateUserQuery: () => ({
-                mutateAsync: async () => Promise.resolve({}),
-            }),
-        }));
-
         const queryClient = createQueryClient();
         render(
             <QueryClientProvider client={queryClient}>
@@ -100,7 +103,7 @@ describe('UserList Tests', () => {
             </QueryClientProvider>,
         );
 
-        expect(await screen.findByText('Loading...')).toBeInTheDocument();
+        expect(screen.getAllByText('Loading...')).toBeTruthy();
     });
 
     it('renders the error state when data is not available', () => {
@@ -109,7 +112,7 @@ describe('UserList Tests', () => {
                 <UserList />
             </QueryClientProvider>,
         );
-        expect(screen.findByText('Error: No data available')).toBeTruthy();
+        expect(screen.getAllByText('Error: No data available')).toBeTruthy();
     });
 
     it('renders the table list when data is available', () => {

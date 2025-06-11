@@ -3,14 +3,12 @@ import { Badge } from '@radix-ui/themes';
 import { useEffect, useMemo, useState } from 'react';
 import { useAllUsersQuery } from '../../api/users';
 import TableList from '../../components/TableList/TableList';
-import { useAxios } from '../../hooks';
 import { User } from '../../types';
 import { Users } from '../../utils/helpers/models';
 
 const UserList = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [users, setUsers] = useState<User[]>([]);
-    const api = useAxios();
     const userColumnHeadings = useMemo(
         () => [
             { field: 'nickname', headerName: 'User Name', flex: 1, minWidth: 150, resizable: false },
@@ -100,7 +98,7 @@ const UserList = () => {
         [],
     );
 
-    const { data, isLoading: allUsersLoading, error, verifiedUsers, refetch } = useAllUsersQuery(api);
+    const { data, isLoading: allUsersLoading, error, verifiedUsers, refetch } = useAllUsersQuery();
 
     useEffect(() => {
         if (allUsersLoading || !data) {
