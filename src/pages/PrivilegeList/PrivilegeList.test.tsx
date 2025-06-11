@@ -16,7 +16,7 @@ const createQueryClient = () =>
     });
 
 // Mock OAuthProvider so that useOAuth returns a dummy token.
-vi.mock('../lib/hooks/useOAuth', () => ({
+vi.mock('../../hooks/useOAuth', () => ({
     useOAuth: () => ({ tokens: { accessToken: 'dummy-token' }, isAuthenticated: true }),
 }));
 

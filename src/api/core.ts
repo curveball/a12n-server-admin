@@ -9,7 +9,7 @@ import {
     MutationRequestParams,
     QueryRequestParams,
 } from '../types';
-import { formatAPIPath } from './helpers/common';
+import { formatAPIPath } from '../utils';
 
 export enum HTTP_METHODS {
     GET = 'get',

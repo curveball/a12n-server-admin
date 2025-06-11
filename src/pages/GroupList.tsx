@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
+import { getAllGroups } from '../api';
 import { Table } from '../components';
 import { useAxios } from '../hooks';
 import { Groups } from '../utils/helpers/models';
-import { getAllGroups } from '../utils/queries/groups';
 
 const AppList = () => {
     const api = useAxios();

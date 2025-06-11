@@ -2,9 +2,24 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
-import Protected from '../components/Protected';
-import useOAuth from '../hooks/useOAuth';
-import { CLIENT_ROUTES } from '../utils/constants';
+import * as useOAuth from '../../hooks/useOAuth';
+import { CLIENT_ROUTES } from '../../routes';
+import Protected from './Protected';
+
+vi.resetAllMocks();
+
+vi.mock('@badgateway/oauth2-client', () =>
+    vi.fn().mockReturnValue({
+        generateCodeVerifier: vi.fn(),
+        generateCodeChallenge: vi.fn(),
+        client: {
+            authorizationCode: {
+                getAuthorizeUri: vi.fn(),
+                getToken: vi.fn(),
+            },
+        },
+    }),
+);
 
 // Patch window.location to avoid navigation errors.
 beforeAll(() => {
@@ -19,18 +34,25 @@ beforeAll(() => {
     });
 });
 
-// Mock the useOAuth hook.
-vi.mock('../hooks/useOAuth', () => ({
-    default: vi.fn().mockReturnValue({
-        isAuthenticated: true,
-        tokens: { accessToken: 'test-token', tokenType: 'Bearer' },
-    }),
-}));
-
 describe('Protected Component', () => {
+    // Mock the useOAuth hook.
+    vi.mock('../../hooks/useOAuth', () => ({
+        default: vi.fn().mockReturnValue({
+            isAuthenticated: true,
+            tokens: { accessToken: 'test-token', tokenType: 'Bearer' },
+        }),
+    }));
+
     it('renders children when authenticated', () => {
         // Simulate an authenticated user.
-        (useOAuth as any).mockReturnValue({ isAuthenticated: true });
+        vi.spyOn(useOAuth, 'default').mockReturnValue({
+            isAuthenticated: true,
+            tokens: { accessToken: 'test-token', expiresAt: 0, refreshToken: 'test-refresh-token' },
+            setTokens: vi.fn(),
+            triggerOAuthFlow: vi.fn(),
+            handleOAuthRedirect: vi.fn(),
+            refreshAccessToken: vi.fn(),
+        }) as any;
 
         render(
             <MemoryRouter initialEntries={['/protected']}>
@@ -54,7 +76,14 @@ describe('Protected Component', () => {
 
     it('redirects to auth trigger when not authenticated', () => {
         // Simulate a non-authenticated user.
-        (useOAuth as any).mockReturnValue({ isAuthenticated: false });
+        vi.spyOn(useOAuth, 'default').mockReturnValue({
+            isAuthenticated: false,
+            tokens: null,
+            setTokens: vi.fn(),
+            triggerOAuthFlow: vi.fn(),
+            handleOAuthRedirect: vi.fn(),
+            refreshAccessToken: vi.fn(),
+        }) as any;
 
         render(
             <MemoryRouter initialEntries={['/protected']}>

@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { HalLink } from 'hal-types';
 import { useMemo } from 'react';
+import { getAllPrivileges } from '../../api/privileges';
 import { Table } from '../../components';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import { useAxios } from '../../hooks';
-import { privilegesQuery } from '../../utils/queries/privileges';
+import { Collection } from '../../types';
 
 function PrivilegeList() {
     const privilegeColumnHeadings = useMemo(
@@ -29,12 +30,12 @@ function PrivilegeList() {
 
     const api = useAxios();
 
-    const { data, isLoading, error } = useQuery(privilegesQuery(api));
+    const { data, isLoading, error } = useQuery(getAllPrivileges(api));
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {(error as Error).message}</div>;
 
-    const privilegeTableData = data ? (data['_links']?.item as HalLink[]) : [];
+    const privilegeTableData = data ? ((data as Collection<Record<string, unknown>>)['_links']?.item as HalLink[]) : [];
 
     const handleDelete = () => {
         console.log('delete privilege?');

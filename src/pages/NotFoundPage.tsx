@@ -1,6 +1,6 @@
 import { Box, Heading, Text } from '@radix-ui/themes';
 import { Link } from 'react-router-dom';
-import { CLIENT_ROUTES } from '../utils/constants';
+import { CLIENT_ROUTES } from '../routes';
 
 const NotFoundPage = () => (
     <Box className='w-screen h-screen flex! flex-row items-center justify-center'>

@@ -1,12 +1,12 @@
 import { queryOptions } from '@tanstack/react-query';
 import { HalLink } from 'hal-types';
+import { SERVER_ROUTES } from '../../routes';
 import { App, Collection, Resource } from '../../types';
-import APICore from '../api';
-import { SERVER_ROUTES } from '../constants';
-import { formatAPIPath } from '../helpers/common';
-import { queryKeys } from './core';
+import { formatAPIPath } from '../../utils';
+import APICore from '../core';
+import { queryKeys } from '../query-keys';
 
-export const getAllApps = (client: APICore) => {
+const getAllApps = (client: APICore) => {
     return queryOptions({
         queryKey: queryKeys.apps.all,
         queryFn: async () => {
@@ -36,3 +36,5 @@ export const getAllApps = (client: APICore) => {
         },
     });
 };
+
+export default getAllApps;
