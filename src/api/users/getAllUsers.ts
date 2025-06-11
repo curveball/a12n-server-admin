@@ -14,6 +14,7 @@ const getAllUsers = (client: APICore) => {
             })) as Collection<User>;
             return data;
         },
+        staleTime: 1000 * 60 * 5, // 5 minutes
     });
 };
 

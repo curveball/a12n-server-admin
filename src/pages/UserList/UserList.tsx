@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from '@radix-ui/themes';
-import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
-import { getAllUsers, getVerifiedUsers } from '../../api/users';
+import { useEffect, useMemo, useState } from 'react';
+import { useAllUsersQuery } from '../../api/users';
 import TableList from '../../components/TableList/TableList';
 import { useAxios } from '../../hooks';
+import { User } from '../../types';
 import { Users } from '../../utils/helpers/models';
 
 const UserList = () => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [users, setUsers] = useState<User[]>([]);
     const api = useAxios();
     const userColumnHeadings = useMemo(
         () => [
@@ -97,29 +99,28 @@ const UserList = () => {
         ],
         [],
     );
-    const { data, isLoading, error } = useQuery(getAllUsers(api));
-    const {
-        data: verifiedUsers,
-        isLoading: verifiedUsersLoading,
-        error: verifiedUsersError,
-    } = useQuery(getVerifiedUsers(api));
 
-    if (isLoading || verifiedUsersLoading) return <div>Loading...</div>;
+    const { data, isLoading: allUsersLoading, error, verifiedUsers, refetch } = useAllUsersQuery(api);
+
+    useEffect(() => {
+        if (allUsersLoading || !data) {
+            setIsLoading(true);
+            setUsers([]);
+        } else {
+            refetch();
+            setIsLoading(false);
+            setUsers(data?._embedded?.item ?? []);
+        }
+    }, [allUsersLoading, data, verifiedUsers, refetch]);
+
+    if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
-    if (verifiedUsersError) return <div>Error: {verifiedUsersError.message}</div>;
 
     return (
         <>
             <TableList
                 columnDefs={userColumnHeadings}
-                data={
-                    data
-                        ? data['_embedded']?.item?.map((user) => ({
-                              ...user,
-                              verified: (verifiedUsers ?? new Set()).has(user['_links']?.self?.href),
-                          }))
-                        : []
-                }
+                data={users}
                 itemName='user'
                 onDelete={() => console.log('Delete')}
             />
