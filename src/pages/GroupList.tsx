@@ -1,13 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { getAllGroups } from '../api';
+import { useAllGroupsQuery } from '../api';
 import { Table } from '../components';
-import { useAxios } from '../hooks';
 import { Groups } from '../utils/helpers/models';
 
-const AppList = () => {
-    const api = useAxios();
+const GroupList = () => {
     const groupColumnHeadings = useMemo(
         () => [
             {
@@ -58,7 +55,8 @@ const AppList = () => {
         ],
         [],
     );
-    const { data, isLoading, error } = useQuery(getAllGroups(api));
+
+    const { data, groups, isLoading, error } = useAllGroupsQuery();
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
@@ -83,4 +81,4 @@ const AppList = () => {
     );
 };
 
-export default AppList;
+export default GroupList;
