@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ResourceType, SERVER_ROUTES } from '../../utils/constants';
+import { ResourceType, SERVER_ROUTES } from '../../types/models';
 import { formatAPIPath } from '../../utils/helpers/common';
 import APICore from '../core';
 import { queryKeys } from '../query-keys';

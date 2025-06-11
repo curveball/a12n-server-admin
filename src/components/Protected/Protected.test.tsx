@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import * as useOAuth from '../../hooks/useOAuth';
-import { CLIENT_ROUTES } from '../../utils/constants';
+import { CLIENT_ROUTES } from '../../types/models';
 import Protected from './Protected';
 
 vi.resetAllMocks();
