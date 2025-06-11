@@ -1,10 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { APICore, getAllUsers, getVerifiedUsers } from '..';
+import { getAllUsers, getVerifiedUsers } from '..';
+import { useAxios } from '../../hooks';
 
-const useAllUsersQuery = (client: APICore) => {
-    const options = getAllUsers(client);
-    const verifiedUsersOptions = getVerifiedUsers(client);
+const useAllUsersQuery = () => {
+    const api = useAxios();
+    const options = getAllUsers(api);
+    const verifiedUsersOptions = getVerifiedUsers(api);
 
     const { data, isLoading, error, refetch, isRefetching } = useQuery(options);
     const { data: verifiedUsers } = useQuery(verifiedUsersOptions);
@@ -18,7 +20,13 @@ const useAllUsersQuery = (client: APICore) => {
         }
     }, [data, verifiedUsers]);
 
-    return { data, isLoading, error, refetch, isRefetching, verifiedUsers };
+    const queryClient = useQueryClient();
+
+    const prefetchUsers = async () => {
+        await queryClient.prefetchQuery(options);
+    };
+
+    return { data, isLoading, error, refetch, isRefetching, verifiedUsers, prefetchUsers };
 };
 
 export default useAllUsersQuery;
