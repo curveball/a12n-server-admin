@@ -32,3 +32,4 @@ dist-ssr
 # Test results
 test-results/*
 playwright/.auth/*
+playwright-report/*
