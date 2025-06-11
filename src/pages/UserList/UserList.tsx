@@ -105,11 +105,10 @@ const UserList = () => {
             setIsLoading(true);
             setUsers([]);
         } else {
-            refetch();
             setIsLoading(false);
             setUsers(data?._embedded?.item ?? []);
         }
-    }, [allUsersLoading, data, verifiedUsers, refetch]);
+    }, [allUsersLoading, data]);
 
     if (isLoading) return <div data-testid='user-list-loading'>Loading...</div>;
     if (error) return <div data-testid='user-list-error'>Error: {error.message}</div>;
