@@ -2,18 +2,18 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { getAllApps } from '.';
 import { useAxios } from '../../hooks';
-import { HalLink } from '../../types';
+import { App, Resource } from '../../types';
 
 const useAllAppsQuery = () => {
     const api = useAxios();
     const queryOptions = getAllApps(api);
-    const [apps, setApps] = useState<HalLink[]>([]);
+    const [apps, setApps] = useState<Resource<App>[]>([]);
 
     const { data, isLoading, error } = useQuery(queryOptions);
 
     useEffect(() => {
         if (data) {
-            setApps(data?._links?.item as unknown as HalLink[]);
+            setApps(data as unknown as Resource<App>[]);
         }
     }, [data]);
 
