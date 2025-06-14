@@ -49,7 +49,6 @@ describe('TableList', () => {
                 <TableList columnDefs={[]} data={[]} itemName='user' onDelete={mockOnDelete} />
             </QueryClientProvider>,
         );
-        screen.debug();
     });
 
     it('renders the table list when data is available', () => {
