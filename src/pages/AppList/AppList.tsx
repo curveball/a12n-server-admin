@@ -1,15 +1,11 @@
 import { Badge } from '@radix-ui/themes';
-import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
-import { getAllApps } from '../../api';
+import { useAllAppsQuery } from '../../api';
 import { Table } from '../../components';
 import UpdateAppModal from '../../components/Modal/UpdateAppModal';
-import { useAxios } from '../../hooks';
 import { Apps } from '../../utils/helpers/models';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const AppList = () => {
-    const api = useAxios();
-    const { data, isLoading, error } = useQuery(getAllApps(api));
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
     const appColumnHeadings = useMemo(
@@ -69,8 +65,11 @@ const AppList = () => {
         [],
     );
 
+    const { data, isLoading, error } = useAllAppsQuery();
+
     if (isLoading || !data) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
+
     const handleAddApp = () => {
         console.log('Add app');
     };

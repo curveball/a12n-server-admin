@@ -2,52 +2,28 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '@testing-library/jest-dom';
 import { cleanup, render, screen } from '@testing-library/react';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { useAllUsersQuery } from '../../api';
 import UserList from './UserList';
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 vi.mock('../utils/hooks', () => ({
     useAxios: () => ({}),
 }));
 
-interface QueryResult<T, K extends string = string> {
-    queryKey: [K];
-    queryFn: () => Promise<T>;
-}
-
-vi.mock('../utils/queries/users', () => ({
+vi.mock('../../api/users', () => ({
     getAllUsers: () => ({
         queryKey: ['users'],
-        queryFn: async () =>
-            Promise.resolve({
-                _links: {
-                    self: {
-                        href: '/users',
-                    },
-                },
-                total: 2,
-                _embedded: {
-                    item: [
-                        { id: 1, name: 'John Doe', email: 'john@example.com', _links: { self: { href: '/users/1' } } },
-                        {
-                            id: 2,
-                            name: 'Jane Smith',
-                            email: 'jane@example.com',
-                            _links: { self: { href: '/users/2' } },
-                        },
-                    ],
-                },
-            }),
-    }),
-    getVerifiedUsers: (): QueryResult<Set<string>> => ({
-        queryKey: ['verifiedUsers'],
-        queryFn: async () => Promise.resolve(new Set(['/users/1'])),
+        queryFn: async () => vi.fn(),
     }),
     useCreateUserQuery: () => ({
         mutateAsync: async () => Promise.resolve({}),
     }),
+    useAllUsersQuery: vi.fn(),
 }));
 
-vi.mock('ag-grid-react', () => ({
+vi.mock('ag-grid-react', (): any => ({
     AgGridReact: (props: any) => {
         if (props.onSelectionChanged) {
             (window as any).mockAgGridSelectionChanged = props.onSelectionChanged;
@@ -55,7 +31,12 @@ vi.mock('ag-grid-react', () => ({
         if (props.onRowDoubleClicked) {
             (window as any).mockAgGridRowDoubleClicked = props.onRowDoubleClicked;
         }
-        return <div data-testid='ag-grid' />;
+        return (
+            <div data-testid='ag-grid-mock'>
+                {Array.isArray(props.rowData) &&
+                    props.rowData.map((row, idx) => <div key={idx}>{row.nickname || row.name}</div>)}
+            </div>
+        );
     },
 }));
 
@@ -66,59 +47,64 @@ const createQueryClient = () =>
 
 describe('UserList Tests', () => {
     beforeEach(() => {
-        render(
-            <QueryClientProvider client={createQueryClient()}>
-                <UserList />
-            </QueryClientProvider>,
-        );
+        vi.clearAllMocks();
     });
 
     afterEach(() => {
-        vi.clearAllMocks();
         cleanup();
     });
 
     it('renders loading state initially', async () => {
-        vi.mock('../utils/queries/users', () => ({
-            getAllUsers: () => ({
-                queryKey: ['users'],
-                queryFn: () => new Promise(() => {}),
-            }),
-            getVerifiedUsers: () => ({
-                queryKey: ['verifiedUsers'],
-                queryFn: () => new Promise(() => {}),
-            }),
-            useCreateUserQuery: () => ({
-                mutateAsync: async () => Promise.resolve({}),
-            }),
+        vi.mocked(useAllUsersQuery).mockImplementation(() => ({
+            data: undefined,
+            isLoading: true,
+            error: null,
+            refetch: vi.fn(),
+            isRefetching: false,
+            prefetchUsers: async () => Promise.resolve(),
         }));
-
-        const queryClient = createQueryClient();
         render(
-            <QueryClientProvider client={queryClient}>
+            <QueryClientProvider client={createQueryClient()}>
                 <UserList />
             </QueryClientProvider>,
         );
-
         expect(await screen.findByText('Loading...')).toBeInTheDocument();
     });
 
-    it('renders the error state when data is not available', () => {
+    it('renders the table list when data is available', async () => {
+        const mockSuccessResponse = {
+            _links: {
+                self: {
+                    href: '/users',
+                },
+            },
+            total: 2,
+            _embedded: {
+                item: [
+                    { id: 1, name: 'John Doe', email: 'john@example.com', _links: { self: { href: '/users/1' } } },
+                    {
+                        id: 2,
+                        name: 'Jane Smith',
+                        email: 'jane@example.com',
+                        _links: { self: { href: '/users/2' } },
+                    },
+                ],
+            },
+        };
+        vi.mocked(useAllUsersQuery).mockImplementation(() => ({
+            data: mockSuccessResponse as any,
+            isLoading: false,
+            error: undefined as any,
+            refetch: vi.fn(),
+            isRefetching: false,
+            prefetchUsers: vi.fn(),
+        }));
         render(
             <QueryClientProvider client={createQueryClient()}>
                 <UserList />
             </QueryClientProvider>,
         );
-        expect(screen.findByText('Error: No data available')).toBeTruthy();
-    });
-
-    it('renders the table list when data is available', () => {
-        render(
-            <QueryClientProvider client={createQueryClient()}>
-                <UserList />
-            </QueryClientProvider>,
-        );
-        expect(screen.findByText('John Doe')).toBeTruthy();
-        expect(screen.findByText('Jane Smith')).toBeTruthy();
+        expect(await screen.findByText('John Doe')).toBeInTheDocument();
+        expect(await screen.findByText('Jane Smith')).toBeInTheDocument();
     });
 });

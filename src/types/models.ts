@@ -17,7 +17,9 @@ type BaseResource = {
     privileges: Record<string, string[]>;
 };
 
-export type App = BaseResource;
+export type App = BaseResource & {
+    href: string;
+};
 
 export type TemplateProperty = {
     type: string;

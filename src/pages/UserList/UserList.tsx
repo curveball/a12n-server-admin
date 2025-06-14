@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from '@radix-ui/themes';
-import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
-import { getAllUsers, getVerifiedUsers } from '../../api/users';
+import { useQueryClient } from '@tanstack/react-query';
+import { useEffect, useMemo, useState } from 'react';
+import { queryKeys } from '../../api/query-keys';
+import { useAllUsersQuery } from '../../api/users';
 import TableList from '../../components/TableList/TableList';
-import { useAxios } from '../../hooks';
+import { User } from '../../types';
 import { Users } from '../../utils/helpers/models';
 
 const UserList = () => {
-    const api = useAxios();
+    const [isLoading, setIsLoading] = useState(true);
+    const [users, setUsers] = useState<User[]>([]);
     const userColumnHeadings = useMemo(
         () => [
             { field: 'nickname', headerName: 'User Name', flex: 1, minWidth: 150, resizable: false },
@@ -97,29 +99,34 @@ const UserList = () => {
         ],
         [],
     );
-    const { data, isLoading, error } = useQuery(getAllUsers(api));
-    const {
-        data: verifiedUsers,
-        isLoading: verifiedUsersLoading,
-        error: verifiedUsersError,
-    } = useQuery(getVerifiedUsers(api));
 
-    if (isLoading || verifiedUsersLoading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
-    if (verifiedUsersError) return <div>Error: {verifiedUsersError.message}</div>;
+    const { data, isLoading: allUsersLoading, error } = useAllUsersQuery();
+    const queryClient = useQueryClient();
+
+    useEffect(() => {
+        if (allUsersLoading || !data) {
+            setIsLoading(true);
+            setUsers([]);
+        } else {
+            queryClient.invalidateQueries({ queryKey: queryKeys.users.all });
+            setIsLoading(false);
+            setUsers(
+                data?._embedded?.item?.map((user) => ({
+                    ...user,
+                    verified: user['_links']?.self?.href ? true : false,
+                })) ?? [],
+            );
+        }
+    }, [allUsersLoading, data, queryClient]);
+
+    if (isLoading) return <div data-testid='user-list-loading'>Loading...</div>;
+    if (error) return <div data-testid='user-list-error'>Error: {error.message}</div>;
 
     return (
         <>
             <TableList
                 columnDefs={userColumnHeadings}
-                data={
-                    data
-                        ? data['_embedded']?.item?.map((user) => ({
-                              ...user,
-                              verified: (verifiedUsers ?? new Set()).has(user['_links']?.self?.href),
-                          }))
-                        : []
-                }
+                data={users}
                 itemName='user'
                 onDelete={() => console.log('Delete')}
             />

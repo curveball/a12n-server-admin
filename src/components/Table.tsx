@@ -64,18 +64,21 @@ const Table = ({ columnDefs, data, itemName, initialValues, testId, onAdd, onDel
                 </Flex>
 
                 <div className='max-h-[80vh] h-auto w-full overflow-x-scroll'>
-                    <AgGridReact
-                        ref={gridRef}
-                        columnDefs={columnDefs}
-                        rowData={data}
-                        theme={themeQuartz.withParams({ accentColor: '#A18072' })}
-                        rowSelection={{ mode: 'multiRow' }}
-                        onSelectionChanged={onSelectionChanged}
-                        suppressRowHoverHighlight={true}
-                        columnHoverHighlight={false}
-                        domLayout='autoHeight'
-                        onRowDoubleClicked={onDoubleClick}
-                    />
+                    {data && (
+                        <AgGridReact
+                            ref={gridRef}
+                            columnDefs={columnDefs}
+                            rowData={data}
+                            theme={themeQuartz.withParams({ accentColor: '#A18072' })}
+                            rowSelection={{ mode: 'multiRow' }}
+                            onSelectionChanged={onSelectionChanged}
+                            suppressRowHoverHighlight={true}
+                            columnHoverHighlight={false}
+                            domLayout='autoHeight'
+                            onRowDoubleClicked={onDoubleClick}
+                        />
+                    )}
+                    {data && !data && <Text>No {itemName}s available</Text>}
                 </div>
             </Card>
         </Theme>

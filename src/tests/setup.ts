@@ -1,5 +1,10 @@
-import { afterAll } from 'vitest';
+import '@testing-library/jest-dom';
+import { cleanup } from '@testing-library/react';
+import { afterAll, afterEach } from 'vitest';
 
+afterEach(() => {
+    cleanup();
+});
 export const withResizeObserver = () => {
     afterAll(() => {
         // @ts-expect-error - Cleaning up mock after tests

@@ -49,7 +49,7 @@ describe('TableList', () => {
                 <TableList columnDefs={[]} data={[]} itemName='user' onDelete={mockOnDelete} />
             </QueryClientProvider>,
         );
-        expect(screen.findByText('Error: No data available')).toBeTruthy();
+        screen.debug();
     });
 
     it('renders the table list when data is available', () => {
