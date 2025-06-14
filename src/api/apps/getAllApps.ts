@@ -15,7 +15,6 @@ const getAllApps = (client: APICore) => {
             })) as Collection<App>;
 
             const apps = data._links.item as HalLink[];
-            console.log(apps);
             // Need to manually unpack
             const appDetailsPromises = apps.map(async (app: HalLink) => {
                 try {
