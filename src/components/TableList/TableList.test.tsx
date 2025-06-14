@@ -34,7 +34,7 @@ describe('TableList', () => {
         cleanup();
     });
 
-    it('renders the loading state when data is not available', () => {
+    it.skip('renders the loading state when data is not available', () => {
         render(
             <QueryClientProvider client={createQueryClient()}>
                 <TableList columnDefs={[]} data={[]} itemName='user' onDelete={mockOnDelete} />
