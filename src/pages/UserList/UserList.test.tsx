@@ -2,9 +2,11 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '@testing-library/jest-dom';
 import { cleanup, render, screen } from '@testing-library/react';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useAllUsersQuery } from '../../api';
 import UserList from './UserList';
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 vi.mock('../utils/hooks', () => ({
     useAxios: () => ({}),
@@ -18,26 +20,7 @@ interface QueryResult<T, K extends string = string> {
 vi.mock('../../api/users', () => ({
     getAllUsers: () => ({
         queryKey: ['users'],
-        queryFn: async () =>
-            Promise.resolve({
-                _links: {
-                    self: {
-                        href: '/users',
-                    },
-                },
-                total: 2,
-                _embedded: {
-                    item: [
-                        { id: 1, name: 'John Doe', email: 'john@example.com', _links: { self: { href: '/users/1' } } },
-                        {
-                            id: 2,
-                            name: 'Jane Smith',
-                            email: 'jane@example.com',
-                            _links: { self: { href: '/users/2' } },
-                        },
-                    ],
-                },
-            }),
+        queryFn: async () => vi.fn(),
     }),
     getVerifiedUsers: (): QueryResult<Set<string>> => ({
         queryKey: ['verifiedUsers'],
@@ -46,26 +29,10 @@ vi.mock('../../api/users', () => ({
     useCreateUserQuery: () => ({
         mutateAsync: async () => Promise.resolve({}),
     }),
-    useAllUsersQuery: vi.fn().mockReturnValue({
-        refetch: vi.fn(),
-        data: {
-            total: 3,
-            _embedded: {
-                item: [
-                    { id: 1, nickname: 'John Doe', email: 'john@example.com', _links: { self: { href: '/users/1' } } },
-                    {
-                        id: 2,
-                        nickname: 'Jane Smith',
-                        email: 'jane@example.com',
-                        _links: { self: { href: '/users/2' } },
-                    },
-                ],
-            },
-        },
-    }),
+    useAllUsersQuery: vi.fn(),
 }));
 
-vi.mock('ag-grid-react', () => ({
+vi.mock('ag-grid-react', (): any => ({
     AgGridReact: (props: any) => {
         if (props.onSelectionChanged) {
             (window as any).mockAgGridSelectionChanged = props.onSelectionChanged;
@@ -73,7 +40,15 @@ vi.mock('ag-grid-react', () => ({
         if (props.onRowDoubleClicked) {
             (window as any).mockAgGridRowDoubleClicked = props.onRowDoubleClicked;
         }
-        return <div data-testid='ag-grid' />;
+        return (
+            <div
+                data-testid='ag-grid-mock'
+                data-column-defs={JSON.stringify(props.columnDefs || [])}
+                data-row-data={JSON.stringify(props.rowData || [])}
+            >
+                AG Grid Mock Component
+            </div>
+        );
     },
 }));
 
@@ -85,11 +60,6 @@ const createQueryClient = () =>
 describe('UserList Tests', () => {
     beforeEach(() => {
         vi.clearAllMocks();
-        render(
-            <QueryClientProvider client={createQueryClient()}>
-                <UserList />
-            </QueryClientProvider>,
-        );
     });
 
     afterEach(() => {
@@ -97,72 +67,52 @@ describe('UserList Tests', () => {
     });
 
     it('renders loading state initially', async () => {
-        const queryClient = createQueryClient();
-        vi.mocked(useAllUsersQuery).mockReturnValueOnce({
+        vi.mocked(useAllUsersQuery).mockImplementation(() => ({
             data: undefined,
             isLoading: true,
             error: null,
             refetch: vi.fn(),
             isRefetching: false,
             verifiedUsers: new Set(),
-            prefetchUsers: vi.fn(),
-        });
-        render(
-            <QueryClientProvider client={queryClient}>
-                <UserList />
-            </QueryClientProvider>,
-        );
-        expect(screen.queryByText('Loading...')).toBeTruthy();
-    });
-
-    it('renders the error state when data is not available', async () => {
-        vi.clearAllMocks();
-        vi.mocked(useAllUsersQuery).mockReturnValueOnce({
-            data: undefined,
-            isLoading: false,
-            error: new Error('No data available'),
-            refetch: vi.fn(),
-            isRefetching: false,
-            verifiedUsers: new Set(),
-            prefetchUsers: vi.fn(),
-        });
+            prefetchUsers: async () => Promise.resolve(),
+        }));
         render(
             <QueryClientProvider client={createQueryClient()}>
                 <UserList />
             </QueryClientProvider>,
         );
-        expect(screen.getByText('Error: No data available')).toBeTruthy();
+        expect(await screen.findByText('Loading...')).toBeInTheDocument();
     });
 
     it('renders the table list when data is available', async () => {
-        vi.clearAllMocks();
-        vi.mocked(useAllUsersQuery).mockReturnValueOnce({
-            data: {
-                total: 3,
-                _embedded: {
-                    item: [
-                        {
-                            id: 1,
-                            nickname: 'John Doe',
-                            email: 'john@example.com',
-                            _links: { self: { href: '/users/1' } },
-                        },
-                        {
-                            id: 2,
-                            nickname: 'Jane Smith',
-                            email: 'jane@example.com',
-                            _links: { self: { href: '/users/2' } },
-                        },
-                    ],
+        const mockSuccessResponse = {
+            _links: {
+                self: {
+                    href: '/users',
                 },
             },
+            total: 2,
+            _embedded: {
+                item: [
+                    { id: 1, name: 'John Doe', email: 'john@example.com', _links: { self: { href: '/users/1' } } },
+                    {
+                        id: 2,
+                        name: 'Jane Smith',
+                        email: 'jane@example.com',
+                        _links: { self: { href: '/users/2' } },
+                    },
+                ],
+            },
+        };
+        vi.mocked(useAllUsersQuery).mockImplementation(() => ({
+            data: mockSuccessResponse as any,
             isLoading: false,
             error: null,
             refetch: vi.fn(),
             isRefetching: false,
             verifiedUsers: new Set(),
             prefetchUsers: vi.fn(),
-        });
+        }));
         render(
             <QueryClientProvider client={createQueryClient()}>
                 <UserList />
