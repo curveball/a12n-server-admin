@@ -39,4 +39,9 @@ jobs:
           mkdir -p ./src/tests/a12n-server
           echo "JWT_PRIVATE_KEY=${{ secrets.JWT_PRIVATE_KEY }}" >> ./src/tests/a12n-server/.env
           npx playwright test
-
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
