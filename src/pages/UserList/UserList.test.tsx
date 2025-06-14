@@ -32,12 +32,9 @@ vi.mock('ag-grid-react', (): any => ({
             (window as any).mockAgGridRowDoubleClicked = props.onRowDoubleClicked;
         }
         return (
-            <div
-                data-testid='ag-grid-mock'
-                data-column-defs={JSON.stringify(props.columnDefs || [])}
-                data-row-data={JSON.stringify(props.rowData || [])}
-            >
-                AG Grid Mock Component
+            <div data-testid='ag-grid-mock'>
+                {Array.isArray(props.rowData) &&
+                    props.rowData.map((row, idx) => <div key={idx}>{row.nickname || row.name}</div>)}
             </div>
         );
     },
@@ -97,7 +94,7 @@ describe('UserList Tests', () => {
         vi.mocked(useAllUsersQuery).mockImplementation(() => ({
             data: mockSuccessResponse as any,
             isLoading: false,
-            error: null,
+            error: undefined as any,
             refetch: vi.fn(),
             isRefetching: false,
             prefetchUsers: vi.fn(),
@@ -107,7 +104,7 @@ describe('UserList Tests', () => {
                 <UserList />
             </QueryClientProvider>,
         );
-        expect(screen.findByText('John Doe')).toBeTruthy();
-        expect(screen.findByText('Jane Smith')).toBeTruthy();
+        expect(await screen.findByText('John Doe')).toBeInTheDocument();
+        expect(await screen.findByText('Jane Smith')).toBeInTheDocument();
     });
 });
