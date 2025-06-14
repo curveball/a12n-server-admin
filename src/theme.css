@@ -2,14 +2,6 @@
 
 @font-face {
     font-family: 'Matter', sans-serif;
-    src: url('./assets/fonts/Matter-Light.woff2') format('woff2');
-    font-weight: 300; /* Light */
-    font-style: normal;
-    display: swap;
-}
-
-@font-face {
-    font-family: 'Matter', sans-serif;
     src: url('./assets/fonts/Matter-Regular.woff2') format('woff2');
     font-weight: 400; /* Regular */
     font-style: normal;
@@ -40,14 +32,6 @@
     display: swap;
 }
 
-@font-face {
-    font-family: 'Matter', sans-serif;
-    src: url('./assets/fonts/Matter-Heavy.woff2') format('woff2');
-    font-weight: 800; /* Heavy */
-    font-style: normal;
-    display: swap;
-}
-
 .radix-themes {
     --font-weight-light: 300;
     --font-weight-regular: 400;
@@ -55,7 +39,7 @@
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --default-font-family: 'Matter', sans-serif;
-    --heading-font-family: 'Matter';
+    --heading-font-family: 'Matter', sans-serif;
     --strong-font-family: 'Matter';
 }
 
