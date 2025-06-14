@@ -1,5 +1,5 @@
 import { expect, test as setup } from '@playwright/test';
-import { CLIENT_ROUTES } from '../utils/constants';
+import { CLIENT_ROUTES } from '../routes';
 
 const authFile = 'playwright/.auth/user.json';
 
