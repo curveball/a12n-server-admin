@@ -3,7 +3,7 @@ import { exec } from 'child_process';
 export default async function globalTeardown() {
     console.log('🧹 Cleaning up test environment...');
     // find the process running on port 8531
-    exec('lsof -i :8531', (error, stdout, stderr) => {
+    exec('lsof -i :8531', (error, stdout) => {
         if (error) {
             console.error(`Error finding process: ${error.message}`);
             return;
