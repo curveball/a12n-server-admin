@@ -41,7 +41,7 @@
 }
 
 @font-face {
-    font-family: 'Matter';
+    font-family: 'Matter', sans-serif;
     src: url('./assets/fonts/Matter-Heavy.woff2') format('woff2');
     font-weight: 800; /* Heavy */
     font-style: normal;
@@ -49,7 +49,12 @@
 }
 
 .radix-themes {
-    --default-font-family: 'Matter';
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --default-font-family: 'Matter', sans-serif;
     --heading-font-family: 'Matter';
     --strong-font-family: 'Matter';
 }
