@@ -12,11 +12,6 @@ vi.mock('../utils/hooks', () => ({
     useAxios: () => ({}),
 }));
 
-interface QueryResult<T, K extends string = string> {
-    queryKey: [K];
-    queryFn: () => Promise<T>;
-}
-
 vi.mock('../../api/users', () => ({
     getAllUsers: () => ({
         queryKey: ['users'],
