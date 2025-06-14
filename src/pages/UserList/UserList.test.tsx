@@ -34,7 +34,7 @@ vi.mock('ag-grid-react', (): any => ({
         return (
             <div data-testid='ag-grid-mock'>
                 {Array.isArray(props.rowData) &&
-                    props.rowData.map((row, idx) => <div key={idx}>{row.nickname || row.name}</div>)}
+                    props.rowData.map((row: any, idx: number) => <div key={idx}>{row.nickname || row.name}</div>)}
             </div>
         );
     },

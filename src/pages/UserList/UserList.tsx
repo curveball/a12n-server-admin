@@ -111,7 +111,7 @@ const UserList = () => {
             queryClient.invalidateQueries({ queryKey: queryKeys.users.all });
             setIsLoading(false);
             setUsers(
-                data?._embedded?.item?.map((user) => ({
+                data?._embedded?.item?.map((user: any) => ({
                     ...user,
                     verified: user['_links']?.self?.href ? true : false,
                 })) ?? [],
