@@ -22,10 +22,6 @@ vi.mock('../../api/users', () => ({
         queryKey: ['users'],
         queryFn: async () => vi.fn(),
     }),
-    getVerifiedUsers: (): QueryResult<Set<string>> => ({
-        queryKey: ['verifiedUsers'],
-        queryFn: async () => Promise.resolve(new Set(['/users/1'])),
-    }),
     useCreateUserQuery: () => ({
         mutateAsync: async () => Promise.resolve({}),
     }),
@@ -73,7 +69,6 @@ describe('UserList Tests', () => {
             error: null,
             refetch: vi.fn(),
             isRefetching: false,
-            verifiedUsers: new Set(),
             prefetchUsers: async () => Promise.resolve(),
         }));
         render(
@@ -110,7 +105,6 @@ describe('UserList Tests', () => {
             error: null,
             refetch: vi.fn(),
             isRefetching: false,
-            verifiedUsers: new Set(),
             prefetchUsers: vi.fn(),
         }));
         render(

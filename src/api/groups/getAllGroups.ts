@@ -28,6 +28,7 @@ const getAllGroups = (client: APICore) => {
             return Promise.all(groupDetailsPromises);
         },
         staleTime: 1000 * 60 * 5, // 5 minutes
+        gcTime: 1000 * 60 * 3600, // 1 hour
     });
 };
 

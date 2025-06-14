@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from '@radix-ui/themes';
+import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useMemo, useState } from 'react';
+import { queryKeys } from '../../api/query-keys';
 import { useAllUsersQuery } from '../../api/users';
 import TableList from '../../components/TableList/TableList';
 import { User } from '../../types';
@@ -98,17 +100,24 @@ const UserList = () => {
         [],
     );
 
-    const { data, isLoading: allUsersLoading, error, verifiedUsers, refetch } = useAllUsersQuery();
+    const { data, isLoading: allUsersLoading, error } = useAllUsersQuery();
+    const queryClient = useQueryClient();
 
     useEffect(() => {
         if (allUsersLoading || !data) {
             setIsLoading(true);
             setUsers([]);
         } else {
+            queryClient.invalidateQueries({ queryKey: queryKeys.users.all });
             setIsLoading(false);
-            setUsers(data?._embedded?.item ?? []);
+            setUsers(
+                data?._embedded?.item?.map((user) => ({
+                    ...user,
+                    verified: user['_links']?.self?.href ? true : false,
+                })) ?? [],
+            );
         }
-    }, [allUsersLoading, data]);
+    }, [allUsersLoading, data, queryClient]);
 
     if (isLoading) return <div data-testid='user-list-loading'>Loading...</div>;
     if (error) return <div data-testid='user-list-error'>Error: {error.message}</div>;
