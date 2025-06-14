@@ -78,7 +78,7 @@ const Table = ({ columnDefs, data, itemName, initialValues, testId, onAdd, onDel
                             onRowDoubleClicked={onDoubleClick}
                         />
                     )}
-                    {data && !data && <Text>No {itemName}s available</Text>}
+                    {(!data || data.length === 0) && <Text>No {itemName}s available</Text>}
                 </div>
             </Card>
         </Theme>
