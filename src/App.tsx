@@ -1,7 +1,6 @@
 import '@radix-ui/themes/styles.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-
 import {
     AppList,
     GroupList,
@@ -11,6 +10,7 @@ import {
     PrivilegeList,
     UserList,
 } from './pages';
+import './theme.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -19,7 +19,16 @@ import ApiSandbox from './pages/ApiSandbox';
 import { OAuthProvider } from './providers/OAuthProvider/OAuthProvider';
 import { CLIENT_ROUTES } from './routes';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retryDelay: (failureCount, error) => {
+                console.log(failureCount, error);
+                return 1000;
+            },
+        },
+    },
+});
 
 function App() {
     return (
