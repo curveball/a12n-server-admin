@@ -21,7 +21,7 @@ const ciConfig = [
     },
     {
         command: 'npm run setup:backend',
-        url: 'http://localhost:8531',
+        url: 'http://localhost:8571',
         reuseExistingServer: !process.env.CI,
     },
 ];
