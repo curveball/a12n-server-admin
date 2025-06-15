@@ -20,6 +20,8 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.52.0-noble
       options: --user 1001
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,6 +34,8 @@ jobs:
         run: rm -rf node_modules package-lock.json
       - name: Install dependencies
         run: npm install
+      - name: Install sqlite3
+        run: apt-get update && apt-get install -y sqlite3
       - name: Install Playwright Browsers
         run: npx playwright install
       - name: Run e2e tests
