@@ -36,6 +36,12 @@ jobs:
         run: npm install
       - name: Install Playwright Browsers
         run: npx playwright install
+      - name: Verify sqlite3 availability
+        run: |
+          echo "🔍 Checking sqlite3..."
+          sqlite3 --version || echo "SQLite3 not found in system"
+          echo "📦 Checking npm sqlite3..."
+          npm list sqlite3 || echo "sqlite3 npm package not found"
       - name: Run e2e tests
         run: |
           mkdir -p ./src/tests/a12n-server

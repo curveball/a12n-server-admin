@@ -1,5 +1,6 @@
 import { defineConfig } from '@playwright/test';
 import dotenv from 'dotenv';
+import path from 'path';
 
 dotenv.config({ path: `.env` });
 
@@ -23,6 +24,7 @@ const ciConfig = [
         command: 'npm run setup:backend',
         url: 'http://localhost:8571',
         reuseExistingServer: !process.env.CI,
+        cwd: path.join(process.cwd(), 'src/tests/a12n-server'),
     },
 ];
 
