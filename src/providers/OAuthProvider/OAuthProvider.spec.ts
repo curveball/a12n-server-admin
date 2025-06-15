@@ -1,5 +1,6 @@
 // src/tests/OAuthFlow.test.tsx
 import { expect, test } from '@playwright/test';
+import * as authFile from '../../../playwright/.auth/user.json' assert { type: 'json' };
 import { CLIENT_ROUTES } from '../../routes';
 import { formatAPIPath } from '../../utils';
 
@@ -16,6 +17,7 @@ test('should trigger OAuth flow and finish at /users/table', async ({ page }) =>
 });
 
 test('should trigger OAuth flow and finish at custom redirect path', async ({ page }) => {
+    await page.context().storageState({ path: authFile });
     await page.goto(formatAPIPath([CLIENT_ROUTES.AUTH_TRIGGER], { redirect: CLIENT_ROUTES.USERS_SANDBOX }));
 
     await expect(page.url()).toContain(`http://localhost:5173/auth/trigger?redirect=%2Fusers%2Fsandbox`);

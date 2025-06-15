@@ -47,6 +47,7 @@ First-time contributors:
 ├── playwright.config.ts      # E2E test configuration
 ├── public                    # Static files for build
 ├── src
+│   ├── api                     # API calls, tanstack query hooks and options
 │   ├── assets                  # Static assets that wind up in build
 │   ├── components              # Reusable UI components
 │   ├── hooks                   # Custom hooks
@@ -91,6 +92,11 @@ Collocate tests within the same folder as the code they test.
     - Run with `npm run test:e2e`.
 - **All Tests:**
     - Run all tests with `npm test`.
+- **E2E Tests in Docker:**
+    - Run tests with `npm run test:e2e:ci`.
+    - Build the test docker image with `npm run build:test:docker`
+    - If you are using a Mac, `docker build -f Dockerfile.playwright --platform linux/amd64 -t a12n-server-admin-test .`
+    - Run the test docker image with `npm run test:e2e:ci` (this will take a while)
 - **CI:**
     - All PRs are checked by GitHub Actions ([see workflows](.github/workflows/)).
 

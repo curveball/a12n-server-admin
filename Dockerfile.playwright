@@ -1,0 +1,53 @@
+# Use the official Node.js image as a base image 
+FROM node:20-alpine AS build-stage
+
+FROM mcr.microsoft.com/playwright:v1.52.0-noble AS test-stage
+
+USER pwuser
+
+WORKDIR /home/pwuser
+
+# Set the port to 5173
+ENV PORT=5173
+ENV HOST=0.0.0.0
+
+USER root
+
+# Install sqlite3 and netcat-openbsd
+RUN apt-get update && apt-get install -y sqlite3 netcat-traditional
+
+# Set the user to the non-root user (pwuser already exists in Playwright image)
+USER pwuser
+
+# Copy package.json and package-lock.json (if available) 
+COPY --chown=pwuser:pwuser package*.json ./ 
+
+# Clear npm cache and install dependencies with specific flags
+RUN npm cache clean --force
+RUN rm -rf node_modules package-lock.json
+RUN npm install
+
+# Copy the entrypoint script
+COPY --chown=pwuser:pwuser entrypoint.sh /home/pwuser/entrypoint.sh
+RUN chmod +x /home/pwuser/entrypoint.sh
+
+# Copy permission needed file into image
+COPY --chown=pwuser:pwuser ./src/ ./src/
+COPY --chown=pwuser:pwuser ./playwright.config.ts ./
+COPY --chown=pwuser:pwuser ./.env ./
+RUN mkdir -p /home/pwuser/src/tests/a12n-server
+RUN chown pwuser:pwuser /home/pwuser/src/tests/a12n-server
+RUN cp /home/pwuser/src/tests/snapshot.sql /home/pwuser/src/tests/a12n-server/snapshot.sql
+
+# Install Playwright browsers
+RUN npx playwright install 
+
+# Set the environment to use the right display drivers
+ENV CI=true
+
+# Start both a12n-server and dev server in background, then run tests
+CMD ["sh", "-c", "mkdir -p /home/pwuser/src/tests/a12n-server && cp /home/pwuser/src/tests/snapshot.sql /home/pwuser/src/tests/a12n-server/ && cd /home/pwuser/src/tests/a12n-server && chown pwuser:pwuser /home/pwuser/src/tests/a12n-server && npx @curveball/a12n-server & while ! nc -z localhost 8531; do sleep 1; done && cd ../../ && npm run dev & while ! nc -z localhost 5173; do sleep 1; done && npx playwright test"]
+
+
+
+ 
