@@ -5,17 +5,36 @@ dotenv.config({ path: `.env` });
 
 export default defineConfig({
     testMatch: '**/*.spec.ts',
-    timeout: 30000,
+    timeout: 30 * 1000,
     use: {
         baseURL: 'http://localhost:5173',
+        trace: 'on-first-failure',
         headless: process.env.CI ? true : false,
+        httpCredentials: {
+            username: process.env.VITE_AUTH_SERVER_EMAIL || '',
+            password: process.env.VITE_AUTH_SERVER_PASSWORD || '',
+        },
     },
-    webServer: {
-        command: 'npm run dev',
-        url: 'http://localhost:5173',
-        reuseExistingServer: !process.env.CI,
-        stdout: 'ignore',
-        stderr: 'pipe',
-    },
-    reporter: 'html',
+    projects: [
+        {
+            name: 'setup',
+            testMatch: /auth\.setup\.ts/,
+        },
+        {
+            name: 'e2e tests',
+            testMatch: '**/*.spec.ts',
+            use: {
+                baseURL: 'http://localhost:5173',
+                headless: process.env.CI ? true : false,
+                httpCredentials: {
+                    username: process.env.VITE_AUTH_SERVER_EMAIL || '',
+                    password: process.env.VITE_AUTH_SERVER_PASSWORD || '',
+                },
+            },
+        },
+        {
+            name: 'teardown',
+            testMatch: /global\.teardown\.ts/,
+        },
+    ],
 });

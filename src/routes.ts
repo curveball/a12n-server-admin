@@ -18,4 +18,5 @@ export enum SERVER_ROUTES {
     PRIVILEGES = '/privilege',
     APPS = '/app',
     GROUPS = '/group',
+    REGISTER_CONTINUE = '/register?continue=',
 }
