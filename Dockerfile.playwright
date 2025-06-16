@@ -23,8 +23,6 @@ RUN echo "VITE_AUTH_CLIENT_ID=$VITE_AUTH_CLIENT_ID" > .env && \
     echo "VITE_AUTH_SERVER_PASSWORD=$VITE_AUTH_SERVER_PASSWORD" >> .env && \
     echo "VITE_CLIENT_SECRET=$VITE_CLIENT_SECRET" >> .env
 
-FROM build-stage AS test-stage
-
 FROM mcr.microsoft.com/playwright:v1.52.0-noble AS test-stage
 
 USER pwuser
