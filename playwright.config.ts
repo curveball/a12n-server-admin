@@ -6,15 +6,6 @@ dotenv.config({ path: `.env` });
 export default defineConfig({
     testMatch: '**/*.spec.ts',
     timeout: 30 * 1000,
-    use: {
-        baseURL: 'http://localhost:5173',
-        trace: 'on-first-failure',
-        headless: process.env.CI ? true : false,
-        httpCredentials: {
-            username: process.env.VITE_AUTH_SERVER_EMAIL || '',
-            password: process.env.VITE_AUTH_SERVER_PASSWORD || '',
-        },
-    },
     projects: [
         {
             name: 'setup',

@@ -1,6 +1,3 @@
-# Use the official Node.js image as a base image 
-FROM node:20-alpine AS build-stage
-
 FROM mcr.microsoft.com/playwright:v1.52.0-noble AS test-stage
 
 USER pwuser
@@ -35,9 +32,9 @@ RUN chmod +x /home/pwuser/entrypoint.sh
 COPY --chown=pwuser:pwuser ./src/ ./src/
 COPY --chown=pwuser:pwuser ./playwright.config.ts ./
 COPY --chown=pwuser:pwuser ./.env ./
+COPY --chown=pwuser:pwuser ./src/tests/snapshot.sql /home/pwuser/src/tests/a12n-server/
 RUN mkdir -p /home/pwuser/src/tests/a12n-server
 RUN chown pwuser:pwuser /home/pwuser/src/tests/a12n-server
-RUN cp /home/pwuser/src/tests/snapshot.sql /home/pwuser/src/tests/a12n-server/snapshot.sql
 
 # Install Playwright browsers
 RUN npx playwright install 
@@ -45,8 +42,7 @@ RUN npx playwright install
 # Set the environment to use the right display drivers
 ENV CI=true
 
-# Start both a12n-server and dev server in background, then run tests
-CMD ["sh", "-c", "mkdir -p /home/pwuser/src/tests/a12n-server && cp /home/pwuser/src/tests/snapshot.sql /home/pwuser/src/tests/a12n-server/ && cd /home/pwuser/src/tests/a12n-server && chown pwuser:pwuser /home/pwuser/src/tests/a12n-server && npx @curveball/a12n-server & while ! nc -z localhost 8531; do sleep 1; done && cd ../../ && npm run dev & while ! nc -z localhost 5173; do sleep 1; done && npx playwright test"]
+CMD ["/home/pwuser/entrypoint.sh"]
 
 
 
