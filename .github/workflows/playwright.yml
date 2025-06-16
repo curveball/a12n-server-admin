@@ -27,6 +27,14 @@ jobs:
     - name: Install Docker Compose
       run: sudo apt-get install docker-compose
 
+    - name: Create .env file
+      run: |
+        echo "VITE_AUTH_CLIENT_ID=${{ secrets.VITE_AUTH_CLIENT_ID }}" >> .env
+        echo "VITE_CLIENT_SECRET=${{ secrets.VITE_CLIENT_SECRET }}" >> .env
+        echo "VITE_AUTH_SERVER_URL=${{ vars.VITE_AUTH_SERVER_URL }}" >> .env
+        echo "VITE_POST_AUTH_REDIRECT_URI=${{ vars.VITE_POST_AUTH_REDIRECT_URI }}" >> .env
+        echo "VITE_AUTH_SERVER_EMAIL=${{ secrets.VITE_AUTH_SERVER_EMAIL }}" >> .env
+        echo "VITE_AUTH_SERVER_PASSWORD=${{ secrets.VITE_AUTH_SERVER_PASSWORD }}" >> .env
     - name: Run Playwright tests with Docker Compose
       run: docker-compose up --build --abort-on-container-exit
       
