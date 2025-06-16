@@ -1,24 +1,15 @@
 # a12n-server-admin
 
-[![Unit Tests](https://github.com/curveball/a12n-server-admin/actions/workflows/vitest.yml/badge.svg)](https://github.com/curveball/a12n-server-admin/actions/workflows/vitest.yml)
 [![Integration and E2E Tests](https://github.com/curveball/a12n-server-admin/actions/workflows/playwright.yml/badge.svg)](https://github.com/curveball/a12n-server-admin/actions/workflows/playwright.yml)
 [![CodeQL](https://github.com/curveball/a12n-server-admin/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/curveball/a12n-server-admin/actions/workflows/github-code-scanning/codeql)
 
 The admin UI counterpart to [`@curveball/a12n-server`](https://github.com/curveball/a12n-server), a lightweight OAuth2 server.
 
-## Tech Stack
+<img width="1440" alt="Screenshot 2025-03-11 at 10 16 43 PM" src="https://github.com/user-attachments/assets/c5dd945b-ba8f-480c-a09d-6845a6fec5af" />
 
-- [React](https://react.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vitejs.dev/)
-- [Vitest](https://vitest.dev/)
-- [Playwright](https://playwright.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Shadcn UI](https://ui.shadcn.com/)
-- [Tanstack Query](https://tanstack.com/query/latest)
-- [React Router](https://reactrouter.com/)
-- [React Hook Form](https://react-hook-form.com/)
-- [Zod](https://zod.dev/)
+<img width="1419" alt="Screenshot 2025-03-11 at 10 18 44 PM" src="https://github.com/user-attachments/assets/00833ad6-bc12-4ca9-b4d7-39837ab26da3" />
+
+<img width="1440" alt="Screenshot 2025-03-11 at 10 20 30 PM" src="https://github.com/user-attachments/assets/88e27497-00e6-40f4-af2e-6d906a5e0470" />
 
 ## Getting Started
 
@@ -80,6 +71,20 @@ VITE_POST_AUTH_REDIRECT_URI=http://localhost:5173/auth/redirect
 ```
 
 Now you should be able to run the server with `npm run dev`!
+
+## Tech Stack
+
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Vitest](https://vitest.dev/)
+- [Playwright](https://playwright.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [Tanstack Query](https://tanstack.com/query/latest)
+- [React Router](https://reactrouter.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/)
 
 ## License
 
