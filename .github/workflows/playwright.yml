@@ -33,7 +33,7 @@ jobs:
     - name: Copy test results
       if: always()
       run: |
-        docker-compose cp playwright-tests:/home/pwuser/playwright-report ./playwright-report
+        cp playwright-tests:/home/pwuser/playwright-report ./playwright-report
         docker-compose down
     - uses: actions/upload-artifact@v4
       if: always()
