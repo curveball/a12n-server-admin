@@ -53,6 +53,6 @@ jobs:
         sleep 30
 
     - name: Run Playwright tests
-        run: |
-            npx playwright install
-            npx playwright test --config=playwright.config.ts --reporter=github
+      run: |
+        npx playwright install
+        npx playwright test --config=playwright.config.ts --reporter=github
