@@ -1,3 +1,8 @@
+/**
+ * Preserves and enables logged in state
+ *  before e2e playwright tests
+ * See https://playwright.dev/docs/auth#basic-shared-account-in-all-tests
+ */
 import { expect, test as setup } from '@playwright/test';
 
 const authFile = 'playwright/.auth/user.json';

@@ -1,3 +1,6 @@
+/**
+ * Setup for Vitest unit tests
+ */
 import '@testing-library/jest-dom';
 import { cleanup } from '@testing-library/react';
 import { afterAll, afterEach } from 'vitest';
