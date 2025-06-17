@@ -16,7 +16,7 @@ First-time contributors:
     npm install
     ```
 3. Set up your local environment as described in the [README.md](./README.md).
-4. Create a new branch for your task against `<yourfork>/main` ```
+4. Create a new branch for your task against `<yourfork>/main`
 
 ## 🛠️ Development Workflow
 
@@ -83,6 +83,13 @@ First-time contributors:
 ## 🧪 Testing
 
 Collocate tests within the same folder as the code they test.
+
+Assuming you've set up `a12n-server` locally for development with an admin user, the following environment variables will be needed to run unit and e2e tests locally:
+
+```
+VITEST_AUTH_SERVER_EMAIL=<your-admin-email>
+VITEST_AUTH_SERVER_PASSWORD=<your-admin-password>
+```
 
 - **Unit Tests:**
     - Use [Vitest](https://vitest.dev/) for unit tests. These tests use the `*.test.ts(x)` suffix.
