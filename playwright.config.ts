@@ -5,17 +5,16 @@ dotenv.config({ path: `.env` });
 
 export default defineConfig({
     testMatch: '**/*.spec.ts',
-    timeout: 30000,
-    use: {
-        baseURL: 'http://localhost:5173',
-        headless: process.env.CI ? true : false,
-    },
-    webServer: {
-        command: 'npm run dev',
-        url: 'http://localhost:5173',
-        reuseExistingServer: !process.env.CI,
-        stdout: 'ignore',
-        stderr: 'pipe',
-    },
-    reporter: 'html',
+    timeout: 30 * 1000,
+    projects: [
+        { name: 'setup', testMatch: /.*\.setup\.ts/ },
+        {
+            name: 'e2e tests',
+            testMatch: '**/*.spec.ts',
+            use: {
+                baseURL: 'http://localhost:5173',
+                headless: process.env.CI ? true : false,
+            },
+        },
+    ],
 });

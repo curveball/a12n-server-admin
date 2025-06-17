@@ -47,6 +47,7 @@ First-time contributors:
 ├── playwright.config.ts      # E2E test configuration
 ├── public                    # Static files for build
 ├── src
+│   ├── api                     # API calls, tanstack query hooks and options
 │   ├── assets                  # Static assets that wind up in build
 │   ├── components              # Reusable UI components
 │   ├── hooks                   # Custom hooks
@@ -76,8 +77,8 @@ First-time contributors:
     - Secondary: #008573, #641723, #027864
 
 - **Font:**
-    - Primary: Typography
-    - Title: Mona Sans
+    - Primary: Matter
+    - Title: Matter
 
 ## 🧪 Testing
 
@@ -87,7 +88,9 @@ Collocate tests within the same folder as the code they test.
     - Use [Vitest](https://vitest.dev/) for unit tests. These tests use the `*.test.ts(x)` suffix.
     - Run with `npm run test:unit`.
 - **Integration & E2E Tests:**
-    - Use [Playwright](https://playwright.dev/) for integration and end-to-end tests. These tests use the `*.spec.ts` suffix.
+    - Install playwright `npm i -D @playwright/test`
+    - For these tests to work locally in your dev environment, you need to have a12n-server running on `http://localhost:8531` and a12n-server-admin running on `http://localhost:5173`
+    - We use [Playwright](https://playwright.dev/) for integration and end-to-end tests. These tests use the `*.spec.ts` suffix.
     - Run with `npm run test:e2e`.
 - **All Tests:**
     - Run all tests with `npm test`.

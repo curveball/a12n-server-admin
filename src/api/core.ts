@@ -24,7 +24,7 @@ class APICore {
 
     constructor(toastFn: ToastFns) {
         this.#toast = toastFn;
-        this.client = axios.create({ baseURL: import.meta.env.VITE_SERVER_URL });
+        this.client = axios.create({ baseURL: import.meta.env.VITE_AUTH_SERVER_URL });
     }
 
     get = ({

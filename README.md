@@ -61,7 +61,8 @@ Copy the clientId (`admin-ui-client` by default) field after creating the OAuth2
 
 ```
 # the URL that a12n-server runs on
-VITE_SERVER_URL=http://localhost:8531/
+VITE_SERVER_URL=http://localhost:5173
+VITE_AUTH_SERVER_URL=http://localhost:8531
 # the client-id for the App resource that you created in a12n-server
 VITE_AUTH_CLIENT_ID=admin-ui-client # replace with the clientId of the app you just created
 

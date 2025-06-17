@@ -4,35 +4,61 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+permissions:
+  contents: read
 env:
   CI: true
-  environment: test
-  VITE_CLIENT_SECRET: ${{ secrets.VITE_CLIENT_SECRET }}
-  VITE_AUTH_SERVER_URL: ${{ vars.VITE_AUTH_SERVER_URL }}
-  VITE_POST_AUTH_REDIRECT_URI: ${{ vars.VITE_POST_AUTH_REDIRECT_URI }}
-  VITE_AUTH_SERVER_EMAIL: ${{ vars.VITE_AUTH_SERVER_EMAIL }}
-  VITE_AUTH_SERVER_PASSWORD: ${{ vars.VITE_AUTH_SERVER_PASSWORD }}
+  VITE_AUTH_CLIENT_ID: playwright-test
+  VITE_CLIENT_SECRET: playwright-test-secret
+  VITE_AUTH_SERVER_URL: http://localhost:8531
+  VITE_POST_AUTH_REDIRECT_URI: http://localhost:5173/auth/redirect
+  VITE_AUTH_SERVER_EMAIL: admin@example.com
+  VITE_AUTH_SERVER_PASSWORD: playwright-test-password
+  VITE_SERVER_URL: http://localhost:5173
 jobs:
-  playwright:
-    name: 'Integration and E2E Tests'
+  test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.52.0-noble
-      options: --user 1001
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-      # The following steps are required due to https://github.com/npm/cli/issues/4828
-      - name: Clean dependencies
-        run: rm -rf node_modules package-lock.json
-      - name: Install dependencies
-        run: npm install
-      - name: Install Playwright Browsers
-        run: npx playwright install
-      - name: Run e2e tests
-        run: npx playwright test
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    - uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install NPM dependencies
+      run: npm i
+
+    - name: Start a12n-server
+      run: |
+          mkdir -p test-a12n-server
+          cd test-a12n-server
+          cp ../playwright/test-database-dump.sql .
+          sqlite3 a12nserver.sqlite3 < test-database-dump.sql
+          npx -y @curveball/a12n-server &
+
+
+    - name: Start the application
+      run: |
+        npm run dev &
+
+    - name: Wait for the application to start
+      run: |
+        echo "Waiting for the application to start..."
+        sleep 5
+
+    - name: Are the ports open?
+      run: |
+          curl -I $VITE_SERVER_URL
+          curl -I $VITE_AUTH_SERVER_URL
+
+    - name: Install Playwright dependencies
+      run: npx playwright install --with-deps
+    - name: Install Playwright browsers
+      run: npx playwright install
+
+    - name: Run Playwright tests
+      run: |
+        npx playwright test --config=playwright.config.ts --reporter=github
