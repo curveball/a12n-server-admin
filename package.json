@@ -14,8 +14,7 @@
         "test": "npm run test:unit && npm run test:e2e",
         "setup:backend": "bash ./src/tests/e2e-setup.sh",
         "prepare": "husky .husky",
-        "build:test:docker": "COMPOSE_BAKE=true docker compose up --build",
-        "test:e2e:ci": "docker compose up"
+        "build:test:docker": "COMPOSE_BAKE=true docker compose up --build"
     },
     "dependencies": {
         "@badgateway/oauth2-client": "^2.4.2",
@@ -36,8 +35,7 @@
         "react-router-dom": "^7.2.0",
         "react-toastify": "^11.0.5",
         "tailwindcss": "^4.0.12",
-        "zod": "^3.24.2",
-        "sqlite3": "^5.1.6"
+        "zod": "^3.24.2"
     },
     "devDependencies": {
         "@ag-grid-community/client-side-row-model": "^32.3.5",

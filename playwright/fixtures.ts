@@ -1,11 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { test as baseTest, expect } from '@playwright/test';
-import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { CLIENT_ROUTES } from '../src/utils/constants';
-
-dotenv.config({ path: `.env` });
 
 export * from '@playwright/test';
 
