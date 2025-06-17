@@ -10,7 +10,7 @@ env:
   CI: true
   VITE_AUTH_CLIENT_ID: playwright-test
   VITE_CLIENT_SECRET: playwright-test-secret
-  VITE_AUTH_SERVER_URL: https://localhost:8531/
+  VITE_AUTH_SERVER_URL: http://localhost:8531/
   VITE_POST_AUTH_REDIRECT_URI: http://localhost:5173/auth/redirect
   VITE_AUTH_SERVER_EMAIL: admin@example.com
   VITE_AUTH_SERVER_PASSWORD: playwright-test-password
@@ -48,6 +48,10 @@ jobs:
       run: |
         echo "Waiting for the application to start..."
         sleep 5
+
+    - name: Are the ports open?
+      run: curl -I ${VITE_SERVER_URL}
+      run: curl -I ${VITE_AUTH_SERVER_URL}
 
     - name: Run Playwright tests
       run: |
