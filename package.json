@@ -13,8 +13,7 @@
         "test:e2e": "playwright test",
         "test": "npm run test:unit && npm run test:e2e",
         "setup:backend": "bash ./src/tests/e2e-setup.sh",
-        "prepare": "husky .husky",
-        "build:test:docker": "COMPOSE_BAKE=true docker compose up --build"
+        "prepare": "husky .husky"
     },
     "dependencies": {
         "@badgateway/oauth2-client": "^2.4.2",
