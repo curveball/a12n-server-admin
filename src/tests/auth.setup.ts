@@ -1,9 +1,11 @@
-import { test as setup } from '@playwright/test';
+import { expect, test as setup } from '@playwright/test';
 
 const authFile = 'playwright/.auth/user.json';
 
 setup('login', async ({ page }) => {
-    await page.goto(`${process.env.VITE_AUTH_SERVER_URL!}/login`, { waitUntil: 'domcontentloaded' });
+    await page.goto(`${process.env.VITE_AUTH_SERVER_URL!}/login`);
+
+    expect(page.url()).toContain(process.env.VITE_AUTH_SERVER_URL!);
 
     await page.fill('input[name="userName"]', process.env.VITE_AUTH_SERVER_EMAIL!);
     await page.fill('input[name="password"]', process.env.VITE_AUTH_SERVER_PASSWORD!);

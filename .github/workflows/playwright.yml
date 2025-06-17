@@ -10,11 +10,11 @@ env:
   CI: true
   VITE_AUTH_CLIENT_ID: playwright-test
   VITE_CLIENT_SECRET: playwright-test-secret
-  VITE_AUTH_SERVER_URL: http://localhost:8531/
+  VITE_AUTH_SERVER_URL: http://localhost:8531
   VITE_POST_AUTH_REDIRECT_URI: http://localhost:5173/auth/redirect
   VITE_AUTH_SERVER_EMAIL: admin@example.com
   VITE_AUTH_SERVER_PASSWORD: playwright-test-password
-  VITE_SERVER_URL: http://localhost:5173/
+  VITE_SERVER_URL: http://localhost:5173
 jobs:
   test:
     timeout-minutes: 60
