@@ -23,9 +23,5 @@ export default defineConfig({
                 },
             },
         },
-        {
-            name: 'teardown',
-            testMatch: /global\.teardown\.ts/,
-        },
     ],
 });
