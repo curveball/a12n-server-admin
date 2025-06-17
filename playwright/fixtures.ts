@@ -2,7 +2,7 @@
 import { test as baseTest, expect } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import { CLIENT_ROUTES } from '../src/utils/constants';
+import { CLIENT_ROUTES } from '../src/routes';
 
 export * from '@playwright/test';
 
