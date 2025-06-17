@@ -50,8 +50,8 @@ jobs:
         sleep 5
 
     - name: Are the ports open?
-      run: curl -I ${VITE_SERVER_URL}
-      run: curl -I ${VITE_AUTH_SERVER_URL}
+      run: curl -I $VITE_SERVER_URL
+      run: curl -I $VITE_AUTH_SERVER_URL
 
     - name: Run Playwright tests
       run: |
