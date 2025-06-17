@@ -7,10 +7,7 @@ export default defineConfig({
     testMatch: '**/*.spec.ts',
     timeout: 30 * 1000,
     projects: [
-        {
-            name: 'setup',
-            testMatch: /auth\.setup\.ts/,
-        },
+        { name: 'setup', testMatch: /.*\.setup\.ts/ },
         {
             name: 'e2e tests',
             testMatch: '**/*.spec.ts',
