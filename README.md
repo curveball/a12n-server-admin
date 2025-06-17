@@ -96,6 +96,12 @@ You should be able to run this project locally with `npm run dev`!
 - [React Hook Form](https://react-hook-form.com/)
 - [Zod](https://zod.dev/)
 
+## Contributing
+
+We're always open to contributions!
+
+Check out [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
+
 ## License
 
 This project is licensed under the Apache License 2.0, consistent with the original project.
