@@ -54,7 +54,9 @@ jobs:
           curl -I $VITE_SERVER_URL
           curl -I $VITE_AUTH_SERVER_URL
 
+    - name: Install Playwright dependencies
+      run: npx playwright install-deps
+
     - name: Run Playwright tests
       run: |
-        npx playwright install
         npx playwright test --config=playwright.config.ts --reporter=github
