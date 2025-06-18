@@ -5,6 +5,8 @@
 
 The admin UI counterpart to [`@curveball/a12n-server`](https://github.com/curveball/a12n-server), a lightweight OAuth2 server.
 
+![image](https://github.com/user-attachments/assets/97855564-7f0a-42ad-8d2b-05ed14eee5e1)
+
 <img width="1440" alt="Screenshot 2025-03-11 at 10 16 43 PM" src="https://github.com/user-attachments/assets/c5dd945b-ba8f-480c-a09d-6845a6fec5af" />
 
 <img width="1419" alt="Screenshot 2025-03-11 at 10 18 44 PM" src="https://github.com/user-attachments/assets/00833ad6-bc12-4ca9-b4d7-39837ab26da3" />
