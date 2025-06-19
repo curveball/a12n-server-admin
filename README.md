@@ -7,11 +7,11 @@ The admin UI counterpart to [`@curveball/a12n-server`](https://github.com/curveb
 
 ![image](https://github.com/user-attachments/assets/97855564-7f0a-42ad-8d2b-05ed14eee5e1)
 
-<img width="1440" alt="Screenshot 2025-03-11 at 10 16 43 PM" src="https://github.com/user-attachments/assets/c5dd945b-ba8f-480c-a09d-6845a6fec5af" />
+<img width="1440" alt="421643125-c5dd945b-ba8f-480c-a09d-6845a6fec5af" src="https://github.com/user-attachments/assets/b2a53db8-19c5-4bf8-9976-fcc9e8b2860a" />
 
-<img width="1419" alt="Screenshot 2025-03-11 at 10 18 44 PM" src="https://github.com/user-attachments/assets/00833ad6-bc12-4ca9-b4d7-39837ab26da3" />
+<img width="1419" alt="421643743-00833ad6-bc12-4ca9-b4d7-39837ab26da3" src="https://github.com/user-attachments/assets/98948986-e3ad-4f67-bd34-a89bd62a02ef" />
 
-<img width="1440" alt="Screenshot 2025-03-11 at 10 20 30 PM" src="https://github.com/user-attachments/assets/88e27497-00e6-40f4-af2e-6d906a5e0470" />
+<img width="1440" alt="421644270-88e27497-00e6-40f4-af2e-6d906a5e0470" src="https://github.com/user-attachments/assets/c3f95a8b-22d8-4ebb-8d0c-297719eeec1a" />
 
 ## Getting Started
 
