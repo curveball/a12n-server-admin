@@ -1,15 +1,7 @@
 import '@radix-ui/themes/styles.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import {
-    AppList,
-    GroupList,
-    NotFoundPage,
-    OAuthRedirectPage,
-    OAuthTriggerPage,
-    PrivilegeList,
-    UserList,
-} from './pages';
+import { AppList, GroupList, NotFoundPage, OAuthRedirectPage, OAuthTriggerPage, UserList } from './pages';
 import './theme.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -53,14 +45,6 @@ function App() {
                                 element={
                                     <Protected>
                                         <ApiSandbox />
-                                    </Protected>
-                                }
-                            />
-                            <Route
-                                path={CLIENT_ROUTES.PRIVILEGES_TABLE}
-                                element={
-                                    <Protected>
-                                        <PrivilegeList />
                                     </Protected>
                                 }
                             />
