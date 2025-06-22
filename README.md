@@ -49,17 +49,17 @@ You can also create an App manually by navigating to Apps and press "Add new app
 
 5. Next, click on the url next to client-collection:
 
-![image](https://github.com/user-attachments/assets/27314f01-7bf3-408d-b062-794e93f52854)
+<img width="757" alt="421639867-27314f01-7bf3-408d-b062-794e93f52854" src="https://github.com/user-attachments/assets/53ba78b1-e357-4670-92ef-95d1dd6eb22e" />
 
 6. Click Add new OAuth2 credentials at the top.
 
 7. Check the following options and add `http://localhost:5173/auth/redirect` as the redirect uri.
 
-![image](https://github.com/user-attachments/assets/1d1d51d8-ac48-4a29-9a25-24668cb9f780)
+<img width="1285" alt="421640175-1d1d51d8-ac48-4a29-9a25-24668cb9f780" src="https://github.com/user-attachments/assets/79a31899-95c2-4fc8-8313-e3b27063c317" />
 
 8. Copy the clientId (`admin-ui-client` by default) field after creating the OAuth2 crendentials
 
-![image](https://github.com/user-attachments/assets/e96b05c3-e55b-43f4-9e58-bb55a734115f)
+![421641375-e96b05c3-e55b-43f4-9e58-bb55a734115f](https://github.com/user-attachments/assets/09429a7f-f3c2-4712-aa28-9f43d2a6737e)
 
 9. In the `.env` file of the `a12n-server-admin` project, add the following
 
