@@ -36,7 +36,8 @@ test.describe('Complete Logout Flow', () => {
 
         // Step 3: Set up navigation expectation before clicking logout
         // Since logout redirects to external auth server, we'll intercept the navigation
-        let redirectUrl = '';
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        let redirectUrl = '' as string;
         page.on('framenavigated', (frame) => {
             if (frame === page.mainFrame()) {
                 redirectUrl = frame.url();
