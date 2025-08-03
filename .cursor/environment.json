@@ -1,0 +1,9 @@
+{
+    "install": "npm install",
+    "terminals": [
+        {
+            "name": "Run dev env",
+            "command": "npm run dev"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "mcpServers": {
+        "playwright": {
+            "command": "npx",
+            "url": "http://localhost:5731/mcp",
+            "args": ["@playwright/mcp@latest", "--storage-state={../playwright/.auth/user.json}", "--port=5731"]
+        }
+    }
+}

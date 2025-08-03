@@ -24,6 +24,8 @@ dist-ssr
 *.sw?
 *.sqlite3
 .cursor/*
+!.cursor/mcp.json
+!.cursor/environment.json
 .vscode/*
 
 # Private keys
