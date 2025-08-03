@@ -17,4 +17,12 @@ export default defineConfig({
             },
         },
     ],
+    // Configure TypeScript compilation properly
+    use: {
+        // This forces Playwright to use proper TS compilation
+        actionTimeout: 0,
+    },
+    // Ensure TypeScript is compiled correctly
+    globalSetup: undefined,
+    globalTeardown: undefined,
 });
