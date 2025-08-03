@@ -23,9 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 *.sqlite3
-.cursor/*
 !.cursor/mcp.json
 !.cursor/environment.json
+!.cursor/playwright-mcp-test-generator-agent.mdc
+.cursor/rules/*
 .vscode/*
 
 # Private keys
