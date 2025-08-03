@@ -20,18 +20,10 @@ export default function Layout() {
         [],
     );
 
-    const profileOptions = [
-        {
-            label: 'Logout',
-            onClick: () => {
-                console.log('Logout');
-            },
-        },
-    ];
     return (
         <Theme accentColor='orange' radius='small'>
             <Flex style={{ height: '100vh', overflow: 'hidden', marginLeft: '260px' }}>
-                <Sidebar version={version} navItems={navItems} profileOptions={profileOptions} />
+                <Sidebar version={version} navItems={navItems} />
                 <Flex direction='column' style={{ flex: 1, overflowY: 'auto', padding: '1.5rem' }}>
                     <Outlet />
                 </Flex>

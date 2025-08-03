@@ -1,5 +1,6 @@
 import { DotsVerticalIcon } from '@radix-ui/react-icons';
 import { Button, DropdownMenu, Text } from '@radix-ui/themes';
+import useOAuth from '../../hooks/useOAuth';
 
 type ProfileDropdownProps = {
     profileOptions: {
@@ -9,6 +10,17 @@ type ProfileDropdownProps = {
 };
 
 export default function ProfileDropdown({ profileOptions }: ProfileDropdownProps) {
+    const { setTokens } = useOAuth();
+
+    const handleLogout = async () => {
+        setTokens({
+            accessToken: '',
+            refreshToken: '',
+            expiresAt: 0,
+        });
+
+        window.location.href = import.meta.env.VITE_AUTH_SERVER_URL + '/logout';
+    };
     return (
         <DropdownMenu.Root>
             <DropdownMenu.Trigger>
@@ -16,7 +28,7 @@ export default function ProfileDropdown({ profileOptions }: ProfileDropdownProps
                     <DotsVerticalIcon className='w-4 h-4' />
                 </Button>
             </DropdownMenu.Trigger>
-            <DropdownMenu.Content align='start'>
+            <DropdownMenu.Content align='end'>
                 {profileOptions.map((option) => (
                     <DropdownMenu.Item key={option.label} className='cursor-pointer'>
                         <Text onClick={option.onClick}>{option.label}</Text>
