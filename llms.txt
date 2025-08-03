@@ -1,0 +1,443 @@
+# a12n-server-admin
+
+> Admin UI for @curveball/a12n-server - A lightweight OAuth2 authentication server
+
+## Project Overview
+
+This is a React-based admin interface for managing users, applications, groups, and privileges in the a12n-server OAuth2 authentication system. The application provides a modern, responsive UI for administrative tasks including user management, OAuth2 app configuration, and access control.
+
+**Critical Dependency**: This admin UI requires a running instance of `@curveball/a12n-server` to function. It's not a standalone application but a client interface for the authentication server.
+
+## a12n-server Integration
+
+### Dependency Relationship
+- **@curveball/a12n-server v0.31.3** - The core OAuth2 authentication server this UI manages
+- This admin UI acts as an OAuth2 client that authenticates with and manages the a12n-server
+- The server provides RESTful HAL APIs that this UI consumes
+- Both applications must be running simultaneously for full functionality
+
+### Server Setup Requirements
+1. **Running a12n-server instance** with supported database (MySQL, PostgreSQL, or SQLite)
+2. **CORS configuration** allowing the admin UI origin (typically `http://localhost:5173`)
+3. **OAuth2 client registration** in a12n-server for this admin UI
+4. **Network connectivity** between the admin UI and server (same machine or network accessible)
+
+### API Communication
+- **Base URL**: Configured via `VITE_AUTH_SERVER_URL` environment variable
+- **Authentication**: OAuth2 authorization code flow with PKCE
+- **Data Format**: HAL (Hypertext Application Language) JSON responses
+- **HTTP Client**: Axios with custom interceptors for token management
+- **Error Handling**: HTTP status codes with custom error messages
+
+### Required Server Configuration
+```sql
+-- CORS setup in a12n-server database
+INSERT INTO server_settings (setting, value) 
+VALUES ('cors.allowOrigin', '["http://localhost:5173", "*"]');
+```
+
+### OAuth2 Client Setup in a12n-server
+- **Client ID**: `admin-ui-client` (configurable)
+- **Redirect URI**: `http://localhost:5173/auth/redirect`
+- **Grant Types**: `authorization_code`, `refresh_token`
+- **Scopes**: Admin-level permissions for user/app/group management
+
+## Tech Stack
+
+### Core Technologies
+- **React 19** - Frontend framework
+- **TypeScript** - Type safety and developer experience
+- **Vite** - Build tool and dev server
+- **React Router v7** - Client-side routing
+- **TanStack Query v5** - Data fetching, caching, and synchronization
+
+### UI/Styling
+- **Tailwind CSS v4** - Utility-first CSS framework
+- **Radix UI** - Accessible component primitives (@radix-ui/themes, @radix-ui/react-dropdown-menu, @radix-ui/react-icons)
+- **AG Grid** - Data grid for table displays (ag-grid-community, ag-grid-react)
+- **React Toastify** - Toast notifications
+
+### Authentication & API
+- **@badgateway/oauth2-client** - OAuth2 client implementation
+- **Axios** - HTTP client with interceptors
+- **Zod** - Schema validation
+- **hal-types** - HAL (Hypertext Application Language) support
+
+### Testing
+- **Vitest** - Unit testing framework
+- **Playwright** - End-to-end testing
+- **@testing-library/react** - React component testing utilities
+- **jsdom** - DOM environment for testing
+
+### Development Tools
+- **ESLint** - Code linting with TypeScript support
+- **Prettier** - Code formatting
+- **Husky** - Git hooks
+- **lint-staged** - Staged file linting
+
+## Project Structure
+
+```
+src/
+├── api/                    # API layer with React Query hooks
+│   ├── apps/              # App-related API calls
+│   ├── groups/            # Group-related API calls
+│   ├── privileges/        # Privilege-related API calls
+│   ├── users/             # User-related API calls
+│   ├── interceptors/      # Axios request/response interceptors
+│   ├── core.ts           # Base API configuration
+│   └── query-keys.ts     # React Query key constants
+├── components/            # Reusable UI components
+│   ├── DeveloperTab/     # API debugging tools
+│   ├── Modal/            # Modal dialogs (Create/Update)
+│   ├── Protected/        # Route protection wrapper
+│   ├── Sidebar/          # Navigation sidebar
+│   └── TableList/        # Data table component
+├── hooks/                # Custom React hooks
+│   ├── useAxios.ts       # Axios integration
+│   ├── useFormValidation.ts # Form validation
+│   ├── useOAuth.ts       # OAuth2 flow management
+│   ├── useQueryParams.ts # URL query parameter handling
+│   └── useToast.tsx      # Toast notification hook
+├── pages/                # Page components/routes
+│   ├── ApiSandbox.tsx    # API testing interface
+│   ├── AppList/          # Application management
+│   ├── GroupList.tsx     # Group management
+│   ├── PrivilegeList/    # Privilege management
+│   ├── UserList/         # User management
+│   ├── OAuthRedirectPage.tsx # OAuth callback handling
+│   └── OAuthTriggerPage.tsx  # OAuth initiation
+├── providers/            # React context providers
+│   └── OAuthProvider/    # OAuth2 state management
+├── types/                # TypeScript type definitions
+│   ├── api.ts           # API response types
+│   ├── forms.ts         # Form data types
+│   └── models.ts        # Core data models
+├── utils/               # Utility functions
+│   ├── constants.ts     # Application constants
+│   ├── formatApiPath.ts # API URL formatting
+│   └── helpers/         # Helper functions
+└── tests/               # Test configuration
+    ├── auth.setup.ts    # Test authentication setup
+    └── setup.ts         # Test environment setup
+```
+
+## Key Features
+
+### Authentication & Authorization
+- OAuth2 authorization code flow with PKCE
+- Token management (access & refresh tokens)
+- Protected routes with authentication guards
+- Logout functionality with token cleanup
+
+### User Management
+- Create, read, update users
+- Password generation and management
+- User verification status
+- Active/inactive user states
+- Privilege assignment
+
+### Application Management
+- OAuth2 client registration
+- App configuration (redirect URIs, grant types)
+- Client credentials management
+- App activation/deactivation
+
+### Group Management
+- Group creation and management
+- Member assignment
+- Group-based permissions
+
+### Privilege Management
+- Fine-grained permission system
+- Privilege assignment to users/groups
+- Resource-based access control
+
+### Developer Tools
+- API Sandbox for testing endpoints
+- Request/response inspection
+- Developer debugging tab
+- Real-time API monitoring
+
+## Data Models
+
+### Core Resources (HAL-based)
+```typescript
+type BaseResource = {
+  nickname: string;
+  active: boolean;
+  createdAt: string;
+  modifiedAt: string;
+  type: ResourceType;
+  privileges: Record<string, string[]>;
+};
+
+type User = BaseResource & {
+  hasPassword: boolean;
+  password?: string;
+  verifiedAt?: string;
+};
+
+type App = BaseResource & {
+  href: string;
+};
+
+type Group = BaseResource;
+```
+
+## Environment Configuration
+
+Required environment variables:
+```env
+VITE_SERVER_URL=http://localhost:5173           # This admin UI's URL
+VITE_AUTH_SERVER_URL=http://localhost:8531      # a12n-server instance URL
+VITE_AUTH_CLIENT_ID=admin-ui-client             # OAuth2 client ID registered in a12n-server
+VITE_POST_AUTH_REDIRECT_URI=http://localhost:5173/auth/redirect  # OAuth callback URL
+```
+
+### Server Connection Details
+- **Default a12n-server port**: 8531
+- **Default admin UI port**: 5173 (Vite dev server)
+- **Production setup**: Both can run on different domains/ports with proper CORS configuration
+- **Database**: a12n-server manages its own database (SQLite/MySQL/PostgreSQL)
+- **Session management**: Handled by a12n-server, admin UI only manages OAuth tokens
+
+## API Integration
+
+### Server Communication
+- **Protocol**: RESTful API with HAL (Hypertext Application Language) responses
+- **Base URL**: `${VITE_AUTH_SERVER_URL}` (e.g., `http://localhost:8531`)
+- **Authentication**: Bearer tokens from OAuth2 flow
+- **Content Type**: `application/hal+json`
+- **HTTP Client**: Axios with custom interceptors for token management
+- **Caching**: React Query for server state management and synchronization
+- **Error Handling**: HTTP status codes with toast notifications
+
+### Key API Endpoints (a12n-server)
+```typescript
+// Server endpoints this admin UI consumes
+/user                    # User management (GET, POST, PATCH)
+/user/{id}              # Individual user operations
+/app                    # OAuth2 application management
+/app/{id}               # Individual app operations
+/group                  # Group management
+/group/{id}             # Individual group operations
+/privilege              # Privilege management
+/privilege/{id}         # Individual privilege operations
+/oauth2/authorize       # OAuth2 authorization endpoint
+/oauth2/token          # OAuth2 token endpoint
+```
+
+### HAL Response Structure
+```typescript
+// Example HAL response from a12n-server
+{
+  "nickname": "john-doe",
+  "active": true,
+  "type": "user",
+  "_links": {
+    "self": { "href": "/user/123" },
+    "edit": { "href": "/user/123", "method": "PATCH" },
+    "collection": { "href": "/user" }
+  },
+  "_embedded": {
+    "privileges": [
+      { "privilege": "admin", "resource": "*" }
+    ]
+  }
+}
+```
+
+### Route Structure
+```typescript
+CLIENT_ROUTES = {
+  ROOT: '/',
+  AUTH_TRIGGER: '/auth/trigger',
+  AUTH_REDIRECT: '/auth/redirect',
+  USERS_TABLE: '/users/table',
+  USERS_SANDBOX: '/users/sandbox',
+  GROUPS_TABLE: '/groups/table',
+  APPS_TABLE: '/apps/table',
+  PRIVILEGES_TABLE: '/privileges/table',
+  NOT_FOUND: '/404'
+};
+
+SERVER_ROUTES = {
+  USERS: '/user',
+  PRIVILEGES: '/privilege',
+  APPS: '/app',
+  GROUPS: '/group'
+};
+```
+
+## Testing Strategy
+
+### Unit Tests (Vitest)
+- Component testing with React Testing Library
+- API hook testing
+- Utility function testing
+- Mock implementations for external dependencies
+
+### E2E Tests (Playwright)
+- Authentication flow testing
+- CRUD operations
+- User journey testing
+- Cross-browser compatibility
+
+### Test Files Location
+- Unit tests: `*.test.tsx` files co-located with components
+- E2E tests: `*.spec.ts` files in component directories
+- Test setup: `src/tests/` directory
+
+## Development Guidelines
+
+### Code Style
+- TypeScript strict mode enabled
+- ESLint with TypeScript rules
+- Prettier for code formatting
+- Husky pre-commit hooks with lint-staged
+
+### Component Patterns
+- Functional components with hooks
+- Custom hooks for business logic
+- Protected route wrappers
+- Modal patterns for forms
+- Table components with AG Grid
+
+### State Management
+- React Query for server state
+- React Context for OAuth state
+- Local state with useState/useReducer
+- Form state with controlled components
+
+### Error Handling
+- Global error boundaries
+- Toast notifications for user feedback
+- Axios interceptors for API errors
+- Fallback UI components
+
+## Architecture Decisions
+
+### Why These Technologies?
+- **React Query**: Excellent caching, background updates, and synchronization
+- **Radix UI**: Accessible, unstyled components that work well with Tailwind
+- **AG Grid**: Powerful data grid with enterprise features
+- **Vite**: Fast development server and build tool
+- **Playwright**: Reliable cross-browser e2e testing
+
+### API Design
+- HAL-based REST API for discoverability
+- Resource-based routing
+- Consistent error responses
+- OAuth2 standard compliance
+
+### Security Considerations
+- PKCE for OAuth2 flows
+- Secure token storage
+- CORS configuration
+- Input validation with Zod
+
+## Getting Started
+
+### Prerequisites
+1. **Node.js 20.x or newer**
+2. **Running a12n-server instance** with supported database
+
+### Development Setup
+1. **Start a12n-server first**:
+   ```bash
+   mkdir a12n-server && cd a12n-server
+   npx @curveball/a12n-server
+   ```
+
+2. **Configure CORS in a12n-server**:
+   ```bash
+   sqlite3 a12nserver.sqlite3
+   INSERT INTO server_settings (setting, value) 
+   VALUES ('cors.allowOrigin', '["http://localhost:5173", "*"]');
+   ```
+
+3. **Create admin account** at `http://localhost:8531/`
+
+4. **Register OAuth2 client** for admin UI:
+   - Visit: `http://localhost:8531/app/new`
+   - Set client ID: `admin-ui-client`
+   - Add redirect URI: `http://localhost:5173/auth/redirect`
+   - Enable grant types: `authorization_code`, `refresh_token`
+
+5. **Setup admin UI**:
+   ```bash
+   # In this project directory
+   cp .env.example .env
+   # Edit .env with your a12n-server details
+   npm install
+   npm run dev
+   ```
+
+6. **Verify connection**: Admin UI should redirect to a12n-server for authentication
+
+### Deployment Considerations
+- **Network Security**: Both services need network connectivity
+- **CORS Configuration**: Production origins must be allowlisted in a12n-server
+- **SSL/TLS**: Both services should use HTTPS in production
+- **Environment Variables**: Different configs for dev/staging/production
+- **Database Backup**: a12n-server database contains all user/app data
+
+## Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run test` - Run all tests (unit + e2e)
+- `npm run test:unit` - Run unit tests
+- `npm run test:e2e` - Run e2e tests
+- `npm run lint` - Lint code
+
+## Contributing
+
+- Follow existing code patterns
+- Write tests for new features
+- Use TypeScript strictly
+- Follow semantic commit messages
+- Ensure all tests pass before PR
+
+## Notes for LLMs
+
+### Common Tasks
+1. **Adding new API endpoints**: Create hooks in `src/api/`, add query keys, implement error handling
+2. **Creating new pages**: Add to `src/pages/`, update routing in `App.tsx`, add to `CLIENT_ROUTES`
+3. **New components**: Follow existing patterns, include tests, use TypeScript strictly
+4. **Forms**: Use controlled components, implement validation with Zod
+5. **Testing**: Write unit tests for logic, e2e tests for user flows
+
+### Code Patterns to Follow
+- Use React Query hooks for data fetching
+- Implement proper error boundaries
+- Use toast notifications for user feedback
+- Follow HAL conventions for API responses
+- Implement proper TypeScript types
+- Use accessibility best practices with Radix UI
+
+### Important Files
+- `src/App.tsx` - Main application component and routing
+- `src/api/core.ts` - Base API configuration and a12n-server connection
+- `src/providers/OAuthProvider/` - OAuth2 authentication state management
+- `src/types/models.ts` - Core data type definitions matching a12n-server API
+- `src/routes.ts` - Route constants and types
+
+### Common Issues & Troubleshooting
+1. **"CORS error"** - Check a12n-server CORS settings allow admin UI origin
+2. **"OAuth client not found"** - Verify client is registered in a12n-server with correct ID
+3. **"401 Unauthorized"** - Check OAuth2 flow completion and token storage
+4. **"Connection refused"** - Ensure a12n-server is running on expected port
+5. **"Invalid redirect URI"** - Verify redirect URI matches exactly in both environments
+6. **API endpoints 404** - Check a12n-server version compatibility (requires v0.31.3+)
+
+### a12n-server Dependency Notes
+- **Version compatibility**: Admin UI requires a12n-server v0.31.3 or newer
+- **Database changes**: Any a12n-server database schema changes may affect this UI
+- **API changes**: This UI depends on specific a12n-server HAL API structure
+- **Authentication flow**: Uses a12n-server's OAuth2 implementation exclusively
+- **Permission model**: Reflects a12n-server's privilege/resource system exactly
+
+This project emphasizes type safety, testing, accessibility, and modern React patterns. When making changes, maintain these standards and follow the existing architectural decisions. Always consider the a12n-server API contract when modifying data handling or authentication flows.
