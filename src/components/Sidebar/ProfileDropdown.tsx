@@ -30,7 +30,7 @@ export default function ProfileDropdown({ profileOptions }: ProfileDropdownProps
             </DropdownMenu.Trigger>
             <DropdownMenu.Content align='end'>
                 {profileOptions.map((option) => (
-                    <DropdownMenu.Item key={option.label} className='cursor-pointer'>
+                    <DropdownMenu.Item key={option.label} className='cursor-pointer' data-testid={option.label}>
                         <Text onClick={option.onClick}>{option.label}</Text>
                     </DropdownMenu.Item>
                 ))}
