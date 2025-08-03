@@ -66,6 +66,8 @@ You can also create an App manually by navigating to Apps and press "Add new app
 You can also run `cp .env.example .env` to create a `.env` file with the values.
 
 ```
+# the environment
+NODE_ENV=development
 # the URL for the client
 VITE_SERVER_URL=http://localhost:5173
 # the a12n-server url
