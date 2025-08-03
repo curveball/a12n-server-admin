@@ -1,0 +1,302 @@
+---
+description: This rule guides AI agents on using Playwright MCP tools to generate comprehensive end-to-end tests. It should be invoked when: 1. a user requests Playwright test generation, 2. testing specific user workflows or components, 3. creating E2E test scenarios, 4. validating UI functionality through automated testing.
+globs: *.spec.ts
+alwaysApply: false
+---
+
+# Playwright MCP Test Generator Agent
+
+## Critical Rules
+
+- NEVER generate test code based on scenario descriptions alone
+- ALWAYS examine the actual codebase and components before writing tests
+- Execute tests and iterate until they pass
+- Save test files with `.spec.ts` extension in the same directory as the component being tested
+- Use systematic step-by-step approach with MCP tools
+
+## Workflow Steps
+
+### 1. Discovery and Analysis Phase
+
+Before writing any test code, agents must:
+
+- Use `codebase_search` to understand the application structure and routing
+- Use `read_file` to examine components, pages, and relevant functionality
+- Use `grep_search` to find specific selectors, IDs, or test attributes
+- Identify user workflows and critical paths through the application
+
+### 2. Test Planning Phase
+
+After understanding the codebase:
+
+- Map out user journey steps
+- Identify key elements for interaction (buttons, forms, navigation)
+- Determine assertion points and expected outcomes
+- Plan test data requirements and setup/teardown needs
+
+### 3. Test Implementation Phase
+
+Generate Playwright TypeScript tests that:
+
+- Import from `@playwright/test`
+- Use proper test structure with `test.describe` and `test` blocks
+- Include meaningful test names that describe the scenario
+- Implement proper page object patterns where appropriate
+- Use robust selectors (prefer data-testid, role-based, or text-based)
+- Include proper assertions and wait strategies
+
+### 4. Execution and Iteration Phase
+
+- Save the test file in the correct location
+- Execute the test using `run_terminal_cmd`
+- Analyze failures and iterate on selectors, timing, or logic
+- Ensure tests are stable and reliable
+
+## Test Structure Guidelines
+
+<rule>
+name: playwright-test-structure
+description: Standard structure for Playwright tests
+examples:
+- input: |
+    // Basic test structure template
+    test('scenario description', async ({ page }) => {
+      // Test implementation
+    });
+  output: |
+    import { test, expect } from '@playwright/test';
+
+    test.describe('Feature Name', () => {
+      test('should perform specific user action successfully', async ({ page }) => {
+        // Navigate to page
+        await page.goto('/path');
+        
+        // Perform actions
+        await page.click('[data-testid="action-button"]');
+        
+        // Verify results
+        await expect(page.locator('[data-testid="result"]')).toBeVisible();
+      });
+    });
+
+tests:
+- input: "Generate test for user login flow"
+  output: |
+    - Examine login components and authentication flow
+    - Identify form fields, buttons, and navigation
+    - Create test that fills form, submits, and verifies success
+    - Include error scenarios and edge cases
+    - Execute and refine until stable
+
+metadata:
+priority: high
+version: 1.0
+</rule>
+
+## Selector Best Practices
+
+### Priority Order for Element Selection
+
+1. **data-testid attributes** (most reliable)
+   ```typescript
+   await page.click('[data-testid="submit-button"]');
+   ```
+
+2. **Role-based selectors** (semantic and accessible)
+   ```typescript
+   await page.click('role=button[name="Submit"]');
+   ```
+
+3. **Text-based selectors** (user-facing and intuitive)
+   ```typescript
+   await page.click('text="Sign In"');
+   ```
+
+4. **CSS selectors** (use sparingly, prefer semantic attributes)
+   ```typescript
+   await page.click('.submit-btn');
+   ```
+
+## Common Test Patterns
+
+### Navigation Tests
+```typescript
+test('should navigate between pages', async ({ page }) => {
+  await page.goto('/');
+  await page.click('nav a[href="/about"]');
+  await expect(page).toHaveURL(/.*about/);
+});
+```
+
+### Form Interaction Tests
+```typescript
+test('should submit form with valid data', async ({ page }) => {
+  await page.goto('/contact');
+  await page.fill('[data-testid="name-input"]', 'John Doe');
+  await page.fill('[data-testid="email-input"]', 'john@example.com');
+  await page.click('[data-testid="submit-button"]');
+  await expect(page.locator('[data-testid="success-message"]')).toBeVisible();
+});
+```
+
+### Modal and Dialog Tests
+```typescript
+test('should open and close modal', async ({ page }) => {
+  await page.goto('/dashboard');
+  await page.click('[data-testid="open-modal"]');
+  await expect(page.locator('[data-testid="modal"]')).toBeVisible();
+  await page.click('[data-testid="close-modal"]');
+  await expect(page.locator('[data-testid="modal"]')).not.toBeVisible();
+});
+```
+
+## MCP Tool Usage Strategy
+
+### Information Gathering
+```javascript
+// Use codebase_search for understanding
+codebase_search({
+  query: "How does user authentication work in this application?",
+  target_directories: ["src/"]
+});
+
+// Use read_file for component details
+read_file({
+  target_file: "src/components/LoginForm.tsx",
+  should_read_entire_file: true
+});
+
+// Use grep_search for specific patterns
+grep_search({
+  query: "data-testid",
+  include_pattern: "*.tsx"
+});
+```
+
+### Test Execution
+```javascript
+// Run the test
+run_terminal_cmd({
+  command: "npx playwright test path/to/test.spec.ts",
+  is_background: false
+});
+
+// Check for test output and results
+// Iterate on failures by examining error messages
+```
+
+## File Naming and Location
+
+- Test files should be named `ComponentName.spec.ts`
+- Place tests in the same directory as the component being tested
+- For page-level tests, place in the same directory as the page component
+- For integration tests, consider a dedicated `tests/` or `e2e/` directory
+
+## Error Handling and Debugging
+
+### Common Issues and Solutions
+
+1. **Element not found**: Use more robust selectors or add wait strategies
+2. **Timing issues**: Add appropriate `waitFor` conditions
+3. **Flaky tests**: Implement proper state verification and cleanup
+4. **Environment issues**: Ensure test data and setup are consistent
+
+### Debugging Strategies
+
+```typescript
+// Add debugging aids
+await page.screenshot({ path: 'debug-screenshot.png' });
+await page.pause(); // For interactive debugging
+console.log(await page.locator('[data-testid="element"]').count());
+```
+
+## Test Categories
+
+### Unit-like Component Tests
+- Test individual component behavior
+- Mock external dependencies
+- Focus on component props and state
+
+### Integration Tests
+- Test component interactions
+- Include real API calls (with test data)
+- Verify data flow between components
+
+### End-to-End Tests
+- Test complete user workflows
+- Use real or staging environment
+- Verify business-critical paths
+
+## Quality Assurance Checklist
+
+Before considering a test complete:
+
+- [ ] Test runs reliably without flakiness
+- [ ] Selectors are robust and semantic
+- [ ] Test covers both happy path and error scenarios
+- [ ] Assertions are meaningful and specific
+- [ ] Test is properly organized and documented
+- [ ] Test follows project naming conventions
+- [ ] Test execution time is reasonable
+
+## Examples
+
+### Complete Test Generation Workflow
+
+When a user requests: "Generate a test for the user registration flow"
+
+1. **Discovery**:
+   ```javascript
+   codebase_search({
+     query: "Where is user registration handled?",
+     target_directories: []
+   });
+   ```
+
+2. **Component Analysis**:
+   ```javascript
+   read_file({
+     target_file: "src/components/RegistrationForm.tsx",
+     should_read_entire_file: true
+   });
+   ```
+
+3. **Test Implementation**:
+   ```typescript
+   import { test, expect } from '@playwright/test';
+
+   test.describe('User Registration', () => {
+     test('should register new user successfully', async ({ page }) => {
+       await page.goto('/register');
+       
+       await page.fill('[data-testid="username-input"]', 'newuser');
+       await page.fill('[data-testid="email-input"]', 'user@example.com');
+       await page.fill('[data-testid="password-input"]', 'securepassword');
+       await page.fill('[data-testid="confirm-password-input"]', 'securepassword');
+       
+       await page.click('[data-testid="register-button"]');
+       
+       await expect(page.locator('[data-testid="success-message"]')).toBeVisible();
+       await expect(page).toHaveURL(/.*dashboard/);
+     });
+
+     test('should show validation errors for invalid input', async ({ page }) => {
+       await page.goto('/register');
+       
+       await page.click('[data-testid="register-button"]');
+       
+       await expect(page.locator('[data-testid="username-error"]')).toBeVisible();
+       await expect(page.locator('[data-testid="email-error"]')).toBeVisible();
+     });
+   });
+   ```
+
+4. **Execution and Refinement**:
+   ```javascript
+   run_terminal_cmd({
+     command: "npx playwright test src/components/RegistrationForm.spec.ts",
+     is_background: false
+   });
+   ```
+
+This systematic approach ensures comprehensive, reliable, and maintainable Playwright tests that accurately reflect user workflows and application behavior.
