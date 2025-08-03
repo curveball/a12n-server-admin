@@ -88,6 +88,7 @@ const Sidebar = ({ version, navItems, profileOptions = [] }: SidebarProps) => {
                         }}
                     >
                         <Button
+                            data-testid='github-button'
                             variant='ghost'
                             size='2'
                             style={{ padding: '0', margin: '0', width: '100%', height: '100%', borderRadius: '6px' }}

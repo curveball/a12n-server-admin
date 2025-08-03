@@ -1,6 +1,5 @@
 import { DotsVerticalIcon } from '@radix-ui/react-icons';
 import { Button, DropdownMenu, Text } from '@radix-ui/themes';
-import useOAuth from '../../hooks/useOAuth';
 
 type ProfileDropdownProps = {
     profileOptions: {
@@ -10,28 +9,22 @@ type ProfileDropdownProps = {
 };
 
 export default function ProfileDropdown({ profileOptions }: ProfileDropdownProps) {
-    const { setTokens } = useOAuth();
-
-    const handleLogout = async () => {
-        setTokens({
-            accessToken: '',
-            refreshToken: '',
-            expiresAt: 0,
-        });
-
-        window.location.href = import.meta.env.VITE_AUTH_SERVER_URL + '/logout';
-    };
     return (
         <DropdownMenu.Root>
-            <DropdownMenu.Trigger>
+            <DropdownMenu.Trigger className='IconButton' aria-label='Profile Options'>
                 <Button variant='ghost' size='2' className='rounded-lg p-2 text-gray-500'>
                     <DotsVerticalIcon className='w-4 h-4' />
                 </Button>
             </DropdownMenu.Trigger>
-            <DropdownMenu.Content align='end'>
+            <DropdownMenu.Content className='DropdownMenuContent' side='bottom'>
                 {profileOptions.map((option) => (
-                    <DropdownMenu.Item key={option.label} className='cursor-pointer' data-testid={option.label}>
-                        <Text onClick={option.onClick}>{option.label}</Text>
+                    <DropdownMenu.Item
+                        key={option.label}
+                        data-testid={option.label}
+                        className='cursor-pointer'
+                        onClick={option.onClick}
+                    >
+                        <Text>{option.label}</Text>
                     </DropdownMenu.Item>
                 ))}
             </DropdownMenu.Content>
