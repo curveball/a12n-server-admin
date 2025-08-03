@@ -4,6 +4,7 @@ import { Avatar, Badge, Box, Button, Flex, Heading, Text } from '@radix-ui/theme
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AdminUILogo from '../../assets/icons/admin-ui-logo.svg';
+import useOAuth from '../../hooks/useOAuth';
 import ProfileDropdown from './ProfileDropdown';
 
 export type NavItem = {
@@ -21,11 +22,24 @@ type ProfileOption = {
 type SidebarProps = {
     version: string;
     navItems: NavItem[];
-    profileOptions: ProfileOption[];
+    profileOptions?: ProfileOption[];
 };
 
-const Sidebar = ({ version, navItems, profileOptions }: SidebarProps) => {
+const Sidebar = ({ version, navItems, profileOptions = [] }: SidebarProps) => {
     const location = useLocation();
+    const { setTokens } = useOAuth();
+
+    const handleLogout = async () => {
+        setTokens(null);
+        window.location.href = import.meta.env.VITE_AUTH_SERVER_URL + '/logout';
+    };
+
+    profileOptions = [
+        {
+            label: 'Logout',
+            onClick: handleLogout,
+        },
+    ];
 
     return (
         <Box
@@ -74,6 +88,7 @@ const Sidebar = ({ version, navItems, profileOptions }: SidebarProps) => {
                         }}
                     >
                         <Button
+                            data-testid='github-button'
                             variant='ghost'
                             size='2'
                             style={{ padding: '0', margin: '0', width: '100%', height: '100%', borderRadius: '6px' }}

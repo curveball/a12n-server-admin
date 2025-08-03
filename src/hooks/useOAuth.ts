@@ -25,6 +25,7 @@ export const OAuthContext = createContext<OAuthContextType>({
 
 const useOAuth = (): OAuthContextType => {
     const context = useContext<OAuthContextType>(OAuthContext);
+
     if (!context) {
         throw new Error('useOAuth must be used within a OAuthProvider');
     }
