@@ -12,9 +12,11 @@ const OAuthTriggerPage = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            setPostAuthRedirectPath(useQueryParams('redirect') || CLIENT_ROUTES.USERS_TABLE);
+            setPostAuthRedirectPath(postAuthRedirectPath);
         }
-        setPostAuthRedirectPath(import.meta.env.VITE_AUTH_SERVER_URL + SERVER_ROUTES.LOGIN);
+        if (!isAuthenticated) {
+            setPostAuthRedirectPath(import.meta.env.VITE_AUTH_SERVER_URL + SERVER_ROUTES.LOGIN);
+        }
         triggerOAuthFlow(postAuthRedirectPath);
     }, [isAuthenticated]);
 
