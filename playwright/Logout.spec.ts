@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test.describe('Complete Logout Flow', () => {
+test.describe('Logout Flow', () => {
     // Mock user authentication before each test
     test.beforeEach(async ({ page }) => {
         // Navigate to the application
@@ -56,7 +56,7 @@ test.describe('Complete Logout Flow', () => {
 
         // Verify either external redirect occurred or we're back to auth flow
         const isLoggedOut =
-            currentUrl.includes('/logout') || currentUrl.includes('/auth') || currentUrl !== 'http://localhost:5173/';
+            currentUrl.includes('/login') || currentUrl.includes('/auth') || currentUrl !== 'http://localhost:5173/';
 
         expect(isLoggedOut).toBe(true);
     });

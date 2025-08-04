@@ -6,12 +6,10 @@ import './theme.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { useEffect } from 'react';
 import { Layout, Protected } from './components';
-import { useOAuth } from './hooks';
 import ApiSandbox from './pages/ApiSandbox';
 import { OAuthProvider } from './providers/OAuthProvider/OAuthProvider';
-import { CLIENT_ROUTES, SERVER_ROUTES } from './routes';
+import { CLIENT_ROUTES } from './routes';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -25,14 +23,6 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-    const { isAuthenticated } = useOAuth();
-
-    useEffect(() => {
-        if (!isAuthenticated) {
-            window.location.href = import.meta.env.VITE_AUTH_SERVER_URL + SERVER_ROUTES.LOGIN;
-        }
-    }, [isAuthenticated]);
-
     return (
         <Router>
             <QueryClientProvider client={queryClient}>

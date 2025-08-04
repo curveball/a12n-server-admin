@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { OAuthContext } from '../../hooks/useOAuth';
-import { CLIENT_ROUTES, SERVER_ROUTES } from '../../routes';
+import { CLIENT_ROUTES } from '../../routes';
 import { CODE_VERIFIER_LOCAL_STORAGE_NAME, POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME } from '../../utils/constants';
 import client from './OAuth2Client';
 
@@ -45,7 +45,7 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             return postAuthRedirectPath;
         } catch (err) {
             console.error(err);
-            window.location.href = SERVER_ROUTES.LOGIN;
+            navigate(CLIENT_ROUTES.NOT_FOUND);
         }
     };
 

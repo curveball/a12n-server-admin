@@ -16,6 +16,9 @@ export default defineConfig({
                 headless: process.env.CI ? true : false,
             },
         },
+        { name: 'OAuthFlow', testMatch: /.*\.OAuthProvider\.ts/ },
+        // Add all other tests here
+        { name: 'Logout', testMatch: /.*\.logout\.ts/ },
     ],
     // Configure TypeScript compilation properly
     use: {
