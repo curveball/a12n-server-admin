@@ -26,7 +26,9 @@ function App() {
     return (
         <Router>
             <QueryClientProvider client={queryClient}>
-                {import.meta.env.NODE_ENV === 'test' && <ReactQueryDevtools initialIsOpen={false} />}
+                {['development', 'test'].includes(process.env.NODE_ENV || '') && (
+                    <ReactQueryDevtools initialIsOpen={false} />
+                )}
                 <OAuthProvider>
                     <Routes>
                         <Route path={CLIENT_ROUTES.AUTH_TRIGGER} element={<OAuthTriggerPage />} />
