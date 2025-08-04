@@ -18,6 +18,7 @@ export default defineConfig({
         },
         { name: 'OAuthFlow', testMatch: /.*\.OAuthProvider\.ts/ },
         // Add all other tests here
+        // Logout must come last because the logout step will clear the auth state required for testing logged-in scenarios
         { name: 'Logout', testMatch: /.*\.logout\.ts/ },
     ],
     // Configure TypeScript compilation properly
