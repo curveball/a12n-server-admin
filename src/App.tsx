@@ -31,7 +31,7 @@ function App() {
                     <Routes>
                         <Route path={CLIENT_ROUTES.AUTH_TRIGGER} element={<OAuthTriggerPage />} />
                         <Route path={CLIENT_ROUTES.AUTH_REDIRECT} element={<OAuthRedirectPage />} />
-                        <Route path={CLIENT_ROUTES.ROOT} element={<Layout />}>
+                        <Route path={CLIENT_ROUTES.ROOT} element={<Protected>{<Layout />}</Protected>}>
                             <Route
                                 path={CLIENT_ROUTES.USERS_TABLE}
                                 element={

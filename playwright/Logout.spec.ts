@@ -3,8 +3,15 @@ import { expect, test } from '@playwright/test';
 test.describe('Logout Flow', () => {
     // Mock user authentication before each test
     test.beforeEach(async ({ page }) => {
-        // Navigate to the application
+        if (!page.url().includes(process.env.VITE_AUTH_SERVER_URL!)) {
+            await page.goto(`${process.env.VITE_AUTH_SERVER_URL!}/login`);
+            await page.fill('input[name="userName"]', process.env.VITE_AUTH_SERVER_EMAIL!);
+            await page.fill('input[name="password"]', process.env.VITE_AUTH_SERVER_PASSWORD!);
+            await page.click('button[type="submit"]');
+        }
+
         await page.goto('/');
+        await page.context().storageState({ path: 'playwright/.auth/user.json' });
 
         // Mock authenticated state by setting tokens in localStorage
         await page.evaluate(() => {
