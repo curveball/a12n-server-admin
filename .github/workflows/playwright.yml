@@ -15,6 +15,7 @@ env:
   VITE_AUTH_SERVER_EMAIL: admin@example.com
   VITE_AUTH_SERVER_PASSWORD: playwright-test-password
   VITE_SERVER_URL: http://localhost:5173
+  NODE_ENV: test
 jobs:
   test:
     timeout-minutes: 60
