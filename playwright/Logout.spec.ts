@@ -14,7 +14,9 @@ test.describe('Logout Flow', () => {
         await page.goto('/');
 
         // Wait for the sidebar to be visible (indicating authenticated state)
-        await expect(page.locator('nav, aside, [role="navigation"]')).toBeVisible();
+        await expect(page.locator('nav, aside, [role="navigation"]')).toBeVisible({
+            timeout: 1000,
+        });
     });
 
     test('should clear authentication tokens when logout is clicked', async ({ page }) => {
@@ -38,11 +40,11 @@ test.describe('Logout Flow', () => {
         expect(tokensCleared).toBe(true);
     });
 
-    test('should redirect to logout page when after logout', async ({ page }) => {
+    test('should redirect to login page when confirming logout', async ({ page }) => {
         // Verify profile dropdown trigger is visible
         const profileDropdownTrigger = page.locator('button[aria-label="Profile Options"]');
 
-        await expect(profileDropdownTrigger).toBeVisible();
+        await expect(profileDropdownTrigger).toBeVisible({ timeout: 1000 });
 
         // Click to open dropdown
         await profileDropdownTrigger.click();
@@ -51,16 +53,20 @@ test.describe('Logout Flow', () => {
         const logoutOption = page.locator('[data-testid="Logout"]');
         await logoutOption.click();
 
-        // Should either redirect to auth or show unauthenticated state
-        const currentUrl = page.url();
-        expect(currentUrl.includes('/logout')).toBe(true);
+        await page.waitForLoadState('networkidle');
+        expect(page.url().includes('/logout')).toBe(true);
+        await page.locator('button[type="submit"]').click();
+        await page.waitForLoadState('networkidle');
+        expect(page.url().includes('/login')).toBe(true);
     });
 
     test('once logged out, should be unable to access protected routes', async ({ page }) => {
         // Verify profile dropdown trigger is visible
         const profileDropdownTrigger = page.locator('button[aria-label="Profile Options"]');
 
-        await expect(profileDropdownTrigger).toBeVisible();
+        await expect(profileDropdownTrigger).toBeVisible({
+            timeout: 1000,
+        });
 
         // Click to open dropdown
         await profileDropdownTrigger.click();
