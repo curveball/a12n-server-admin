@@ -14,6 +14,7 @@ export const CLIENT_ROUTES = {
 };
 
 export const SERVER_ROUTES = {
+    LOGIN: '/login',
     USERS: '/user',
     PRIVILEGES: '/privilege',
     APPS: '/app',
