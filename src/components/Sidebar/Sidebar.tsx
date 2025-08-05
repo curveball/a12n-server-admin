@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import ServerStats from '@curveball/a12n-server';
 import { GitHubLogoIcon, GlobeIcon, GridIcon, PersonIcon, RocketIcon } from '@radix-ui/react-icons';
 import { Avatar, Badge, Box, Button, Flex, Heading, Text } from '@radix-ui/themes';
 import React, { useMemo } from 'react';
@@ -6,7 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 import AdminUILogo from '../../assets/icons/admin-ui-logo.svg';
 import useOAuth from '../../hooks/useOAuth';
 import { CLIENT_ROUTES } from '../../routes';
-import { ServerStats } from '../../types';
+import { UserInfo } from '../../types';
 import ProfileDropdown from './ProfileDropdown';
 
 export type NavItem = {
@@ -25,11 +26,14 @@ type SidebarProps = {
     serverStats?: ServerStats;
     version: string;
     profileOptions?: ProfileOption[];
+    authenticatedUser?: UserInfo;
 };
 
-const Sidebar = ({ version, profileOptions = [], serverStats }: SidebarProps) => {
+const Sidebar = ({ version, profileOptions = [], serverStats, authenticatedUser }: SidebarProps) => {
     const location = useLocation();
     const { setTokens } = useOAuth();
+    console.log(authenticatedUser);
+    const isAdmin = authenticatedUser?.privileges['*'].includes('admin');
     const navItems = useMemo<NavItem[]>(
         () => [
             {
@@ -120,6 +124,7 @@ const Sidebar = ({ version, profileOptions = [], serverStats }: SidebarProps) =>
                             size='2'
                             style={{ padding: '0', margin: '0', width: '100%', height: '100%', borderRadius: '6px' }}
                             onClick={() => window.open('https://github.com/curveball/a12n-server', '_blank')}
+                            className='hover:bg-transparent'
                         >
                             <GitHubLogoIcon color='#A18072' width={18} height={18} />
                         </Button>
@@ -196,7 +201,7 @@ const Sidebar = ({ version, profileOptions = [], serverStats }: SidebarProps) =>
                     <Box style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
                         <Flex align='center' gap='2'>
                             <Text size='2' style={{ fontWeight: 500, color: '#DFCDC5', marginBottom: '-2px' }}>
-                                Evert Pot
+                                {authenticatedUser?.nickname ?? authenticatedUser?.name}
                             </Text>
                             <Badge
                                 style={{
@@ -212,11 +217,11 @@ const Sidebar = ({ version, profileOptions = [], serverStats }: SidebarProps) =>
                                     justifyContent: 'center',
                                 }}
                             >
-                                Admin
+                                <span className='capitalize'>{isAdmin ? 'Admin' : 'User'}</span>
                             </Badge>
                         </Flex>
                         <Text size='2' style={{ color: '#DFCDC5BF' }}>
-                            evert.pot@gmail.com
+                            {authenticatedUser?.email}
                         </Text>
                     </Box>
                 </Flex>

@@ -1,7 +1,8 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useAxios } from '.';
-import { Resource, ServerStats } from '../types/models';
+import { HalLink } from '../types';
+import { Resource, ServerStats, UserInfo } from '../types/models';
 
 const useServerStats = () => {
     const api = useAxios();
@@ -17,11 +18,29 @@ const useServerStats = () => {
                     console.error(error);
                 },
             })) as Resource<ServerStats>,
-        staleTime: 1000 * 60 * 5, // 5 minutes
-        gcTime: 1000 * 60 * 3600, // 1 hour
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 3600,
     });
 
     const { data, isLoading, error, refetch, isRefetching } = useQuery(options);
+
+    const authenticatedAsHref = data?._links?.['authenticated-as'] as HalLink;
+
+    const authenticatedUserOptions = queryOptions({
+        enabled: !!authenticatedAsHref,
+        queryKey: ['authenticated-as'],
+        throwOnError: true,
+        queryFn: async () =>
+            (await api.get({
+                suffix: authenticatedAsHref?.href,
+                onError: (error) => {
+                    console.error(error);
+                },
+            })) as Resource<UserInfo>,
+        staleTime: 1000 * 60 * 5,
+    });
+
+    const { data: authenticatedUser } = useQuery(authenticatedUserOptions);
 
     useEffect(() => {
         if (!isLoading || !data) {
@@ -29,7 +48,14 @@ const useServerStats = () => {
         }
     }, [isLoading, data, refetch]);
 
-    return { data, isLoading, error, refetch, isRefetching };
+    return {
+        data,
+        isLoading,
+        error,
+        refetch,
+        isRefetching,
+        authenticatedUser,
+    };
 };
 
 export default useServerStats;

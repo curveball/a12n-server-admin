@@ -8,7 +8,7 @@ import { Sidebar } from './Sidebar';
 
 export default function Layout() {
     const version = packageJson.version;
-    const { data: stats, isLoading, refetch } = useServerStats();
+    const { data: stats, isLoading, refetch, authenticatedUser } = useServerStats();
     const [serverStats, setServerStats] = useState<ServerStats | undefined>(stats);
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export default function Layout() {
     return (
         <Theme accentColor='orange' radius='small'>
             <Flex style={{ height: '100vh', overflow: 'hidden', marginLeft: '260px' }}>
-                <Sidebar version={version} serverStats={serverStats} />
+                <Sidebar version={version} serverStats={serverStats} authenticatedUser={authenticatedUser} />
                 <Flex direction='column' style={{ flex: 1, overflowY: 'auto', padding: '1.5rem' }}>
                     <Outlet />
                 </Flex>
