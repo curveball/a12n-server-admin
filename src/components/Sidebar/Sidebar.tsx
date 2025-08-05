@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { GitHubLogoIcon, GlobeIcon, GridIcon, PersonIcon, RocketIcon } from '@radix-ui/react-icons';
 import { Avatar, Badge, Box, Button, Flex, Heading, Text } from '@radix-ui/themes';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AdminUILogo from '../../assets/icons/admin-ui-logo.svg';
 import useOAuth from '../../hooks/useOAuth';
+import { CLIENT_ROUTES } from '../../routes';
+import { ServerStats } from '../../types';
 import ProfileDropdown from './ProfileDropdown';
 
 export type NavItem = {
@@ -20,14 +22,38 @@ type ProfileOption = {
 };
 
 type SidebarProps = {
+    serverStats?: ServerStats;
     version: string;
-    navItems: NavItem[];
     profileOptions?: ProfileOption[];
 };
 
-const Sidebar = ({ version, navItems, profileOptions = [] }: SidebarProps) => {
+const Sidebar = ({ version, profileOptions = [], serverStats }: SidebarProps) => {
     const location = useLocation();
     const { setTokens } = useOAuth();
+    const navItems = useMemo<NavItem[]>(
+        () => [
+            {
+                name: 'Users',
+                icon: <PersonIcon />,
+                count: serverStats?.stats?.user ?? 0,
+                path: CLIENT_ROUTES.USERS_TABLE,
+            },
+            {
+                name: 'Groups',
+                icon: <GlobeIcon />,
+                count: serverStats?.stats?.group ?? 0,
+                path: CLIENT_ROUTES.GROUPS_TABLE,
+            },
+            { name: 'Apps', icon: <GridIcon />, count: serverStats?.stats?.app ?? 0, path: CLIENT_ROUTES.APPS_TABLE },
+            {
+                name: 'Sandbox',
+                icon: <RocketIcon />,
+                count: 0,
+                path: CLIENT_ROUTES.USERS_SANDBOX,
+            },
+        ],
+        [serverStats],
+    );
 
     const handleLogout = async () => {
         setTokens(null);

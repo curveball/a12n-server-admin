@@ -49,3 +49,14 @@ export enum ResourceType {
     APP = 'app',
     GROUP = 'group',
 }
+
+export type ServerStats = {
+    version: string;
+    stats: {
+        user: number;
+        group: number;
+        app: number;
+        privileges: number;
+        tokensIssued: number;
+    };
+};

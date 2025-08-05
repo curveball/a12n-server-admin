@@ -1,6 +1,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useAxios } from '.';
+import { Resource, ServerStats } from '../types/models';
 
 const useServerStats = () => {
     const api = useAxios();
@@ -10,12 +11,12 @@ const useServerStats = () => {
         queryKey: ['stats'],
         throwOnError: true,
         queryFn: async () =>
-            await api.get({
-                suffix: '/?_browser-accept=application%2Fhal%2Bjson',
+            (await api.get({
+                suffix: `/?_browser-accept=${encodeURIComponent('application/hal+json')}`,
                 onError: (error) => {
-                    console.log(error);
+                    console.error(error);
                 },
-            }),
+            })) as Resource<ServerStats>,
         staleTime: 1000 * 60 * 5, // 5 minutes
         gcTime: 1000 * 60 * 3600, // 1 hour
     });
