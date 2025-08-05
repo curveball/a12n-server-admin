@@ -5,6 +5,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AdminUILogo from '../../assets/icons/admin-ui-logo.svg';
 import useOAuth from '../../hooks/useOAuth';
+import useServerStats from '../../hooks/useServerStats';
 import ProfileDropdown from './ProfileDropdown';
 
 export type NavItem = {
@@ -28,7 +29,8 @@ type SidebarProps = {
 const Sidebar = ({ version, navItems, profileOptions = [] }: SidebarProps) => {
     const location = useLocation();
     const { setTokens } = useOAuth();
-
+    const { data: stats, refetch } = useServerStats();
+    console.log(stats);
     const handleLogout = async () => {
         setTokens(null);
         window.location.href = import.meta.env.VITE_AUTH_SERVER_URL + '/logout';
