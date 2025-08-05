@@ -1,7 +1,8 @@
 import '@radix-ui/themes/styles.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { AppList, GroupList, NotFoundPage, OAuthRedirectPage, OAuthTriggerPage, UserList } from './pages';
+import { AppList, GroupList, NotFoundPage, OAuthTriggerPage, UserList } from './pages';
+import Loading from './pages/Loading';
 import './theme.css';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -32,7 +33,7 @@ function App() {
                 <OAuthProvider>
                     <Routes>
                         <Route path={CLIENT_ROUTES.AUTH_TRIGGER} element={<OAuthTriggerPage />} />
-                        <Route path={CLIENT_ROUTES.AUTH_REDIRECT} element={<OAuthRedirectPage />} />
+                        <Route path={CLIENT_ROUTES.AUTH_REDIRECT} element={<Loading />} />
                         <Route path={CLIENT_ROUTES.ROOT} element={<Protected>{<Layout />}</Protected>}>
                             <Route
                                 path={CLIENT_ROUTES.USERS_TABLE}
