@@ -43,6 +43,7 @@ const Sidebar = ({ version, navItems, profileOptions = [] }: SidebarProps) => {
 
     return (
         <Box
+            data-testid='sidebar'
             position='fixed'
             top='0'
             left='0'
@@ -193,7 +194,7 @@ const Sidebar = ({ version, navItems, profileOptions = [] }: SidebarProps) => {
                         </Text>
                     </Box>
                 </Flex>
-                <ProfileDropdown profileOptions={profileOptions} />
+                <ProfileDropdown profileOptions={profileOptions} data-testid='profile-dropdown' />
             </Box>
         </Box>
     );

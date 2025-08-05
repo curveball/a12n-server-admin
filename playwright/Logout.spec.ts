@@ -12,9 +12,9 @@ test.describe('Logout Flow', () => {
         }
         await page.context().storageState({ path: 'playwright/.auth/user.json' });
         await page.goto('/');
-
+        await page.waitForLoadState('networkidle');
         // Wait for the sidebar to be visible (indicating authenticated state)
-        await expect(page.locator('nav, aside, [role="navigation"]')).toBeVisible({
+        await expect(page.locator('[data-testid="sidebar"]')).toBeVisible({
             timeout: 1000,
         });
     });
