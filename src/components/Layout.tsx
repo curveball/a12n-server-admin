@@ -1,23 +1,37 @@
 import { GlobeIcon, GridIcon, PersonIcon, RocketIcon } from '@radix-ui/react-icons';
 import { Flex, Theme } from '@radix-ui/themes';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import packageJson from '../../package.json';
+import useServerStats from '../hooks/useServerStats';
 import { CLIENT_ROUTES } from '../routes';
 import { Sidebar } from './Sidebar';
 import type { NavItem } from './Sidebar/Sidebar';
 
 export default function Layout() {
     const version = packageJson.version;
-    // FIXME: count on navItem should be dynamic
+    const { data: stats, isLoading, refetch } = useServerStats();
+    const [serverStats, setServerStats] = useState(stats);
+
+    useEffect(() => {
+        if (!stats || isLoading) return;
+        refetch();
+        setServerStats(stats);
+    }, [stats, isLoading, refetch]);
+
     const navItems = useMemo<NavItem[]>(
         () => [
-            { name: 'Users', icon: <PersonIcon />, count: 14, path: CLIENT_ROUTES.USERS_TABLE },
-            { name: 'Groups', icon: <GlobeIcon />, count: 5, path: CLIENT_ROUTES.GROUPS_TABLE },
-            { name: 'Apps', icon: <GridIcon />, count: 2, path: CLIENT_ROUTES.APPS_TABLE },
-            { name: 'Sandbox', icon: <RocketIcon />, count: 0, path: CLIENT_ROUTES.USERS_SANDBOX },
+            { name: 'Users', icon: <PersonIcon />, count: serverStats?.stats?.user, path: CLIENT_ROUTES.USERS_TABLE },
+            { name: 'Groups', icon: <GlobeIcon />, count: serverStats?.stats?.group, path: CLIENT_ROUTES.GROUPS_TABLE },
+            { name: 'Apps', icon: <GridIcon />, count: serverStats?.stats?.app, path: CLIENT_ROUTES.APPS_TABLE },
+            {
+                name: 'Sandbox',
+                icon: <RocketIcon />,
+                count: serverStats?.stats?.user,
+                path: CLIENT_ROUTES.USERS_SANDBOX,
+            },
         ],
-        [],
+        [serverStats],
     );
 
     return (
