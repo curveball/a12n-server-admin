@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { TOAST_TYPE } from '../hooks/useToast';
-import { App, Collection, Group, Resource, User } from './models';
+import { App, Collection, Group, Resource, ServerStats, User } from './models';
 
 export type APIQueryParams = Record<string, string | number | boolean | undefined>;
 
@@ -29,8 +29,8 @@ export type APIResponseToastMessages = {
     };
 };
 
-export type APIResourceResponse = Resource<User> | Resource<App> | Resource<Group>;
-export type APICollectionResponse = Collection<User> | Collection<App> | Collection<Group>;
+export type APIResourceResponse = Resource<User> | Resource<App> | Resource<Group> | Resource<ServerStats>;
+export type APICollectionResponse = Collection<User> | Collection<App> | Collection<Group> | Collection<ServerStats>;
 
 export type CreateUserAPIRequest = {
     nickname: string;

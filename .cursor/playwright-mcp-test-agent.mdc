@@ -1,6 +1,6 @@
 ---
 description: This rule guides AI agents on using Playwright MCP tools to generate comprehensive end-to-end tests. It should be invoked when: 1. a user requests Playwright test generation, 2. testing specific user workflows or components, 3. creating E2E test scenarios, 4. validating UI functionality through automated testing.
-globs: *.spec.ts
+globs: *.spec.ts, playwright.config.ts
 alwaysApply: false
 ---
 
@@ -191,6 +191,39 @@ run_terminal_cmd({
 - Place tests in the same directory as the component being tested
 - For page-level tests, place in the same directory as the page component
 - For integration tests, consider a dedicated `tests/` or `e2e/` directory
+
+### Test Project Configuration
+
+This project uses multiple Playwright test projects with **strict sequencing requirements**:
+
+```typescript
+// playwright.config.ts project sequence
+projects: [
+    { name: 'setup', testMatch: /.*\.setup\.ts/ },           // 1. FIRST - Auth setup
+    { name: 'e2e tests', testMatch: '**/*.spec.ts' },       // 2. General E2E tests
+    { name: 'OAuthFlow', testMatch: /.*\.OAuthProvider\.ts/ }, // 3. OAuth-specific tests
+    // Additional test projects go here...
+    { name: 'Logout', testMatch: /.*\.logout\.ts/ },         // 4. LAST - Logout tests
+]
+```
+
+**CRITICAL SEQUENCING RULES**:
+- `setup` tests **MUST run first** to establish authentication state
+- `Logout` tests **MUST run last** as they clear auth state needed by other tests
+- All other test projects should be inserted between setup and logout
+
+**File Naming Patterns**:
+- Setup tests: `*.setup.ts` (authentication, data seeding)
+- General E2E: `*.spec.ts` (component, page, integration tests)
+- OAuth flows: `*.OAuthProvider.ts` (OAuth2 authentication workflows)
+- Logout flows: `*.logout.ts` (logout and session cleanup tests)
+- Custom projects: `*.{project-name}.ts` (specific feature test suites)
+
+**When Adding New Test Projects**:
+1. Choose appropriate file naming pattern
+2. Add project to `playwright.config.ts` **before** the Logout project
+3. Ensure project doesn't interfere with authentication state
+4. Document any special requirements or dependencies
 
 ## Error Handling and Debugging
 

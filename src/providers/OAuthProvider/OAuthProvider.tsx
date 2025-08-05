@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { OAuthContext } from '../../hooks/useOAuth';
 import { CLIENT_ROUTES } from '../../routes';
-import { CODE_VERIFIER_LOCAL_STORAGE_NAME, POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME } from '../../utils/constants';
 import client from './OAuth2Client';
 
 export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -14,8 +13,8 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const triggerOAuthFlow = async (postAuthRedirectPath: string) => {
         const codeVerifier = await generateCodeVerifier();
-        localStorage.setItem(CODE_VERIFIER_LOCAL_STORAGE_NAME, codeVerifier);
-        localStorage.setItem(POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME, postAuthRedirectPath);
+        localStorage.setItem('a12n_ADMIN_UI_CODE_VERIFIER', codeVerifier);
+        localStorage.setItem('a12n_ADMIN_UI_POST_AUTH_REDIRECT_PATH', postAuthRedirectPath);
 
         document.location = await client.authorizationCode.getAuthorizeUri({
             redirectUri: import.meta.env.VITE_POST_AUTH_REDIRECT_URI,
@@ -26,8 +25,8 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     const handleOAuthRedirect = async () => {
         try {
-            const codeVerifier = localStorage.getItem(CODE_VERIFIER_LOCAL_STORAGE_NAME)!;
-            const postAuthRedirectPath = localStorage.getItem(POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME)!;
+            const codeVerifier = localStorage.getItem('a12n_ADMIN_UI_CODE_VERIFIER')!;
+            const postAuthRedirectPath = localStorage.getItem('a12n_ADMIN_UI_POST_AUTH_REDIRECT_PATH')!;
             const searchParams = new URLSearchParams(window.location.search);
 
             const oAuth2Token = await client.authorizationCode.getToken({
@@ -37,15 +36,17 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 state: postAuthRedirectPath,
             });
 
-            localStorage.removeItem(CODE_VERIFIER_LOCAL_STORAGE_NAME);
-            localStorage.removeItem(POST_AUTH_REDIRECT_PATH_LOCAL_STORAGE_NAME);
+            localStorage.removeItem('a12n_ADMIN_UI_CODE_VERIFIER');
+            localStorage.removeItem('a12n_ADMIN_UI_POST_AUTH_REDIRECT_PATH');
             setTokens(oAuth2Token);
             setIsAuthenticated(true);
 
             return postAuthRedirectPath;
         } catch (err) {
+            setTokens(null);
+            setIsAuthenticated(false);
             console.error(err);
-            navigate('/404');
+            navigate(CLIENT_ROUTES.NOT_FOUND);
         }
     };
 

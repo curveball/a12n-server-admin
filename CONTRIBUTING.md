@@ -99,6 +99,51 @@ VITEST_AUTH_SERVER_PASSWORD=<your-admin-password>
     - For these tests to work locally in your dev environment, you need to have a12n-server running on `http://localhost:8531` and a12n-server-admin running on `http://localhost:5173`
     - We use [Playwright](https://playwright.dev/) for integration and end-to-end tests. These tests use the `*.spec.ts` suffix.
     - Run with `npm run test:e2e`.
+
+### 🎭 Playwright Test Project Sequencing
+
+**CRITICAL**: When adding new test projects to `playwright.config.ts`, you **MUST** maintain the correct sequence order:
+
+```typescript
+projects: [
+    { name: 'setup', testMatch: /.*\.setup\.ts/ }, // 1. Authentication setup
+    { name: 'e2e tests', testMatch: '**/*.spec.ts' }, // 2. General E2E tests
+    { name: 'OAuthFlow', testMatch: /.*\.OAuthProvider\.ts/ }, // 3. OAuth-specific tests
+    // Add all other test projects here...
+    { name: 'Logout', testMatch: /.*\.logout\.ts/ }, // ⚠️ MUST BE LAST
+];
+```
+
+**Why this order matters:**
+
+- **Setup tests run first** to establish authentication state
+- **General tests run second** while auth state is available
+- **Logout tests MUST run last** because they clear authentication state needed by other tests
+
+**Contributing Guidelines:**
+
+1. **Adding new test projects**: Insert them before the `Logout` project
+2. **Never reorder**: Keep `setup` first and `Logout` last
+3. **Test isolation**: Each project should be independent except for auth state dependency
+4. **File naming**: Follow the patterns:
+    - Setup: `*.setup.ts`
+    - General E2E: `*.spec.ts`
+    - OAuth flows: `*.OAuthProvider.ts`
+    - Logout flows: `*.logout.ts`
+
+**Example of adding a new test project:**
+
+```typescript
+projects: [
+    { name: 'setup', testMatch: /.*\.setup\.ts/ },
+    { name: 'e2e tests', testMatch: '**/*.spec.ts' },
+    { name: 'OAuthFlow', testMatch: /.*\.OAuthProvider\.ts/ },
+    { name: 'UserManagement', testMatch: /.*\.user\.ts/ }, // ✅ New project added here
+    { name: 'AppManagement', testMatch: /.*\.app\.ts/ }, // ✅ Another new project
+    { name: 'Logout', testMatch: /.*\.logout\.ts/ }, // ⚠️ Always stays last
+];
+```
+
 - **All Tests:**
     - Run all tests with `npm test`.
 - **CI:**
