@@ -44,6 +44,8 @@ export const OAuthProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
             return postAuthRedirectPath;
         } catch (err) {
+            setTokens(null);
+            setIsAuthenticated(false);
             console.error(err);
             navigate(CLIENT_ROUTES.NOT_FOUND);
         }
