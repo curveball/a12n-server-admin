@@ -9,14 +9,23 @@ test.describe('Logout Flow', () => {
             await page.fill('input[name="password"]', process.env.VITE_AUTH_SERVER_PASSWORD!);
             await page.click('button[type="submit"]');
             await page.context().storageState({ path: 'playwright/.auth/user.json' });
+            await page.goto('/');
+            await page.waitForLoadState('networkidle');
+            // Wait for the sidebar to be visible (indicating authenticated state)
+            await expect(page.locator('[data-testid="sidebar"]')).toBeVisible({
+                timeout: 1000,
+            });
+        } else {
+            await page.goto('/');
+
+            await page.context().storageState({ path: 'playwright/.auth/user.json' });
+            await page.goto('/');
+            await page.waitForLoadState('networkidle');
+            // Wait for the sidebar to be visible (indicating authenticated state)
+            await expect(page.locator('[data-testid="sidebar"]')).toBeVisible({
+                timeout: 1000,
+            });
         }
-        await page.context().storageState({ path: 'playwright/.auth/user.json' });
-        await page.goto('/');
-        await page.waitForLoadState('networkidle');
-        // Wait for the sidebar to be visible (indicating authenticated state)
-        await expect(page.locator('[data-testid="sidebar"]')).toBeVisible({
-            timeout: 1000,
-        });
     });
 
     test('should clear authentication tokens when logout is clicked', async ({ page }) => {
