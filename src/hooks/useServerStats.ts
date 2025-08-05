@@ -24,7 +24,7 @@ const useServerStats = () => {
     const { data, isLoading, error, refetch, isRefetching } = useQuery(options);
 
     useEffect(() => {
-        if (!isLoading || !data) {
+        if (isLoading || !data) {
             refetch();
         }
     }, [isLoading]);
