@@ -1,6 +1,6 @@
 ---
 description: This rule guides AI agents on using Playwright MCP tools to generate comprehensive end-to-end tests. It should be invoked when: 1. a user requests Playwright test generation, 2. testing specific user workflows or components, 3. creating E2E test scenarios, 4. validating UI functionality through automated testing.
-globs: *.spec.ts
+globs: *.spec.ts, playwright.config.ts
 alwaysApply: false
 ---
 
