@@ -14,7 +14,7 @@ test.describe('Logout Flow', () => {
         await page.goto('/');
         await page.waitForLoadState('networkidle');
         // Wait for the sidebar to be visible (indicating authenticated state)
-        await expect(page.locator('[data-testid="sidebar"]')).toBeVisible();
+        await expect(page.locator('[data-testid="sidebar"]')).toBeVisible({ timeout: 1000 });
     });
 
     test('should clear authentication tokens when logout is clicked', async ({ page }) => {
