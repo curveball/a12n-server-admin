@@ -6,14 +6,24 @@ import useOAuth from '../../hooks/useOAuth';
 import client from './OAuth2Client';
 import { OAuthProvider } from './OAuthProvider';
 
-vi.resetAllMocks();
-
 // Only mock generateCodeVerifier
 vi.mock('@badgateway/oauth2-client', async (importOriginal) => {
     const actual = await importOriginal();
     return {
         ...(actual as Record<string, unknown>),
         generateCodeVerifier: vi.fn(() => Promise.resolve('mockedCodeVerifier')),
+        OAuth2Client: vi.fn(() => ({
+            authorizationCode: {
+                getAuthorizeUri: vi.fn(() => Promise.resolve('https://mocked-auth-url.com')),
+                getToken: vi.fn(() =>
+                    Promise.resolve({
+                        accessToken: 'mockToken',
+                        refreshToken: 'mockRefreshToken',
+                        expiresAt: Date.now() + 3600 * 1000,
+                    }),
+                ),
+            },
+        })),
     };
 });
 
@@ -23,30 +33,18 @@ vi.mock('react-router-dom', () => ({
     useNavigate: vi.fn(() => navigate),
 }));
 
-const originalLocation = window.location;
+const originalLocation = vi.mocked(window.location);
 
 beforeAll(() => {
-    // @ts-expect-error override window.location for jsdom navigation
-    delete window.location;
-    // @ts-expect-error override window.location for jsdom navigation
-    window.location = {
-        assign: vi.fn(),
-        set href(url) {
-            // @ts-expect-error override window.location for jsdom navigation
-            this._href = url;
-        },
-        get href() {
-            // @ts-expect-error override window.location for jsdom navigation
-            return this._href;
-        },
-    };
+    vi.resetAllMocks();
+    originalLocation.href = 'https://localhost:5173';
 });
 
 afterAll(() => {
-    window.location = originalLocation;
+    vi.resetAllMocks();
 });
 
-describe.skip('OAuthProvider', () => {
+describe('OAuthProvider', () => {
     beforeEach(() => {
         vi.clearAllMocks();
         client.authorizationCode.getAuthorizeUri = vi.fn(() => Promise.resolve('https://mocked-auth-url.com'));
