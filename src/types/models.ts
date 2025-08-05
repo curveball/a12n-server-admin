@@ -50,13 +50,21 @@ export enum ResourceType {
     GROUP = 'group',
 }
 
-export type ServerStats = {
-    version: string;
-    stats: {
-        user: number;
-        group: number;
-        app: number;
-        privileges: number;
-        tokensIssued: number;
-    };
+export type UserInfo = BaseResource & {
+    nickname: string;
+    email: string;
+    verifiedAt: string;
+    createdAt: string;
+    modifiedAt: string;
+    type: ResourceType;
+    privileges: Record<string, string[]>;
+    name?: string;
+    locale?: string;
+    givenName?: string;
+    middleName?: string;
+    familyName?: string;
+    birthdate?: string;
+    address?: string;
+    zoneinfo?: string;
+    metadata: Record<string, string>;
 };
