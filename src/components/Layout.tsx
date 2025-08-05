@@ -15,7 +15,7 @@ export default function Layout() {
         if (!stats || isLoading) return;
         refetch();
         setServerStats(stats);
-    }, [stats, isLoading]);
+    }, [stats, isLoading, refetch]);
 
     return (
         <Theme accentColor='orange' radius='small'>

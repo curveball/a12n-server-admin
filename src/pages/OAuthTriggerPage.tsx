@@ -14,6 +14,7 @@ const OAuthTriggerPage = () => {
             setPostAuthRedirectPath(import.meta.env.VITE_AUTH_SERVER_URL + SERVER_ROUTES.LOGIN);
             triggerOAuthFlow(postAuthRedirectPath);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated]);
 
     return isAuthenticated ? <Navigate to={postAuthRedirectPath} /> : <Loading />;
