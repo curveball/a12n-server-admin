@@ -19,7 +19,7 @@ test.describe('Logout Flow', () => {
 
     test('should clear authentication tokens when logout is clicked', async ({ page }) => {
         // Click profile dropdown and logout
-        const profileDropdownTrigger = page.locator('[data-testid="profile-dropdown"]');
+        const profileDropdownTrigger = page.locator('button[aria-label="Profile Options"]');
 
         await profileDropdownTrigger.click();
         const logoutOption = page.locator('[data-testid="Logout"]');
@@ -40,7 +40,7 @@ test.describe('Logout Flow', () => {
 
     test('should redirect to login page when confirming logout', async ({ page }) => {
         // Verify profile dropdown trigger is visible
-        const profileDropdownTrigger = page.locator('[data-testid="profile-dropdown"]');
+        const profileDropdownTrigger = page.locator('button[aria-label="Profile Options"]');
 
         await expect(profileDropdownTrigger).toBeTruthy();
 
@@ -60,7 +60,7 @@ test.describe('Logout Flow', () => {
 
     test('once logged out, should be unable to access protected routes', async ({ page }) => {
         // Verify profile dropdown trigger is visible
-        const profileDropdownTrigger = page.locator('[data-testid="profile-dropdown"]');
+        const profileDropdownTrigger = page.locator('button[aria-label="Profile Options"]');
 
         await expect(profileDropdownTrigger).toBeTruthy();
 
