@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '@testing-library/jest-dom/vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import DeveloperTabComponent from './DeveloperTab';
+import ApiSandbox from './ApiSandbox';
 
 afterEach(() => {
     cleanup();
@@ -70,7 +70,7 @@ describe('Developer Tab Tests', () => {
         const queryClient = createQueryClient();
         render(
             <QueryClientProvider client={queryClient}>
-                <DeveloperTabComponent
+                <ApiSandbox
                     queryOptions={{ queryKey: ['users'], queryFn: () => Promise.resolve([]) }}
                     fullUrl='http://localhost:8531/user?embed=item'
                 />
@@ -83,7 +83,7 @@ describe('Developer Tab Tests', () => {
         cleanup();
     });
 
-    it('renders DeveloperTabComponent with default snippet (curl) and shows empty data response', async () => {
+    it('renders ApiSandbox with default snippet (curl) and shows empty data response', async () => {
         expect(screen.getByTestId('request-details-heading')).toBeInTheDocument();
         expect(screen.getByText('http://localhost:8531/user?embed=item')).toBeInTheDocument();
         expect(screen.getByRole('button', { name: /curl/i })).toBeInTheDocument();
