@@ -23,7 +23,63 @@ const queryClient = new QueryClient({
     },
 });
 
+// Route configuration array
+const routesConfig = [
+    {
+        path: CLIENT_ROUTES.AUTH_TRIGGER,
+        element: <OAuthTriggerPage />,
+        isProtected: false,
+        isNested: false,
+    },
+    {
+        path: CLIENT_ROUTES.AUTH_REDIRECT,
+        element: <Loading />,
+        isProtected: false,
+        isNested: false,
+    },
+    {
+        path: CLIENT_ROUTES.USERS_TABLE,
+        element: <UserList />,
+        isProtected: true,
+        isNested: true,
+    },
+    {
+        path: CLIENT_ROUTES.USERS_SANDBOX,
+        element: <ApiSandbox />,
+        isProtected: true,
+        isNested: true,
+    },
+    {
+        path: CLIENT_ROUTES.GROUPS_TABLE,
+        element: <GroupList />,
+        isProtected: true,
+        isNested: true,
+    },
+    {
+        path: CLIENT_ROUTES.APPS_TABLE,
+        element: <AppList />,
+        isProtected: true,
+        isNested: true,
+    },
+    {
+        path: CLIENT_ROUTES.NOT_FOUND,
+        element: <NotFoundPage />,
+        isProtected: false,
+        isNested: false,
+    },
+    {
+        path: '*',
+        element: <NotFoundPage />,
+        isProtected: false,
+        isNested: false,
+    },
+];
+
 function App() {
+    // Separate nested routes from top-level routes
+    const topLevelRoutes = routesConfig.filter((route) => !route.isNested);
+    const nestedRoutes = routesConfig.filter((route) => route.isNested);
+
     return (
         <Router>
             <QueryClientProvider client={queryClient}>
@@ -32,44 +88,21 @@ function App() {
                 )}
                 <OAuthProvider>
                     <Routes>
-                        <Route path={CLIENT_ROUTES.AUTH_TRIGGER} element={<OAuthTriggerPage />} />
-                        <Route path={CLIENT_ROUTES.AUTH_REDIRECT} element={<Loading />} />
+                        {/* Render top-level routes */}
+                        {topLevelRoutes.map((route, index) => (
+                            <Route key={`${route.path}-${index}`} path={route.path} element={route.element} />
+                        ))}
+
+                        {/* Root route with nested protected routes */}
                         <Route path={CLIENT_ROUTES.ROOT} element={<Protected>{<Layout />}</Protected>}>
-                            <Route
-                                path={CLIENT_ROUTES.USERS_TABLE}
-                                element={
-                                    <Protected>
-                                        <UserList />
-                                    </Protected>
-                                }
-                            />
-                            <Route
-                                path={CLIENT_ROUTES.USERS_SANDBOX}
-                                element={
-                                    <Protected>
-                                        <ApiSandbox />
-                                    </Protected>
-                                }
-                            />
-                            <Route
-                                path={CLIENT_ROUTES.GROUPS_TABLE}
-                                element={
-                                    <Protected>
-                                        <GroupList />
-                                    </Protected>
-                                }
-                            />
-                            <Route
-                                path={CLIENT_ROUTES.APPS_TABLE}
-                                element={
-                                    <Protected>
-                                        <AppList />
-                                    </Protected>
-                                }
-                            />
+                            {nestedRoutes.map((route, index) => (
+                                <Route
+                                    key={`nested-${route.path}-${index}`}
+                                    path={route.path}
+                                    element={route.isProtected ? <Protected>{route.element}</Protected> : route.element}
+                                />
+                            ))}
                         </Route>
-                        <Route path={CLIENT_ROUTES.NOT_FOUND} element={<NotFoundPage />} />
-                        <Route path='*' element={<NotFoundPage />} />
                     </Routes>
                 </OAuthProvider>
             </QueryClientProvider>
