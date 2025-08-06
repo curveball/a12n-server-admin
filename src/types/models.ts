@@ -68,3 +68,17 @@ export type UserInfo = BaseResource & {
     zoneinfo?: string;
     metadata: Record<string, string>;
 };
+
+export type ServerStats = {
+    stats: {
+        user: number;
+        group: number;
+        app: number;
+    };
+};
+
+export type HalLink = {
+    href: string;
+    templated?: boolean;
+    title?: string;
+};
