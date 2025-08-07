@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ServerStats from '@curveball/a12n-server';
+import { ServerStats } from '../../types/models';
 import { GitHubLogoIcon, GlobeIcon, GridIcon, PersonIcon, RocketIcon } from '@radix-ui/react-icons';
 import { Avatar, Badge, Box, Button, Flex, Heading, Text } from '@radix-ui/themes';
 import React, { useMemo } from 'react';

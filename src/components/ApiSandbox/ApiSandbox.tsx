@@ -6,7 +6,7 @@ import useOAuth from '../../hooks/useOAuth';
 import { RequestDetails } from './RequestDetails';
 import { ResponseDetails } from './ResponseDetails';
 
-export function DeveloperTabComponent({ queryOptions, fullUrl }: { queryOptions: QueryOptions; fullUrl: string }) {
+export function ApiSandbox({ queryOptions, fullUrl }: { queryOptions: QueryOptions; fullUrl: string }) {
     const { tokens } = useOAuth();
 
     const { data, error, isLoading, isFetching, refetch } = useQuery({
@@ -49,4 +49,4 @@ export function DeveloperTabComponent({ queryOptions, fullUrl }: { queryOptions:
     );
 }
 
-export default DeveloperTabComponent;
+export default ApiSandbox;
