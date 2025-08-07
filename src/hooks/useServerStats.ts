@@ -1,8 +1,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useAxios } from '.';
-import { HalLink } from '../types';
-import { Resource, ServerStats, UserInfo } from '../types/models';
+import { Resource, ServerStats, UserInfo, HalLink } from '../types/models';
 
 const useServerStats = () => {
     const api = useAxios();

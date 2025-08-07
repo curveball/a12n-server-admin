@@ -88,7 +88,7 @@ src/
 │   ├── core.ts           # Base API configuration
 │   └── query-keys.ts     # React Query key constants
 ├── components/            # Reusable UI components
-│   ├── DeveloperTab/     # API debugging tools
+│   ├── ApiSandbox/      # API debugging tools
 │   ├── Modal/            # Modal dialogs (Create/Update)
 │   ├── Protected/        # Route protection wrapper
 │   ├── Sidebar/          # Navigation sidebar
