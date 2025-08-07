@@ -99,7 +99,7 @@ function App() {
                                 <Route
                                     key={`nested-${route.path}-${index}`}
                                     path={route.path}
-                                    element={route.isProtected ? <Protected>{route.element}</Protected> : route.element}
+                                    element={route.element}
                                 />
                             ))}
                         </Route>
