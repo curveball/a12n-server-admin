@@ -32,7 +32,6 @@ type SidebarProps = {
 const Sidebar = ({ version, profileOptions = [], serverStats, authenticatedUser }: SidebarProps) => {
     const location = useLocation();
     const { setTokens } = useOAuth();
-    console.log(authenticatedUser);
     const isAdmin = authenticatedUser?.privileges['*'].includes('admin');
     const navItems = useMemo<NavItem[]>(
         () => [

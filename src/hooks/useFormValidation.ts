@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { z, infer as ZodInfer, ZodObject } from 'zod';
 import { useToast } from '.';
 
+type ErrorShape<T> =
+    T extends Array<infer U> ? Array<ErrorShape<U>> : T extends object ? { [K in keyof T]?: ErrorShape<T[K]> } : string;
+
 const useFormValidation = <T extends ZodObject<z.ZodRawShape>>({
     schema,
     initialValues,
@@ -25,12 +28,42 @@ const useFormValidation = <T extends ZodObject<z.ZodRawShape>>({
         );
         return { ...schemaDefaults, ...initialValues };
     });
-    const [errors, setErrors] = useState<Partial<Record<keyof ZodInfer<T>, string>>>({});
+    const [errors, setErrors] = useState<Partial<ErrorShape<ZodInfer<T>>>>({});
+
+    function setNestedValue(obj: any, path: string, value: any) {
+        const keys = path.split('.');
+        let temp = obj;
+        for (let i = 0; i < keys.length - 1; i++) {
+            const key = keys[i];
+            const nextKey = keys[i + 1];
+            const isArrayIndex = !isNaN(Number(nextKey));
+            if (isArrayIndex) {
+                if (!Array.isArray(temp[key])) temp[key] = [];
+            } else {
+                if (!temp[key]) temp[key] = {};
+            }
+            temp = temp[key];
+        }
+        const lastKey = keys[keys.length - 1];
+        if (!isNaN(Number(lastKey))) {
+            temp[Number(lastKey)] = value;
+        } else {
+            temp[lastKey] = value;
+        }
+    }
 
     const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         const { name, value } = e.target;
-        setFormState((prev) => ({ ...prev, [name]: value }));
-        setErrors((prev) => ({ ...prev, [name]: '' }));
+        setFormState((prev) => {
+            const updated = { ...prev };
+            setNestedValue(updated, name, value);
+            return updated;
+        });
+        setErrors((prev) => {
+            const updated = { ...prev };
+            setNestedValue(updated, name, '');
+            return updated;
+        });
     };
 
     const handleCheckboxChange = (name: string, checked: boolean) => {
@@ -45,17 +78,20 @@ const useFormValidation = <T extends ZodObject<z.ZodRawShape>>({
             return true;
         } catch (err) {
             if (err instanceof z.ZodError) {
+                const newErrors: any = {};
+                err.errors.forEach((zodErr) => {
+                    const path = zodErr.path.join('.');
+                    setNestedValue(newErrors, path, zodErr.message);
+                });
+                setErrors(newErrors);
                 const firstError = err.errors[0];
-                setErrors({ [firstError.path[0] as keyof ZodInfer<T>]: firstError.message } as Partial<
-                    Record<keyof ZodInfer<T>, string>
-                >);
                 toast.error({ title: 'Invalid Form Submission.', description: firstError.message });
             }
             return false;
         }
     };
 
-    return { formState, errors, handleInputChange, handleCheckboxChange, isFormValid };
+    return { formState, setFormState, errors, handleInputChange, handleCheckboxChange, isFormValid };
 };
 
 export default useFormValidation;

@@ -40,6 +40,20 @@ export type User = BaseResource & {
     hasPassword: boolean;
     password?: string;
     verifiedAt?: string;
+    name?: string;
+    locale?: string;
+    givenName?: string;
+    middleName?: string;
+    familyName?: string;
+    birthdate?: string;
+    address?: {
+        streetAddress: (string | undefined)[];
+        locality: string;
+        postalCode: string;
+        region: string;
+        country: string;
+    };
+    zoneinfo?: string;
 };
 
 export type Model = App | Template | Group | User;

@@ -10,6 +10,32 @@ export const CreateUserModalSchema = z.object({
 export const UpdateUserModalSchema = z.object({
     nickname: z.string().min(1, { message: 'User Name is required' }),
     active: z.boolean(),
+    name: z.string().optional(),
+    locale: z
+        .string()
+        .optional()
+        .refine((val) => !val || /^([a-zA-Z]{2,3})-([a-zA-Z]{2,4})$/.test(val), {
+            message: 'Locale must be in format en-US, where language is 2 or 3 letters and country is 2 to 4 letters',
+        }),
+    givenName: z.string().optional(),
+    middleName: z.string().optional(),
+    familyName: z.string().optional(),
+    birthdate: z
+        .string()
+        .optional()
+        .refine((val) => !val || (/^\d{4}-\d{2}-\d{2}$/.test(val) && !isNaN(Date.parse(val))), {
+            message: 'Birthdate must be a valid date in YYYY-MM-DD format',
+        }),
+    address: z
+        .object({
+            streetAddress: z.array(z.string().optional()),
+            locality: z.string(),
+            postalCode: z.string(),
+            region: z.string(),
+            country: z.string().regex(/^[a-zA-Z]{2}$/, { message: 'Country must be a 2-letter country code' }),
+        })
+        .optional(),
+    zoneinfo: z.string().optional(),
 });
 
 export type UserUpdateInitialValues = {

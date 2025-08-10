@@ -1,7 +1,7 @@
 import '@radix-ui/themes/styles.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { AppList, GroupList, NotFoundPage, OAuthTriggerPage, UserList } from './pages';
+import { AppList, GroupList, NotFoundPage, OAuthTriggerPage, UserList, UserEdit } from './pages';
 import Loading from './pages/Loading';
 import './theme.css';
 
@@ -48,6 +48,14 @@ function App() {
                                 element={
                                     <Protected>
                                         <ApiSandbox />
+                                    </Protected>
+                                }
+                            />
+                            <Route
+                                path={CLIENT_ROUTES.USER_EDIT}
+                                element={
+                                    <Protected>
+                                        <UserEdit />
                                     </Protected>
                                 }
                             />
