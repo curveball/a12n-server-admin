@@ -1,24 +1,16 @@
-import { Theme } from '@radix-ui/themes';
+import { Select, Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
-import { QueryOptions, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import useOAuth from '../../hooks/useOAuth';
+import useSandboxQueries from '../../hooks/useSandboxQueries';
+import { HttpRequestMethod } from '../../types/api';
 import { RequestDetails } from './RequestDetails';
 import { ResponseDetails } from './ResponseDetails';
 
-type ApiSandboxProps = {
-    queryOptions: QueryOptions;
-    fullUrl: string;
-};
-
-export function ApiSandbox({ queryOptions, fullUrl }: ApiSandboxProps) {
+export function ApiSandbox() {
     const { tokens } = useOAuth();
-
-    const { data, error, isLoading, isFetching, refetch } = useQuery({
-        ...queryOptions,
-        queryKey: queryOptions?.queryKey ?? ['defaultKey'],
-    });
-
+    const token = tokens ? tokens.accessToken : 'NO_TOKEN_FOUND';
+    const { method, requestRoute, isFetching, data, error, refetch, setRequestRoute, fullUrl } = useSandboxQueries();
     const [startTime, setStartTime] = useState<number | undefined>(undefined);
     const [elapsed, setElapsed] = useState<number | undefined>(undefined);
 
@@ -31,25 +23,40 @@ export function ApiSandbox({ queryOptions, fullUrl }: ApiSandboxProps) {
             setElapsed((endTime - startTime) / 1000);
             setStartTime(undefined);
         }
-        console.log(data);
-    }, [isFetching, data, error, startTime]);
-
-    const token = tokens ? tokens.accessToken : 'NO_TOKEN_FOUND';
+    }, [isFetching, error, startTime, requestRoute]);
 
     return (
         <Theme>
+            <Select.Root
+                value={requestRoute}
+                onValueChange={(value: string) => {
+                    setRequestRoute(value);
+                }}
+            >
+                <Select.Trigger className='w-full'>
+                    <Select.Content className='w-full'>
+                        <Select.Item value='/'>/</Select.Item>
+                        <Select.Item value='/users'>/users</Select.Item>
+                    </Select.Content>
+                </Select.Trigger>
+            </Select.Root>
+
             <div className='flex flex-col gap-2'>
                 <RequestDetails
-                    method='GET'
-                    url={fullUrl}
+                    method={method as HttpRequestMethod}
                     isFetching={isFetching}
                     refetch={refetch}
-                    data={data}
                     fullUrl={fullUrl}
                     token={token}
                 />
 
-                <ResponseDetails elapsed={elapsed} isLoading={isLoading} error={error as Error} data={data} />
+                <ResponseDetails
+                    key={fullUrl}
+                    data={data}
+                    elapsed={elapsed}
+                    isLoading={isFetching}
+                    error={error as Error}
+                />
             </div>
         </Theme>
     );

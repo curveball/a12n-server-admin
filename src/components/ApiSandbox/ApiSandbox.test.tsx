@@ -2,12 +2,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '@testing-library/jest-dom/vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { withResizeObserver } from '../../tests/setup';
 import ApiSandbox from './ApiSandbox';
-
-afterEach(() => {
-    cleanup();
-});
 
 vi.mock('../../hooks/useOAuth', () => ({
     default: () => ({
@@ -18,6 +15,27 @@ vi.mock('../../hooks/useOAuth', () => ({
         handleOAuthRedirect: vi.fn(),
         refreshAccessToken: vi.fn(),
     }),
+}));
+
+vi.mock('../../hooks/useSandboxQueries', () => ({
+    default: () => ({
+        refetch: vi.fn(),
+        method: 'GET',
+        requestRoute: '/',
+        setRequestRoute: vi.fn(),
+        isFetching: false,
+        data: [
+            {
+                _links: {
+                    self: {},
+                },
+            },
+        ],
+    }),
+}));
+
+vi.mock('../../hooks/useServerStats', () => ({
+    useServerStats: vi.fn(),
 }));
 
 vi.mock(import('../../hooks/useAxios'), async (importOriginal) => {
@@ -62,24 +80,25 @@ if (!navigator.clipboard) {
 
 const createQueryClient = () =>
     new QueryClient({
-        defaultOptions: { queries: { retry: false } },
+        defaultOptions: { queries: { retry: 1 } },
     });
 
-describe('Developer Tab Tests', () => {
+describe('ApiSandbox Tests', () => {
+    beforeAll(() => {
+        withResizeObserver();
+    });
+
     beforeEach(() => {
         const queryClient = createQueryClient();
         render(
             <QueryClientProvider client={queryClient}>
-                <ApiSandbox
-                    queryOptions={{ queryKey: ['users'], queryFn: () => Promise.resolve([]) }}
-                    fullUrl='http://localhost:8531/user?embed=item'
-                />
+                <ApiSandbox />
             </QueryClientProvider>,
         );
     });
 
     afterEach(() => {
-        vi.clearAllMocks();
+        vi.resetAllMocks();
         cleanup();
     });
 

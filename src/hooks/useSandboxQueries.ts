@@ -1,36 +1,60 @@
-import { QueryOptions } from '@tanstack/react-query';
+import { QueryOptions, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useAxios, useServerStats } from '.';
 import { getAllUsers } from '../api';
-/* eslint-disable no-case-declarations */
+
 const useSandboxQueries = () => {
     const api = useAxios();
-    const route = useLocation();
-    console.info('route pathname', route.pathname);
+    const [method, setMethod] = useState<string>('GET');
+    const [fullUrl, setFullUrl] = useState<string>(`${import.meta.env.VITE_AUTH_SERVER_URL}`);
+    // set query options
     const [options, setOptions] = useState<QueryOptions>({});
-    const [params, setParams] = useState<string>('');
+    // set request route params
+    const [params, setParams] = useState<string>('/');
+    // set query key
+    const [queryKey, setQueryKey] = useState<string[]>(['stats']);
+    const [requestRoute, setRequestRoute] = useState<string | undefined>('/');
+
     const { queryOptions: serverStatsOptions, queryParams: serverStatsParams } = useServerStats();
 
+    const { data, error, isLoading, isFetching, refetch } = useQuery({ ...options, queryKey: queryKey as string[] });
+
     useEffect(() => {
-        switch (route.pathname) {
-            case '/sandbox':
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                setOptions(serverStatsOptions as QueryOptions);
-                setParams(serverStatsParams as string);
-                break;
-            case '/users/sandbox':
+        setFullUrl(`${import.meta.env.VITE_AUTH_SERVER_URL}${requestRoute}${params}`);
+        switch (requestRoute) {
+            case '/users':
+                setMethod('GET');
+                setRequestRoute(`/users`);
                 setOptions(getAllUsers(api) as QueryOptions);
                 setParams('/user?embed=item');
+                setQueryKey(['users']);
                 break;
+            case '/':
             default:
-                setOptions({} as QueryOptions);
-                setParams('');
-                break;
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                setMethod('GET');
+                setRequestRoute(`/`);
+                setOptions(serverStatsOptions as QueryOptions);
+                setParams(serverStatsParams as string);
+                setQueryKey(['stats']);
         }
-    }, [route.pathname]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [requestRoute]);
 
-    return { queryOptions: options, queryParams: params };
+    return {
+        method,
+        queryOptions: options,
+        queryParams: params,
+        requestRoute,
+        setRequestRoute,
+        data,
+        error,
+        isLoading,
+        isFetching,
+        refetch,
+        fullUrl,
+        setFullUrl,
+    };
 };
 
 export default useSandboxQueries;
