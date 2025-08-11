@@ -1,29 +1,33 @@
 import { QueryOptions } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAxios, useServerStats } from '.';
 import { getAllUsers } from '../api';
-
+/* eslint-disable no-case-declarations */
 const useSandboxQueries = () => {
-    let queryOptions: QueryOptions = {};
-    let queryParams: string = '';
     const api = useAxios();
     const route = useLocation();
     console.info('route pathname', route.pathname);
+    const [options, setOptions] = useState<QueryOptions>({});
+    const [params, setParams] = useState<string>('');
+
     switch (route.pathname) {
         case '/sandbox':
-            queryOptions = useServerStats().queryOptions as QueryOptions;
-            queryParams = useServerStats().queryParams as string;
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            const { queryOptions, queryParams } = useServerStats();
+            setOptions(queryOptions as QueryOptions);
+            setParams(queryParams as string);
             break;
         case '/users/sandbox':
-            queryOptions = getAllUsers(api) as QueryOptions;
-            queryParams = '/user?embed=item';
+            setOptions(getAllUsers(api) as QueryOptions);
+            setParams('/user?embed=item');
             break;
         default:
-            queryOptions = {} as QueryOptions;
-            queryParams = '';
+            setOptions({} as QueryOptions);
+            setParams('');
             break;
     }
-    return { queryOptions, queryParams };
+    return { queryOptions: options, queryParams: params };
 };
 
 export default useSandboxQueries;
