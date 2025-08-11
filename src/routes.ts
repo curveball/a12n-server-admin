@@ -4,7 +4,7 @@ export const CLIENT_ROUTES = {
     AUTH_REDIRECT: '/auth/redirect',
     USERS_TABLE: '/users',
     USERS_SANDBOX: '/users/sandbox',
-    GROUPS_TABLE: '/groups/table',
+    GROUPS_TABLE: '/groups',
     GROUPS_SANDBOX: '/groups/sandbox',
     APPS_TABLE: '/apps/table',
     APPS_SANDBOX: '/apps/sandbox',

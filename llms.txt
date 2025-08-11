@@ -256,7 +256,7 @@ CLIENT_ROUTES = {
   AUTH_REDIRECT: '/auth/redirect',
   USERS_TABLE: '/users',
   USERS_SANDBOX: '/users/sandbox',
-  GROUPS_TABLE: '/groups/table',
+  GROUPS_TABLE: '/groups',
   APPS_TABLE: '/apps/table',
   PRIVILEGES_TABLE: '/privileges/table',
   NOT_FOUND: '/404'
