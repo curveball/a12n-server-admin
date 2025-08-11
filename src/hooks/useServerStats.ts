@@ -5,6 +5,7 @@ import { HalLink, Resource, ServerStats, UserInfo } from '../types/models';
 
 const useServerStats = () => {
     const api = useAxios();
+    const queryParams = `/?_browser-accept=${encodeURIComponent('application/hal+json')}`;
 
     const options = queryOptions({
         enabled: true,
@@ -12,7 +13,7 @@ const useServerStats = () => {
         throwOnError: true,
         queryFn: async () =>
             (await api.get({
-                suffix: `/?_browser-accept=${encodeURIComponent('application/hal+json')}`,
+                suffix: queryParams,
                 onError: (error) => {
                     console.error(error);
                 },
@@ -55,7 +56,7 @@ const useServerStats = () => {
         isRefetching,
         authenticatedUser,
         queryOptions: options,
-        queryParams: `/?_browser-accept=${encodeURIComponent('application/hal+json')}`,
+        queryParams,
     };
 };
 
