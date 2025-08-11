@@ -4,6 +4,8 @@ import { App, Collection, Group, Resource, ServerStats, User } from './models';
 
 export type APIQueryParams = Record<string, string | number | boolean | undefined>;
 
+export type HttpRequestMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
+
 export type QueryRequestParams = {
     suffix?: string;
     params?: APIQueryParams;

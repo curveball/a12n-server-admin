@@ -1,22 +1,21 @@
 import { RocketIcon } from '@radix-ui/react-icons';
 import { Badge, Box, Button } from '@radix-ui/themes';
 import React, { useEffect, useState } from 'react';
+import { HttpRequestMethod } from '../../types/api';
 import { CodeBlock } from '../CodeBlock';
 import DropdownSelector from '../DropdownSelector';
 
 export type SnippetType = 'curl' | 'node' | 'python';
 
 interface RequestDetailsProps {
-    method: string;
-    url: string;
-    data: unknown;
+    method: HttpRequestMethod;
     isFetching: boolean;
     refetch: () => void;
     fullUrl: string;
     token: string;
 }
 
-export const RequestDetails: React.FC<RequestDetailsProps> = ({ method, url, isFetching, refetch, fullUrl, token }) => {
+export const RequestDetails: React.FC<RequestDetailsProps> = ({ method, isFetching, refetch, fullUrl, token }) => {
     const [snippetType, setSnippetType] = useState<SnippetType>('curl');
     const [snippetHtml, setSnippetHtml] = useState<string>('');
 
@@ -64,7 +63,9 @@ print(response.json())`;
                 <Badge color='green' size='3'>
                     {method}
                 </Badge>
-                <pre className='text-sm text-gray-700 flex-1'>{url}</pre>
+                <pre className='text-sm text-gray-700 flex-1' data-testid='request-url'>
+                    {fullUrl}
+                </pre>
             </Box>
 
             <div className='flex items-center gap-x-2 mb-2'>
