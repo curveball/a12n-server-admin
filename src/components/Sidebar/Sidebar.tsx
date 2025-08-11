@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import AdminUILogo from '../../assets/icons/admin-ui-logo.svg';
 import useOAuth from '../../hooks/useOAuth';
 import { CLIENT_ROUTES } from '../../routes';
-import { type ServerStats, type UserEdit } from '../../types/models';
+import { UserInfo, type ServerStats } from '../../types/models';
 import ProfileDropdown from './ProfileDropdown';
 
 export type NavItem = {
@@ -25,7 +25,7 @@ type SidebarProps = {
     serverStats?: ServerStats;
     version: string;
     profileOptions?: ProfileOption[];
-    authenticatedUser?: UserEdit;
+    authenticatedUser?: UserInfo;
 };
 
 const Sidebar = ({ version, profileOptions = [], serverStats, authenticatedUser }: SidebarProps) => {
