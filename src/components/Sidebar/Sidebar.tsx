@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ServerStats } from '../../types/models';
 import { GitHubLogoIcon, GlobeIcon, GridIcon, PersonIcon, RocketIcon } from '@radix-ui/react-icons';
 import { Avatar, Badge, Box, Button, Flex, Heading, Text } from '@radix-ui/themes';
 import React, { useMemo } from 'react';
@@ -7,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import AdminUILogo from '../../assets/icons/admin-ui-logo.svg';
 import useOAuth from '../../hooks/useOAuth';
 import { CLIENT_ROUTES } from '../../routes';
-import { UserInfo } from '../../types';
+import { type ServerStats, type UserEdit } from '../../types/models';
 import ProfileDropdown from './ProfileDropdown';
 
 export type NavItem = {
@@ -26,7 +25,7 @@ type SidebarProps = {
     serverStats?: ServerStats;
     version: string;
     profileOptions?: ProfileOption[];
-    authenticatedUser?: UserInfo;
+    authenticatedUser?: UserEdit;
 };
 
 const Sidebar = ({ version, profileOptions = [], serverStats, authenticatedUser }: SidebarProps) => {

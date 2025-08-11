@@ -4,7 +4,7 @@ import { CLIENT_ROUTES } from '../../routes';
 import { formatAPIPath } from '../../utils';
 
 test.describe('OAuth Flow', () => {
-    test('should trigger OAuth flow and finish at /users/table', async ({ page }) => {
+    test('should trigger OAuth flow and finish at /users', async ({ page }) => {
         await page.context().storageState({ path: 'playwright/.auth/user.json' });
         await page.goto(CLIENT_ROUTES.AUTH_TRIGGER);
 
@@ -13,7 +13,7 @@ test.describe('OAuth Flow', () => {
         await page.click('button[type="submit"]');
 
         await expect(page).toHaveURL(CLIENT_ROUTES.USERS_TABLE);
-        await expect(page.url()).toBe(`${process.env.VITE_SERVER_URL!}/users/table`);
+        await expect(page.url()).toBe(`${process.env.VITE_SERVER_URL!}/users`);
     });
 
     test('should trigger OAuth flow and finish at custom redirect path', async ({ page }) => {

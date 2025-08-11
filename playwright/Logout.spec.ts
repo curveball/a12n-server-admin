@@ -88,7 +88,7 @@ test.skip('Logout Flow', () => {
 
         await page.locator('button[type="submit"]').click();
         await page.waitForTimeout(1000);
-        await page.goto('/users/table');
+        await page.goto('/users');
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(1000);
 

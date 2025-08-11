@@ -8,9 +8,9 @@ import './theme.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Layout, Protected } from './components';
-import ApiSandbox from './pages/ApiSandbox';
+import { default as SandboxView } from './pages/ApiSandbox';
+import Home from './pages/Home';
 import { OAuthProvider } from './providers/OAuthProvider/OAuthProvider';
-import { CLIENT_ROUTES } from './routes';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -23,63 +23,61 @@ const queryClient = new QueryClient({
     },
 });
 
-// Route configuration array
+// Route configuration array;
+
 const routesConfig = [
     {
-        path: CLIENT_ROUTES.AUTH_TRIGGER,
+        path: '/',
+        element: <Layout />,
+        isProtected: true,
+        children: [
+            {
+                path: '/',
+                element: <Home />,
+            },
+            {
+                path: '/users',
+                element: <UserList />,
+                isProtected: true,
+                children: [
+                    {
+                        path: '/users/sandbox',
+                        element: <SandboxView />,
+                    },
+                ],
+            },
+            {
+                path: '/groups',
+                element: <GroupList />,
+                isProtected: true,
+            },
+            {
+                path: '/apps',
+                element: <AppList />,
+                isProtected: true,
+            },
+        ],
+    },
+    {
+        path: '/auth/trigger',
         element: <OAuthTriggerPage />,
-        isProtected: false,
-        isNested: false,
     },
     {
-        path: CLIENT_ROUTES.AUTH_REDIRECT,
+        path: '/auth/redirect',
         element: <Loading />,
-        isProtected: false,
-        isNested: false,
     },
+
     {
-        path: CLIENT_ROUTES.USERS_TABLE,
-        element: <UserList />,
-        isProtected: true,
-        isNested: true,
-    },
-    {
-        path: CLIENT_ROUTES.USERS_SANDBOX,
-        element: <ApiSandbox />,
-        isProtected: true,
-        isNested: true,
-    },
-    {
-        path: CLIENT_ROUTES.GROUPS_TABLE,
-        element: <GroupList />,
-        isProtected: true,
-        isNested: true,
-    },
-    {
-        path: CLIENT_ROUTES.APPS_TABLE,
-        element: <AppList />,
-        isProtected: true,
-        isNested: true,
-    },
-    {
-        path: CLIENT_ROUTES.NOT_FOUND,
+        path: '/404',
         element: <NotFoundPage />,
-        isProtected: false,
-        isNested: false,
     },
     {
         path: '*',
         element: <NotFoundPage />,
-        isProtected: false,
-        isNested: false,
     },
 ];
 
 function App() {
-    // Separate nested routes from top-level routes
-    const topLevelRoutes = routesConfig.filter((route) => !route.isNested);
-    const nestedRoutes = routesConfig.filter((route) => route.isNested);
-
     return (
         <Router>
             <QueryClientProvider client={queryClient}>
@@ -88,21 +86,22 @@ function App() {
                 )}
                 <OAuthProvider>
                     <Routes>
-                        {/* Render top-level routes */}
-                        {topLevelRoutes.map((route, index) => (
-                            <Route key={`${route.path}-${index}`} path={route.path} element={route.element} />
+                        {routesConfig.map((route, index) => (
+                            <Route
+                                key={`${route.path}-${index}`}
+                                path={route.path}
+                                element={route.isProtected ? <Protected>{route.element}</Protected> : route.element}
+                            >
+                                {route.children &&
+                                    route.children.map((child, index) => (
+                                        <Route
+                                            key={`${child.path}-${index}`}
+                                            path={child.path}
+                                            element={child.element}
+                                        />
+                                    ))}
+                            </Route>
                         ))}
-
-                        {/* Root route with nested protected routes */}
-                        <Route path={CLIENT_ROUTES.ROOT} element={<Protected>{<Layout />}</Protected>}>
-                            {nestedRoutes.map((route, index) => (
-                                <Route
-                                    key={`nested-${route.path}-${index}`}
-                                    path={route.path}
-                                    element={route.element}
-                                />
-                            ))}
-                        </Route>
                     </Routes>
                 </OAuthProvider>
             </QueryClientProvider>

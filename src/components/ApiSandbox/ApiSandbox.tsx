@@ -2,11 +2,27 @@ import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import { QueryOptions, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import { getAllUsers } from '../../api';
 import useOAuth from '../../hooks/useOAuth';
 import { RequestDetails } from './RequestDetails';
 import { ResponseDetails } from './ResponseDetails';
 
-export function ApiSandbox({ queryOptions, fullUrl }: { queryOptions: QueryOptions; fullUrl: string }) {
+type ApiSandboxProps = {
+    queryOptions: QueryOptions;
+    fullUrl: string;
+    queryParams: string;
+};
+
+export function ApiSandbox({ queryOptions, queryParams }: ApiSandboxProps) {
+    const api = useAxios();
+    const route = useLocation();
+    switch (route.pathname) {
+        case '/users/sandbox':
+            queryOptions = getAllUsers(api) as QueryOptions;
+            fullUrl = +'/user?embed=item';
+            queryParams = '/user?embed=item';
+            break;
+    }
     const { tokens } = useOAuth();
 
     const { data, error, isLoading, isFetching, refetch } = useQuery({

@@ -2,7 +2,7 @@ export const CLIENT_ROUTES = {
     ROOT: '/',
     AUTH_TRIGGER: '/auth/trigger',
     AUTH_REDIRECT: '/auth/redirect',
-    USERS_TABLE: '/users/table',
+    USERS_TABLE: '/users',
     USERS_SANDBOX: '/users/sandbox',
     GROUPS_TABLE: '/groups/table',
     GROUPS_SANDBOX: '/groups/sandbox',
