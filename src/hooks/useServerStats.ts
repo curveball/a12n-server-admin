@@ -1,7 +1,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useAxios } from '.';
-import { Resource, ServerStats, UserInfo, HalLink } from '../types/models';
+import { HalLink, Resource, ServerStats, UserInfo } from '../types/models';
 
 const useServerStats = () => {
     const api = useAxios();
@@ -54,6 +54,8 @@ const useServerStats = () => {
         refetch,
         isRefetching,
         authenticatedUser,
+        queryOptions: options,
+        queryParams: `/?_browser-accept=${encodeURIComponent('application/hal+json')}`,
     };
 };
 

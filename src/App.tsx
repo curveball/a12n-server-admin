@@ -23,8 +23,6 @@ const queryClient = new QueryClient({
     },
 });
 
-// Route configuration array;
-
 const routesConfig = [
     {
         path: '/',
@@ -34,17 +32,22 @@ const routesConfig = [
             {
                 path: '/',
                 element: <Home />,
+                isProtected: true,
+            },
+            {
+                path: '/sandbox',
+                element: <SandboxView />,
+                isProtected: true,
             },
             {
                 path: '/users',
                 element: <UserList />,
                 isProtected: true,
-                children: [
-                    {
-                        path: '/users/sandbox',
-                        element: <SandboxView />,
-                    },
-                ],
+            },
+            {
+                path: '/users/sandbox',
+                element: <SandboxView />,
+                isProtected: true,
             },
             {
                 path: '/groups',
