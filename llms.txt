@@ -257,7 +257,7 @@ CLIENT_ROUTES = {
   USERS_TABLE: '/users',
   USERS_SANDBOX: '/users/sandbox',
   GROUPS_TABLE: '/groups',
-  APPS_TABLE: '/apps/table',
+  APPS_TABLE: '/apps',
   PRIVILEGES_TABLE: '/privileges/table',
   NOT_FOUND: '/404'
 };
