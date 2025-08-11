@@ -8,15 +8,22 @@ import './theme.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Layout, Protected } from './components';
-import { default as SandboxView } from './pages/ApiSandbox';
 import Home from './pages/Home';
+import { default as SandboxView } from './pages/SandboxView';
 import { OAuthProvider } from './providers/OAuthProvider/OAuthProvider';
 
+import { Resource, ServerStats } from './types/models';
+
+const defaultQueryFn = async ({ queryKey }: { queryKey: readonly unknown[] }) => {
+    const response = queryClient.getQueryData<Resource<ServerStats>>([queryKey[0]]);
+    return response;
+};
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
+            queryFn: defaultQueryFn,
             retryDelay: (failureCount, error) => {
-                console.log(failureCount, error);
+                console.warn(`failed request: ${failureCount}`, error);
                 return 1000;
             },
         },
