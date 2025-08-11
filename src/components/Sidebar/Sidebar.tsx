@@ -52,7 +52,7 @@ const Sidebar = ({ version, profileOptions = [], serverStats, authenticatedUser 
                 name: 'Sandbox',
                 icon: <RocketIcon />,
                 count: 0,
-                path: CLIENT_ROUTES.USERS_SANDBOX,
+                path: CLIENT_ROUTES.SANDBOX,
             },
         ],
         [serverStats],

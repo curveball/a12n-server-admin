@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useServerStats } from '../hooks';
 
 export default function Home() {
@@ -7,7 +6,6 @@ export default function Home() {
     return (
         <>
             <p>Hello, {authenticatedUser?.nickname}</p>
-            <Link to='/sandbox'>API Sandbox</Link>
         </>
     );
 }

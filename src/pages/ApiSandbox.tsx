@@ -1,6 +1,6 @@
 import { QueryOptions } from '@tanstack/react-query';
 import ApiSandbox from '../components/ApiSandbox/ApiSandbox';
-import useSandboxQueries from '../hooks/useQueries';
+import useSandboxQueries from '../hooks/useSandboxQueries';
 
 const SandboxView = () => {
     const { queryOptions, queryParams } = useSandboxQueries();
