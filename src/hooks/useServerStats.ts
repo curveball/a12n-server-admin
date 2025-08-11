@@ -1,5 +1,4 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
 import { useAxios } from '.';
 import { HalLink, Resource, ServerStats, UserInfo } from '../types/models';
 
@@ -41,12 +40,6 @@ const useServerStats = () => {
     });
 
     const { data: authenticatedUser } = useQuery(authenticatedUserOptions);
-
-    useEffect(() => {
-        if (!isLoading || !data) {
-            refetch();
-        }
-    }, [isLoading, data, refetch]);
 
     return {
         data,
