@@ -1,3 +1,13 @@
+import { Link } from 'react-router-dom';
+import { useServerStats } from '../hooks';
+
 export default function Home() {
-    return <div>Home</div>;
+    const { authenticatedUser } = useServerStats();
+
+    return (
+        <>
+            <p>Hello, {authenticatedUser?.nickname}</p>
+            <Link to='/sandbox'>API Sandbox</Link>
+        </>
+    );
 }
