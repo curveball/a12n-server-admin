@@ -81,7 +81,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ content, isCopyEnabled = t
                         <Badge color='gray' size='3' className='absolute top-0 right-0 mt-3 -z-10 mr-3'>
                             Raw
                         </Badge>
-                        <pre>{content}</pre>
+                        <pre data-testid='code-block-content'>{content}</pre>
                     </Box>
                 )}
             </Box>
