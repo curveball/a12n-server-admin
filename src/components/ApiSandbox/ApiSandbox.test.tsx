@@ -2,12 +2,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '@testing-library/jest-dom/vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { withResizeObserver } from '../../tests/setup';
 import ApiSandbox from './ApiSandbox';
-
-afterEach(() => {
-    cleanup();
-});
 
 vi.mock('../../hooks/useOAuth', () => ({
     default: () => ({
@@ -18,6 +15,28 @@ vi.mock('../../hooks/useOAuth', () => ({
         handleOAuthRedirect: vi.fn(),
         refreshAccessToken: vi.fn(),
     }),
+}));
+
+vi.mock('../../hooks/useSandboxQueries', () => ({
+    default: () => ({
+        refetch: vi.fn(),
+        method: 'GET',
+        requestRoute: '/',
+        setRequestRoute: vi.fn(),
+        isFetching: false,
+        data: [
+            {
+                _links: {
+                    self: {},
+                },
+            },
+        ],
+        fullUrl: 'http://localhost:8531/',
+    }),
+}));
+
+vi.mock('../../hooks/useServerStats', () => ({
+    useServerStats: vi.fn(),
 }));
 
 vi.mock(import('../../hooks/useAxios'), async (importOriginal) => {
@@ -62,35 +81,38 @@ if (!navigator.clipboard) {
 
 const createQueryClient = () =>
     new QueryClient({
-        defaultOptions: { queries: { retry: false } },
+        defaultOptions: { queries: { retry: 1 } },
     });
 
-describe('Developer Tab Tests', () => {
+describe('ApiSandbox Tests', () => {
+    beforeAll(() => {
+        withResizeObserver();
+    });
+
     beforeEach(() => {
         const queryClient = createQueryClient();
         render(
             <QueryClientProvider client={queryClient}>
-                <ApiSandbox
-                    queryOptions={{ queryKey: ['users'], queryFn: () => Promise.resolve([]) }}
-                    fullUrl='http://localhost:8531/user?embed=item'
-                />
+                <ApiSandbox />
             </QueryClientProvider>,
         );
     });
 
     afterEach(() => {
-        vi.clearAllMocks();
+        vi.resetAllMocks();
         cleanup();
     });
 
-    it('renders ApiSandbox with default snippet (curl) and shows empty data response', async () => {
-        expect(screen.getByTestId('request-details-heading')).toBeInTheDocument();
-        expect(screen.getByText('http://localhost:8531/user?embed=item')).toBeInTheDocument();
+    it('renders ApiSandbox with default requested URL', async () => {
+        expect(screen.getByTestId('request-url')).toHaveTextContent('http://localhost:8531/');
         expect(screen.getByRole('button', { name: /curl/i })).toBeInTheDocument();
+        expect(screen.getByTestId('code-block-content')).toHaveTextContent('curl -X GET "http://localhost:8531/"');
+    });
 
-        await waitFor(() => {
-            expect(screen.getByText('[]')).toBeInTheDocument();
-        });
+    it('updates the request URL when the user selects the /users route', async () => {
+        const select = screen.getByTestId('selection-trigger');
+        await fireEvent.change(select, { target: { value: '/users' } });
+        expect(screen.getByTestId('request-url')).toHaveTextContent('http://localhost:8531/users');
     });
 
     it('copies snippet text to clipboard when the Copy button is clicked', async () => {

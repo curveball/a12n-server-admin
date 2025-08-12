@@ -1,3 +1,4 @@
+import { type UserEdit } from '@curveball/a12n-server';
 import { HalResource } from 'hal-types';
 
 export type Resource<T extends Record<string, unknown> = Record<string, never>> = HalResource<T>;
@@ -50,24 +51,7 @@ export enum ResourceType {
     GROUP = 'group',
 }
 
-export type UserInfo = BaseResource & {
-    nickname: string;
-    email: string;
-    verifiedAt: string;
-    createdAt: string;
-    modifiedAt: string;
-    type: ResourceType;
-    privileges: Record<string, string[]>;
-    name?: string;
-    locale?: string;
-    givenName?: string;
-    middleName?: string;
-    familyName?: string;
-    birthdate?: string;
-    address?: string;
-    zoneinfo?: string;
-    metadata: Record<string, string>;
-};
+export type UserInfo = BaseResource & UserEdit;
 
 export type ServerStats = {
     stats: {

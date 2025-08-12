@@ -8,20 +8,84 @@ import './theme.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Layout, Protected } from './components';
-import ApiSandbox from './pages/ApiSandbox';
+import Home from './pages/Home';
+import { default as SandboxView } from './pages/SandboxView';
 import { OAuthProvider } from './providers/OAuthProvider/OAuthProvider';
-import { CLIENT_ROUTES } from './routes';
 
+import { Resource, ServerStats } from './types/models';
+
+const defaultQueryFn = async ({ queryKey }: { queryKey: readonly unknown[] }) => {
+    const response = queryClient.getQueryData<Resource<ServerStats>>([queryKey[0]]);
+    return response;
+};
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
+            queryFn: defaultQueryFn,
             retryDelay: (failureCount, error) => {
-                console.log(failureCount, error);
+                console.warn(`failed request: ${failureCount}`, error);
                 return 1000;
             },
         },
     },
 });
+
+const routesConfig = [
+    {
+        path: '/',
+        element: <Layout />,
+        isProtected: true,
+        children: [
+            {
+                path: '/',
+                element: <Home />,
+                isProtected: true,
+            },
+            {
+                path: '/sandbox',
+                element: <SandboxView />,
+                isProtected: true,
+            },
+            {
+                path: '/users',
+                element: <UserList />,
+                isProtected: true,
+            },
+            {
+                path: '/users/sandbox',
+                element: <SandboxView />,
+                isProtected: true,
+            },
+            {
+                path: '/groups',
+                element: <GroupList />,
+                isProtected: true,
+            },
+            {
+                path: '/apps',
+                element: <AppList />,
+                isProtected: true,
+            },
+        ],
+    },
+    {
+        path: '/auth/trigger',
+        element: <OAuthTriggerPage />,
+    },
+    {
+        path: '/auth/redirect',
+        element: <Loading />,
+    },
+
+    {
+        path: '/404',
+        element: <NotFoundPage />,
+    },
+    {
+        path: '*',
+        element: <NotFoundPage />,
+    },
+];
 
 function App() {
     return (
@@ -32,44 +96,22 @@ function App() {
                 )}
                 <OAuthProvider>
                     <Routes>
-                        <Route path={CLIENT_ROUTES.AUTH_TRIGGER} element={<OAuthTriggerPage />} />
-                        <Route path={CLIENT_ROUTES.AUTH_REDIRECT} element={<Loading />} />
-                        <Route path={CLIENT_ROUTES.ROOT} element={<Protected>{<Layout />}</Protected>}>
+                        {routesConfig.map((route, index) => (
                             <Route
-                                path={CLIENT_ROUTES.USERS_TABLE}
-                                element={
-                                    <Protected>
-                                        <UserList />
-                                    </Protected>
-                                }
-                            />
-                            <Route
-                                path={CLIENT_ROUTES.USERS_SANDBOX}
-                                element={
-                                    <Protected>
-                                        <ApiSandbox />
-                                    </Protected>
-                                }
-                            />
-                            <Route
-                                path={CLIENT_ROUTES.GROUPS_TABLE}
-                                element={
-                                    <Protected>
-                                        <GroupList />
-                                    </Protected>
-                                }
-                            />
-                            <Route
-                                path={CLIENT_ROUTES.APPS_TABLE}
-                                element={
-                                    <Protected>
-                                        <AppList />
-                                    </Protected>
-                                }
-                            />
-                        </Route>
-                        <Route path={CLIENT_ROUTES.NOT_FOUND} element={<NotFoundPage />} />
-                        <Route path='*' element={<NotFoundPage />} />
+                                key={`${route.path}-${index}`}
+                                path={route.path}
+                                element={route.isProtected ? <Protected>{route.element}</Protected> : route.element}
+                            >
+                                {route.children &&
+                                    route.children.map((child, index) => (
+                                        <Route
+                                            key={`${child.path}-${index}`}
+                                            path={child.path}
+                                            element={child.element}
+                                        />
+                                    ))}
+                            </Route>
+                        ))}
                     </Routes>
                 </OAuthProvider>
             </QueryClientProvider>

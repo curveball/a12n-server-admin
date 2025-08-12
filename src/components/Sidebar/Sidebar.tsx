@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ServerStats } from '../../types/models';
 import { GitHubLogoIcon, GlobeIcon, GridIcon, PersonIcon, RocketIcon } from '@radix-ui/react-icons';
 import { Avatar, Badge, Box, Button, Flex, Heading, Text } from '@radix-ui/themes';
 import React, { useMemo } from 'react';
@@ -7,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import AdminUILogo from '../../assets/icons/admin-ui-logo.svg';
 import useOAuth from '../../hooks/useOAuth';
 import { CLIENT_ROUTES } from '../../routes';
-import { UserInfo } from '../../types';
+import { UserInfo, type ServerStats } from '../../types/models';
 import ProfileDropdown from './ProfileDropdown';
 
 export type NavItem = {
@@ -32,7 +31,6 @@ type SidebarProps = {
 const Sidebar = ({ version, profileOptions = [], serverStats, authenticatedUser }: SidebarProps) => {
     const location = useLocation();
     const { setTokens } = useOAuth();
-    console.log(authenticatedUser);
     const isAdmin = authenticatedUser?.privileges['*'].includes('admin');
     const navItems = useMemo<NavItem[]>(
         () => [
@@ -53,7 +51,7 @@ const Sidebar = ({ version, profileOptions = [], serverStats, authenticatedUser 
                 name: 'Sandbox',
                 icon: <RocketIcon />,
                 count: 0,
-                path: CLIENT_ROUTES.USERS_SANDBOX,
+                path: CLIENT_ROUTES.SANDBOX,
             },
         ],
         [serverStats],

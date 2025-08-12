@@ -1,10 +1,10 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
 import { useAxios } from '.';
-import { Resource, ServerStats, UserInfo, HalLink } from '../types/models';
+import { HalLink, Resource, ServerStats, UserInfo } from '../types/models';
 
 const useServerStats = () => {
     const api = useAxios();
+    const queryParams = `/?_browser-accept=${encodeURIComponent('application/hal+json')}`;
 
     const options = queryOptions({
         enabled: true,
@@ -12,7 +12,7 @@ const useServerStats = () => {
         throwOnError: true,
         queryFn: async () =>
             (await api.get({
-                suffix: `/?_browser-accept=${encodeURIComponent('application/hal+json')}`,
+                suffix: queryParams,
                 onError: (error) => {
                     console.error(error);
                 },
@@ -41,12 +41,6 @@ const useServerStats = () => {
 
     const { data: authenticatedUser } = useQuery(authenticatedUserOptions);
 
-    useEffect(() => {
-        if (!isLoading || !data) {
-            refetch();
-        }
-    }, [isLoading, data, refetch]);
-
     return {
         data,
         isLoading,
@@ -54,6 +48,8 @@ const useServerStats = () => {
         refetch,
         isRefetching,
         authenticatedUser,
+        queryOptions: options,
+        queryParams,
     };
 };
 
