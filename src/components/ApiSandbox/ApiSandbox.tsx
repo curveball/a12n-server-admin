@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import useOAuth from '../../hooks/useOAuth';
 import useSandboxQueries from '../../hooks/useSandboxQueries';
 import { HttpRequestMethod } from '../../types/api';
+import { CodeBlock } from '../CodeBlock';
 import { RequestDetails } from './RequestDetails';
 import { ResponseDetails } from './ResponseDetails';
 
@@ -25,6 +26,8 @@ export function ApiSandbox() {
         }
     }, [isFetching, error, startTime, requestRoute]);
 
+    const snippet = `${method} -X ${method.toLowerCase()} "${fullUrl}"`;
+
     return (
         <Theme>
             <Select.Root
@@ -33,7 +36,7 @@ export function ApiSandbox() {
                     setRequestRoute(value);
                 }}
             >
-                <Select.Trigger className='w-full'>
+                <Select.Trigger className='w-full' data-testid='selection-trigger'>
                     <Select.Content className='w-full'>
                         <Select.Item value='/'>/</Select.Item>
                         <Select.Item value='/users'>/users</Select.Item>
@@ -50,13 +53,20 @@ export function ApiSandbox() {
                     token={token}
                 />
 
-                <ResponseDetails
-                    key={fullUrl}
-                    data={data}
-                    elapsed={elapsed}
-                    isLoading={isFetching}
-                    error={error as Error}
-                />
+                <div className='response-section'>
+                    <div className='snippet-container'>
+                        <CodeBlock text={snippet} data-testid='request-snippet' />
+                    </div>
+                    <div className='response-details'>
+                        <ResponseDetails
+                            key={fullUrl}
+                            data={data}
+                            elapsed={elapsed}
+                            isLoading={isFetching}
+                            error={error as Error}
+                        />
+                    </div>
+                </div>
             </div>
         </Theme>
     );

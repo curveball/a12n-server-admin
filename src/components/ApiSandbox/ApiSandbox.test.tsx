@@ -31,6 +31,7 @@ vi.mock('../../hooks/useSandboxQueries', () => ({
                 },
             },
         ],
+        fullUrl: 'http://localhost:8531/',
     }),
 }));
 
@@ -102,14 +103,16 @@ describe('ApiSandbox Tests', () => {
         cleanup();
     });
 
-    it('renders ApiSandbox with default snippet (curl) and shows empty data response', async () => {
-        expect(screen.getByTestId('request-details-heading')).toBeInTheDocument();
-        expect(screen.getByText('http://localhost:8531/user?embed=item')).toBeInTheDocument();
+    it('renders ApiSandbox with default requested URL', async () => {
+        expect(screen.getByTestId('request-url')).toHaveTextContent('http://localhost:8531/');
         expect(screen.getByRole('button', { name: /curl/i })).toBeInTheDocument();
+        expect(screen.getByTestId('code-block-content')).toHaveTextContent('curl -X GET "http://localhost:8531/"');
+    });
 
-        await waitFor(() => {
-            expect(screen.getByText('[]')).toBeInTheDocument();
-        });
+    it('updates the request URL when the user selects the /users route', async () => {
+        const select = screen.getByTestId('selection-trigger');
+        await fireEvent.change(select, { target: { value: '/users' } });
+        expect(screen.getByTestId('request-url')).toHaveTextContent('http://localhost:8531/users');
     });
 
     it('copies snippet text to clipboard when the Copy button is clicked', async () => {
