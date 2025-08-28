@@ -1,5 +1,6 @@
 import { Box, Button, Flex, Text } from '@radix-ui/themes';
-import { isValid } from 'zod';
+import { useCreateAppQuery } from '../../api';
+import { useAxios } from '../../hooks';
 import { Modal } from '.';
 import { InputField } from '..';
 import { useFormValidation } from '../../hooks';
@@ -8,6 +9,8 @@ import { CreateAppModalSchema } from '../../types/forms';
 export default function CreateAppModal({ onClose, isOpen }: { onClose: () => void; isOpen: boolean }) {
     const title = 'Create App';
     const description = 'Enter in details below to create a new app';
+    const api = useAxios();
+    const createAppMutation = useCreateAppQuery(api);
 
     const { formState, errors, handleInputChange, isFormValid } = useFormValidation({
         schema: CreateAppModalSchema,
@@ -17,9 +20,22 @@ export default function CreateAppModal({ onClose, isOpen }: { onClose: () => voi
         e.preventDefault();
         if (!isFormValid()) return false;
 
-        // TODO: API call to a12n server here
-
-        console.log('App Created:', { formState });
+        // Map form appName to API nickname field
+        createAppMutation.mutate(
+            {
+                nickname: formState.appName,
+            },
+            {
+                onSuccess: () => {
+                    onClose();
+                    // Clear the form state by triggering a re-render
+                },
+                onError: (error) => {
+                    console.error('Error creating app:', error);
+                    // Error handling is managed by the API layer (toast notifications)
+                },
+            },
+        );
     };
 
     return (
@@ -84,10 +100,10 @@ export default function CreateAppModal({ onClose, isOpen }: { onClose: () => voi
                             color='orange'
                             radius='large'
                             onClick={handleCreateApp}
-                            disabled={!isValid}
+                            disabled={!isFormValid() || createAppMutation.isPending}
                             className='flex-1 bg-orange-500 text-white h-10 rounded-lg'
                         >
-                            Create
+                            {createAppMutation.isPending ? 'Creating...' : 'Create'}
                         </Button>
                     </Flex>
                 </form>

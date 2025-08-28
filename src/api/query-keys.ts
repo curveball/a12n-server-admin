@@ -6,6 +6,7 @@ export const queryKeys = {
     posts: {
         all: ['posts'] as const,
         user: ['posts', 'user'] as const,
+        app: ['posts', 'app'] as const,
         detail: (id: string) => ['posts', id] as const,
     },
     privileges: {
