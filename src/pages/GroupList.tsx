@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useAllGroupsQuery } from '../api';
-import { Table } from '../components';
+import { CreateGroupModal, Table } from '../components';
 import { Groups } from '../utils/helpers/models';
 
 const GroupList = () => {
@@ -57,27 +57,38 @@ const GroupList = () => {
     );
 
     const { data, isLoading, error } = useAllGroupsQuery();
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
     const handleAddGroup = () => {
-        console.log('Add group');
+        setIsCreateModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsCreateModalOpen(false);
     };
 
     const handleDeleteGroup = () => {
         console.log('Delete group');
     };
     return (
-        <Table
-            testId='group-list'
-            columnDefs={groupColumnHeadings}
-            data={data}
-            itemName='group'
-            onDelete={handleDeleteGroup}
-            onAdd={handleAddGroup}
-            initialValues={{}}
-        />
+        <>
+            <Table
+                testId='group-list'
+                columnDefs={groupColumnHeadings}
+                data={data}
+                itemName='group'
+                onDelete={handleDeleteGroup}
+                onAdd={handleAddGroup}
+                initialValues={{}}
+            />
+            <CreateGroupModal 
+                isOpen={isCreateModalOpen}
+                onClose={handleCloseModal}
+            />
+        </>
     );
 };
 

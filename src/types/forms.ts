@@ -28,6 +28,10 @@ export const UpdateAppModalSchema = z.object({
     appURL: z.string().url({ message: 'Invalid URL format' }).optional().or(z.literal('')),
 });
 
+export const CreateGroupModalSchema = z.object({
+    nickname: z.string().min(1, { message: 'Group Name is required' }),
+});
+
 export type UserAppInitialValues = {
     appName: string;
     appURL: string;
