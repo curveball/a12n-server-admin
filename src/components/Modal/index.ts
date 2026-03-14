@@ -1,4 +1,5 @@
 export { default as CreateAppModal } from './CreateAppModal';
+export { default as CreateGroupModal } from './CreateGroupModal';
 export { default as CreateUserModal } from './CreateUserModal';
 export { default as Modal } from './Modal';
 export { default as PasswordGeneratedModal } from './PasswordGeneratedModal';
