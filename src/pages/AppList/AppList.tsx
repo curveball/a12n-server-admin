@@ -2,11 +2,13 @@ import { Badge } from '@radix-ui/themes';
 import { useMemo, useState } from 'react';
 import { useAllAppsQuery } from '../../api';
 import { Table } from '../../components';
+import CreateAppModal from '../../components/Modal/CreateAppModal';
 import UpdateAppModal from '../../components/Modal/UpdateAppModal';
 import { Apps } from '../../utils/helpers/models';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const AppList = () => {
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
     const appColumnHeadings = useMemo(
         () => [
@@ -71,7 +73,7 @@ const AppList = () => {
     if (error) return <div>Error: {error.message}</div>;
 
     const handleAddApp = () => {
-        console.log('Add app');
+        setIsCreateModalOpen(true);
     };
 
     const handleDeleteApp = () => {
@@ -95,6 +97,7 @@ const AppList = () => {
                 onDoubleClick={handleDoubleClick}
             />
 
+            <CreateAppModal onClose={() => setIsCreateModalOpen(false)} isOpen={isCreateModalOpen} />
             <UpdateAppModal onClose={() => setIsUpdateModalOpen(false)} isOpen={isUpdateModalOpen} />
         </>
     );
