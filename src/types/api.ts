@@ -41,6 +41,19 @@ export type CreateUserAPIRequest = {
 
 export type UpdateUserAPIRequest = {
     nickname: string;
-    type: string;
     active: boolean;
+    name?: string;
+    locale?: string;
+    givenName?: string;
+    middleName?: string;
+    familyName?: string;
+    birthdate?: string;
+    address?: {
+        streetAddress: (string | undefined)[];
+        locality: string;
+        postalCode: string;
+        region: string;
+        country: string;
+    };
+    zoneinfo?: string;
 };

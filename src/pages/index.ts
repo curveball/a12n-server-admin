@@ -6,3 +6,4 @@ export { default as NotFoundPage } from './NotFoundPage';
 export { default as OAuthTriggerPage } from './OAuthTriggerPage';
 export { default as PrivilegeList } from './PrivilegeList/PrivilegeList';
 export { default as UserList } from './UserList/UserList';
+export { default as UserEdit } from './UserEdit/UserEdit';

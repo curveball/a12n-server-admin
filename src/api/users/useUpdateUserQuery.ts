@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { SERVER_ROUTES } from '../../routes';
-import { ResourceType } from '../../types';
+import { ResourceType, UpdateUserAPIRequest } from '../../types';
 import { formatAPIPath } from '../../utils';
 import APICore from '../core';
 import { queryKeys } from '../query-keys';
@@ -10,14 +10,10 @@ function useUpdateUserQuery(client: APICore) {
 
     return useMutation({
         mutationKey: queryKeys.puts.user,
-        mutationFn: async ({ nickname, id, active }: { nickname: string; id: string; active: boolean }) => {
+        mutationFn: async ({ id, userData }: { id: string; userData: UpdateUserAPIRequest }) => {
             return await client.put({
                 suffix: formatAPIPath([SERVER_ROUTES.USERS, id]),
-                body: {
-                    nickname: nickname,
-                    type: ResourceType.USER,
-                    active,
-                },
+                body: userData,
             });
         },
         onSuccess: () => {

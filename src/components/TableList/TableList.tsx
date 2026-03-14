@@ -4,9 +4,9 @@ import { Button, Card, Flex, Text, Theme } from '@radix-ui/themes';
 import { GridOptions, RowDoubleClickedEvent, themeQuartz } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { useRef, useState } from 'react';
-import { UserUpdateInitialValues } from '../../types';
 import { Users } from '../../utils/helpers/models';
-import { CreateUserModal, PasswordGeneratedModal, UpdateUserModal } from '../Modal';
+import { CreateUserModal, PasswordGeneratedModal } from '../Modal';
+import { CLIENT_ROUTES } from '../../routes';
 
 /**
  * @deprecated Do NOT add more functionality to this
@@ -24,17 +24,9 @@ type TableListProps = {
 };
 
 const TableList = ({ columnDefs, data, itemName, onDelete }: TableListProps) => {
-    const initialUserUpdateValues: UserUpdateInitialValues = {
-        nickname: '',
-        id: '',
-        active: false,
-    };
-
     const gridRef = useRef<any>(null);
     const [selectedCount, setSelectedCount] = useState(0);
     const [isCreateUserModalOpen, setCreateUserModalOpen] = useState(false);
-    const [isUpdateUserModalOpen, setUpdateUserModalOpen] = useState(false);
-    const [selectedUserData, setSelectedUserData] = useState<UserUpdateInitialValues>(initialUserUpdateValues);
     const [password, setPassword] = useState('');
     const [showPasswordModal, setShowPasswordModal] = useState(false);
 
@@ -53,8 +45,9 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: TableListProps) => 
 
     const handleRowDoubleClick = (event: RowDoubleClickedEvent) => {
         const rowData = event.data;
-        setSelectedUserData({ id: Users.parseUserID(rowData), ...rowData });
-        setUpdateUserModalOpen(true);
+        // setSelectedUserData({ id: Users.parseUserID(rowData), ...rowData });
+        // setUpdateUserModalOpen(true);
+        window.location.href = CLIENT_ROUTES.USER_EDIT.replace(':id', Users.parseUserID(rowData));
     };
 
     const downloadCSV = () => {
@@ -130,13 +123,6 @@ const TableList = ({ columnDefs, data, itemName, onDelete }: TableListProps) => 
                             onRowDoubleClicked={handleRowDoubleClick}
                         />
                     </div>
-                    {isUpdateUserModalOpen && itemName === 'user' && (
-                        <UpdateUserModal
-                            initialValues={selectedUserData}
-                            isOpen={isUpdateUserModalOpen}
-                            onClose={() => setUpdateUserModalOpen(false)}
-                        />
-                    )}
                 </Card>
             </div>
         </Theme>
